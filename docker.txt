@@ -1,15 +1,60 @@
-DOCKER
-======
+----------DOCKER----------
 
 Docker, a platform for deploying and running applications. Docker provides a way to run an application securely isolated in a container in a way that is platform agnostic. https://docs.docker.com/
 
-DOCKER CONTAINER: like a directory, it holds everything needed for an app to run.
+BOOT2DOCKER
+===========
+
+The Docker Engine uses Linux-specific kernel features, so to run it on OS X we need to use a lightweight virtual machine. To make this process easier, there is a helper application called Boot2Docker that installs the virtual machine and runs the Docker daemon: https://docs.docker.com/installation/mac/
+
+
+DOCKER ELEMENTS
+===============
+
+DOCKER CONTAINER: A Linux Container, (sort of) like a directory, it holds everything needed for an app to run.
+  * Docker containers are essentially directories that can be packed (e.g. tar-archived), the shared and run on other hosts. The only dependency is having docker installed on the hosts.
+  * Docker containers allow:
+    * Application portability,
+    * Isolating processes,
+    * Preventing access beyond the container's own filesystem,
+    * All while being more much lightweight than a virtual machine.
+  * When everything is self-contained and the risk of system-level changes are eliminated, the container becomes immune to external exposures which could put it out of order (i.e. 'dependency hell').
 
 DOCKER IMAGE: read-only template for a docker container.
-  – Uses a union file system (UFS) to 'layer' file system branches on top of each other. Every time a change is made to a Docker image, a new layer is created.
-  – Docker images are built from a set a steps called instructions (cf. "plays" in Ansible). These instructions can be built either by executing commands manually or automatically through Dockerfiles.
+  * Uses a union file system (UFS) to 'layer' file system branches on top of each other. Every time a change is made to a Docker image, a new layer is created.
+  * Docker images are built from a set a steps called instructions. These instructions can be built either by executing commands manually or automatically through Dockerfiles.
+  * As more layers (tools, applications, etc.) are added on top of the base, new images can be formed by committing these changes – like a version control system!
 
 DOCKER REGISTRY: private or public stores for docker images. Docker Hub is a public registry.
+  * There are a bunch of free docker images for common services! https://registry.hub.docker.com/
+
+
+DOCKER PARTS
+============
+
+DOCKER DAEMON: used to manage local docker containers.
+
+DOCKER CLI: used to command and communicate with the docker daemon.
+
+DOCKER IMAGE INDEX: a repository (public or private) for docker images.
+
+
+WORKING WITH DOCKER IMAGES
+==========================
+
+There are many freely available images shared across the docker image index and the CLI allows you to search and download them. For example:
+
+sudo docker search [image_name]
+sudo docker pull [image_name]
+
+You can list all images on your system:
+
+sudo docker images
+
+As you work with a container and continue to perform actions on it (e.g. download and install software, configure files), to have it keep its state, you need to commit:
+
+sudo docker commit [container ID] [image name]
+
 
 ----------------------------------------------
 
