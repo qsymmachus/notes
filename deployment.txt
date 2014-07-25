@@ -1,0 +1,10 @@
+
+STAGING: newave@192.237.223.189
+PRODUCTION: root@newavenuehomes.com
+
+CAPISTRANO:
+
+Setup in deploy.rb
+
+cap staging deploy
+cap production deploy

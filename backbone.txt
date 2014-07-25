@@ -1,0 +1,145 @@
+BACKBONE.JS
+
+A Javascript library for creating client-heavy apps that allow you to route models, collections, and views to a RESTful JSON API.
+
+'MVP' architecture:
+- Model
+– View: much dumber than in MVC, no logic here.
+– Presenter: handles all interactions between model and view.
+
+------------------------------
+DEPENDENCIES
+
+jQuery
+underscore.js
+backbone.js (duh)
+
+------------------------------
+
+AJAX PREFILTER
+
+Useful if your RESTful server is external to your client. Automatically filters AJAX requests to prefix with specified URL.
+
+$.ajaxPrefilter(function(options, originalOptions, jqXHR) {
+  options.url= "http://restfulservice.com" + options.url;
+});
+
+------------------------------
+
+BACKBONE ROUTER
+
+var Router = Backbone.Router.extend({
+  routes: {
+    '': 'home',
+    'new': 'editUser'	
+  }
+});
+
+------------------------------
+
+BACKBONE COLLECTION
+
+var Users = Backbone.Collection.extend({
+  url: '/users'
+});
+
+------------------------------
+
+BACKBONE MODEL
+
+var User = Backbone.Model.extend({
+  urlRoot: '/users'
+});
+
+------------------------------
+
+TEMPLATES
+
+<script type="text/template" id="user-list-template">
+  <a href='#/new'>New User</a>
+  <table>
+    <thead>
+      <tr>
+        <th>First Name</th>
+        <th>Last Name</th>
+        <th>Age</th>
+        <th></th>
+      </tr>
+    </thead>
+    <tbody>
+      <% _.each(users, function(user) { %>
+        <td><%= user.get('firstname') %></td>
+        <td><%= user.get('lastname') %></td>
+        <td><%= user.get('age') %></td>
+      <% }); %>
+    </tbody>
+</script> 
+
+<script type="text/template" id="edit-user-template">
+  <form class="edit-user-form">
+    <legend>Create User</legend>
+    <label>First Name</label>
+    <input type="text" name="firstname"/>
+    <label>Last Name</label>
+    <input type="text" name="lastname"/>
+    <label>Age</label>
+    <input type="text" name="age"/>
+    <button type="submit">Create</button>
+  </form>
+</script>
+
+------------------------------
+
+BACKBONE VIEW
+
+var UserList = Backbone.View.extend({
+  el: '.page', // element within which the view is rendered
+  render: function() {
+    var that = this;
+    var users = new Users();
+    users.fetch({
+      success: function(users) {
+        var template = _.template($('#user-list-template').html(), {users: users.models});
+        that.$el.html(template);
+      }
+    })
+  }
+});
+
+var EditUser = Backbone.View.extend({
+  el: '.page',
+  render: fucntion() {
+    var template = _.template($('#edit-user-template').html, {});
+    this.$el.html(template);
+  },
+  events: {
+    'submit .edit-user-form': 'saveUser'
+  }
+  saveUser: function(ev) {
+    var userDetails = $(ev.currentTarget).serialize();
+    var user = new User();
+    user.save(userDetails, {});
+    return false; // Prevents event default.
+  }
+})
+
+------------------------------
+
+YOUR INSTANCES
+
+var userList = new UserList();
+var editUser = new EditUser();
+var router = new Router();
+
+// Route functions:
+router.on('route:home', function() {
+  userList.render();
+});
+router.on('route:editUser', function() {
+  userList.render();
+});
+
+// This must be started for the router to work
+// It listens for url changes
+Backbone.history.start();
+

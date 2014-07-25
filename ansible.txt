@@ -1,0 +1,51 @@
+BASIC ANSIBLE
+---------
+
+0. Install Ansible on your local machine
+
+brew install ansible
+
+
+1. Set up host inventory
+
+Your inventory is found in /etc/ansible/hosts
+
+[app]
+
+server1.example.com
+server2.example.com
+
+[db]
+server3.example.com
+
+
+2. Write your playbook
+
+Playbooks contain plays --> Plays contain tasks --> Tasks contain modules
+
+A task calls a module and may have parameters. Example modules include:
+– Package management: yum, apt
+– Remote execution: command, shell
+– File handling: copy, template
+– DB management: postgresql_db
+– Source control: git
+
+Example playbook:
+
+---
+- name: install and start apache
+  hosts: webservers
+  user: root
+
+  tasks:
+
+  - name: install httpd
+    yum: name=httpd state=latest
+
+  - name: start httpd
+    service: name=httpd state=running
+
+
+3. Run the playbook
+
+ansible-playbook my_playbook.yml
