@@ -1,0 +1,25 @@
+DOCKER
+======
+
+Docker, a platform for deploying and running applications. Docker provides a way to run an application securely isolated in a container in a way that is platform agnostic. https://docs.docker.com/
+
+DOCKER CONTAINER: like a directory, it holds everything needed for an app to run.
+
+DOCKER IMAGE: read-only template for a docker container.
+  – Uses a union file system (UFS) to 'layer' file system branches on top of each other. Every time a change is made to a Docker image, a new layer is created.
+  – Docker images are built from a set a steps called instructions (cf. "plays" in Ansible). These instructions can be built either by executing commands manually or automatically through Dockerfiles.
+
+DOCKER REGISTRY: private or public stores for docker images. Docker Hub is a public registry.
+
+----------------------------------------------
+
+USEFUL RESOURCES
+
+"How To Install and Use Docker: Getting Started"
+https://www.digitalocean.com/community/tutorials/how-to-install-and-use-docker-getting-started
+
+"Docker Explained: How To Containerize and Use Nginx as a Proxy"
+https://www.digitalocean.com/community/tutorials/docker-explained-how-to-containerize-and-use-nginx-as-a-proxy
+
+
+
