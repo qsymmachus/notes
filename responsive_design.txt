@@ -1,0 +1,60 @@
+______________________________________________
+
+FIXED design = layout is fixed at specific pixel widths.
+
+FLUID design = layout is set using relative widths (percentages).
+
+ADAPTIVE design = layout is either fixed or fluid, but can adapt to different screen sizes with media queries.
+
+	
+______________________________________________
+
+CONVERTING PX TO EM
+
+1 em = standard font size for the browser (typically 16px).
+
+Therefore, 
+
+target / context = result
+
+24px / 16px = 1.5em
+
+Note that context is nested: if, for example, <p>’s font size is set to 1.5 em, your new “context” for anything inside <p> is 24 px.
+
+______________________________________________
+
+FLEXIBLE MARGINS
+
+When setting flexible margins on an element, your context is the width of the element’s container.
+
+Therefore,
+
+1000px container / 20px margin = 2%
+
+______________________________________________
+
+FLEXIBLE PADDING
+
+When setting ﬂexible padding on an element, your context is the width of the element itself.
+
+Therefore,
+
+600px element / 10px padding = 1.67%
+
+______________________________________________
+
+MEDIA QUERIES
+
+Delivers different styles to different screen resolutions. First, in your HTML:
+
+<link rel=“stylesheet” href=“style.css” type=“text/css” media=“screen”>
+
+Then, at the bottom of your CSS files:
+
+@media screen and (max-width: 480px) {
+	/* CSS to be applied when width <= 480px */
+}
+
+For this to work  properly with mobile devices, which will otherwise automatically zoom a page out to 980px, you need a viewport meta tag:
+
+<meta name=“viewport” content=“width=device-width, initial-scale=1.0, user-scalable=no”>

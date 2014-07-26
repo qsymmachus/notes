@@ -1,0 +1,19 @@
+NEW REPO
+
+git init
+git add .     # adds all the files in your directory to the stage
+git commit -m "Added original website files"   # commits your changes to your local repo
+git remote add origin https://github.com/<creator-name>/<project-name>.git  
+# this is the github address of the new repo you created.
+git push -u origin master
+
+WORKFLOW
+
+git add. # ADD
+git commit -m “note of changes” # COMMIT
+git pull origin master # PULL
+git push origin master # PUSH
+
+CLONE
+
+git clone https://gist.github.com/the_repo.git <name for local repo>
