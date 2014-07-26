@@ -1,0 +1,168 @@
+HELLO WORLD
+
+#include <stdio.h>
+
+int main() 
+{
+  printf(“Hello, world!”);
+  return 0;
+}
+
+________________________________________________________________________________
+
+VARIABLE DECLARATION
+
+// note that C is statically typed.
+
+int days_in_week = 7;
+float cm_to_in = 2.54;
+char the_w = 'W';
+
+printf("%d days in a week.\n", days_in_week);
+printf("%f cm per in.\n", cm_to_in);
+printf("The %c is a cool hotel.\n", the_w);
+
+________________________________________________________________________________
+
+ARRAYS
+
+// note that the size of the array is declared at initialization.
+
+float numbers[3];
+numbers[0] = 3.1415;
+numbers[1] = 1.618;
+numbers[2] = 1.4142;
+
+// leave the size blank for unlimited size
+
+int lots_of_nums[];
+
+// note that when intialized curly brackets are used, not square brackets!!
+
+int fibs[] = {1, 1, 2, 3, 5};
+
+// strings are represented as an array of chars
+
+char word[] = “applesauce”;
+________________________________________________________________________________
+
+OPERATORS & EXPRESSIONS
+
+%        modulo
+
++=        assignment operators
+-=
+*=
+/=
+
+
+n++;        auto increment (if assigned, performed after assignment)
+n—-;        auto decrement (if assigned, performed after assignment)
+++n;        auto increment (if assigned, performed before assignment)
+—n;         auto decrement (if assigned, performed before assignment)
+
+e.g.
+
+int a = 3;
+int b = a++; // n == 3, a == 4
+int c = —-a; // c == 3, a == 3
+
+________________________________________________________________________________
+
+LOOPS
+
+for (int i = 0; i < 10; i++) {
+  printf(“%d”, i);
+}
+
+while (done == false) {
+  // do something
+}
+
+do {
+  // do-while, a reverse while.
+  // useful if we want to evaluate the block before checking the conditional.
+} while (done == false);
+
+________________________________________________________________________________
+
+CONDITIONALS & SWITCH STATEMENTS
+
+if (conditional) {
+
+} else if (another) {
+
+} else {
+
+}
+
+// one line conditional. Note that  you can add else-ifs as well, unlike in Ruby:
+if (1 == 1) printf(“1 is equal to 1”);
+else if (1 > 1) printf(“Boy is this strange”);
+
+// Switch statement:
+switch (value) {
+  case ‘a’:
+    printf(“It’s ‘a’”);
+    break;
+
+  case ‘b’:
+    printf(“It’s ‘b’”);
+    break;
+
+  default:
+    printf(“It’s neither ‘a’ nor ‘b’”);
+    break;	
+}
+
+________________________________________________________________________________
+
+FUNCTIONS
+
+// note that the return type is statically declared (here it is ‘int’).
+int doubler(int n) {
+  return n*2;
+}
+
+// if a function has no return type, use ‘void’
+void hello() {
+  printf(“Hello, I am a computer”);
+}
+
+________________________________________________________________________________
+
+SCOPE
+
+Scope in C is lexical; that is, scope is defined by what is between a set of brackets {}. Similar in practice to Ruby’s block-level scope. Contrast this with Javascript, which has functional scope. 
+
+________________________________________________________________________________
+
+POINTERS & MEMORY
+
+1. Pointers point to the memory address of a variable.
+
+char *letter;  // * indicates that this is a pointer type
+char k = ‘k’;
+letter = &c;  // this points to the memory address of k, not the value of k.
+printf(“%c”, *letter);  => k
+k = ‘x’;
+printf(“%c”, *letter);  => x // the address is the same, but the value has changed.
+
+
+2. Using pointers to traverse arrays
+
+int nums[3] = {3, 5, 7};
+num = &nums[0]; 
+printf(“%d”, *num)  => 3
+++num; // increment the pointer to the next address in memory!
+printf(“%d”, *num)  => 5
+
+
+3. Calculating the length of an array using sizeof():
+
+printf(“float size: %ld bytes\n”, sizeof(1.5));  =>  float size: 4 bytes
+
+long floatArrayLength(float array) {
+  long element_size = sizeof(array[0]);
+  return sizeof(array) / element_size;
+}

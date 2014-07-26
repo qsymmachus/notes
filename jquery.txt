@@ -1,0 +1,65 @@
+	DOCS: http://api.jquery.com/
+
+–––––––––––––––––––––––––––––
+
+SELECTING DOCUMENT OBJECTS
+
+$(‘.class-name’)
+
+$(‘#id-name’)
+
+$(‘parent child’)		All children of parent (like CSS)
+
+$(‘parent > child’)		More specific chain of parents to children
+
+–––––––––––––––––––––––––––––
+
+MODIFYING SELECTED OBJECTS
+
+.css(‘property’, ‘value’)
+
+.attr(‘attribute’, ‘value’)
+
+
+–––––––––––––––––––––––––––––
+
+EVENT HANDLERS
+
+.on(‘event’, function(){})
+
+	‘click’
+	‘hover’
+	‘mouseenter’
+	‘mouseleave’
+
+.click()			Shortcut for .on(‘click’)
+
+–––––––––––––––––––––––––––––
+
+OTHER USEFUL METHODS
+
+.val()				Retrieve value of object, useful for forms
+
+.val(“x”)			Set value of object
+
+.parents(filter)		returns all parents of the object; result can be filtered
+
+.siblings(filter)		returns all siblings of the object; result can be filtered
+
+–––––––––––––––––––––––––––––
+
+MAKING ASYNCHRONOUS REQUEST (AJAX)
+
+$('form.new-trip').on('submit', function(event) {
+      event.preventDefault();
+      formData = $(this).serialize();    // serializing the form data
+      $.ajax({
+        type: 'post',   // you could also use ‘$(this).method'  
+        url: '/trips',   // you can also use ‘$(this).action'        
+        data: $(this).serialize // serialize the form data
+      }).done(function(serverData){   // do something with the server's response
+        $('#trip-list).append("<p><%= serverData %></p>")
+      }).fail(function() {
+        console.log("failed post");
+      })
+    });

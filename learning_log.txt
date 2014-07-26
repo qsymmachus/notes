@@ -1,0 +1,848 @@
+WHAT ELSE SHOULD I LEARN?
+- Quicksort
+- Merge sort
+– Clearly define REST, RESTful routes
+– Read "Refactoring" by Fields & Fowler
+– Read "Design Patterns" by Olsen
+
+--------------------------------------
+
+WHAT DID I LEARN AT DEV BOOTCAMP?
+
+
+-----WEEK 1-----
+
+1/6/14
+- Work more patiently. When you rush you not only make more mistakes, it's a disservice to your partner.
+- When multiplying strings in ruby, the string must precede the integer:
+	"M" * 3 => "MMM"
+	3 * "M" => String can't be coerced into Fixnum
+	
+	
+1/7/14
+– regex named captures:
+	 /^(?<first_consonants>[^aeiouy\d\W_]+)(?<rest_of_word>.*)/ =~ english_word
+	 piglatin_word = first_consonants + rest_of_word + "ay"
+– pass value:
+	copies object value to another variable (identifier), NON-DESTRUCTIVE
+- pass reference:
+	copies object reference to another variable (identifier), can be DESTRUCTIVE
+
+
+1/8/14
+- Learned about the Benchmark module.
+- Learned about the Prime module.
+– Using File.new to read outside files within ruby:
+	my_dictionary = []
+	File.open("dictionary.txt").each_line do |line|
+  		my_dictionary << line.rstrip
+	end
+– How to write an iterative version of binary search; see algorithm-drill-binary-search-challenge.
+
+
+1/9/14
+- How to use pry and pry-nav as a debugging tool. You can put a "pause" in a program by inserting the following line, then test the state at that moment:
+	require 'pry'; binding.pry
+- A good approach to the convert arabic number to english number problem, see numbers-in-words-challenge
+- How to use command+D in sublime for quick search and replace.
+- How to use command+shift+L in sublime for a giant cursor.
+
+
+1/10/14
+– Learned about the Matrix module.
+- How to break down a complex problem into manageable psuedocode, e.g. the sudoku challenge. It seemed impossible at first but once we had a good algorithm psuedocoded we finished it in 3 hours.
+
+
+1/11/14
+– Learned the difference between primitive, composite, and abstract data structures:
+	primitive: provided by the language itself to serve as building blocks.
+	composite: composed of primitive datastructures. In Ruby arrays & hashes are composite.
+	abstract: defined by the operations that may be performed not how it is implemented.
+- Learned how to implement a stack.
+- Learned how to implement a queue.
+- Learned how to implement a linked list.
+- Learned how to write my own "each" methods using yield.
+
+
+-----WEEK 2-----
+
+1/13/14
+- Learned about rspec and got a little practice using it.
+– Learned how inheritance works in Ruby; see orange-tree-2-groves-challenge.
+
+
+1/14/14
+- Learned how to use ARGV to provide ruby with user input directly from the command line.
+- Learned how to import and export .csv files in Ruby with the CSV class.
+- Learned how to write and use my own modules.
+- gets.chomp returns a string by default, convert it if you have to!
+
+
+1/15/14
+- Learned about Nokogiri and how to use it to parse/scrape HTML. See scraping-hn-1-building-objects-challenge, scraping-hn-2-building-objects-challenge.
+- How to pass hashes as arguments to avoid argument-order dependency. See design-drill-argument-order-dependency-challenge.
+– Learned about the Net Module; see http://www.rubyinside.com/nethttp-cheat-sheet-2940.html
+
+
+1/16/14
+- Learned about MVC design (Model/Viewer/Controller), more helpfully visualized as VCM:
+	Viewer --> Controller --> Model
+	HTML   --> Ruby/Rails --> Database
+- Learned about Object#send. Send can take a string/symbol as an argument, and convert that into a method call: 
+	String.send("reverse"). 
+It can be a useful way to avoid complicated conditional branching if we're interpreting input in an interface, but this also poses obvious security risks:
+	Interface.send(ARGV[0])
+
+	
+1/17/14
+– Learned that gets.chomp won't work if there are already values stored in ARGV. #shift values out of ARGV before trying to use gets.
+– Got some experience working with MVC design with the flash cards project.
+
+
+1/18/14
+– Learned about the colorize gem.
+– Learned about the "abort" command.
+– Reviewed how to use the SQLite gem in ruby. Databases are structured like arrays:
+	$db = SQLite3::Database.open "congress_poll_results.db"
+	az_reps = $db.execute("SELECT name FROM congress_members WHERE location = 'AZ'")
+
+	
+-----WEEK 3-----
+
+1/20/14
+– Reviewed SQL query syntax.
+– WHERE won't work with aggregate functions:
+	WHERE count(*) > 3 		nope.
+	HAVING count(*) > 3		yes.
+– Learned how to use combined primary keys in SQL to enforce unique combinations of chosen fields in a table.
+
+
+1/21/14
+– Got a lot more practice using the sqlite3 gem, translating table records into ruby objects and vice versa.
+– Learned about the different "layers" of data: raw data, relational databases, ruby interfaces on top of relational databases (e.g. sqlite3 gem), and ORM (object-relational mapping, e.g. ActiveRecord.)
+
+
+1/22/14
+– Introduced to ActiveRecord. First started learning about:
+	– Rake files
+	– Migrations
+	– Associations
+	– Validations
+	– Models
+
+
+1/23/14
+– More practice with ActiveRecord – wrote my own database from scratch!
+– Learned a little about the twitter API gem.
+
+
+1/24/14
+– More practice with ActiveRecord and the MVC model – built a To Do List app with persistent state stored in an ActiveRecord database. Got practice writing migrations, models w/associations, and ActiveRecord queries.
+– ActiveRecord associations, assuming "derp" associates with "herp":
+	– belongs_to			one-to-one, derp has a herp_id
+	– has_one				one-to-one, herp has a derp_id
+	– has_many				one-to-many, herp has a derp_id
+	– has_many through: 	many-to-many, with through indicating the join table.
+	– has_one through:		one-to-one, via a third table
+	
+	– has_and_belongs_to_many 	many-to-many, with automatically generated join table.
+
+
+1/25/14
+– Learned the basics of Sinatra, a library and Domain Specific Language for making simple web apps. It's dependent on the Rack web server interface, which wraps HTTP requests and responses into forms that Ruby (or another abstract language) understands.
+– Reviewed the basics of CSS positioning:
+	– Static: boxes is stacked and can't accept a coordinate system (top, left, etc.)
+	– Relative: box is stacked and CAN accept a coordinate system.
+	– Absolute: box is removed from normal flow, won't affect or be affected by others.
+	– Fixed: like absolute, but fixed in place and unaffected by scrolling.
+	– Inherit: inherits the position of its parent element.
+	
+	
+	
+-----WEEK 4-----
+
+1/27/14
+– Learned about request/response cycle.
+– Got a lot more practice with Sinatra!
+	– Sinatra stores user input in hashes.
+		– params is local to each route.
+		– session (a cookie) is global for all routes.
+	– Sinatra can pass these values to ERB files to be rendered as HTML.
+	
+	
+1/28/14
+– Learned more about request/response cycle: how Rack translates requests and sends them down to middleware (Like Rails and Sinatra) for processing, which in turn send responses back up in a form that Rack understands and can send out as an HTTP response. See rack_fun and:
+	http://chneukirchen.org/blog/archive/2007/02/introducing-rack.html
+– HTTP traffic is usually sent through port 80.
+– How to get a local repo running on Heroku:
+	– TEST THE APP LOCALLY FIRST
+	– Add a Procfile; for a Sinatra project it will probably look like this:
+		bundle exec shotgun config.ru -p $PORT
+	– This will generate a random name for your app:
+		$ heroku create  
+	  If you want to change it, you can update your heroku remote address with the following:
+		$ git remote set-url heroku NEW_URL_HERE
+	– Push your master branch to heroku.
+	– Get your app up and running:
+		$ heroku ps:scale web=1
+	– To stop your app from running:
+		$ heroku ps:scale web=0
+		
+
+1/29/14
+– Starting from a Sinatra skeleton I created a URL-shortening app, complete with users!
+– Learned how to write a simple authentication method for a users database.
+– Learned about the ruby Digest module, which can be used for hash encryption. Useful for hashing passwords:
+	Digest::SHA256.hexdigest("password") => as23df452...
+– How to use sessions to keep track of a logged-in user.
+
+
+1/30/14
+– More about sessions in Sinatra: a session is a way of storing state between requests on a server. The session hash is stored on the server, and a cookie (rack.session) is stored on the client side. The client cookie stores a key that associates the client with a session on the server.
+– HTML forms can only send GET and POST requests. If you want to send another request, like PUT or DELETE, you must include the following tag in your form:
+	<input type="hidden" name="_method" value="put">
+– Learned about the z-index attribute in CSS. z-index allows you specify the stack order of elements (how they are layered on top of each other). An element with greater stack order is always in front of an element with a lower stack order.
+
+
+1/31/14
+– Got practice building a Flashcards web app from the ground up.
+– Learned how to make my routes more RESTful!
+– Learned a good git workflow for working in groups:
+	– Create a feature branch of the latest origin/master
+	– When you're done, rebase with origin/master:
+		$ git fetch
+		$ git rebase origin master
+	– Resolve merge conflicts in rebase BEFORE continuing!
+	– Push your branch, submit pull request	.
+	
+
+-----WEEK 5-----
+
+2/3/14
+– Introduction to jQuery: manipulating objects in the DOM, event handlers.
+– How to manipulate the DOM with both jQuery and vanilla Javascript.
+– See jquery.txt
+
+
+2/4/14
+– Types of testing:
+	ATOMISTIC
+	– Unit: class level, does class x behave as expected?
+	– Functional/controller: controller level, do my controllers behave as expected?
+	– Integration: higher level, e.g. test controllers in actual browser (expensive testing)
+	– Acceptance: highest level, demo the product to match user expectations
+	SYSTEM-WIDE
+– "Continuous Integration": common in actual practice, server that continuously runs tests and automatically notifies the team if the latest commit produced an error.
+– A lot of testing vocabularly dates back to the days of JUnit (Java unit testing):
+	– setup: create the dummy classes for testing
+	– teardown: clean up the dummy classes
+	– assert: true/false test
+	– assert_eq: equality test
+– The two main ruby domain specific languages for testing are Minitest & Rspec.
+– For Rspec syntax, see "The Rspec book", ch. 16–18.
+
+
+2/5/14
+– AJAX: Asynchronous Javascript And XML (a set of techniques rather than a distinct language).
+	– Synchronous responses:  Whole page reloads with each request/response.
+	– Asynchronous responses: Each request/response reloads only a portion of the same page.
+– How to make an asynchronous request in vanilla Javascript:
+    // See docs on MDN:
+    var myRequest = XMLHttpRequest.new 
+– Making an asynchronous request in jQuery: see jquery.txt
+– Scope types:
+    – Lexical (C, C++, Java)
+    – Block-level (Ruby)
+    – Functional (Javascript)
+– Closure: a means for storing a particular scope for later use. Closures are functions that preserve any variables that were in their scope when stored, even if they were not explicitly placed inside the closure. In Ruby Procs and Lambdas are closures. In Javascript functions can be used like closures (module design pattern).
+
+
+2/6/14
+– Event delegation in jQuery. If you try to apply event handlers to dynamically generated elements, it won't work. This is because event handlers are only applied to elements on the screen when the script first loaded. You can work around this using event delegation, rather than this:
+
+$("#myList li").on('click', function () {
+    $(this).css('color', 'red')
+});
+
+Write this:
+
+$("#myList").on('click', 'li', function () {
+    $(this).css('color', 'red')
+});
+
+
+
+2/7/14
+– Got practice writing unit tests for active record models using rspec.
+– To get 'margin: 0 auto' to work with images, change 'display' to 'block'. Images are inline by default.
+– How to make elements draggable; see http://www.html5rocks.com/en/tutorials/dnd/basics/
+– The "data-" attribute in HTML is fully customizable; it could be "data-id" or "data-name", etc. Useful for DOM manipulation!
+
+
+-----WEEK 6------
+
+2/10/14
+– Learned about a d3js, a javascript library for visualizing data using HTML, SVG, and CSS: http://d3js.org/
+– More practice using the Twitter API via the ruby twitter gem.
+– Learned about dotevn, a way to store global variables in your app, see https://github.com/bkeepers/dotenv
+– Solution to N + 1 queries in ActiveRecord: use includes. For example, given two joined tables clients and addresses, don't do this:
+    
+    clients = Client.all
+    
+    clients.each do |client|
+      // Since addresses are lazy loaded, the following line requires a database query:
+      puts client.address.postcode 
+    end
+    "
+
+Do this:
+
+    clients = Client.includes(:address)
+    
+    clients.each do |client|
+      // All associated addresses are "eager loaded" and stored in clients:
+      puts client.address.postcode
+    end
+    
+
+2/11/14
+– How to set and use cookies in Sinatra, http://www.gittr.com/index.php/archive/sinatra-cookie-handling-in-0-9-4/.
+– When you set a cookie on the server, you need to tell it which domains may access the cookie or Chrome prevents you from reading it with JavaScript. Make sure you set the domain to an empty string (""), e.g. in Sinatra:
+    response.set_cookie("color", {:value => params[:favorite_color], :domain => ""})
+– "Monkey patching": adding behaviors/variables to classes on the fly.
+– Nice prototype vs. class analogy:
+    - Class – Plato's forms; an abstract ideal upon which instances are based.
+    - Prototype – Aristotle's categories; no abstraction, real instances that share qualities
+    
+
+2/12/14
+– Learned about the Strategy Design Pattern.
+– Learned about server background processing; see tweet-later-challenge.
+    – Jobs are queued and worked on in the background so the user does not have to wait for a
+      job to finish to be redirected.
+    – We used Redis as our queue and Sidekiq as our workers.
+– Learned about OAuth, implemented OAuth 1.0 with Twitter.
+
+
+2/13/14
+– Testing mock-ups to avoid actually writing to the DB: "stub" or "double", and "mock"
+    - stub/double - invite something to stand in for something else (like a DB model)
+      - Stub of 'Band' model Rspec: 
+            band_double = double(:band, name: 'Beatles', awesome: true)
+    - mock – something associated with the thing you're testing that is changed by the test;
+      usually a simplified "mock" of the associated object, we're just testing behavior.
+– Learned how to use the simplecov gem to test test coverage %.
+
+
+2/14/14
+– Learned how to use database caching to avoid repeat requests to an API.
+– Got practice setting up background jobs using redis and sidekiq.
+
+
+-----WEEK 7-----
+
+2/16/14
+– Basic introduction to rails!
+– If you encounter the following error in rails: 
+    ActionController::InvalidAuthenticityToken 
+try adding this to your controller:
+    skip_before_action :verify_authenticity_token
+– Learned about resource routing in Rails. Resource routing allows you to quickly declare all of the common routes for a given resource. Instead of declaring separate RESTful routes for your index, show, new, edit, create, update and destroy actions, a resourceful route declares them in a single line of code in routes.rb: 
+    resources :photo
+– Route helpers are helper methods which automatically create the string for a resource's URL or path:
+    – photos_path – /photos
+    – new_photo_path – /photos/new
+    – edit_photo_path(:id) – /photos/:id/edit
+    – photo_path(:id) – photos/:id
+– Learned about rails view helpers like link_to and image_tag
+– Learned about rails form helpers: http://guides.rubyonrails.org/form_helpers.html
+– There are two possible parameters in a web application:
+    – query string parameters; everything after '?' in the URL
+    – POST data
+
+
+2/17/14
+– Learned more formally about REST (Representational state transfer) architecture. REST is a set of ideas about how a well-designed Web application should behave. The core concept of REST is the existence of resources, each of which is referenced with a global URI. Clients and servers ("components") exchange stateful representations of these resources using a standardized interface (e.g. HTTP).
+– Rails controller actions for corresponding resourceful routes:
+    – index (all resources)
+    – show (one resource)
+    – new (form for create)
+    – create
+    – edit (form for update)
+    – update
+    – destroy
+– Using the link_to helper to generate links:
+    - link_to(photo.name, photo_path(photo))
+    - link_to("Edit", edit_photo_path(photo))
+    - link_to("Delete", photo_path(photo), method: :delete)
+– #find_or_create_by method; Tag.find_or_create_by_name("vacation") – either finds or or creates a Tag with the matching name field, then returns it.
+– Building within associations:
+    category = Category.new
+    @post = category.post.build(params)
+– Learned about nested resources in Rails.
+
+
+2/18/14
+– How do you write controller tests for nested resources? You need to specify the id of the parent resource:
+    get :index, category_id: category.id
+– Stubbing a controller method:
+    controller.stub(:current_user) { return this }
+– Really useful helper methods you should put in ApplicationController:
+    
+    def current_user
+      @current_user ||= User.find(session[:id]) if session[:id]
+    end
+    
+    def check_authentication
+      redirect_to root_path if current_user.blank?
+    end
+    
+    def login(user)
+      session[:id] = user.id
+    end
+
+
+2/19/14
+– RSpec: Why use let? What's the difference between let and let! ?
+    – let lazy-loads the assigned variable. That is, it is only assigned if it is specifically       
+      referred to in an example. So it is preferable for memory reasons. It also assures that           
+      each instance of the variable defined by let is totally new.
+    – let! eager-loads the assigned variable before running any of the examples. This is                
+      preferable if we want to test actual changes to the database (for example, if we are 
+      writing controller tests for #create).
+– Got a lot more practice writing controller tests in RSpec.
+– Learned how to write feature tests in RSpec with help from capybara.
+
+
+2/20/14
+– 'define_method(cat) do; end' is the same as 'def cat; end'
+– When writing a class, wrapping methods in this block: 'class << self; end' Will make the enclosed methods class methods
+– Metaprogramming! Or writing code that writes other code. You can do stuff like this:
+
+METHODS = { say_hello: "hello", ... }
+
+METHODS.each do |name, message|
+  define_method(name) do
+    puts message
+  end
+end
+
+Or even fancier stuff like this:
+
+# Overriding the Object method #method_missing (this is dangerous stuff!)
+def method_missing(method)
+  if METHODS.keys.include(method)
+    helper_to_run_method(method)
+  else
+    super
+  end
+end
+
+
+2/21/14
+– Learned how to render partials in rails views and send rendered partials as responses in rails controllers. View syntax:
+    <%= render 'todo', todo: todo %>
+Controller syntax:
+    render partial: todo, locals: { todo: todo }
+– Learned how to integrate AJAX requests into rails by adding 'remote: true' to form_for helper and binding handlers to the 'ajax:success' and 'ajax:error' events.
+
+
+-----WEEK 8-----
+
+2/24/14
+– Refresher on double/stubs in Rspec:   
+    double(:dog, bark: 'woof')
+    some_object.stub(:some_method?) { true }
+    Class.any_instance.stub(:some_method?) { false }
+– Learned how to write custom rake tasks.
+– Learned about database indices: they are a datastructure that stores 1.) the data from one column for all records in a table, 2.) a pointer to the actual record. The index is usually a B-Tree and is sorted, allowing your database to perform a binary search. This allows you to find a given column much faster than performing a linear search through all records. It's a good idea to create an index for:
+    – Columns that you search through regularly.
+    – Columns with high cardinality (i.e. variation, so it will benefit greatly from sorting)
+    – FOREIGN KEYS! This makes finding associations much, much faster.
+– How to build a database index in rails. Add this to your migration:
+    add_index :table, :column, name: 'name_of_index'
+– Learned the difference between '#update_attribute' and '#update_attributes'. As the names suggest, the former updates only one attribute, while the latter updates multiple. NOTE that #update_attribute DOES NOT perform any validations, so it may be preferred if speed is your goal.
+    Object.update_attribute(:only_one_field, "Some Value")
+    Object.update_attributes(:field1 => "value", :field2 => "value2", :field3 => "value3")
+    
+
+2/25/14
+– Learned how to use the XMLHttpRequest javascript object.
+– Practiced manipulating the DOM with vanilla javascript.
+– Learned how to use the module design pattern in javascript; see miniQuery challenge and notes in javascript.txt
+– Javascript is functionally scoped. Ruby is block scoped. This means that:
+
+function() {
+  if (true) {
+    var message = "hi"  // this identifier is "hoisted" to the top of the function
+  }
+  console.log(message) // this will print "hi"!
+}
+
+def function
+  if true
+    message = "hi"  # this is local to the if block
+  end
+  
+  puts message  # this will NOT print the message
+end
+
+
+2/26/14
+– Javascript callback: when you pass a function as an argument rather than an anonymous function. Note that you are not CALLING the function (someFunction()), but just passing the function itself (someFunction). In this sense a callback is kind of like a block in ruby.
+– The scope method in rails. Adding this to your ActiveRecord model:
+    scope :red, where(color: 'red')
+Allows you to do this:
+    Shirt.red  # returns all red shirts.
+– First time experimenting with the Handlebars.js templating language.
+
+
+
+-----POST DBC PRACTICE-----
+
+3/10/14
+– Wrote binary search in ruby (29 minutes)
+– Wrote binary search in javascript (17 minutes)
+– Javascript does not perform integer division by default. Use Math.floor(n)
+– Learned quicksort:
+    – Choose a 'pivot' from the list
+    – Place remaining elements into into 'greater' and 'less' arrays relative to the pivot.
+    – Repeat these steps recursively on the sublists. 
+    – The base case is a list with a length of 0 or 1.
+    – typical return statement: quicksort(less) + [pivot] + quicksort(greater)
+– Write quicksort in ruby (6 minutes)
+
+
+3/11/14
+– Wrote binary search in ruby (14 minutes)
+– Wrote quicksort in ruby (3 minutes)
+– Quicksort code kata in ruby (3 versions in 15 minutes)
+– Wrote quicksort in javascript (29 minutes)
+– Learned about Array.filter() in javascript.
+– Read a useful guide to regular expressions: http://qntm.org/files/re/re.html
+
+
+3/12/14
+– Be proactive, not reactive – seek out the job you want. A job is an investment:
+    – Look for a company with: a good team, a growing market, and market traction.
+– Attitude (personality and work ethic) and skills (portfolio) are key.
+– Can you answer the question: why are you a good hire?
+
+
+3/13/14
+– Negotiation: "I want market value but I can't pick a number without a sense of the full compensation package."
+– GET IT IN WRITING: How will I be evaluated? How often will I be evaluated? What would you consider to be a mark of success in this position?
+
+
+3/14/14
+– Big-O notation in increasing order of complexity:
+    – O(1) constant
+    – O(logn) logarithmic
+    – O(n) linear
+    – O(nlogn) linearithmic
+    – O(n^2) quadratic
+    – O(2^n) exponential
+    – O(n!) factorial
+– CLR, "Introduction of Algorithms": http://www.amazon.com/Introduction-Algorithms-Thomas-H-Cormen/dp/0262033844/ref=sr_1_1?ie=UTF8&qid=1394838278&sr=8-1&keywords=Introduction+to+Algorithms
+
+
+3/17/14
+– Learned merge sort:
+    – Divide the unsorted list in sublists with a length of 1
+    – Repeatedly merge the sublists until there is only 1 list remaining (base case).
+– Wrote merge sort in ruby (25 mins)
+– Things you must know:
+    – Javascript variable hoisting
+    – Ruby block scope; javascript functional scope
+    – Closures in javascript
+
+
+3/18/14
+– Learned about #all? enumerable: returns true if all elements meet the condition passed in the block.
+– Learned about #any? enumerable: returns true if any element meets the condition passed in the block.
+– How to properly use Ruby's 'rescue':
+    begin
+        # something that might raise an exception
+    rescue
+        # ...
+    end
+Within a method definition the 'begin' is not necessary:
+    def foo
+      # ...
+    rescue
+      # ...
+    end
+    
+
+3/24/14
+– Portfolio 1 challenge, 'RESTful CRUD' (57 minutes)
+– Read notes from week 1
+
+
+3/25/14
+– Portfolio 2 challenge, 'Active Record' (22 minutes)
+– Read notes from week 2
+
+
+3/26/14
+– Portfolio 3 challenge, 'User authentication' (44 minutes)
+– Read notes from week 3
+
+
+3/28/14
+– Portfolio 5 challenge, "Validations" (37 minutes, with validation tests)
+– Read notes from week 4
+– Applied to Quizlet
+
+
+3/29/14
+– Implemented insertion sort in Ruby (25 minutes)
+– Read pp. 1–29 of "Introduction to Algorithms"
+– Read notes from week 5
+– Applied to Apartment List, Scribd
+
+
+4/1/14
+– Applied to Tapjoy, Gumroad
+
+
+4/2/14
+– Portfolio 6 challenge, OO Javascript (40 minutes)
+– Read pp. 29–43 of "Introduction to Algorithms"
+– Applied to Academia.edu
+
+
+4/3/14
+– http://paultyma.blogspot.ie/2007/03/howto-pass-silicon-valley-software.html
+    – Be humble. You won't be the smartest person at the company; you don't want to be.
+    – Know your data structures!
+– https://gist.github.com/ryansobol/5252653
+    - "Fifteen questions to ask during a ruby interview"
+    - Good review of ruby fundamentals.
+    – Modules serve a mechanism for namespacing behaviors
+– Applied to Nitro, InstaEDU
+– Read notes from week 6
+
+
+4/4/14
+– Refactored Shadi's implementation of singly and doubly linked lists.
+– Read about O-notation, stacks, queues, and linked lists in "Introduction to Algorithms" (pp. 43–49, 229–241).
+– Applied to Class Dojo, Mind Snacks, VolunteerMatch
+
+
+4/6/14
+– Portfolio 7 challege, AJAX & jQuery (20 minutes)
+– Added implementation of stack to Shadi's repo.
+
+
+4/7/14
+– Got in touch with Mirror Placement
+– Got in touch with Graham Rath at Jivaro Inc (recruiter)
+– Read notes from week 7
+– Applied to IFTTT; met with David at Tapjoy.
+– Read about binary trees in "Introduction to Algorithms" (pp. 286–294).
+
+
+4/8/14
+– Introduced myself to Graham Rath
+– Read more about binary trees in "Introduction to Algorithms" (pp. 294–299).
+– Started implementing a binary tree in ruby
+    – Refresher on how to use before(:each) hooks in rspec.
+– Contacted Shadi about Change.org
+– Applied to Entelo
+
+
+4/9/14
+- Scheduled phone interview with Sean Lindsay! (chief engineer at Tapjoy)
+– Contacted Stephanie about Omada
+– Contacted Spencer about his connection at Dropbox
+– Practiced the following interview questions on paper:
+    – Implement a queue with two stacks
+    – In-place array reversal
+    – Parenthese order validator
+    – #getLargest stack element
+– Started reading "JS The Right Way":
+    – https://developer.mozilla.org/en-US/docs/Web/JavaScript/Introduction_to_Object-Oriented_JavaScript
+    – https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Closures
+– Practiced behavioral questions
+
+
+4/10/14
+– Had a phone interview with Sean Lindsay!
+– Practiced interview questions
+– Applied to Edupath
+
+
+4/11/14
+– Practiced the following interview questions on paper:
+    – How to reduce the memory used by a hash of strings
+    – How to calculate the max profit from an array of stock prices
+– Redid the "Intro to Rails" challenge
+– Read about the rails asset pipeline: http://guides.rubyonrails.org/asset_pipeline.html
+    – the pipeline concatenates assets, so all .js and CSS files are rolled into one.
+    – the pipeline minifies all assets
+    – the pipeline can compile higher-level languages like Coffeescript or Sass
+– get '/posts/:id', to: 'post#show', as: 'post'
+    – as: gives a name to the route that can be used inside the controllers and views.
+    
+    
+4/12/14
+– Prepared tech talk for the Tapjoy interview
+
+
+4/13/14
+– Refresher on the form_for helper: http://guides.rubyonrails.org/v3.2.13/form_helpers.html
+– Continued working through the "Intro to Rails" challenge
+– Practiced tech talk for the Tapjoy interview
+
+
+4/14/14
+– Finished working through the "Intro to Rails" challenge
+– Practice for the Tapjoy interview with Bella
+– Applied to Gravity
+– authentication vs. authorization:
+    – authentication: identifying a user as who they really claim to be.
+    – authorization: the rules that determine what a given user is allowed to do.
+    
+    
+4/15/14
+– Interviewed at Tapjoy!
+
+
+4/16/14
+– Got in touch with Teach for America (via AngelList).
+
+
+4/17/14
+– Applied at Gravity
+
+
+4/21/14
+– Emailed Stephanie about Omada again
+– Started working on "Green Businesses" project
+– Applied to ePantry, Chalk
+
+
+4/22/14
+– Continued working on "Green Businesses" project
+    – AJAXified search
+    – Started styling
+– Applied to Shelf
+– Contacted Stephanie for an introduction to Jared Smith (intern at ZenPayroll)
+
+
+4/23/14
+– Contacted Jared Smith (works at ZenPayroll)
+– Continued working on "Green Businesses" project
+    – Finished styling
+– Applied to New Avenue; contacted Justin Martinez (head engineer)
+
+
+4/24/14
+– Finished "Green Businesses" project
+    – Integrated google maps
+    – Improved search with pg_search
+    – Deployed to Heroku
+– Had phone interview with Justin Martinez (New Avenue)
+– Read up about New Avenue in preparation for tomorrow's interview!
+
+
+4/25/14
+– Interviewed at New Avenue!
+– Final tweaks to "Green Businesses" Project
+
+
+4/26/14
+– Met Jared Smith for lunch, got a referral at ZenPayroll
+– Applied to ZenPayroll
+
+
+4/28/14
+– Sent a message to Prayag Narula, CTO of MobileWorks
+– Made a contribution to Spencer's "NFL map" project
+
+
+4/30/14
+– Emailed Stephanie about Omada again...
+– Applied to Liftopia
+– Asked Stephanie for an introduction to Andrew Armenante (UClass)
+– Started Treehouse iOS development track:
+    – Started introduction to C
+    
+5/1/14
+– Arranged meeting with Austin Putman (Omada Health)
+– Continued iOS learning:
+    – C loops, conditionals, functions
+
+
+-----FIRST JOB-----
+
+WEEK OF 5/6/14
+– Learned about singular resources in rails.
+– Learned about foreign key constraints (prevents the assignment of a foreign key that points to a non-existent resource)
+– Started using tmux
+– Learned how to use guard to keep on eye on tests
+– The act_as_list gem adds functionality to your Rails models that makes it easier to create sortable lists that persist on the backend.
+
+
+WEEK OF 5/11/14
+– To eager load an association by default, assign a default scope:
+    default_scope includes(:comments)
+– .html_safe can be used to tell rails that any html embedded in an interpolated variable is safe to render: <%= @info.html_safe %>
+– When using the button_tag or submit_tag helpers, including disable_with in your data attributes will automatically disable the button after the form it is tied to is submitted:
+  – <%= submit_tag "Create", data: { disable_with: "Creating..."} %>
+  
+  
+WEEK OF 5/18/14
+– Strong parameters: this has changed between Rails 3 and 4. 'attr_accesible' is no longer used, parameters are now always 'strong parameters,' that is they must be whitelisted for assignment within the controller itself. This means you'll have to make a conscious choice about which attributes to allow for mass updating and thus prevent accidentally exposing that which shouldn't be exposed. In your controller:
+    def project_builder_exercise_params
+      params.require(:comment).permit(:title, :body)
+    end
+– To skip an iteration in an enumerable or loop, use 'next if...'
+– Learned how we deploy to staging and production using Capistrano
+– Ansible saves "deployment states" or "playbooks" to make deployment easier (configuration management)
+– Vagrant allows you to easily manage virtual machines so you can mock out server deployments for testing (virtual machine management)
+– Horizontal scaling: to add more nodes to a system, such as adding a new computer to a distributed software application. 
+– Vertical scaling:  to add resources to a single node in a system, typically involving the addition of CPUs or memory to a single computer.
+
+
+WEEK OF 5/25/14
+– the 'split' gem makes it easy to perform A/B testing: https://github.com/andrew/split
+– Mailgun makes it easy to automatically send emails. The mailgun gem allows you to easily integrate it with Rails' built-in mailer, ActionMailer. You can use the #headers method to add custom headers to emails sent with ActionMailer. Then we can use mailgun routing to handle user responses.
+– To copy your public ssh key to a server:
+  ssh-copy-id -i ~/.ssh/id_rsa.pub root@<server-ip-address>
+– In your shell, ^R allows you to search through past commands.
+
+WEEK OF 6/1/14
+– In an Active Record model:
+  alias_attribute :approved_at, :accepted_at
+  
+  
+WEEK OF 6/8/14
+– Docker, a platform for deploying and running applications. Docker provides a way to run an application securely isolated in a container in a way that is platform agnostic. https://docs.docker.com/
+– Learned about the 'transition' CSS property for animated changes:
+  h3:hover {
+      background-color: #1a853b;
+      transition: background-color 0.25s ease;
+   }
+– Learned how to secure requests made to an API you're building with a HMAC (key-hashed method authentication code): http://www.thebuzzmedia.com/designing-a-secure-rest-api-without-oauth-authentication/
+
+
+WEEK OF 6/15/14
+– Single table inheritance in rails (models inheriting other models): http://thibaultdenizet.com/tutorial/single-table-inheritance-with-rails-4-part-1/
+  – Models that share a single table are distinguished by a "inheritance" column that specifies type:
+In the superclass:
+  self.inheritance_column = :type
+– Different ways to mass insert data into your rails database: https://www.coffeepowered.net/2009/01/23/mass-inserting-data-in-rails-without-killing-your-performance/
+
+
+WEEK OF 7/5/14
+– You can use db:migrate:redo to rerun the last migration.
+– The ActiveRecord methods #find_by and #where won't work if the model is 'dirty', i.e. if it hasn't been saved to the database yet, but merely instantiated. Use the enumerable method #find instead.
+– http://nodeschool.io/ is a good resource for learning node.js
+
+
+WEEK OF 7/12/14
+– Started learning node.js, "a runtime environment and a library for running applications written in JavaScript outside the browser (for example, on the server)".
+– Node use asynchronous (or "non-blocking") I/O, a form of input/output processing that allows other processing to continue before transmission is complete. This is in contrast to synchronous I/O, which requires all processing to pause until transmission is complete.
+– Useful node guide: https://github.com/maxogden/art-of-node#callbacks
