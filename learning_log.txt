@@ -846,3 +846,7 @@ WEEK OF 7/12/14
 – Started learning node.js, "a runtime environment and a library for running applications written in JavaScript outside the browser (for example, on the server)".
 – Node use asynchronous (or "non-blocking") I/O, a form of input/output processing that allows other processing to continue before transmission is complete. This is in contrast to synchronous I/O, which requires all processing to pause until transmission is complete.
 – Useful node guide: https://github.com/maxogden/art-of-node#callbacks
+
+WEEK OF 7/27/14
+- Learned a lot about Docker and how to use Docker images/containers to deploy services. Checkout your note 'docker.txt'
+- Useful article on best practices for writing Dockerfiles: http://phusion.github.io/baseimage-docker/
