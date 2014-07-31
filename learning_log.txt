@@ -850,3 +850,6 @@ WEEK OF 7/12/14
 WEEK OF 7/27/14
 - Learned a lot about Docker and how to use Docker images/containers to deploy services. Checkout your note 'docker.txt'
 - Useful article on best practices for writing Dockerfiles: http://phusion.github.io/baseimage-docker/
+– Learned how to create a node http server. See learning-node/learnyounode
+– Padrino is a ruby web framework built on top of Sinatra: http://www.padrinorb.com/
+
