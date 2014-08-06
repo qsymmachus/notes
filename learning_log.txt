@@ -847,13 +847,22 @@ WEEK OF 7/12/14
 – Node use asynchronous (or "non-blocking") I/O, a form of input/output processing that allows other processing to continue before transmission is complete. This is in contrast to synchronous I/O, which requires all processing to pause until transmission is complete.
 – Useful node guide: https://github.com/maxogden/art-of-node#callbacks
 
+
 WEEK OF 7/27/14
 - Learned a lot about Docker and how to use Docker images/containers to deploy services. Checkout your note 'docker.txt'
 - Useful article on best practices for writing Dockerfiles: http://phusion.github.io/baseimage-docker/
 – Learned how to create a node http server. See learning-node/learnyounode
 – Padrino is a ruby web framework built on top of Sinatra: http://www.padrinorb.com/
 
+
 WEEK OF 8/3/14
 – Learned how to deploy rails/padrino apps using Capistrano: http://capistranorb.com/
+– How to create and read cookies with jQuery-cookie:
+    $.cookie("test", 1);
+    $.cookie("test", 1, { expires : 10 });
+    var cookieValue = $.cookie("test"); => 1
+    $.removeCookie("test");
+– Learned about the WebSocket protocol, a TCP protocol initiated by an HTTP request which allows a persistent connection between client and server, rather than a request-response cycle: http://blog.cloudflare.com/cloudflare-now-supports-websockets
+– Note that HTTP 2.0 proposals call for a similar 'persistent connection' stream. It's unclear how WebSockets and HTTP 2.0 will be reconciled, as they seem to have similar aims.
 
 
