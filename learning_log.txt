@@ -853,3 +853,7 @@ WEEK OF 7/27/14
 – Learned how to create a node http server. See learning-node/learnyounode
 – Padrino is a ruby web framework built on top of Sinatra: http://www.padrinorb.com/
 
+WEEK OF 8/3/14
+– Learned how to deploy rails/padrino apps using Capistrano: http://capistranorb.com/
+
+
