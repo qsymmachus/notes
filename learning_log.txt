@@ -866,3 +866,16 @@ WEEK OF 8/3/14
 – Note that HTTP 2.0 proposals call for a similar 'persistent connection' stream. It's unclear how WebSockets and HTTP 2.0 will be reconciled, as they seem to have similar aims.
 
 
+WEEK OF 8/10/14
+– If you want an active record model to be linked to a table with a name other than the model's, use self.tablename = some_other_name
+– A counter cache is an integer column that is automatically incremented when, for example, a table gains an association. This is a way to improve performance if we must frequently query this number. For example, if we want to counter cache the number of orders associated with a customer:
+
+  class Order < ActiveRecord::Base
+    belongs_to :customer, counter_cache: true
+  end
+
+  class AddOrderCountToCustomers < ActiveRecord::Migration
+    def change
+      add_column :customers, :orders_count, :integer, default: 0
+    end
+  end
