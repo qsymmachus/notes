@@ -867,15 +867,32 @@ WEEK OF 8/3/14
 
 
 WEEK OF 8/10/14
+– Restart your brew-installed version of postgres: 
+    pg_ctl -D /usr/local/var/postgres -l /usr/local/var/postgres/server.log start
 – If you want an active record model to be linked to a table with a name other than the model's, use self.tablename = some_other_name
+– If you want a rails controller to choose a layout conditionally, you can pass a method to layout: 'layout :method_that_chooses_layout_string'
+– Refresher on how to create Sidekiq workers:
+
+
+    class EmailWorker
+      include Sidekiq::Worker
+      sidekiq_options queue: "default"
+
+      def perform(recipient)
+        # send the email...
+      end
+    end
+
+    EmailWorker.perform_in(5.seconds, user)
+
 – A counter cache is an integer column that is automatically incremented when, for example, a table gains an association. This is a way to improve performance if we must frequently query this number. For example, if we want to counter cache the number of orders associated with a customer:
 
-  class Order < ActiveRecord::Base
-    belongs_to :customer, counter_cache: true
-  end
-
-  class AddOrderCountToCustomers < ActiveRecord::Migration
-    def change
-      add_column :customers, :orders_count, :integer, default: 0
+    class Order < ActiveRecord::Base
+      belongs_to :customer, counter_cache: true
     end
-  end
+
+    class AddOrderCountToCustomers < ActiveRecord::Migration
+      def change
+        add_column :customers, :orders_count, :integer, default: 0
+      end
+    end
