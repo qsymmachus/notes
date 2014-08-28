@@ -896,3 +896,14 @@ WEEK OF 8/10/14
         add_column :customers, :orders_count, :integer, default: 0
       end
     end
+
+
+WEEK OF 8/24/14
+– The Javascript 'Date' object is pretty useful: http://www.w3schools.com/jsref/jsref_obj_date.asp
+– 'whenever' is a cool gem for writing ruby cron jobs: https://github.com/javan/whenever
+– How to write tests for Rails mailers: http://blog.lucascaton.com.br/index.php/2010/10/25/how-to-test-mailers-in-rails-3-with-rspec/
+– Scope to check to get a model that is a specific number of days old:
+  
+  scope :n_days_old, ->(n = 1) do 
+    where( "created_at <= ? AND created_at >= ?",  Date.today - (n - 1), Date.today - n)
+  end
