@@ -907,3 +907,14 @@ WEEK OF 8/24/14
   scope :n_days_old, ->(n = 1) do 
     where( "created_at <= ? AND created_at >= ?",  Date.today - (n - 1), Date.today - n)
   end
+
+
+WEEK OF 8/31/14
+– To get Redis and Sidekiq up and running:
+    redis-server &
+    bundle exec sidekiq &
+
+
+WEEK OF 9/7/14
+– CoreOS, a Linux distribution designed specifically for server deployments using docker: https://coreos.com/
+– To deploy new_avenue/help: cap production deploy
