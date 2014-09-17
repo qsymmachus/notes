@@ -918,3 +918,13 @@ WEEK OF 8/31/14
 WEEK OF 9/7/14
 – CoreOS, a Linux distribution designed specifically for server deployments using docker: https://coreos.com/
 – To deploy new_avenue/help: cap production deploy
+
+
+WEEK OF 9/14/14
+– Learned about 'state machines': http://en.wikipedia.org/wiki/Finite-state_machine
+  – a 'state' is the status of a system waiting to execute a 'transition'
+  – a 'transition' is an action to perform when a condition or event occurs.
+  – transitions often change the state of a system.
+– A ruby gem that makes it easy to define states and transitions:https://github.com/pluginaweek/state_machine
+– Learned the 'rails way' to separate model behavior into modules. Put modules in the 'app/model/concerns' folder and extend 'ActiveSupport::Concern' in each module: http://stackoverflow.com/questions/14541823/how-to-use-concerns-in-rails-4
+– 'include' vs 'extend' in ruby: include adds instance methods, extend adds class methods.
