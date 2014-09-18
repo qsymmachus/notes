@@ -928,3 +928,4 @@ WEEK OF 9/14/14
 – A ruby gem that makes it easy to define states and transitions:https://github.com/pluginaweek/state_machine
 – Learned the 'rails way' to separate model behavior into modules. Put modules in the 'app/model/concerns' folder and extend 'ActiveSupport::Concern' in each module: http://stackoverflow.com/questions/14541823/how-to-use-concerns-in-rails-4
 – 'include' vs 'extend' in ruby: include adds instance methods, extend adds class methods.
+– 'file' <filename> is a pretty cool bash/zsh command
