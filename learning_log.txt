@@ -933,3 +933,5 @@ WEEK OF 9/14/14
 
 WEEK of 9/21/14
 – Learned about String#tr for easy character replacement - read the Ruby docs more often!: http://www.ruby-doc.org/core-2.1.3/String.html#method-i-tr
+– To backup a database:
+  pg_dump -O some_database | gzip > ~/Desktop/database.gz
