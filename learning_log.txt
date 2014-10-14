@@ -935,3 +935,31 @@ WEEK of 9/21/14
 – Learned about String#tr for easy character replacement - read the Ruby docs more often!: http://www.ruby-doc.org/core-2.1.3/String.html#method-i-tr
 – To backup a database:
   pg_dump -O some_database | gzip > ~/Desktop/database.gz
+
+
+WEEK OF 9/28/14
+– To dump and restore a postgres database:
+  pg_dump dbname > outfile    or    pg_dump dbname | gzip > filename.gz
+  dropdb dbname
+  createdb -T template0 dbname
+  psql dbname < infile
+
+
+WEEK OF 10/5/14
+– To grant a user permission to use a postgres database:
+  psql dbname
+  GRANT ALL ON DATABASE dbname to username
+– You can force a link to open in a new page with the html attribute "target=_blank".
+
+
+WEEK OF 10/12/14
+– Learned how to test Sidekiq using rspec:
+
+  Sidekiq::Testing.fake! # check queue
+  # do something that should create a worker
+  expect(Emails::NotificationWorker.jobs.last["args"].first).to eq user.id
+
+  Sidekiq::Testing.inline! # execute workers immediately
+  # do something that should create a worker
+  expect(ActionMailer::Base.deliveries.last.email).to eq user.email
+  
