@@ -953,7 +953,8 @@ WEEK OF 10/5/14
 
 
 WEEK OF 10/12/14
-– Learned how to test Sidekiq using rspec:
+– Learned about token-based authentication (authentication without a password). For an implementation in Node, check out passwordless: https://hacks.mozilla.org/2014/10/passwordless-authentication-secure-simple-and-fast-to-deploy/
+– How to test Sidekiq using rspec:
 
   Sidekiq::Testing.fake! # check queue
   # do something that should create a worker
@@ -962,4 +963,12 @@ WEEK OF 10/12/14
   Sidekiq::Testing.inline! # execute workers immediately
   # do something that should create a worker
   expect(ActionMailer::Base.deliveries.last.email).to eq user.email
+
+– How to test around an error in rspec (i.e. you want to test something other than the mere fact that an error was raised):
+
+  expect {
+    # something that raises an error
+  }.to raise_error do |error|
+    expect(something_else).to eq "to have happened"
+  end
   
