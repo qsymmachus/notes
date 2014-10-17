@@ -953,7 +953,11 @@ WEEK OF 10/5/14
 
 
 WEEK OF 10/12/14
-– Learned about token-based authentication (authentication without a password). For an implementation in Node, check out passwordless: https://hacks.mozilla.org/2014/10/passwordless-authentication-secure-simple-and-fast-to-deploy/
+– Learned about token-based authentication (authentication without a password).For an implementation in Node, check out passwordless: https://hacks.mozilla.org/2014/10/passwordless-authentication-secure-simple-and-fast-to-deploy/
+– How to build a bar chart using D3, a step-by-step tutorial: http://bost.ocks.org/mike/bar/
+– "General data update pattern" for D3: http://bl.ocks.org/mbostock/3808218
+– Look over your D3 experiments in /qsymmachus/d3-experiments
+– NVD3, reusable charts for D3. Saves a lot of time: http://nvd3.org/
 – How to test Sidekiq using rspec:
 
   Sidekiq::Testing.fake! # check queue
