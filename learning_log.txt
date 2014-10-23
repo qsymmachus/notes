@@ -975,4 +975,9 @@ WEEK OF 10/12/14
   }.to raise_error do |error|
     expect(something_else).to eq "to have happened"
   end
+
+
+WEEK OF 10/19/14
+– 'vh' and 'vw' allow you to size elements relative to the size of the client's viewport. For example, "height: 100vh" will set an element's height equal to the entire height of the viewport.
+– Pure CSS parallax: http://keithclark.co.uk/articles/pure-css-parallax-websites/
   
