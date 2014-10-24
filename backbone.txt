@@ -4,10 +4,20 @@ A Javascript library for creating client-heavy apps that allow you to route mode
 
 'MVP' architecture:
 - Model
-– View: much dumber than in MVC, no logic here.
+– View: simpler than in MVC, no logic here.
 – Presenter: handles all interactions between model and view.
 
+Useful tutorial: https://www.youtube.com/watch?v=FZSjvWtUxYk
+                 https://github.com/thomasdavis/backbonetutorials/tree/gh-pages/videos/beginner
+
 ------------------------------
+
+THE BIG PICTURE
+
+index.html => Router => Views => Collections/Models => RESTful API
+
+------------------------------
+
 DEPENDENCIES
 
 jQuery
@@ -21,7 +31,7 @@ AJAX PREFILTER
 Useful if your RESTful server is external to your client. Automatically filters AJAX requests to prefix with specified URL.
 
 $.ajaxPrefilter(function(options, originalOptions, jqXHR) {
-  options.url= "http://restfulservice.com" + options.url;
+  options.url = "http://restfulservice.com" + options.url;
 });
 
 ------------------------------
@@ -31,7 +41,8 @@ BACKBONE ROUTER
 var Router = Backbone.Router.extend({
   routes: {
     '': 'home',
-    'new': 'editUser'	
+    'new': 'editUser',
+    'edit/:id': 'editUser'
   }
 });
 
@@ -48,12 +59,16 @@ var Users = Backbone.Collection.extend({
 BACKBONE MODEL
 
 var User = Backbone.Model.extend({
-  urlRoot: '/users'
+  urlRoot: '/users' // Backbone knows to append /:id
 });
 
 ------------------------------
 
 TEMPLATES
+
+These are templates prepared for use with underscores' _.template() function.  
+Alternatively, you could use a templating language like moustache: 
+https://github.com/janl/mustache.js
 
 <script type="text/template" id="user-list-template">
   <a href='#/new'>New User</a>
@@ -71,19 +86,23 @@ TEMPLATES
         <td><%= user.get('firstname') %></td>
         <td><%= user.get('lastname') %></td>
         <td><%= user.get('age') %></td>
+        <td><a href="#/edit/<%= user.id %>">Edit</a></td
       <% }); %>
     </tbody>
 </script> 
 
 <script type="text/template" id="edit-user-template">
   <form class="edit-user-form">
-    <legend>Create User</legend>
+    <legend><%= user ? 'Edit User' : 'Create User' %></legend>
     <label>First Name</label>
-    <input type="text" name="firstname"/>
+    <input type="text" name="firstname" value="<% user ? user.get('firstname') : '' %>/>
     <label>Last Name</label>
-    <input type="text" name="lastname"/>
+    <input type="text" name="lastname" value="<% user ? user.get('lastname') : '' %>/>
     <label>Age</label>
-    <input type="text" name="age"/>
+    <input type="text" name="age" value="<% user ? user.get('age') : '' %>/>
+    <% if (user) { %>
+      <input type="hidden" name="id" value="<%= user.id %>"/>
+    <% }; %>
     <button type="submit">Create</button>
   </form>
 </script>
@@ -95,7 +114,7 @@ BACKBONE VIEW
 var UserList = Backbone.View.extend({
   el: '.page', // element within which the view is rendered
   render: function() {
-    var that = this;
+    var that = this; // so we can pass scope to the 'success' function below
     var users = new Users();
     users.fetch({
       success: function(users) {
@@ -108,18 +127,35 @@ var UserList = Backbone.View.extend({
 
 var EditUser = Backbone.View.extend({
   el: '.page',
-  render: fucntion() {
-    var template = _.template($('#edit-user-template').html, {});
-    this.$el.html(template);
+  render: function(options) {
+    var that = this; // so we can pass scope to the 'success' function below
+    if (options.id) { // render form for existing user
+      var user = new User({id: options.id});
+      user.fetch({
+        success: function(user) {
+          var template = _.template($('#edit-user-template').html, {user: user});
+          that.$el.html(template);
+        }
+      })
+    } else { // render form for new user 
+      var template = _.template($('#edit-user-template').html, {user: null});
+      this.$el.html(template);
+    }
   },
   events: {
     'submit .edit-user-form': 'saveUser'
   }
   saveUser: function(ev) {
-    var userDetails = $(ev.currentTarget).serialize();
+    var userDetails = $(ev.currentTarget).serialize(); // grabbing form data
     var user = new User();
-    user.save(userDetails, {});
-    return false; // Prevents event default.
+    // Backbone knows whether to 'post' or 'put' depending on whether the
+    // form data has an id.
+    user.save(userDetails, {
+      success: function(user) {
+        router.navigate('', {trigger: true}); // redirect back to index
+      }
+    });
+    return false; // prevents event default
   }
 })
 
@@ -135,11 +171,13 @@ var router = new Router();
 router.on('route:home', function() {
   userList.render();
 });
-router.on('route:editUser', function() {
-  userList.render();
+router.on('route:editUser', function(id) {
+  editUser.render({id: id}); // passing /:id to the function if it is defined
 });
 
 // This must be started for the router to work
 // It listens for url changes
 Backbone.history.start();
+
+
 
