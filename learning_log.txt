@@ -981,4 +981,13 @@ WEEK OF 10/19/14
 – 'vh' and 'vw' allow you to size elements relative to the size of the client's viewport. For example, "height: 100vh" will set an element's height equal to the entire height of the viewport.
 – Pure CSS parallax: http://keithclark.co.uk/articles/pure-css-parallax-websites/
 – You should use this: https://cdnjs.com/
+– A/B testing using 'split': https://github.com/andrew/split
   
+
+WEEK OF 10/26/14
+– How to vertically align an element within its parent:
+  .element {
+    position: relative;
+    top: 50%;
+    transform: translateY(-50%);
+  }
