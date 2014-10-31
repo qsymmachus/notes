@@ -985,7 +985,15 @@ WEEK OF 10/19/14
   
 
 WEEK OF 10/26/14
+– Understanding callbacks: https://github.com/maxogden/art-of-node#callbacks
+– Also see 'callbacks.txt'
+– Started to learn how to develop an app using Node:
+  – Sequelize, a js ORM
+  – Mocha, for testing; Chai, an assertion library
+  – Supertest, an assertion library for HTTP requests
+  – Checkout the repo newavenue/vortex
 – How to vertically align an element within its parent:
+  
   .element {
     position: relative;
     top: 50%;
