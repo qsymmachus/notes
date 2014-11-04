@@ -1,0 +1,16 @@
+ENGLISH
+=======
+
+x  Hobbs, "Plato and the Hero"
+x  Morozov, "To Save Everything, Click Here"
+x  Lansing, "Endurance: Shackleton's Incredible Voyage"
+o  Russell, "History of Western Philosophy"
+o  Gamma et al., "Design Patterns"
+o  Nemeth et al., "UNIX and Linux System Administration"
+
+LATIN
+=====
+
+x Sallust, "Jugurthine War"
+x Apuleius, "Golden Ass/Metamorphoses"
+o Caesar, "Gallic Wars"
