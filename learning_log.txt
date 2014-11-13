@@ -1012,7 +1012,16 @@ WEEK OF 11/2/14
 
 WEEK IF 11/9/14
 – Cross Origin Request Sharing (CORS) allows resources to to be requested from another domain other than the domain from which the resource originated. By default, web browsers forbid "cross domain" requests. CORS works by adding headers to the server response which define what domains have cross domain access to a resource, and what type of requests they can make:
+  
   Access-Control-Allow-Origin: http://example.com
   Access-Control-Allow-Headers: Origin, X-Requested-With, Content-Type, Accept
   Access-Control-Allow-Methods: GET, POST, PUT, DELETE, OPTIONS
+
+– To get a list of TCP ports that are currently listening:
+  
+  lsof -i -P | grep -i "listen"
+  =============================
+  lsof    list open files
+  -i      list TCP/IP connections (literally, "network files")
+  -P      don't convert port numbers to port names
   
