@@ -446,6 +446,9 @@ Controller syntax:
     render partial: todo, locals: { todo: todo }
 – Learned how to integrate AJAX requests into rails by adding 'remote: true' to form_for helper and binding handlers to the 'ajax:success' and 'ajax:error' events.
 
+  $('form').on('ajax:success', someCallback);
+  $('form').on('ajax:error', differentCallback);
+
 
 -----WEEK 8-----
 
@@ -983,4 +986,44 @@ WEEK OF 10/19/14
 – 'vh' and 'vw' allow you to size elements relative to the size of the client's viewport. For example, "height: 100vh" will set an element's height equal to the entire height of the viewport.
 – Pure CSS parallax: http://keithclark.co.uk/articles/pure-css-parallax-websites/
 – You should use this: https://cdnjs.com/
+– A/B testing using 'split': https://github.com/andrew/split
+  
+
+WEEK OF 10/26/14
+– Understanding callbacks: https://github.com/maxogden/art-of-node#callbacks
+– Also see 'callbacks.txt'
+– Started to learn how to develop an app using Node:
+  – Sequelize, a js ORM
+  – Mocha, for testing; Chai, an assertion library
+  – Supertest, an assertion library for HTTP requests
+  – Checkout the repo newavenue/vortex
+– How to vertically align an element within its parent:
+  
+  .element {
+    position: relative;
+    top: 50%;
+    transform: translateY(-50%);
+  }
+
+
+WEEK OF 11/2/14
+– Learned about 'full text search' in Postgres, a search across all columns in a table. This requires a 'document' (tsvector) of each record to be generated and stored as a column in the table, and an index is then generated for that column for rapid searching. http://www.postgresql.org/docs/8.3/static/textsearch-intro.html
+– In a rails controller, you can quickly check if a request was sent using AJAX with 'request.xhr?'
+– /[[:alnum:]]/ - regex for any single alphanumeric character, including accented characters.
+
+
+WEEK IF 11/9/14
+– Cross Origin Request Sharing (CORS) allows resources to to be requested from another domain other than the domain from which the resource originated. By default, web browsers forbid "cross domain" requests. CORS works by adding headers to the server response which define what domains have cross domain access to a resource, and what type of requests they can make:
+  
+  Access-Control-Allow-Origin: http://example.com
+  Access-Control-Allow-Headers: Origin, X-Requested-With, Content-Type, Accept
+  Access-Control-Allow-Methods: GET, POST, PUT, DELETE, OPTIONS
+
+– To get a list of TCP ports that are currently listening:
+  
+  lsof -i -P | grep -i "listen"
+  =============================
+  lsof    list open files
+  -i      list TCP/IP connections (literally, "network files")
+  -P      don't convert port numbers to port names
   
