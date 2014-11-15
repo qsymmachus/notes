@@ -6,7 +6,7 @@ CREATE TABLE table_name(id integer, first_name text, last_name text);
 
 _____________________________________________________________
 
-CONVERT CVS => DB, DB => CVS
+CONVERT CVS => DB, DB => CVS (sqlite)
 
 .mode list
 .separator ,
