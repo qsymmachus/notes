@@ -869,6 +869,8 @@ WEEK OF 8/3/14
 WEEK OF 8/10/14
 – Restart your brew-installed version of postgres: 
     pg_ctl -D /usr/local/var/postgres -l /usr/local/var/postgres/server.log start
+    or more simply:
+    pg_ctl -D /usr/local/var/postgres
 – If you want an active record model to be linked to a table with a name other than the model's, use self.tablename = some_other_name
 – If you want a rails controller to choose a layout conditionally, you can pass a method to layout: 'layout :method_that_chooses_layout_string'
 – Refresher on how to create Sidekiq workers:
