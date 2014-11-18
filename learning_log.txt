@@ -1028,4 +1028,22 @@ WEEK OF 11/9/14
 
 WEEK OF 11/16/14
 – How to write a ruby gem: http://howistart.org/posts/ruby/1
-  
+– Nice article on REST best practices: https://bourgeois.me/rest
+– Rspec mocks: https://github.com/rspec/rspec-mocks
+– Static vs. Dynamic Typing:
+
+  Static typing: type checking is performed at compile-time; type is associated with variables not values. 
+    – Pros: Allows type errors to be caught early; may result in more efficient runtime by omitting type checks at execution.
+    – Cons: Requires explicit type declaration of variables, duck typing is difficult to implement.
+
+  Dynamic typing: type checking is performed at run-time; type is associated with values not variables.
+    Pros: More flexible insofar as types and functionality can be determined at runtime, duck typing is easy to implement.
+    Cons: May result in runtime type errors.
+
+– Imperative vs. Declarative programming paradigms, perhaps the most important contrasting paradigms:
+
+  Imperative: A programming paradigm that describes computations in terms of statements that change program state. In this respect it conceptually mirrors machine code, in which native machine language instructions alter the contents of memory. 
+    – Object-oriented programming languages are imperative.
+
+  Declarative: A programming paradigm describes WHAT computation should be performed and not HOW to compute it. It expresses the logic of a computation without describing its control flow. Functions have no side effects – they are idempotent and do not alter state. 
+    – Logical and functional programming languages are declarative.
