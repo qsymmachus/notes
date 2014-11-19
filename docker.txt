@@ -1,11 +1,22 @@
-a----------DOCKER----------
+----------DOCKER----------
 
 Docker, a platform for deploying and running applications. Docker provides a way to run an application securely isolated in a container in a way that is platform agnostic. https://docs.docker.com/
+
 
 BOOT2DOCKER
 ===========
 
 The Docker Engine uses Linux-specific kernel features, so to run it on OS X we need to use a lightweight virtual machine. To make this process easier, there is a helper application called Boot2Docker that installs the virtual machine and runs the Docker daemon: https://docs.docker.com/installation/mac/
+
+
+DOCKER TOOLS
+============
+
+DOCKER DAEMON: used to manage local docker containers.
+
+DOCKER CLI: used to command and communicate with the docker daemon.
+
+DOCKER IMAGE INDEX: a repository (public or private) for docker images.
 
 
 DOCKER ELEMENTS
@@ -32,14 +43,14 @@ DOCKER REGISTRY: private or public stores for docker images. Docker Hub is a pub
   * There are a bunch of free docker images for common services! https://registry.hub.docker.com/
 
 
-DOCKER PARTS
-============
+WORKING WITH A DOCKERFILE
+=========================
 
-DOCKER DAEMON: used to manage local docker containers.
+BUILDING an image from a dockerfile:
 
-DOCKER CLI: used to command and communicate with the docker daemon.
+docker build -t [name for image] [directory where Dockerfile lives]
 
-DOCKER IMAGE INDEX: a repository (public or private) for docker images.
+This generates a docker image. You create the container from the image with:
 
 
 WORKING WITH DOCKER IMAGES
@@ -49,7 +60,6 @@ SEARCH for images. There are many freely available images shared across the dock
 
 docker search [image_name]
 docker pull [image_name]
-
 
 LIST all images on your system:
 
@@ -67,6 +77,9 @@ COMMIT an image. As you work with a container and continue to perform actions on
 sudo docker commit [container ID] [image name]
 
 
+WORKING WITH DOCKER CONTAINERS
+==============================
+
 CREATE a new container (either from an existing image or creating a new one):
 
 docker run [image name] [command to run]
@@ -76,6 +89,16 @@ docker run my_image echo 'hello'
 RUNNING a container:
 
 docker run [container id]
+
+docker run [image name] [command to run]
+
+If you want to start an interactive shell within your container:
+
+docker run -it [image name] /bin/bash
+
+If you want to forward a port on the host to a port on the container:
+
+docker run --publish 3000:3000 [image name] [command to run]
 
 
 STOPPING a container:
@@ -94,26 +117,12 @@ docker attach [container id]
 
 To 'detach' the current container, type ^+P followed by ^+Q
 
-
-WORKING WITH A DOCKERFILE
-=========================
-
-BUILDING an image from a dockerfile:
-
-docker build -t [name for image] [directory where Dockerfile lives]
-
-This generates a docker image. You create the container from the image with:
-
-docker run [image name] [command to run]
-
-If you want to start an interactive shell within your container:
-
-docker run -i -t [image name] /bin/bash
-
-
 ----------------------------------------------
 
 USEFUL RESOURCES
+
+"Intro to Docker" - quick slideshow w/simple deployment example
+http://jdlm.info/ds-docker-demo/#15
 
 "How To Install and Use Docker: Getting Started"
 https://www.digitalocean.com/community/tutorials/how-to-install-and-use-docker-getting-started
