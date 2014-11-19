@@ -1032,6 +1032,12 @@ WEEK OF 11/16/14
 – How to write a ruby gem: http://howistart.org/posts/ruby/1
 – Nice article on REST best practices: https://bourgeois.me/rest
 – Rspec mocks: https://github.com/rspec/rspec-mocks
+– Method stubbing in rspec:
+
+  allow(NeatModule).to receive(:neat_method).and_return { 
+    "return this instead of what you usually do!"
+  }
+
 – Static vs. Dynamic Typing:
 
   Static typing: type checking is performed at compile-time; type is associated with variables not values. 
