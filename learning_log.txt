@@ -836,7 +836,10 @@ WEEK OF 6/15/14
   – Models that share a single table are distinguished by a "inheritance" column that specifies type:
 In the superclass:
   self.inheritance_column = :type
-– Different ways to mass insert data into your rails database: https://www.coffeepowered.net/2009/01/23/mass-inserting-data-in-rails-without-killing-your-performance/
+– Different ways to mass/bulk insert data into your rails database: https://www.coffeepowered.net/2009/01/23/mass-inserting-data-in-rails-without-killing-your-performance/
+
+  inserts = ['(bob, bob@example.com)', '(mary, mary@example.com)', ...]
+  "INSERT INTO users ('name', 'email') VALUES #{inserts.join(', ')}""
 
 
 WEEK OF 7/5/14
