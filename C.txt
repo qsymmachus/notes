@@ -37,7 +37,7 @@ numbers[2] = 1.4142;
 
 int lots_of_nums[];
 
-// note that when intialized curly brackets are used, not square brackets!!
+// note that when initialized curly brackets are used, not square brackets!!
 
 int fibs[] = {1, 1, 2, 3, 5};
 
@@ -143,7 +143,7 @@ POINTERS & MEMORY
 
 char *letter;  // * indicates that this is a pointer type
 char k = ‘k’;
-letter = &c;  // this points to the memory address of k, not the value of k.
+letter = &k;  // this points to the memory address of k, not the value of k.
 printf(“%c”, *letter);  => k
 k = ‘x’;
 printf(“%c”, *letter);  => x // the address is the same, but the value has changed.
