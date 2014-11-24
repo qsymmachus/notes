@@ -1,27 +1,5 @@
-_____________________________________________________________
-
-CREATE A TABLE (sqlite)
-
-CREATE TABLE table_name(id integer, first_name text, last_name text);
-
-_____________________________________________________________
-
-CONVERT CVS => DB, DB => CVS (sqlite)
-
-.mode list
-.separator ,
-.import data.cvs table_name
-
-.mode list
-.separator ,
-.output output_data.cvs
-(some select statements)
-.exit
-
-_____________________________________________________________
-
 SELECT BASICS
-
+=============
 
 AND		test two or more conditions.
 
@@ -50,10 +28,10 @@ BETWEEN		allows range checking (always inclusive).
 SELECT name, area/1000 FROM world
 WHERE area BETWEEN 207600 AND 244820
 
-_____________________________________________________________
+
 
 SELECT WITHIN SELECT (Subqueries)
-
+=================================
 
 e.g. List each country where the population is larger than Russia’s:
 
@@ -69,10 +47,10 @@ SELECT name FROM world
 WHERE gdp >
 ALL (SELECT gdp FROM world WHERE continent = 'Europe')
 
-_____________________________________________________________
+
 
 AGGREGATE FUNCTIONS
-
+===================
 
 SUM		returns the sum of values!
 
@@ -124,14 +102,22 @@ LAST() - Returns the last value
 MAX() - Returns the largest value
 MIN() - Returns the smallest value
 
-_____________________________________________________________
+
+JOINING TABLES
+==============
 
 JOIN		combine databases by linking specific columns
 
 SELECT player 
 FROM game JOIN goal ON id=matchid
 
-_____________________________________________________________
+LEFT JOIN include rows from the left table even when the linking value is null.
+
+RIGHT JOIN  include rows from the right table even when the linking value is null.
+
+
+MISCELLANEOUS
+=============
 
 NULL		null values. cannot use ‘=‘ or ‘!=‘, but rather IS and IS NOT.
 
@@ -139,21 +125,11 @@ SELECT name
 FROM teacher
 WHERE dept IS NULL
 
-
-
-LEFT JOIN	include rows from the left table even when the linking value is null.
-
-RIGHT JOIN	include rows from the right table even when the linking value is null.
-
-
-
-
 COALESCE	takes any number of arguments and returns the first value that is not null.
 
 SELECT name, COALESCE(mobile, home, ‘no number’)
 FROM addresses
 
-_____________________________________________________________
 
 CASE		allows you to test conditions.
 
