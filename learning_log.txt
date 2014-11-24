@@ -1064,6 +1064,11 @@ WEEK OF 11/16/14
 
 
 WEEK OF 11/23/14
+– Core Postgres Docs. Also see 'postgres.txt':
+  Part 1 Overview – http://www.postgresql.org/docs/9.3/static/tutorial.html
+  Part 2 SQL – http://www.postgresql.org/docs/9.3/static/sql.html
+  Part 3 Server – http://www.postgresql.org/docs/9.3/static/admin.html
+
 – To pipe psql output to a file:
 
     postgres=# \o ~/output.txt
