@@ -1060,7 +1060,7 @@ WEEK OF 11/16/14
 
   Declarative: A programming paradigm describes WHAT computation should be performed and not HOW to compute it. It expresses the logic of a computation without describing its control flow. Functions have no side effects – they are idempotent and do not alter state. 
     – Logical and functional programming languages are declarative
-    – e.g. SQL, Haskell, Lisp.x
+    – e.g. SQL, Haskell, Lisp.
 
 
 WEEK OF 11/23/14
