@@ -12,3 +12,9 @@ The following are examples of profiles relevant to us:
 -- UI and UX design sensibilities
 -- Awareness of cross-browser and cross-device compatibilities
 -- Openness to devising and setting up workflows, stacks, and systems for whatever comes our way
+
+-----
+
+Custom:
+
+– Developed  multiple ETL (extract, transform, load) processes in Ruby, SQL, and Javascript to load client data efficiently and reliably.
