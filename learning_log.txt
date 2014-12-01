@@ -1098,4 +1098,8 @@ WEEK OF 11/23/14
 
   3. Subtype/inclusion polymorphism: this is often simply described as "polymorphism" in object-oriented programming. Subtype polymorphism guarantees that subtypes have the same interface as their supertype.
 
-        
+
+WEEK OF 11/30/14
+– Class vs. Type in OO programming:
+    Class: an object's class defines how it is implemented (its state and operations)
+    Type: an object's type refers only to its interface – the set of requests to which it responds.
