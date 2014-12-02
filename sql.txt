@@ -1,3 +1,16 @@
+CRUD OPERATIONS
+===============
+
+INSERT INTO tasks ('title', 'status') 
+VALUES ('Buy groceries', 'incomplete'), ('Gas car', 'incomplete')
+
+DELETE from tasks
+WHERE status='complete'
+
+UPDATE tasks SET status='incomplete'
+WHERE title='Buy groceries'
+
+
 SELECT BASICS
 =============
 
