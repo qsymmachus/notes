@@ -1098,4 +1098,22 @@ WEEK OF 11/23/14
 
   3. Subtype/inclusion polymorphism: this is often simply described as "polymorphism" in object-oriented programming. Subtype polymorphism guarantees that subtypes have the same interface as their supertype.
 
-        
+
+WEEK OF 11/30/14
+– Referential integrity "requires every value of one attribute (column) of a relation (table) to exist as a value of another attribute in a different (or the same) relation (table)." Most commonly, this means a foreign key should  points to a relation that actually exists. 
+  – This is not always easy to enforce at the application level. See this very useful article: http://robots.thoughtbot.com/referential-integrity-with-foreign-keys
+  – In rails, `has_many :posts, dependent: :destroy` helps enforce referential integrity by destroying associated posts whenever the parent model is destroyed. But this `after_destroy` callback is only triggered if the parent model is actually instantiated, so it's not perfect.
+  – To work around this, you can use a migration to add a foreign key constraint at the database level:  `add_foreign_key :posts, :users`. This will run the following SQL:
+
+    ALTER TABLE `posts`
+    ADD CONSTRAINT `posts_user_id_fk`
+    FOREIGN KEY (`user_id`) REFERENCES `users`(id);
+
+  – You can also mimic the behavior of an the `after_destroy` callback at the database level with cascading deletes (Rails 4.2 only): `add_foreign_key :posts, :users, on_delete: :cascade`. This will run the following SQL:
+
+    ALTER TABLE `posts`
+    ADD CONSTRAINT `posts_user_id_fk`
+    FOREIGN KEY (`user_id`) REFERENCES `users`(id)
+    ON DELETE CASCADE;
+
+– Read more about foreign key constraints: http://www.postgresql.org/docs/9.3/static/ddl-constraints.html#DDL-CONSTRAINTS-FK
