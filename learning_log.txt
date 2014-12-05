@@ -1117,3 +1117,4 @@ WEEK OF 11/30/14
     ON DELETE CASCADE;
 
 – Read more about foreign key constraints: http://www.postgresql.org/docs/9.3/static/ddl-constraints.html#DDL-CONSTRAINTS-FK
+– The Unix philosophy in a nutshell: tools should be independently useful, but have clean integration points.

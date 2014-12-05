@@ -1,0 +1,44 @@
+ROCKET 
+======
+
+A tool for deploying and running applications within container runtimes. A lot like docker, cf. `./docker.txt`.
+
+Rocket was designed with three goals in mind:
+
+  – Composability
+  – Security
+  – Speed
+
+It's important to bear in mind that CoreOS created Rocket in response to design criticisms of Docker. From their blog post:
+
+    "When Docker was first introduced to us in early 2013, the idea of a 'standard container' was striking and immediately attractive: a simple component, a composable unit, that could be used in a variety of systems."
+
+    "Unfortunately, a simple re-usable component is not how things are playing out. Docker now is building tools for launching cloud servers, systems for clustering, and a wide range of functions: building images, running images, uploading, downloading, and eventually even overlay networking, all compiled into one monolithic binary running primarily as root on your server...We should stop talking about Docker containers, and start talking about the Docker Platform."
+
+
+APP CONTAINER OVERVIEW
+======================
+
+An “App Container” is the specification of an image format, container runtime, and a discovery mechanism. CoreOS wants this to be an open specification, so that Rocket's implementation is one of many app containers.
+
+  Application Container Image (ACI): encrypted tgz that includes all the bits needed to run an app container (i.e. image => runtime).
+
+  Application Container Runtime: definition of the environment the running app container should be given.
+
+  Application Container Discovery: a protocol for finding and downloading a container image.
+
+
+WHAT'S THE DIFFERENCE BETWEEN ROCKET AND APP CONTAINER?
+=======================================================
+
+App Container is a specification for a container for running applications. Rocket implements these facilities as a command line tool, `rkt`. An open specification allows other systems do their own implementation of App Container without using Rocket.
+
+
+RESOURCES
+=========
+
+Original announcement: https://coreos.com/blog/rocket
+
+15 min demo: https://www.youtube.com/watch?v=E9WVjxaRkKU
+
+Tutorial: https://github.com/kelseyhightower/rocket-tutorial
