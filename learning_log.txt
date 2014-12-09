@@ -1118,3 +1118,9 @@ WEEK OF 11/30/14
 
 – Read more about foreign key constraints: http://www.postgresql.org/docs/9.3/static/ddl-constraints.html#DDL-CONSTRAINTS-FK
 – The Unix philosophy in a nutshell: tools should be independently useful, but have clean integration points.
+
+
+WEEK OF 12/7/14
+– Understanding the node.js event loop: http://blog.mixu.net/2011/02/01/understanding-the-node-js-event-loop/
+– Yet another 'app containerization' option, cf. Docker and Rocket: Travelling Ruby! Specifically designed for Ruby apps, works on both Linux and OS X: 
+http://phusion.github.io/traveling-ruby/
