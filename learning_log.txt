@@ -1124,3 +1124,4 @@ WEEK OF 12/7/14
 – Understanding the node.js event loop: http://blog.mixu.net/2011/02/01/understanding-the-node-js-event-loop/
 – Yet another 'app containerization' option, cf. Docker and Rocket: Travelling Ruby! Specifically designed for Ruby apps, works on both Linux and OS X: 
 http://phusion.github.io/traveling-ruby/
+– Skeleton, a super lightweight CSS framework: http://getskeleton.com/
