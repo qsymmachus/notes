@@ -1,5 +1,5 @@
-# CHAIN OF RESPONSIBILITY
-# =======================
+# CHAIN OF RESPONSIBILITY (object behavioral pattern)
+# ===================================================
 
 # GoF definition (p. 223):
 # ------------------------
@@ -17,7 +17,7 @@
 
 # Cons:
 # -----
-#  * The 'chain' of successors may grow unwieldy and difficult to track.
+#  * The 'chain' of handlers may grow unwieldy and difficult to track.
 
 # Module to make objects ('handlers') chainable:
 # ----------------------------------------------
@@ -70,4 +70,4 @@ kerry.next_in_chain(biden) # Building the chain of responsibility
 biden.next_in_chain(obama)
 
 kerry.launch_nukes # => Passed up chain to 'obama'
-kerry.world_peace # => Raises 'End of Chain' error; no handler can do this
+kerry.world_peace # => Raises 'End of Chain' error; no handler can do this :(

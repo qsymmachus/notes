@@ -1,4 +1,4 @@
-# STRATEGY (Object Behavioral pattern)
+# STRATEGY (object behavioral pattern)
 # ====================================
 
 # GoF definition (p. 315): 
@@ -15,7 +15,7 @@
 
 # Pros:
 # ----
-#  * Strategies (and thus their algorithms) are easily interchangeable.
+#  * Algorithms are encapsulated within interchangeable 'strategies'.
 #  * "Context" is decoupled from the implementation of the algorithm.
 
 # Strategies:
