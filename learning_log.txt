@@ -1125,3 +1125,12 @@ WEEK OF 12/7/14
 – Yet another 'app containerization' option, cf. Docker and Rocket: Travelling Ruby! Specifically designed for Ruby apps, works on both Linux and OS X: 
 http://phusion.github.io/traveling-ruby/
 – Skeleton, a super lightweight CSS framework: http://getskeleton.com/
+
+
+WEEK OF 12/14/14
+– Rails polymorphic associations allow a model to belong to more than one other model, on a single association: http://guides.rubyonrails.org/association_basics.html#polymorphic-associations
+– `zip` and `unzip` let you compress and uncompress files in the shell. You can also encrypt compressed files:
+
+  zip -e output_file.zip target_file
+
+– Check out the node stream handbook: https://github.com/substack/stream-handbook
