@@ -11,6 +11,8 @@
 # (object pattern); but I think composition should always be the preferred
 # method.
 
+# Also known as the 'wrapper' pattern.
+
 # Pros:
 # -----
 #  * Enforces a consistent interface between two disparate objects.
@@ -33,7 +35,7 @@ require 'openssl'
 
 class MessageEncrypter
   def initialize(cipher)
-    # This is the adaptee whose interface we will 'adapt'.
+    # 'cipher' is the adaptee whose interface we will 'adapt'.
     # Note that we use dependency injection here, so
     # 'cipher' could be any object with the same interface.
     @cipher = cipher
