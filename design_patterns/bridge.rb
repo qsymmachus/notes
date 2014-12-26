@@ -1,4 +1,4 @@
-# BRIDGE (object structural)
+# BRIDGE (object structural pattern)
 # ============================================
 
 # GoF definition (p. 151):
@@ -37,17 +37,11 @@ class RoboChat
   def chat
     puts @robot.greeting
     message = ""
-    unless says_goodbye?(message)
+    until @robot.says_goodbye?(message)
       puts "=> "
       message = gets.chomp
       puts @robot.respond(message)
     end
-  end
-
-  private
-
-  def says_goodbye?(message)
-    /^.*goodbye.*$/.match(message.downcase)
   end
 end
 
@@ -73,6 +67,7 @@ class DumbRobot < Robot
     "You do realize my responses are random, right?",
     "Please help computer."
   ]
+
   def greeting
     "Hello! I am not very good at chatting."
   end
@@ -81,6 +76,10 @@ class DumbRobot < Robot
   # Note that RoboChat is ignorant of its implementation.
   def respond(message)
     RESPONSES.sample
+  end
+
+  def says_goodbye?(message)
+    /^.*goodbye.*$/.match(message.downcase)
   end
 end
 
