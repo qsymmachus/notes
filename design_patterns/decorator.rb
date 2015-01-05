@@ -21,13 +21,13 @@
 # Pros:
 # -----
 #  * A decorator's interface must conform to the interface of the component
-#  it decorates.
+#    it decorates.
 #  * Features can be added incrementally to simple components.
 
 # Cons:
 # -----
 #  * Lots of little objects – behaviors are fragmented among different
-#  decorators, which can be difficult to follow.
+#    decorators, which can be difficult to follow.
 
 # Component [superclass to component subclasses and decorators]:
 # -------------------------------------------------------------

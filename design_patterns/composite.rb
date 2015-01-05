@@ -22,7 +22,7 @@
 # Cons:
 # -----
 #  * Component design can be overly generalized, making it difficult to
-#  distinguish between different types of components
+#    distinguish between different types of components
 
 # Component (defines interface):
 # ------------------------------

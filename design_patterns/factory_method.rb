@@ -13,12 +13,12 @@
 # -----
 #  * Allows for more flexible, subclass-specific methods of object creation.
 #  * The abstract factory method defines a clear interface the enforces 
-#  certain requirements on subclasses factory methods.
+#    certain requirements on subclasses factory methods.
 
 # Cons:
 # -----
 #  * Can require creation of new subclasses to implement minor differences
-#  in object creation.
+#    in object creation.
 
 # Abstract class
 # --------------
