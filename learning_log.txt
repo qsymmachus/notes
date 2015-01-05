@@ -1,12 +1,3 @@
-WHAT ELSE SHOULD I LEARN?
-- Quicksort
-- Merge sort
-– Clearly define REST, RESTful routes
-– Read "Refactoring" by Fields & Fowler
-– Read "Design Patterns" by Olsen
-
---------------------------------------
-
 WHAT DID I LEARN AT DEV BOOTCAMP?
 
 
