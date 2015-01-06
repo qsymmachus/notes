@@ -960,12 +960,15 @@ WEEK OF 10/12/14
 – How to test Sidekiq using rspec:
 
   Sidekiq::Testing.fake! # check queue
-  # do something that should create a worker
-  expect(Emails::NotificationWorker.jobs.last["args"].first).to eq user.id
+  expect {
+    # do something that should create a worker
+  }.to change { 
+    SomeWorker.jobs.size 
+  }.by(1)
 
   Sidekiq::Testing.inline! # execute workers immediately
-  # do something that should create a worker
-  expect(ActionMailer::Base.deliveries.last.email).to eq user.email
+  # do something that should create a worker that sends an email
+  expect(ActionMailer::Base.deliveries.last.to.first).to eq user.email
 
 – How to test around an error in rspec (i.e. you want to test something other than the mere fact that an error was raised):
 
