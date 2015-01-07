@@ -7,8 +7,10 @@ A Javascript library for creating client-heavy apps that allow you to route mode
 – View: simpler than in MVC, no logic here.
 – Presenter: handles all interactions between model and view.
 
-Useful tutorial: https://www.youtube.com/watch?v=FZSjvWtUxYk
+Useful tutorials: https://backbonetutorials.com/
+                 https://www.youtube.com/watch?v=FZSjvWtUxYk
                  https://github.com/thomasdavis/backbonetutorials/tree/gh-pages/videos/beginner
+                 http://arturadib.com/hello-backbonejs/
 
 ------------------------------
 
