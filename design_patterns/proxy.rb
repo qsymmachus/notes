@@ -7,7 +7,7 @@
 # it."
 
 # A Proxy must do the following:
-#   * maintain a reference that lets the proxy access teh real subject
+#   * maintain a reference that lets the proxy access the real subject
 #   * provide an interface identical to the subject's
 #   * control access to the real subject
 
