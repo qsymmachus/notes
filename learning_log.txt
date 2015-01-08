@@ -960,12 +960,15 @@ WEEK OF 10/12/14
 – How to test Sidekiq using rspec:
 
   Sidekiq::Testing.fake! # check queue
-  # do something that should create a worker
-  expect(Emails::NotificationWorker.jobs.last["args"].first).to eq user.id
+  expect {
+    # do something that should create a worker
+  }.to change { 
+    SomeWorker.jobs.size 
+  }.by(1)
 
   Sidekiq::Testing.inline! # execute workers immediately
-  # do something that should create a worker
-  expect(ActionMailer::Base.deliveries.last.email).to eq user.email
+  # do something that should create a worker that sends an email
+  expect(ActionMailer::Base.deliveries.last.to.first).to eq user.email
 
 – How to test around an error in rspec (i.e. you want to test something other than the mere fact that an error was raised):
 
@@ -1131,6 +1134,23 @@ WEEK OF 12/14/14
 
 
 WEEK OF 1/3/15
+– 'Secure Secure Shell', a really interesting article on how to make ssh as secure as possible: https://stribika.github.io/2015/01/04/secure-secure-shell.html
+– UML state diagrams, useful for modelling state machines: http://en.wikipedia.org/wiki/State_diagram_%28UML%29
 – To validate unique combinations of columns (for example, if you want to ensure a user votes only once on a given question). In your 'vote' model:
 
   validates :user_id, uniqueness: { scope: :question_id }
+
+– A quicker way to write custom validations: `validate :some_custom_method`
+
+  class Invoice < ActiveRecord::Base
+    validate :paid_is_not_greater_than_owed
+
+    private
+
+    def paid_is_not_greater_than_owed
+      if paid > owed
+        errors.add(:paid, "cannot be greater than owed")
+      end
+    end
+  end
+
