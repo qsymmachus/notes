@@ -1133,7 +1133,11 @@ WEEK OF 12/14/14
 – Check out the node stream handbook: https://github.com/substack/stream-handbook
 
 
-WEEK OF 1/3/15
+WEEK OF 1/4/15
+– Ruby's built in binary search: 
+
+  sorted_array.bsearch { |n| n > 1000 }
+
 – 'Secure Secure Shell', a really interesting article on how to make ssh as secure as possible: https://stribika.github.io/2015/01/04/secure-secure-shell.html
 – UML state diagrams, useful for modelling state machines: http://en.wikipedia.org/wiki/State_diagram_%28UML%29
 – To validate unique combinations of columns (for example, if you want to ensure a user votes only once on a given question). In your 'vote' model:
@@ -1154,3 +1158,6 @@ WEEK OF 1/3/15
     end
   end
 
+
+WEEK OF 1/11/15
+– Icono, pure CSS icons: http://saeedalipoor.github.io/icono/
