@@ -154,3 +154,25 @@ SELECT name, population,
             ELSE 'large'
        END
 FROM world
+
+
+USING 'WITH' TO MIMIC STATE
+===========================
+
+WITH consolidated_deposits AS (
+  SELECT
+    a.sov_id AS sov_id,
+    SUM(COALESCE(a.budget,0)) AS budget,
+    SUM(COALESCE(a.dollars_billed,0)) AS dollars_billed,
+    SUM(COALESCE(a.paid,0)) AS paid
+  FROM sov_item_values AS a
+  WHERE a.row_id LIKE 'P8-C%'
+  GROUP BY a.sov_id;
+)
+UPDATE sov_item_values AS target
+  SET budget = consolidated_deposits.budget
+  SET paid = consolidated_deposits.paid
+  SET dollars_billed = consolidated_deposits.dollars_billed
+WHERE
+  target.sov_id = consolidated_deposits.sov_id
+  target.row_id = 'P8-C010-010'
