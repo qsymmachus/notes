@@ -1161,3 +1161,6 @@ WEEK OF 1/4/15
 
 WEEK OF 1/11/15
 – Icono, pure CSS icons: http://saeedalipoor.github.io/icono/
+– '100 years of computer science' – the most important papers from each decade. This is amazing: http://www.thoughtworks.com/insights/blog/100-years-computer-science
+– Neat CSS pseudo-selector: :nth-child
+https://developer.mozilla.org/en-US/docs/Web/CSS/:nth-child
