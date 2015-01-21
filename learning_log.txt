@@ -1164,3 +1164,22 @@ WEEK OF 1/11/15
 – '100 years of computer science' – the most important papers from each decade. This is amazing: http://www.thoughtworks.com/insights/blog/100-years-computer-science
 – Neat CSS pseudo-selector: :nth-child
 https://developer.mozilla.org/en-US/docs/Web/CSS/:nth-child
+
+
+WEEK OF 1/18/15
+– Learned how to use redis as a cache store. For example, if a method is expensive, you can cache the result and check the cache in future calls. A redis cache requires 3 things: a key, a value, and an expiration date.
+
+class User < ActiveRecord::Base
+  def followers_count
+    # Check redis for a cache of the return value:
+    key = "User#{id}#followers_count"
+    value = $redis.get(key)
+    # If there is no cache, find the return value and cache it:
+    unless value
+      value = followers.count
+      $redis.set(key, value)
+      $redis.expire(key, 60*60*24) # expires in 1 day
+    end
+    value
+  end
+end
