@@ -1167,6 +1167,7 @@ https://developer.mozilla.org/en-US/docs/Web/CSS/:nth-child
 
 
 WEEK OF 1/18/15
+– Check out this Rails helper: time_ago_in_words(Time.now - 3.days) => "3 days"
 – Learned how to use redis as a cache store. For example, if a method is expensive, you can cache the result and check the cache in future calls. A redis cache requires 3 things: a key, a value, and an expiration date.
 
 class User < ActiveRecord::Base
