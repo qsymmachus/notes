@@ -62,6 +62,38 @@ ALL (SELECT gdp FROM world WHERE continent = 'Europe')
 
 
 
+USING 'WITH'
+============
+
+Provides a means to write subqueries for use in a larger SELECT query.
+
+The subqueries, which are often referred to as Common Table Expressions or CTEs, can be thought of as defining temporary tables that exist just for this query.
+
+Check out: http://www.postgresql.org/docs/9.3/static/queries-with.html
+
+WITH regional_sales AS (
+  /* subquery for total regional sales */
+  SELECT region, SUM(amount) AS total_sales
+  FROM orders
+  GROUP BY region
+),
+top_regions AS (
+  /* subquery for regions with most sales */
+  SELECT region
+  FROM regional_sales
+  WHERE total_sales > (SELECT SUM(total_sales)/10 FROM regional_sales)
+)
+/* display sales figures per product in top regions only */
+SELECT region,
+       product,
+       SUM(quantity) AS product_units,
+       SUM(amount) AS product_sales
+FROM orders
+WHERE region IN (SELECT region FROM top_regions)
+GROUP BY region, product;
+
+
+
 AGGREGATE FUNCTIONS
 ===================
 
@@ -116,6 +148,7 @@ MAX() - Returns the largest value
 MIN() - Returns the smallest value
 
 
+
 JOINING TABLES
 ==============
 
@@ -127,6 +160,7 @@ FROM game JOIN goal ON id=matchid
 LEFT JOIN include rows from the left table even when the linking value is null.
 
 RIGHT JOIN  include rows from the right table even when the linking value is null.
+
 
 
 MISCELLANEOUS
