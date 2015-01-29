@@ -1164,6 +1164,8 @@ WEEK OF 1/11/15
 – '100 years of computer science' – the most important papers from each decade. This is amazing: http://www.thoughtworks.com/insights/blog/100-years-computer-science
 – Neat CSS pseudo-selector: :nth-child
 https://developer.mozilla.org/en-US/docs/Web/CSS/:nth-child
+– Find yourself using the same setup over and over for some specs? Use shared context to DRY up your rspec: http://steven-ferguson.github.io/blog/2014/05/17/using-rspec-shared-context-for-dryer-specs/
+
 
 
 WEEK OF 1/18/15
