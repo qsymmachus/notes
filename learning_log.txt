@@ -1190,3 +1190,7 @@ end
 
 WEEK OF 1/25/15
 – Shorten github urls with this neat utility: curl -i http://git.io -F "url=https://github.com/..."
+– Very interesting article on the history of databases: http://avant.org/media/history-of-databases
+– Using ES6 today: http://robots.thoughtbot.com/replace-coffeescript-with-es6
+– RFC index: http://www.rfc-editor.org/rfc-index2.html 
+For example, check out RFC 2616, the original spec for HTTP/1.1
