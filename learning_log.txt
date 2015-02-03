@@ -1194,3 +1194,21 @@ WEEK OF 1/25/15
 – Using ES6 today: http://robots.thoughtbot.com/replace-coffeescript-with-es6
 – RFC index: http://www.rfc-editor.org/rfc-index2.html 
 For example, check out RFC 2616, the original spec for HTTP/1.1
+
+
+WEEK OF 2/1/15
+– DRY up your rspec with shared examples. Somewhere in `/spec/support`:
+
+  shared_examples "an object that can be added" do |num|
+    let(:object) { klass.new }
+
+    it "can be added" do
+      expect(object + num).to eq 2
+    end
+  end
+
+Then in your spec:
+
+  it_behaves_like "an object that can be added", 5 do
+    let(:klass) { MyWidget }
+  end
