@@ -1212,3 +1212,9 @@ Then in your spec:
   it_behaves_like "an object that can be added", 5 do
     let(:klass) { MyWidget }
   end
+
+– The 'satisfy' rspec matcher lets you test almost condition:
+
+    expect(sov.reload.status).to satisfy do |status|
+      status == "approved" || status == "queued_for_processing"
+    end
