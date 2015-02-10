@@ -1218,3 +1218,8 @@ Then in your spec:
     expect(sov.reload.status).to satisfy do |status|
       status == "approved" || status == "queued_for_processing"
     end
+
+
+WEEK OF 2/8/15
+– yEd Graph Editor, a useful apps for making diagrams and flowcharts: http://www.yworks.com/en/products/yfiles/yed/
+
