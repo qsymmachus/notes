@@ -1222,4 +1222,10 @@ Then in your spec:
 
 WEEK OF 2/8/15
 – yEd Graph Editor, a useful apps for making diagrams and flowcharts: http://www.yworks.com/en/products/yfiles/yed/
+– If you're using `remote: true` to submit rails forms via an AJAX request, there are a variety of custom events you can use to trigger callbacks around the request: https://github.com/rails/jquery-ujs/wiki/ajax
 
+For example, say you wanted to append some custom data to the request:
+
+$('form').on('ajax:beforeSend', function(event, xhr, settings) {
+  settings.data += "&custom=" + encodeURIComponent("Here's some custom data!");
+})
