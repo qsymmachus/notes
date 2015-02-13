@@ -1222,6 +1222,24 @@ Then in your spec:
 
 WEEK OF 2/8/15
 – yEd Graph Editor, a useful apps for making diagrams and flowcharts: http://www.yworks.com/en/products/yfiles/yed/
+– Cloud computing actually defined – "deploying groups of servers that allow centralized data storage and online access to services." Cloud computing service models, from lowest level to highest:
+
+  Infrastructure as a service (IaaS): the service is access to computers, whether they be servers, virtual machines, storage, etc.
+    – Provider: Responsible for the hardware.
+    – Client: Responsible for all software.
+    – e.g.: Amazon EC2
+
+  Platform as a service (PaaS): the service is access to a computing platform, including key software, such as the operating system and common dependencies.
+    – Provider: Responsible for hardware and much of the software layer.
+    – Client: Responsible for the application they deploy.
+    – e.g. Google App Engine, Microsoft Azure, Heroku.
+
+  Software as a service (SaaS): the service is access to a specific application and its data. Can be thought of as "on demand software".
+    – Provider: Responsible for the hardware and all software.
+    – Client: Not really responsible for anything – pure consumer.
+    – e.g. Wrike, Zoho, Google Docs.
+
+
 – If you're using `remote: true` to submit rails forms via an AJAX request, there are a variety of custom events you can use to trigger callbacks around the request: https://github.com/rails/jquery-ujs/wiki/ajax
 
 For example, say you wanted to append some custom data to the request:
@@ -1229,3 +1247,4 @@ For example, say you wanted to append some custom data to the request:
 $('form').on('ajax:beforeSend', function(event, xhr, settings) {
   settings.data += "&custom=" + encodeURIComponent("Here's some custom data!");
 })
+
