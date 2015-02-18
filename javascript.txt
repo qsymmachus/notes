@@ -261,3 +261,44 @@ Speaker.thisIsPrivate => undefined!
 Speaker.speak => “Hello my friend”
 
 In this sense Speaker is a closure, because it encapsulates the scope of whole function.
+
+___________________________________________________________________
+
+HOISTING
+
+Can result in confusing scope issues. As a rule,
+
+"Function declarations and function variables are always moved ('hoisted') to the top of their javascript code by the interpreter." 
+[http://www.adequatelygood.com/JavaScript-Scoping-and-Hoisting.html]
+
+NOTE that this means that while variable declarations are hoisted, their assignments are not!
+
+function hoistMe() {
+  // logs 'undefined' – `variable` is hoisted, but has not assignment value.
+  console.log(variable);
+  var variable = "hello";
+}
+
+Function _declarations_ are hoisted along with their function bodies. This returns 'blerg', because the second definition of stuff() is hoisted above the return statement:
+
+function returnStuff() {
+  function stuff() {
+    return "blah";
+  }
+  return stuff();
+  function stuff() {
+    return "blerg";
+  }
+}
+
+By contrast, function _expressions_ hoist their variable declarations, but NOT their assignment expressions – i.e., their function bodies. Therefor the following example returns 'blah', because the second function body of stuff() is not hoisted, and is declared after the 'return' statement:
+
+function returnStuff() {
+  var stuff = function() {
+    return "blah";
+  }
+  return stuff();
+  var stuff = function() {
+    return "blerg";
+  }
+}
