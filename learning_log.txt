@@ -1240,6 +1240,8 @@ WEEK OF 2/8/15
     – e.g. Wrike, Zoho, Google Docs.
 
 
+
+WEEK OF 2/15/15
 – If you're using `remote: true` to submit rails forms via an AJAX request, there are a variety of custom events you can use to trigger callbacks around the request: https://github.com/rails/jquery-ujs/wiki/ajax
 
 For example, say you wanted to append some custom data to the request:
@@ -1248,3 +1250,18 @@ $('form').on('ajax:beforeSend', function(event, xhr, settings) {
   settings.data += "&custom=" + encodeURIComponent("Here's some custom data!");
 })
 
+
+WEEK OF 2/22/15
+– Article on REST WORST practices: http://jacobian.org/writing/rest-worst-practices
+– Article on REST BEST practices: http://phalt.co/rest-digested/
+ 
+  – Each resource should have one URI endpoint.
+  – The HTTP method sent to that endpoint should reflect the type of interaction with that resource.
+  – The status code returned by the response should accurately reflect the outcome of the interaction.
+  – When "scoping" requests, you should use URI parameters: /pokemon?type=fire
+  – It is stateless: each request happens in complete isolation of another. No state, such as cookies or sessions, should change how a request is processed.
+
+– Contrasting SOAP (Simple Object Access Protocol) vs. REST:
+  
+  – SOAP has one URI endpoint and one HTTP method. All method information and data is contained in the request body, usually XML.
+  – The advantage of REST is that URI endpoints are associated with specific resources, and the HTTP method describes how we interact with that resource. We can intuit what a request will do, without knowing anything about how it will be implemented. Moreover, the use of standard HTTP status codes also makes it easy to interpret the outcome of the interaction. Nothing is "bespoke".
