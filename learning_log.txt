@@ -1287,4 +1287,15 @@ WEEK OF 2/29/15
       1. Return null if the node is null.
       2. Inspect the node
       3. Repeat this process recursively on all children of the node.
-      
+
+– How does `this` work in javascript?:
+
+  Global context: it's the global object (usually `window`).
+
+  Function context: it depends on where the function is called. 
+    – if it's called globally, it's the global object.
+    – if it's called within an object, `this` is that object.
+
+  Constructor context: `this` refers to the object that is constructed.
+
+  DOM event handler: when a function is used as an event handler, `this` is the element that fired the event.
