@@ -1267,3 +1267,24 @@ WEEK OF 2/22/15
   
   – SOAP has one URI endpoint and one HTTP method. All method information and data is contained in the request body, usually XML.
   – The advantage of REST is that URI endpoints are associated with specific resources, and the HTTP method describes how we interact with that resource. We can intuit what a request will do, without knowing anything about how it will be implemented. Moreover, the use of standard HTTP status codes also makes it easy to interpret the outcome of the interaction. Nothing is "bespoke".
+
+
+WEEK OF 2/29/15
+– Depth vs. Breadth First Search (searching nodes in a tree or graph):
+
+  DEPTH FIRST: Begin at the root and inspect every neighbor node (nodes at the same level). Repeat the process for each level, working down until you reach the bottom. 
+    – Advantages: Usually the shortest path to the node. Good for finding nodes you expect to find near the top of the tree.
+    – Disadvantages: Keeping track of neighbors can use a lot of memory if the tree is wide. Not good for finding nodes near the bottom of the tree.
+    – Algorithm (using a queue to keep track of node neighbors): 
+      1. Enqueue the node and inspect it.
+      2. IEnqueue all the current node's children. Dequeue the current node.
+      3. Repeat until you find the required node.
+
+  DEPTH FIRST: Begin at the root and inspect one branch of the tree all the way to the bottom, then backtrack to the closest unexpected branch and repeat until you've inspected all branches.
+    – Advantages: Good for finding nodes you expect to find near the bottom of the tree.
+    – Disadvantages: Not good for finding nodes near bottom of the true. Usually won't find the shortest path to a node.
+    – Algorithm (recursive algorithm starting at the root):
+      1. Return null if the node is null.
+      2. Inspect the node
+      3. Repeat this process recursively on all children of the node.
+      
