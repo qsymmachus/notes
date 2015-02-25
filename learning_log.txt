@@ -1252,6 +1252,8 @@ $('form').on('ajax:beforeSend', function(event, xhr, settings) {
 
 
 WEEK OF 2/22/15
+– Higher order functions: Functions that operate on other functions, either by taking them as arguments or by returning them, are called higher-order functions.
+– Getting started with Flux: http://ryanclark.me/getting-started-with-flux/
 – Article on REST WORST practices: http://jacobian.org/writing/rest-worst-practices
 – Article on REST BEST practices: http://phalt.co/rest-digested/
  
