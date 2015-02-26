@@ -1282,7 +1282,7 @@ WEEK OF 2/29/15
 
   DEPTH FIRST: Begin at the root and inspect one branch of the tree all the way to the bottom, then backtrack to the closest unexpected branch and repeat until you've inspected all branches.
     – Advantages: Good for finding nodes you expect to find near the bottom of the tree.
-    – Disadvantages: Not good for finding nodes near bottom of the true. Usually won't find the shortest path to a node.
+    – Disadvantages: Not good for finding nodes near top of the true. Usually won't find the shortest path to a node.
     – Algorithm (recursive algorithm starting at the root):
       1. Return null if the node is null.
       2. Inspect the node
