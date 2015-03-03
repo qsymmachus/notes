@@ -1269,7 +1269,7 @@ WEEK OF 2/22/15
   – The advantage of REST is that URI endpoints are associated with specific resources, and the HTTP method describes how we interact with that resource. We can intuit what a request will do, without knowing anything about how it will be implemented. Moreover, the use of standard HTTP status codes also makes it easy to interpret the outcome of the interaction. Nothing is "bespoke".
 
 
-WEEK OF 2/29/15
+WEEK OF 3/1/15
 – Depth vs. Breadth First Search (searching nodes in a tree or graph):
 
   DEPTH FIRST: Begin at the root and inspect every neighbor node (nodes at the same level). Repeat the process for each level, working down until you reach the bottom. 
@@ -1299,3 +1299,26 @@ WEEK OF 2/29/15
   Constructor context: `this` refers to the object that is constructed.
 
   DOM event handler: when a function is used as an event handler, `this` is the element that fired the event.
+
+– The 'flexbox' CSS property: "The main idea behind the flex layout is to give the container the ability to alter its items' width/height (and order) to best fill the available space" (http://flexboxin5.com/). Relevant properties:
+
+  – display: flex;
+  – flex-direction: row, column;
+  – flex-wrap: wrap [children pushed into next row as resized], nowrap [children always stay in row].
+  – justify-content: flex-start, flex-end, center, space-between, space-around [where to align children within a row, assuming flex-direction: row]
+  – align-items: flex-start, flex-end, center, baseline, stretch [where to align children within a column, assuming flex-direction: row]
+  – align-content: flex-start, flex-end, center, space-between, space-around, stretch [how to align the space between rows, if there is more than one row]
+
+The real magic starts when we make the children of a flexbox flexible as well:
+
+  – flex-grow: [integer; size of child relative to other flexible children]
+  – flex-shrink: [integer, rate child shrinks relative to other flexible children]
+  – flex-basis: [min width, can be pixels, ems, etc.]
+
+Plus you get dead simple vertical centering of an element within a flexbox, by giving the flexbox the following properties:
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  
