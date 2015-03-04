@@ -1010,11 +1010,10 @@ WEEK OF 11/2/14
 
 
 WEEK OF 11/9/14
-– Cross Origin Request Sharing (CORS) allows resources to to be requested from another domain other than the domain from which the resource originated. By default, web browsers forbid "cross domain" AJAX requests. 
+– Cross Origin Request Sharing (CORS) allows resources to to be requested from another domain other than the domain from which the resource originated. By default, web browsers forbid "cross domain" AJAX requests (the 'same-origin policy').
 
 When a CORS-compatible browser makes a cross origin request, it first sends a "pre-flight" request with the following request headers:
 
-  OPTIONS /
   Host: bar.com [domain request is sent to]
   Origin: http://example.com [domain request was sent from]
 

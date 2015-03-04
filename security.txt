@@ -53,3 +53,17 @@ Most commonly, an attacker injects HTML and/or Javascript.
 COUNTERMEASURES:
   – Filter user input. It is essential that you WHITELIST content rather than blacklist it, as blacklists are never complete. Rails makes this easy using #sanitize.
 
+
+4. SQL Injection
+----------------
+
+This is difficult to execute in a normally configured Rails application, but it's important to understand the attack.
+
+A hacker attempts to bypass authorization and access database information by passing input that alters a SQL query. For example, it's a pretty terrible idea to write something like this:
+
+  Project.where("name = '#{params[:name]}'")
+
+That naively passes user input to a SQL query. Instead, use this syntax with sanitized user input:
+
+  Project.where("name = ?", entered_name)
+
