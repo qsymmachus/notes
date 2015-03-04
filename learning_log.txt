@@ -1281,7 +1281,7 @@ WEEK OF 2/22/15
 WEEK OF 3/1/15
 – Depth vs. Breadth First Search (searching nodes in a tree or graph):
 
-  DEPTH FIRST: Begin at the root and inspect every neighbor node (nodes at the same level). Repeat the process for each level, working down until you reach the bottom. 
+  BREADTH FIRST: Begin at the root and inspect every neighbor node (nodes at the same level). Repeat the process for each level, working down until you reach the bottom. 
     – Advantages: Usually the shortest path to the node. Good for finding nodes you expect to find near the top of the tree.
     – Disadvantages: Keeping track of neighbors can use a lot of memory if the tree is wide. Not good for finding nodes near the bottom of the tree.
     – Algorithm (using a queue to keep track of node neighbors): 
