@@ -1279,6 +1279,7 @@ WEEK OF 2/22/15
 
 
 WEEK OF 3/1/15
+– Good article on HTTP caching: https://developers.google.com/web/fundamentals/performance/optimizing-content-efficiency/http-caching?hl=en
 – Depth vs. Breadth First Search (searching nodes in a tree or graph):
 
   BREADTH FIRST: Begin at the root and inspect every neighbor node (nodes at the same level). Repeat the process for each level, working down until you reach the bottom. 
