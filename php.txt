@@ -1,0 +1,57 @@
+PHP
+===
+
+echo "Prints to screen";
+
+echo "<p>PHP will parse HTML tags</p>";
+
+// This is a comment
+
+
+STRINGS
+-------
+
+echo "Concatenate" . " " . "with a dot";
+
+
+VARIABLES
+---------
+
+$myName = "John";
+
+
+CONTROL FLOW
+------------
+
+>
+<
+>=
+<=
+==
+!=
+
+if (condition) {
+  
+}
+elseif (condition) {
+
+}
+else {
+  
+}
+
+switch(value) {
+  case 0:
+    echo "The value is 0";
+    break;
+  case 1:
+    echo "The value is 1";
+    break;
+  case 3: // falling through
+  case 4:
+  case 5:
+   echo "The value is between 3 and 5";
+   break;
+  default:
+    echo "The value is neither 0 nor 1";
+}
