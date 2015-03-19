@@ -8,16 +8,24 @@ echo "<p>PHP will parse HTML tags</p>";
 // This is a comment
 
 
+VARIABLES
+---------
+
+$myName = "John";
+
+
 STRINGS
 -------
 
 echo "Concatenate" . " " . "with a dot";
 
 
-VARIABLES
----------
+ARRAYS
+------
 
-$myName = "John";
+$myArray = array(1, 2, 3, 4, 5);
+
+unset($myArray[0])  =>  [ 2, 3, 4, 5]
 
 
 CONTROL FLOW
@@ -55,3 +63,25 @@ switch(value) {
   default:
     echo "The value is neither 0 nor 1";
 }
+
+
+LOOPS
+-----
+
+for ($i=0; $i < 10; $i++) {
+  echo $i;
+}
+
+$fruits = array("apple", "banana", "orange");
+
+foreach ($fruits as $fruit) {
+  echo $fruit;
+}
+
+while (condition) {
+  // do some stuff
+}
+
+do {
+  // This will run at once before testing the conditon
+} while (condition)
