@@ -5,6 +5,8 @@ echo "Prints to screen";
 
 echo "<p>PHP will parse HTML tags</p>";
 
+print "This prints, too";
+
 // This is a comment
 
 
@@ -19,6 +21,28 @@ STRINGS
 
 echo "Concatenate" . " " . "with a dot";
 
+echo "Let's interpolate a {$variable}";
+
+strlen("hello")  =>  5
+
+substr("hello", 0, 4)  =>  "hell"
+
+strtoupper("hi")  =>  "HI"
+
+strtolower("HI")  =>  "hi"
+
+strpos("John", "o")  =>  1
+
+
+NUMBERS
+-------
+
+round(3.145)  =>  3
+round(3.145, 1)  =>  3.1
+
+rand()  =>  prints random number between 0 and 32767
+rand(1, 10)  =>  prints a random number between 0 and 10
+
 
 ARRAYS
 ------
@@ -26,6 +50,14 @@ ARRAYS
 $myArray = array(1, 2, 3, 4, 5);
 
 unset($myArray[0])  =>  [ 2, 3, 4, 5]
+
+array_push($myArray, 6);
+
+count($myArray);
+
+sort($myArray);
+
+join(", ", $myArray);
 
 
 CONTROL FLOW
@@ -85,3 +117,12 @@ while (condition) {
 do {
   // This will run at once before testing the conditon
 } while (condition)
+
+
+FUNCTIONS
+---------
+
+function name(parameters) {
+  // do stuff
+  return something;
+}
