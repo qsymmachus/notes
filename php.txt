@@ -126,3 +126,34 @@ function name(parameters) {
   // do stuff
   return something;
 }
+
+
+OBJECTS
+-------
+
+class Person {
+
+  // properties:
+
+  public $firstName;
+  public $lastName;
+  public $age;
+
+  // constructor:
+
+  public function __construct($firstName, $lastName, $age) {
+    $this->firstName = $firstName;
+    $this->lastName = $lastName;
+    $this->age = $age;
+  }
+
+  // methods:
+
+  public function greet() {
+    echo "Hello, my name is {$this->firstName}!";
+  }
+}
+
+$me = new Person("John", "Olmsted", 28);
+
+echo $me->firstName  =>  "John"
