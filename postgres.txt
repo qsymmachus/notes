@@ -48,3 +48,16 @@ $ psql [dbname]
 
 \cd             change current working directory
 \! [command]    execute command in shell or start interactive shell
+
+
+Importing/Exporting with CSV
+============================
+
+Import from a CSV:
+
+$ copy users(name, email) from '/Users/john/users.csv' delimiter ',' CSV;
+
+Export to a CSV:
+
+$ copy (select * from users) to '/Users/john/users.csv' with CSV;
+
