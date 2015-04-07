@@ -1332,4 +1332,22 @@ Plus you get dead simple vertical centering of an element within a flexbox, by g
   justify-content: center;
   align-items: center;
 
-  
+
+WEEK OF 4/5/15
+– CKVM, a CentOS virtual machine built with Vagrant, "provisioned dev environment". You do all your work here.
+  1. CentOS VM – runs the show
+  2. Salt – installs and manages all required packages
+  3. Supervisor – process monitoring 
+  4. Gearman – background jobs
+  5. Memcached – key/value store, used primarily for session and method caching
+– Workflow notes:
+  1. Git/repos – local machine
+  2. Supervisor/Salt – VM
+  3. Hostfiles – local machine directs CK traffic to VM
+– Vagrant commands, within a directory with a vagrant file:
+  `$ vagrant up`    Spin it up, this can take a LONG time
+  `$ vagrant status`
+  `$ vagrant ssh`    Access the VM
+– Supervisor commands (inside the VM):
+  `$ sudo supervisor status`    Check active processes
+  `$ sudo supervisor restart all`    Good quick fix 
