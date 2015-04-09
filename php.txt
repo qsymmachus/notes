@@ -49,6 +49,8 @@ ARRAYS
 
 $myArray = array(1, 2, 3, 4, 5);
 
+$associative = array('key' => 'value');
+
 unset($myArray[0])  =>  [ 2, 3, 4, 5]
 
 array_push($myArray, 6);
@@ -128,8 +130,8 @@ function name(parameters) {
 }
 
 
-OBJECTS
--------
+CLASSES & OBJECTS
+-----------------
 
 class Person {
 
@@ -157,3 +159,82 @@ class Person {
 $me = new Person("John", "Olmsted", 28);
 
 echo $me->firstName  =>  "John"
+
+
+INHERITANCE
+-----------
+
+class Fireman extends Person {
+  
+  // overriding an inherited method:
+  public function greet() {
+    echo "GET OUT OF HERE THERE'S A FIRE";
+  }
+
+}
+
+
+CLASS ABSTRACTION
+-----------------
+
+Abstract classes and methods may not be instantiated, and serve only to define
+a set of properties and methods all subclasses share. All methods marked as 
+"abstract" must be defined by subclasses.
+
+abstract class Animal {
+  abstract public function eat();
+}
+
+class Monkey extends Animal {
+  public function eat() {
+    echo "The Monkey munches on a banana.";
+  }
+}
+
+
+INTERFACES
+----------
+
+Specifies what methods a class must implement (an interface). An interface is slightly more abstract than an abstract class, because it does not imply an 'is a' relationship with classes that inherit it.
+
+interface Speech {
+  public function greet($greeting);
+}
+
+class Spaniard implements Speech {
+  
+  public function greet($greeting) {
+    if ($this->canUnderstand($greeting)) {
+      echo "Hola, amigo!";
+    }
+    else {
+      echo "No comprendo.";
+    }
+  }
+
+}
+
+
+TRAITS
+------
+
+Sets of methods that are not inherited, but composed into classes.
+
+There is precedence order for methods within a class. Methods defined in the current class override trait methods, while trait methods override inherited methods.
+
+trait neatBehaviors {
+  public function doSomethingCool() { /* something */ }
+  public function moreNeatStuff() { /* another thing */ }
+}
+
+class User {
+  use neatBehaviors;
+}
+
+You can include multiple traits by separating them with commas:
+
+class User {
+  use neatBehaviors, badBehaviors, shenanagins;
+}
+
+
