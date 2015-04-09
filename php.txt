@@ -161,6 +161,14 @@ $me = new Person("John", "Olmsted", 28);
 echo $me->firstName  =>  "John"
 
 
+METHOD & PROPERTY VISIBILITY
+----------------------------
+
+Public – accessible everywhere.
+Protected – accessible within the class itself and subclasses.
+Private – accessible only within the class itself.
+
+
 INHERITANCE
 -----------
 
