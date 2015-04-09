@@ -54,6 +54,7 @@ Most commonly, an attacker injects HTML and/or Javascript.
 COUNTERMEASURES:
   – Filter user input. It is essential that you WHITELIST content rather than blacklist it, as blacklists are never complete.
   – "Escaping" user input and application output for the right context (html, javascript). This alters input or output so it is treated as data, not code.
+    – In PHP, htmlspecialcharacters() is often used to escape output. The Zend framework wraps this in the method escape().
   – Use the HTTPOnly setting on cookies. This makes cookies accessbile via HTTP only, so they can't be accessed through javascript.
 
 
@@ -87,3 +88,11 @@ Obviously, you should always salt and hash sensitive data. The trick deciding wh
 Use transport layer security (SSL/TLS) when you're transferring sensitive data.
 
 
+6. MIXED CONTENT
+----------------
+
+This vulnerability emerges when you load content insecurely (i.e. over http) on a page that is otherwise secure (https). For example, you might load a script via http on a login page using https. The form is loaded and posted over https, but your "mixed content" – the script loaded via http – is vulnerable to being tampered with. Someone might intercept the transfer and inject their own code into the script; code that might change the login form's `action` attribute, for example, sending your credentials somewhere else!
+
+COUNTERMEASURES:
+
+Don't mix http/https content on the same page! If you're using https, you should load all resources on that page via https.
