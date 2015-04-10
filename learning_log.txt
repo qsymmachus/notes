@@ -1351,3 +1351,8 @@ WEEK OF 4/5/15
 – Supervisor commands (inside the VM):
   `$ sudo supervisor status`    Check active processes
   `$ sudo supervisor restart all`    Good quick fix 
+– Some funny SQL injection exploits:
+    – If your input is naively passed to a WHERE clauses, you can take on an additional select statement using UNION:
+
+      ' UNION SELECT * FROM users--
+      
