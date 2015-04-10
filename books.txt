@@ -5,9 +5,13 @@ x  Hobbs, "Plato and the Hero"
 x  Morozov, "To Save Everything, Click Here"
 x  Lansing, "Endurance: Shackleton's Incredible Voyage"
 x  Russell, "History of Western Philosophy"
-o  Gamma et al., "Design Patterns"
+x  Gamma et al., "Design Patterns"
+x  Herbert, "Dune"
+x  Piketty, "Capital in the 21st Century",
+o  Proust, "In Search of Lost Time"
+
 o  Nemeth et al., "UNIX and Linux System Administration"
-o  Lipovaca, "Learn you a Haskell for Great Good!"
+o  Thomas et al., "Flash Fiction International"
 
 LATIN
 =====
