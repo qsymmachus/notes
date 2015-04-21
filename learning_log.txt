@@ -1355,4 +1355,19 @@ WEEK OF 4/5/15
     – If your input is naively passed to a WHERE clauses, you can take on an additional select statement using UNION:
 
       ' UNION SELECT * FROM users--
-      
+
+
+WEEK OF 4/12/15
+– Mockery, a mock library for PHPUnit. Mock objects like this:
+
+    $mockDatabase = Mockery::mock("Database");
+    $mockDatabase->shouldReceive("select")
+                 ->andReturn("here's some data");
+
+    $mockDatabase->shouldReceive("select")
+                 ->with("specify some arguments")
+                 ->andReturn("argument-specific data");
+
+
+WEEK OF 4/19/15
+
