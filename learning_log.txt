@@ -1370,4 +1370,5 @@ WEEK OF 4/12/15
 
 
 WEEK OF 4/19/15
-
+– A very tiny intro to database systems: 
+http://blog.dancrisan.com/a-tiny-intro-to-database-systems
