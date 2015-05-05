@@ -1372,3 +1372,8 @@ WEEK OF 4/12/15
 WEEK OF 4/19/15
 – A very tiny intro to database systems: 
 http://blog.dancrisan.com/a-tiny-intro-to-database-systems
+
+
+WEEK OF 4/26/15
+– "What every computer science major should know":
+http://matt.might.net/articles/what-cs-majors-should-know/
