@@ -1377,3 +1377,19 @@ http://blog.dancrisan.com/a-tiny-intro-to-database-systems
 WEEK OF 4/26/15
 – "What every computer science major should know":
 http://matt.might.net/articles/what-cs-majors-should-know/
+
+
+WEEK OF 5/3/15
+– Let's learn some Clojure! 
+  – In a nutshell, Clojure is
+    1. A Lisp
+    2. A functional language with immutable data structures
+    3. Runs on the JVM, dynamically compiled
+    4. Designed for concurrency
+  – Clojure is a functional programming language insofar as
+    – It provides tools to help avoid mutable state
+    – Its functions are first-class objects
+    – It emphasizes recursion over iteration
+  – Great resource, "Getting started with Clojure":
+  http://jrheard.tumblr.com/post/40024238467/getting-started-with-clojure
+
