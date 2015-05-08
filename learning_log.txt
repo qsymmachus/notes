@@ -1392,4 +1392,43 @@ WEEK OF 5/3/15
     – It emphasizes recursion over iteration
   – Great resource, "Getting started with Clojure":
   http://jrheard.tumblr.com/post/40024238467/getting-started-with-clojure
+– S-expressions, or "symbolic expressions", are a notation for nested, tree-structured, list data. S-expressions are defined as either:
 
+    1. an atom (which may be a character, string, number, function), or
+    2. an expression of the form (x . y), where x and y are s-expressions.
+
+Most modern s-expression notations use a simplified notation that renders this:
+
+(x . (y . (z . NIL)))
+
+Like this:
+
+(x y z)
+
+S-expressions are also easily represented as binary trees:
+
+   .
+  / \
+ x   .
+    / \
+   y   .
+      / \
+     z  nil
+
+S expressions use prefix notation:
+
+(* 2 (+ 3 4)) => 14
+
+   .
+  / \
+ *   .
+    / \
+   2   .
+      / \
+     .  nil 
+    / \
+   +   .
+      / \
+     3   .
+        / \
+       4  nil
