@@ -1432,3 +1432,7 @@ S expressions use prefix notation:
      3   .
         / \
        4  nil
+
+
+WEEK OF 5/10/15
+– Cyclomatic complexity: a "quantitative measure of the number of linearly independent paths through a program" (control flow graph). Used to measure the complexity and maintainability of a program.
