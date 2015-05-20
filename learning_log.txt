@@ -1436,3 +1436,7 @@ S expressions use prefix notation:
 
 WEEK OF 5/10/15
 – Cyclomatic complexity: a "quantitative measure of the number of linearly independent paths through a program" (control flow graph). Used to measure the complexity and maintainability of a program.
+
+
+WEEK OF 5/17/15
+– HMAC implementations in Go, Python, Ruby, PHP, and Node: http://blog.turret.io/hmac-in-go-python-ruby-php-and-nodejs/
