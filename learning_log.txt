@@ -1440,3 +1440,7 @@ WEEK OF 5/10/15
 
 WEEK OF 5/17/15
 – HMAC implementations in Go, Python, Ruby, PHP, and Node: http://blog.turret.io/hmac-in-go-python-ruby-php-and-nodejs/
+
+
+WEEK OF 5/24/15
+– `\p{L}` is a regex that will capture all unicode letter characters. `\p{N}` will capture all unicode numeric characters.
