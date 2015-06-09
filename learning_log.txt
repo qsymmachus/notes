@@ -1451,3 +1451,11 @@ WEEK OF 5/31/15
 – Faking a conditional assignment operator in PHP:
 
     $name = $name ?: 'John Doe';
+
+
+WEEK OF 6/7/15
+– Reactive Programming: "a programming paradigm oriented around data flows and the propagation of change." Data flows should be easily expressed in the underlying language, and changes will automatically propagate through the dataflow at execution. For example, if we define 'a' as:
+
+  a = b + c
+
+Any change to 'b' or 'c' will automatically change 'a', in contrast to purely imperative programming.
