@@ -1459,3 +1459,5 @@ WEEK OF 6/7/15
   a = b + c
 
 Any change to 'b' or 'c' will automatically change 'a', in contrast to purely imperative programming.
+
+– Referential transparency: a function or expression is referentially transparent if it can be replaced with its value without changing program behavior. For example, a pure function with no side effects is referentially transparent.
