@@ -7,8 +7,10 @@ x  Lansing, "Endurance: Shackleton's Incredible Voyage"
 x  Russell, "History of Western Philosophy"
 x  Gamma et al., "Design Patterns"
 x  Herbert, "Dune"
-x  Piketty, "Capital in the 21st Century",
-o  Proust, "In Search of Lost Time"
+x  Piketty, "Capital in the 21st Century"
+x  Proust, "In Search of Lost Time"
+x  Emerick et al., "Clojure Programming"
+o  Marcus Aurelius, "Meditations"
 
 o  Nemeth et al., "UNIX and Linux System Administration"
 o  Thomas et al., "Flash Fiction International"
