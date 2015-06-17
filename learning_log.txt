@@ -1461,3 +1461,21 @@ WEEK OF 6/7/15
 Any change to 'b' or 'c' will automatically change 'a', in contrast to purely imperative programming.
 
 – Referential transparency: a function or expression is referentially transparent if it can be replaced with its value without changing program behavior. For example, a pure function with no side effects is referentially transparent.
+
+
+WEEK OF 6/14/15
+– The simplest definition of functional programming is programming with pure functions. A pure function
+
+  1. Has no side effects to program state,
+  2. Is referentially transparent; that is, it can be substituted for the value it returns, or vice versa, without affecting program behavior.
+
+More formally, 
+
+f(a) = b
+
+Given 'a', f() will always return 'b', regardless of program state. Every value of 'a' has exactly one value of 'b' that is returned by the function.
+
+Using pure functions has two chief advantages:
+
+  1. It allows for a natural mode of reasoning about a program called the "substitution model" – we can imagine program processes like an equation, expanding or abbreviating expressions and functions that are referentially transparent. This is often easier than reasoning about procedural changes to program state.
+  2. Pure functions are more modular and composable, since they are defined purely by their inputs and outputs, and have no unexpected side effects.
