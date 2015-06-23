@@ -1479,3 +1479,10 @@ Using pure functions has two chief advantages:
 
   1. It allows for a natural mode of reasoning about a program called the "substitution model" – we can imagine program processes like an equation, expanding or abbreviating expressions and functions that are referentially transparent. This is often easier than reasoning about procedural changes to program state.
   2. Pure functions are more modular and composable, since they are defined purely by their inputs and outputs, and have no unexpected side effects.
+
+
+WEEK OF 6/21/15
+– "Currying": converting a function of two arguments into a function of one argument through partial application of the function. 'curry' is in effect a closure that contains one of the two arguments already. Take this polymorphic scala function as an example, which takes a function with two args as its arguments, and returns a function with one arg:
+
+  curry[A, B, C] (f: (A, B) => C): A => (B => C) = 
+    a => b => f(a, b)
