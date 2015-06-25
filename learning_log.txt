@@ -1486,3 +1486,5 @@ WEEK OF 6/21/15
 
   curry[A, B, C] (f: (A, B) => C): A => (B => C) = 
     a => b => f(a, b)
+
+– Functional data structures: operated on only with pure functions. They are therefore immutable!
