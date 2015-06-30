@@ -68,6 +68,12 @@ def curry[A, B](a : A, f: (A, B) => C) : B => C =
   (b: B) => f(a, b)
 
 
+// Lazy (non-strict) evaluation of function arguments
+// onTrue and onFalse are no evaluated until called explicitly ('thunks')
+def if2[A] (cond: Boolena, onTrue: => A, onFalse => A): A =
+  if (cond) onTrue else onFalse
+
+
 PACKAGES
 --------
 
