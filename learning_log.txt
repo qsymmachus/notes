@@ -1488,3 +1488,7 @@ WEEK OF 6/21/15
     a => b => f(a, b)
 
 – Functional data structures: operated on only with pure functions. They are therefore immutable!
+
+
+WEEK OF 6/28/15
+– Non-strictness/laziness: non-strict functions may choose not to evaluate all of its arguments. This separates the _description_ of an expression from its _evaluation_.
