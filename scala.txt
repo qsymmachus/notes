@@ -1,0 +1,86 @@
+SCALA
+=====
+
+object HelloWorld {
+  /** 'main' is your entry point into your program.
+    * The method signature indicates:
+    *   - argument ('args')
+    *   - argument type (Array[String])
+    *   - return type (Unit, like 'Void')
+    */
+  def main(args : Array[String]) : Unit {
+    println("Hello, world!")
+  }
+}
+
+
+object HelloWorld extends App {
+  // If you extend App, all statements within this object will be run:
+  println("Hello, World")
+}
+
+
+VARIABLES
+---------
+
+// variable:
+var x = 5
+
+// constant:
+val y = 8
+
+// explicit type declaration:
+val x : Int = 5
+
+
+FUNCTIONS
+---------
+
+def doubler(x : Int) : Int =
+  x * 2 // implicit return
+
+def doubler(x : Int) : Int = {
+  println("Since this has multiple statements, enclose in a block {}")
+  x * 2
+}
+
+// A polymorphic function is paramaterized on type 'A'
+// 'A' is a generic placeholder that can be used in the method signature.
+def polymorphic[A](x : A) : A = 
+  x
+
+// e.g. this function accepts an argument of type 'A' and returns a type 'B'
+def polymorphic[A](a : A) : B
+
+// Higher-order functions can take functions as arguments.
+// In this examples, it takes a function that accepts 'A' and returns a boolean
+def higherOrder[A](a: A, f: (A) => Boolean)
+  if (f(a)) println("It's true")
+  else println("It's false")
+
+// Returns an anonymous function that accepts 'A' and returns the result of 
+// composing the functions f and g.
+def compose[A](f: A => A, g: A => A) : A = 
+  (x : A) => f(g(a))
+
+
+def curry[A, B](a : A, f: (A, B) => C) : B => C =
+  (b: B) => f(a, b)
+
+
+PACKAGES
+--------
+
+// wildcard import
+import scala.collection._
+
+// selective import
+import scala.collection.{Vector, Sequence}
+
+// renaming import
+import scala.collection.{Vector => Vec}
+
+
+DATA STRUCTURES
+---------------
+
