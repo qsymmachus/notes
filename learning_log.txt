@@ -1492,3 +1492,12 @@ WEEK OF 6/21/15
 
 WEEK OF 6/28/15
 – Non-strictness/laziness: non-strict functions may choose not to evaluate all of its arguments. This separates the _description_ of an expression from its _evaluation_.
+
+
+WEEK OF 7/5/15
+– When you make a POST request, the data that forms the body of the request is usually encoded in one of three ways:
+  
+  application/x-www-form-urlencoded (the default)
+  multipart/form-data (used when including files with <input type='file'>)
+  text/plain (rarely used)
+  
