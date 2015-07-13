@@ -1500,4 +1500,11 @@ WEEK OF 7/5/15
   application/x-www-form-urlencoded (the default)
   multipart/form-data (used when including files with <input type='file'>)
   text/plain (rarely used)
-  
+
+
+WEEK OF 7/12/15
+– How do you nest a git repo within a git repo? For example, what if you are nesting plugins within a project that are themselves git repos? Use git submodules! https://git-scm.com/book/en/v2/Git-Tools-Submodules
+  - git submodule add <git-address>  // add a repo as a submodule
+  - git submodule init  // init the submodules of a project you just cloned
+  - git submodule update  // update all submodules in your project
+
