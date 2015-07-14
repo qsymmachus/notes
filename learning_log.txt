@@ -1507,4 +1507,4 @@ WEEK OF 7/12/15
   - git submodule add <git-address>  // add a repo as a submodule
   - git submodule init  // init the submodules of a project you just cloned
   - git submodule update  // update all submodules in your project
-
+– Nice basic React tutorial: http://reactfordesigners.com/labs/reactjs-introduction-for-people-who-know-just-enough-jquery-to-get-by/
