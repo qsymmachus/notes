@@ -1508,3 +1508,5 @@ WEEK OF 7/12/15
   - git submodule init  // init the submodules of a project you just cloned
   - git submodule update  // update all submodules in your project
 – Nice basic React tutorial: http://reactfordesigners.com/labs/reactjs-introduction-for-people-who-know-just-enough-jquery-to-get-by/
+– One of the concrete advantages of HTTP/2 is decreased latency: HTTP headers will be compressed, and resources can be loaded in parallel over a single TCP connection.
+
