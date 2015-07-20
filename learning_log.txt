@@ -1510,3 +1510,17 @@ WEEK OF 7/12/15
 – Nice basic React tutorial: http://reactfordesigners.com/labs/reactjs-introduction-for-people-who-know-just-enough-jquery-to-get-by/
 – One of the concrete advantages of HTTP/2 is decreased latency: HTTP headers will be compressed, and resources can be loaded in parallel over a single TCP connection.
 
+
+WEEK OF 7/19/15
+– Hexagonal architecture: an application that is "equally driven by users, programs, automated test or batch scripts...[and allowed] to be developed and tested in isolation from its eventual run-time devices and databases."
+  – The image of a "hexagon" is meant to illustrate the fact that the application has many sides or "ports" in
+  and out of the application (HTTP requests, database connections, key-value stores, etc.)
+  – The crux of hexagonal architecture is that each port can easily be mocked without affecting any other.
+  – Each port is a kind of interface, insofar as it encapsulates change!
+  – This is why hexagonal architecture is also often called "ports and adapters" architecture.\
+  – Code layers: each layer has code and "boundaries", which are interfaces! 
+  – Dependencies should work "from the outside in"; that is, inner layers do not depend on outer layers.
+    
+    --> Framework (request handling) --> Application (orchestration) --> Domain (business logic)
+
+– An advantage of functional programming (i.e. programming with pure functions) is that they increase the number of invariants in a system, or things that do not change. This makes code easier to maintain. 
