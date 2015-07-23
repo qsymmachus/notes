@@ -1524,3 +1524,13 @@ WEEK OF 7/19/15
     --> Framework (request handling) --> Application (orchestration) --> Domain (business logic)
 
 – An advantage of functional programming (i.e. programming with pure functions) is that they increase the number of invariants in a system, or things that do not change. This makes code easier to maintain. 
+
+
+WEEK OF 7/26/15
+– Git tagging: used to tag specific points in history as important. Typically used to mark release versions (e.g. v1.2). 
+
+  git tag       
+  git tag -a v1.2 -m "this is version 1.4"
+  git show v1.2
+  git push origin v1.5
+  git push origin --tags
