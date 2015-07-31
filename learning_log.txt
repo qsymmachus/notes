@@ -1534,3 +1534,5 @@ WEEK OF 7/26/15
   git show v1.2
   git push origin v1.5
   git push origin --tags
+
+– Sequel, a nice alternative to ActiveRecord: http://twin.github.io/ode-to-sequel/
