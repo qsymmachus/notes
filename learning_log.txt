@@ -1536,3 +1536,11 @@ WEEK OF 7/26/15
   git push origin --tags
 
 – Sequel, a nice alternative to ActiveRecord: http://twin.github.io/ode-to-sequel/
+
+
+WEEK OF 8/2/15
+– If you know there will a merge conflict, you can force git to favor the versions found on one or the other branch:
+
+  $ git merge branch ours     favor the versions found on the branch you merging INTO
+  $ git merge branch theirs   favor the versions found on the branch you are merging
+
