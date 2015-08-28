@@ -1544,3 +1544,15 @@ WEEK OF 8/2/15
   $ git merge branch ours     favor the versions found on the branch you merging INTO
   $ git merge branch theirs   favor the versions found on the branch you are merging
 
+
+WEEK OF 8/9/15
+– Phing, a PHP task manager like Rake or Grunt: https://www.phing.info/
+
+
+WEEK OF 8/16/15
+– Continuous integration: "the practice of merging all developer working copies into a shared mainline several times a day". Intended to be done in conjuction with TDD and automated unit tests to ensure that each merge produces a working build.
+
+
+WEEK OF 8/23/15
+– A succinct definition of domain drive design: "being disciplined about separating business-specific domain logic from boilerplate logic".
+
