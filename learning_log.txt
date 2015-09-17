@@ -1556,3 +1556,7 @@ WEEK OF 8/16/15
 WEEK OF 8/23/15
 – A succinct definition of domain drive design: "being disciplined about separating business-specific domain logic from boilerplate logic".
 
+
+WEEK OF 9/13/15
+– JSON Web Token (JWT) session management: in traditional session management, a server will generate a session identifier and return it to the client as a cookie. Subsequent requests sent by the client include the session identifier. With JWT, a client's session data ('payload') is represented as a JSON string, including security factors such as the issuer of the token, intended audience, and token lifetime. The string is then base64 encoded, hashed with a private key known only to the server, and then sent to the client's browser in a cookie.
+
