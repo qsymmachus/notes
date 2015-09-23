@@ -1560,3 +1560,8 @@ WEEK OF 8/23/15
 WEEK OF 9/13/15
 – JSON Web Token (JWT) session management: in traditional session management, a server will generate a session identifier and return it to the client as a cookie. Subsequent requests sent by the client include the session identifier. With JWT, a client's session data ('payload') is represented as a JSON string, including security factors such as the issuer of the token, intended audience, and token lifetime. The string is then base64 encoded, hashed with a private key known only to the server, and then sent to the client's browser in a cookie.
 
+
+WEEK OF 9/20/15
+– `tail` displays the last part of a file by putting it to standard output. With the `-f` option, it does not stop when the end of file of reached, but waits for additional data to be appended to the file. This is really useful if you want to keep an eye on a log file (e.g. tail -f some_log).
+– `git mergetool` makes it dead simple to resolve merge conflicts.
+
