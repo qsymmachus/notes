@@ -1565,3 +1565,11 @@ WEEK OF 9/20/15
 – `tail` displays the last part of a file by putting it to standard output. With the `-f` option, it does not stop when the end of file of reached, but waits for additional data to be appended to the file. This is really useful if you want to keep an eye on a log file (e.g. tail -f some_log).
 – `git mergetool` makes it dead simple to resolve merge conflicts.
 
+
+WEEK OF 9/27/15
+– Domain Events (in the context of Domain Driven Design) decouple actions from their triggers, similar to the pub-sub pattern.
+  – As their name suggests, domain events model part of the domain only.
+  – e.g. an Event 'UserDeactivated' holds the details of an event that just took place, like an instance of `$user`.
+    – A Listener 'SendDeactivationEmail' accepts the UserDeactivated event and uses the `$user` object to send the email.
+  – See: http://culttt.com/2014/09/22/implementing-domain-events/
+
