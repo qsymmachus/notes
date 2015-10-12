@@ -1573,3 +1573,7 @@ WEEK OF 9/27/15
     – A Listener 'SendDeactivationEmail' accepts the UserDeactivated event and uses the `$user` object to send the email.
   – See: http://culttt.com/2014/09/22/implementing-domain-events/
 
+
+WEEK OF 10/4/15
+– Awesome little article on "How the Internet Works": https://thesquareplanet.com/blog/how-the-internet-works/
+
