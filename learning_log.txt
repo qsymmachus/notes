@@ -1577,3 +1577,11 @@ WEEK OF 9/27/15
 WEEK OF 10/4/15
 – Awesome little article on "How the Internet Works": https://thesquareplanet.com/blog/how-the-internet-works/
 
+
+WEEK OF 10/11/15
+– Richardson Maturity Model: levels of maturity for a RESTful service: http://martinfowler.com/articles/richardsonMaturityModel.html
+  – Level 0: HTTP is merely the transport layer, often to a single, black-box endpoint.
+  – Level 1: Resources are introduced, each represented by different endpoints.
+  – Level 2: HTTP verbs now have meaning, and reflect what is actually done to a resource.
+  – Level 3: HATEOAS (Hypertext As The Engine of Application State). Reponses include URIs ('hypermedia controls') that tell us what we can do next.
+
