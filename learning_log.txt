@@ -1585,3 +1585,12 @@ WEEK OF 10/11/15
   – Level 2: HTTP verbs now have meaning, and reflect what is actually done to a resource.
   – Level 3: HATEOAS (Hypertext As The Engine of Application State). Reponses include URIs ('hypermedia controls') that tell us what we can do next.
 
+
+WEEK OF 10/18/15
+– User stories should adhere to the INVEST acronym:
+  – Independent (Not tightly coupled to other stories)
+  – Negotiable (The start of a conversation, not a contract)
+  – Valuable
+  – Estimate-able
+  – Testable
+
