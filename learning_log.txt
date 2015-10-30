@@ -1594,3 +1594,9 @@ WEEK OF 10/18/15
   – Estimate-able
   – Testable
 
+
+WEEK OF 10/25/15
+– Mystery solved! Here's how cookies get passed around in the HTTP protocol. With headers!
+  – Response – Set-Cookie: name=value
+  – Request  – Cookie: name=value
+
