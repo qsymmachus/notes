@@ -1600,3 +1600,13 @@ WEEK OF 10/25/15
   – Response – Set-Cookie: name=value
   – Request  – Cookie: name=value
 
+
+WEEK OF 11/1/15
+– git bisect uses binary search to find the commit that introduced a bug.
+  
+  $ git bisect start
+  $ git bisect bad          # current version is bad
+  $ git bisect good s4g93d  # this commit is known to be good
+
+For each subsequent commit, mark it either as `git bisect good` or `git bisect bad`. When done, `git bisect reset`.
+
