@@ -1610,3 +1610,10 @@ WEEK OF 11/1/15
 
 For each subsequent commit, mark it either as `git bisect good` or `git bisect bad`. When done, `git bisect reset`.
 
+
+WEEK OF 11/8/15
+– Statement vs. Expression:
+  – A statement is executed with no return value, but purely for its side-effects.
+  – An expression is evaluates to a value (it has a return).
+– Functional programming languages are expression-based, that is, core language constructs are themselves functions with returns. e.g. Scala if-else blocks.
+
