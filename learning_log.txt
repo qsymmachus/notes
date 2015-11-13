@@ -1617,4 +1617,10 @@ WEEK OF 11/8/15
   – An expression is evaluates to a value (it has a return).
 – Functional programming languages are expression-based, that is, core language constructs are themselves functions with returns. e.g. Scala if-else blocks.
 – Uniform access principle: it should make no difference wehther a property is implemented through storage or computation (referential transparency). The fact that Ruby makes no distinction between object attributes and methods is a good illustration of this; as well as Scala fields.
+– Using 'get' with Scala maps returns an option:
+
+   val map = Map("cat" -> "meow", "dog" -> "woof", "cow" -> "moo")
+   map.get("cat") // Option[String] = Some(meow)
+   map.get("frog") // Option[String] = None
+   map.getOrElse("frog", "default growl") // String = default growl
 
