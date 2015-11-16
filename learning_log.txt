@@ -1625,3 +1625,21 @@ WEEK OF 11/8/15
    map.get("frog") // Option[String] = None
    map.getOrElse("frog", "default growl") // String = default growl
 
+
+WEEK OF 11/15/15
+– Scala pattern matching types (`case <pattern> => <result>`):
+  1. `_`         – wildcard pattern; matches everything.
+  2. `x`         – variable pattern; matches everything and captures the value.
+  3. `x: Int`    – typed pattern, matches and captures `x` if it is the correct type.
+  4. `2`         – constant pattern; a stable identifier that captures the value if it is equal to 2 in this example.
+  5. ``foo``     – stable identifier; like variable pattern but surrounded by backticks, for using other values in scope.
+  6. `(x, y)`    – tuple pattern; matches and decomposes tuples.
+  7. `Age(2)`    – constructor pattern; matches and decomposes case classes with certain arguments.
+  8. `Seq(1, 2)` – sequence pattern; use sequences constructors or prepend/append operators to match sequences.
+     `x +: Nil`
+     `_ :+ x`
+     `x +: y +: _`
+
+– Scala pattern binder: captures the pattern to the right of the `@`: `myAge @ Age(28)`
+– Scala pattern guard: `Age(n) if n >= 21`
+
