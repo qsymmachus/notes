@@ -1645,3 +1645,5 @@ WEEK OF 11/15/15
 – The difference between compilers and interpreters: https://theantlrguy.atlassian.net/wiki/display/ANTLR3/The+difference+between+compilers+and+interpreters
 
 
+WEEK OF 11/22/15
+– docker-machine [manages linux VMS that run dockerhosts] --> dockerhost [manages docker containers] --≥ docker container [runs your app]
