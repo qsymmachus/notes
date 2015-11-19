@@ -1647,3 +1647,7 @@ WEEK OF 11/15/15
 
 WEEK OF 11/22/15
 – docker-machine [manages linux VMS that run dockerhosts] --> dockerhost [manages docker containers] --≥ docker container [runs your app]
+– Using `sed` to perform substitutions:
+
+  $ sed 's/regexp/replacement/g' inputFileName > outputFileName
+
