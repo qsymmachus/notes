@@ -1646,7 +1646,19 @@ WEEK OF 11/15/15
 
 
 WEEK OF 11/22/15
-– docker-machine [manages linux VMS that run dockerhosts] --> dockerhost [manages docker containers] --≥ docker container [runs your app]
+– docker-machine [manages linux VMS that run docker hosts] --> docker host [manages docker containers] --≥ docker container [runs your app]
+– Docker swarm: provides a unified interface for a pool of docker hosts. 
+  When you run containers on the swarm master, it runs them on the nodes, but NOT the swarm master itself.
+   
+   swarm master [docker host that manages nodes] --> swarm mode [docker host running containers, managed by the swarm master]
+   
+   $ docker run swarm create // returns a token used to identify the swarm
+   $ docker-machine create -d virtualbox --swarm --swarm-master --swarm-discovery token://<TOKEN> swarm-master
+   $ docker-machine create -d virtualbox --swarm --swarm-discovery token://<TOKEN> swarm-node-01
+   $ docker-machine create -d virtualbox --swarm --swarm-discovery token://<TOKEN> swarm-node-02 // etc...
+   $ docker-machine env --swarm swarm-master // make the swarm master your active docker machine
+   $ docker info // lists details on the swarm and its nodes
+
 – Using `sed` to perform substitutions:
 
   $ sed 's/regexp/replacement/g' inputFileName > outputFileName
