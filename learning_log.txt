@@ -1642,4 +1642,6 @@ WEEK OF 11/15/15
 
 – Scala pattern binder: captures the pattern to the right of the `@`: `myAge @ Age(28)`
 – Scala pattern guard: `Age(n) if n >= 21`
+– The difference between compilers and interpreters: https://theantlrguy.atlassian.net/wiki/display/ANTLR3/The+difference+between+compilers+and+interpreters
+
 
