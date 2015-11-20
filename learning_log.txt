@@ -1659,12 +1659,17 @@ WEEK OF 11/22/15
    $ docker-machine env --swarm swarm-master // make the swarm master your active docker machine
    $ docker info // lists details on the swarm and its nodes
 
-– Using `sed` to perform substitutions:
-
-  $ sed 's/regexp/replacement/g' inputFileName > outputFileName
-
 – Exposing a port of a docker container:
 
   $ docker run -p 8080:8080 mycontainer
   $ curl http://$(docker-machine ip mymachine):8080
+
+– Using `sed` to perform substitutions:
+
+  $ sed 's/regexp/replacement/g' inputFileName > outputFileName
+
+
+– React JSX is really just syntactic sugar for function calls:
+
+  <div className="section">Hello there</div> == React.DOM.div({ className: "section" }, "Hello there")
 
