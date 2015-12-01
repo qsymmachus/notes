@@ -1673,3 +1673,9 @@ WEEK OF 11/22/15
 
   <div className="section">Hello there</div> == React.DOM.div({ className: "section" }, "Hello there")
 
+
+WEEK OF 11/39/15
+– To loop over files in the shell:
+
+  for f in *; do mv "$f" "$f.jpg"; done
+
