@@ -1679,3 +1679,7 @@ WEEK OF 11/29/15
 
   for f in *; do mv "$f" "$f.jpg"; done
 
+
+WEEK OF 12/23/15
+– Bash academy, a useful series of bash exercises: http://www.bash.academy/
+
