@@ -1680,8 +1680,10 @@ WEEK OF 11/29/15
   for f in *; do mv "$f" "$f.jpg"; done
 
 
-WEEK OF 12/23/15
+WEEK OF 12/13/15
 – Bash academy, a useful series of bash exercises: http://www.bash.academy/
 – WebAssembly, a new binary format for compilation to the web! WebAssembly is a AST (Abstract Syntax Tree) in binary format that future browers will understand. It's a new language that you can compile into that browsers will understand – Javascript is no longer the only option!
   – https://hacks.mozilla.org/2015/12/compiling-to-webassembly-its-happening/
   – https://medium.com/javascript-scene/what-is-webassembly-the-dawn-of-a-new-era-61256ec5a8f6#.56v0uvpa2
+– Common Lisp koans: https://github.com/google/lisp-koans
+
