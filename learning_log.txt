@@ -1694,4 +1694,5 @@ WEEK OF 12/20/15
 
 WEEK 0F 1/3/16
 – Angular 2 vs. React (javascript churn continues): https://medium.com/@housecor/angular-2-versus-react-there-will-be-blood-66595faafd51
+– On that note, a learning React roadmap: https://github.com/petehunt/react-roadmap
 
