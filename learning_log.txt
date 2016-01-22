@@ -1718,4 +1718,6 @@ Most of the time however, dependencies are resolved automatically when you typeh
   }
 
 
+WEEK OF 1/17/16
+– Nice defense of javascript "web apps", and a client-server architecture vs. a monolith: http://molily.de/javascript-web-apps/
 
