@@ -1734,3 +1734,9 @@ WEEK OF 1/17/16
   // "exclusive or"; i.e. unset $somebit in $bitfield
   $bitfield = $bitfield ^ $somebit;
 
+
+WEEK OF 2/21/16
+– To generated case ids for integration tests:
+   
+  `ruby scripts/testrail_util.rb -a -f path/to/file --suite regression --section Reach`
+
