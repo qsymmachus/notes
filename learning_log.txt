@@ -1740,3 +1740,21 @@ WEEK OF 2/21/16
    
   `ruby scripts/testrail_util.rb -a -f path/to/file --suite regression --section Reach`
 
+– LDAP (Lightweight Direct Access Protocol) is a protocol for accessing and maintaining directory information over IP.
+  – Commonly used to store usernames, passwords, and other auth* data.
+  – LDAP clients may add, delete, modify, compare, bind (authenticate), or search entries.
+  – LDAP entries consist of a set of attributes (name => value pairs) that are defined in a schema.
+    – Each entry has a 'distinguished name' (dn) that serves as unique identifier.
+    – Each entry is formally a set, so entry attribute order does not matter.
+    – The entry schema define rules of what kind of attributes an entry should have.
+      - 'objectClass' attribute points to a class defined in the schema, like 'person' or 'manager.'
+      – Object classes may require entries to have special attributes.
+    – Example entry:
+
+      dn: cn=John Olmsted,dc=example,dc=com
+      cn: John Olmsted
+      givenName: John
+      sn: Olmsted
+      mail: john@example.com
+      objectClass: person
+
