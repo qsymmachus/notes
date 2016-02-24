@@ -1747,8 +1747,8 @@ WEEK OF 2/21/16
     – Each entry has a 'distinguished name' (dn) that serves as unique identifier.
     – Each entry is formally a set, so entry attribute order does not matter.
     – The entry schema define rules of what kind of attributes an entry should have.
-      - 'objectClass' attribute points to a class defined in the schema, like 'person' or 'manager.'
-      – Object classes may require entries to have special attributes.
+      - 'objectClass' attribute points to a class defined in the schema, like 'person' or 'printer'.
+      – Object classes define what attributes an entry should have.
     – Example entry:
 
       dn: cn=John Olmsted,dc=example,dc=com
@@ -1759,3 +1759,18 @@ WEEK OF 2/21/16
       objectClass: person
 
 – LDAP schema design: https://www.skills-1st.co.uk/papers/ldap-schema-design-feb-2005/ldap-schema-design-feb-2005.html
+  – LDAP directories are structured as trees of entries (Directory Information Tree, DIT).
+    – Each entry (node) has a 'relative distinguished name' (RDN), which is unique among peer nodes.
+    - Each entry has a 'distinguished name', which is unique within the whole tree (see earlier note above).
+        
+        uid=john@example.com,dc=people,dc=example,dc=org
+        <entry RDN>          <parent nodes>
+
+    - Note that this tree structure makes LDAP very similar to the DNS model.
+  – Authorization: users -> roles -> permissions. These can be represented w/multi-value entry attributes.
+    – One approach is to have an entry for each permission, and use a 'member' attribute to list users with that permission.
+    – To check if a user has a certain permission,
+      1. Find the user's DN,
+      2. Find the permission entry,
+      3. Check the permission's 'member' attribute to see if it has the user's DN.
+     
