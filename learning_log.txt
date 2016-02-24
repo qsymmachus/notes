@@ -1758,3 +1758,4 @@ WEEK OF 2/21/16
       mail: john@example.com
       objectClass: person
 
+– LDAP schema design: https://www.skills-1st.co.uk/papers/ldap-schema-design-feb-2005/ldap-schema-design-feb-2005.html
