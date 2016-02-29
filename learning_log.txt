@@ -1774,3 +1774,29 @@ WEEK OF 2/21/16
       2. Find the permission entry,
       3. Check the permission's 'member' attribute to see if it has the user's DN.
      
+
+WEEK OF 2/28/16
+– Push notifications on iOS and Android
+  – Uses the pub/sub pattern between clients (devices) and providers (app servers).
+  – TCP socket is kept open between the client and provider, listens for notifications.
+  – Apple and Google serve as a middleman between the client and provider.
+  – Providers identify which client they are targeting with a unique token
+
+  Provider                      APN                      Client
+     |                           |                         |
+     |                           |<--set up notifications--|
+     |                           |                         |
+     |                           |-----generated token---->|
+     |                           |                         |
+     |<----------token-------------------------------------|
+     |                           |                         |
+     |----token, notification--->|                         |
+     |                           |                         |
+     |                           | * check token           |
+     |                           |                         |
+     |                           |------notification------>|
+
+  – For iOS, tokens are _device_ specific. For Android, they are _user_ specific.
+
+ 
+
