@@ -1823,3 +1823,7 @@ WEEK OF 2/28/16
   – When you rebase, you copy your working commits over ('upstream') to the tip of the branch you've rebased on.
     – Note that these copied commits are true copies, and have new hashes.
 
+
+WEEK OF 3/6/16
+– Refresher on how to use `find`: `find /some/root/path -name '*.jpg'`
+
