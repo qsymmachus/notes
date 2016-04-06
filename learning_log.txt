@@ -1834,3 +1834,20 @@ WEEK of 3/13/16
 WEEK OF 3/27/16
 – Build web application with Go: https://astaxie.gitbooks.io/build-web-application-with-golang/content/en/preface.html
 
+
+WEEK OF 4/3/16
+– What is Akka?
+  – a toolkit and runtime for developing concurrent, distributed, message-based applications.
+    – _not_ a framework, more properly a library.
+  – Akka provides:
+   
+    1. Actors
+      – Asynchronous, non-blocking, message-driven model
+      – Actors form hierarchies, with parent actors (supervisors) delegating some tasks to child actors.
+      – "The quintessential feature of actor systems is that tasks are split up and delegated until they
+        become small enough to be handled in one piece."
+    2. Fault Tolerance
+      – 'let-it-crash' philosophy
+      – Systems are self-healing
+
+
