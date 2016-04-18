@@ -20,6 +20,23 @@ object HelloWorld extends App {
 }
 
 
+PACKAGES
+--------
+
+// wildcard import
+import scala.collection._
+
+// selective import
+import scala.collection.{Vector, Sequence}
+
+// renaming import
+import scala.collection.{Vector => Vec}
+
+// Naming a package:
+
+package io.olmsted.my.package
+
+
 VARIABLES
 ---------
 
@@ -36,57 +53,219 @@ val x : Int = 5
 FUNCTIONS
 ---------
 
-def doubler(x : Int) : Int =
+def doubler(x : Int): Int =
   x * 2 // implicit return
 
-def doubler(x : Int) : Int = {
+def doubler(x : Int): Int = {
   println("Since this has multiple statements, enclose in a block {}")
   x * 2
 }
 
-// A polymorphic function is paramaterized on type 'A'
+// A polymorphic function is parameterized on type 'A'
 // 'A' is a generic placeholder that can be used in the method signature.
-def polymorphic[A](x : A) : A = 
+def polymorphic[A](x : A): A =
   x
 
 // e.g. this function accepts an argument of type 'A' and returns a type 'B'
-def polymorphic[A](a : A) : B
+def polymorphic[A](a : A): B
 
 // Higher-order functions can take functions as arguments.
-// In this examples, it takes a function that accepts 'A' and returns a boolean
+// In this example, it takes a function that accepts 'A' and returns a boolean
 def higherOrder[A](a: A, f: (A) => Boolean)
   if (f(a)) println("It's true")
   else println("It's false")
 
-// Returns an anonymous function that accepts 'A' and returns the result of 
+// Returns an anonymous function that accepts 'A' and returns the result of
 // composing the functions f and g.
-def compose[A](f: A => A, g: A => A) : A = 
+def compose[A](f: A => A, g: A => A): A =
   (x : A) => f(g(a))
 
-
-def curry[A, B](a : A, f: (A, B) => C) : B => C =
+def curry[A, B](a : A, f: (A, B) => C): B => C =
   (b: B) => f(a, b)
 
 
 // Lazy (non-strict) evaluation of function arguments
 // onTrue and onFalse are no evaluated until called explicitly ('thunks')
-def if2[A] (cond: Boolena, onTrue: => A, onFalse => A): A =
+def if2[A] (cond: Boolean, onTrue: => A, onFalse => A): A =
   if (cond) onTrue else onFalse
 
 
-PACKAGES
---------
+ANONYMOUS FUNCTIONS
+-------------------
 
-// wildcard import
-import scala.collection._
+val adder = (x: I) => x + 1
 
-// selective import
-import scala.collection.{Vector, Sequence}
-
-// renaming import
-import scala.collection.{Vector => Vec}
+def doNumberThing(x: Int, operator: (Int) => Int) =
+  operator(x)
 
 
-DATA STRUCTURES
----------------
+CLASSES
+-------
 
+class Calculator(brand: String) {
+  def multiply(x: Int, y: Int): Int = x * y
+}
+
+val calc = new Calculator("Casio")
+calc.multiply(2, 3) // => 6
+
+/**
+* NB: This doesn't work because we didn't do anything with the 'brand'
+* constructor argument. You could assign it to a val in the class body,
+* but it would be easier and more idiomatic to just use a case class.
+*/
+calc.brand // => error: value brand is not a member of Calculator
+
+// Inheritance:
+
+class ScientificCalculator(brand: String) extends Calculator(brand) {
+  def log(n: Double, base: Double): Double = math.log(n) / math.log(base)
+}
+
+// If your subclass doesn't add any new behavior, you should use a type alias
+// instead.
+
+// Abstract classes:
+
+abstract class ElectronicDevice {
+  def poweredOn: Boolean
+}
+
+class class Calculator(brand: String) extends Electronic {
+  def multiply(x: Int, y: Int): Int = x * y
+
+  def poweredOn: Boolean = true
+}
+
+
+CASE CLASSES
+------------
+
+// Case classes are used to conveniently instantiate classes with public contents.
+
+case class Calculator(brand: String) {
+  def multiply(x: Int, y: Int): Int = x * y
+}
+
+// You can omit 'new' when instantiating case classes:
+val casioCalc = Calculator("Casio")
+casioCalc.brand // => "Casio"
+
+
+TRAITS
+------
+
+// It may be helpful to think of traits more as interfaces than traits / modules.
+
+// A trait may define an interface, implement actual behavior, or some mix of both.
+
+trait Bike {
+  val make: String
+}
+
+trait Brakes {
+  val brakes = true
+}
+
+class Surly extends Bike with Brakes {
+  val make = "Surly"
+}
+
+
+OBJECTS
+-------
+
+// Objects are used instead of classes if we only ever need one instance.
+
+object Counter {
+  var count = 0
+
+  def currentCount(): Int = {
+    count += 1
+    count
+  }
+}
+
+Counter.currentCount // => 1
+
+// NB: Classes and objects may have the same name. In this case, they are known as
+// companion objects. Companion objects are most commonly used as factories. This
+// is a trivial example that just allows you to omit 'new' to create an instance
+// using the syntactic sugar provided by 'apply':
+
+class Bar(foo: String)
+
+object Bar {
+  def apply(foo: String) = new Bar(foo)
+}
+
+val bar = Bar
+
+
+FUNCTIONS ARE OBJECTS
+---------------------
+
+// Believe it or not, functions are themselves objects. For example, ever
+// argument that takes one argument extends the trait Function1.
+
+object addOne extends Function1[Int, Int] {
+  def apply(m: Int): Int = m + 1
+}
+
+// alternate syntax:
+
+object addOne extends (Int => Int) {
+  def apply(m: Int): Int = m + 1
+}
+
+addOne(3) // => 4
+
+
+PATTERN MATCHING
+----------------
+
+// Often pointed to as one of the most powerful features of the language.
+
+// 1. Matching on values:
+
+val num = 1
+
+num match {
+  case 1 => "one"
+  case 2 => "two"
+  case _ => "Some other number!"
+}
+
+// 2. Matching with guards; note that we capture the value with 'n':
+
+val canCount = false
+
+num match {
+  case n if n == 1 => "one"
+  case n if n == 2 => "two"
+  case _ => "Some other number!"
+}
+
+// 3. Matching on type:
+
+def typeChecker(value: Any): String = {
+  value match {
+    case value: Int => "It's an Int!"
+    case value: String => "It's a String!"
+    case _ => "I don't know this type!"
+  }
+}
+
+typeChecker(1) // => "It's an Int!"
+
+// 4. Matching case classes (see case class example above):
+
+val casioCalc = Calculator("Casio")
+val hpCalc = Calculator("HP")
+
+calc match {
+  case Calculator("Casio") => "It's a Casio calculator"
+  case Calculator("HP") => "It's an HP calculator"
+  case Calculator(_) => "I'm unfamiliar with this brand"
+  case _ => "This isn't a calculator at all!"
+}
