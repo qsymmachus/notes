@@ -434,3 +434,34 @@ val andThened = first _ andThen second _
 
 andThened("neat") // => "second(first(neat))"
 
+
+SBT AND PROJECT CONVENTIONS
+---------------------------
+
+// SBT project layout:
+
+* project (project definition files)
+  * project/build/<yourproject>.scala (main project definition file)
+  * project/build.properties (project, sbt, and scala version definitions)
+* src
+  * main/scala (your project code here)
+  * main/resources (any static files you want to include in the jar)
+  * test/scala (test files)
+* lib_managed (jar files your project depends on; populated by sbt update)
+* target (destination for generated stuff, like class files and jars)
+
+// Using SBT:
+
+$ sbt test // Run tests
+
+$ sbt console // Start up a REPL with all project dependencies loaded
+
+$ sbt update // Pull latest dependencies
+
+// Adding a dependency to project/build/<yourproject>.scala
+
+class SampleProject(info: ProjectInfo) extends DefaultProject(info) {
+  val jackson = "org.codehaus.jackson" % "jackson-core-asl" % "1.6.1"
+  val specs = "org.scala-tools.testing" % "specs_2.8.0" % "1.6.5" % "test"
+}
+
