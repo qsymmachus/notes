@@ -269,3 +269,113 @@ calc match {
   case Calculator(_) => "I'm unfamiliar with this brand"
   case _ => "This isn't a calculator at all!"
 }
+
+
+COLLECTIONS
+-----------
+
+// Note that collections are typed.
+
+// 1. Lists:
+
+val numbers = List(1, 2, 3, 4, 5)
+
+// 2. Sets (have no duplicates):
+
+val odds = List(1, 3, 5)
+
+// 3. Tuples (two elements, may be different types):
+
+val john = ("John", 29)
+
+john._1 // => "John"
+john._2 // => 29
+
+// 4. Maps (keys and values may be typed differently):
+
+val people = Map(
+  "John" -> 29,
+  "Galya" -> 28,
+  "Anna" -> 27
+)
+
+
+OPTIONS
+-------
+
+// Options are a nice solution to the 'null pointer' problem. An option may
+// contain a value, but if it does not, it provides fallback options.
+
+// Basic option interface:
+
+trait Option[T] {
+  def isDefined: Boolean
+  def get: T
+  def getOrElse(t: T): T
+}
+
+// The two most common subtypes of option are Some and None.
+
+// Map.get uses Option as its return type:
+
+    val people = Map(
+      "John" -> 29,
+      "Galya" -> 28,
+      "Anna" -> 27
+    )
+
+people.get("John") // => Option[Int] = Some(2)
+people.get("Toby") // => Option[Int] = None (it doesn't exist!)
+
+people.get("Toby").getOrElse(0) // => 0
+
+// Pattern matching is another useful way to handle options
+
+people.get("John") match {
+  case Some(n) => n
+  case None => 0
+}
+
+
+FUNCTIONAL COMBINATORS
+----------------------
+
+// 'Combinators' are higher-order functions operating over collections.
+
+// 1. map:
+
+val numbers = List(1, 2, 3, 4, 5)
+
+numbers.map((x: Int) => x * 2) // => List(2, 4, 6, 8, 10)
+
+def tripler(x: Int) = x * 3
+
+numbers.map(tripler) // => List(3, 6, 9, 12, 15)
+
+// Mapping over a map (lol):
+
+people.map((person: (String, Int)) => 2016 - person._2)
+// => List(1987, 1988, 1989)
+
+// A more readable version with pattern matching:
+
+people.map({case (name, age) => 2016 - age})
+
+// 2. foreach (no return value; side-effecting):
+
+numbers.foreach((x: Int) => println(x))
+
+// 3. filter:
+
+numbers.filter(x: Int) => x % 2 != 0) // List(1, 3, 5)
+
+people.filter({case (name, age) => name != "John"})
+// => Map(Galya -> 28, Anna -> 27)
+
+// 4. foldRight (m is the accumulator and its starting value is 0 here):
+
+numbers.foldLeft(0)((m: Int, n: Int) => m + n) // => 15
+
+// 5. foldLeft (same as foldRight but in the opposite direction):
+
+numbers.foldRight(0)((m: Int, n: Int) => m + n) // => 15
