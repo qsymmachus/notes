@@ -99,6 +99,40 @@ def doNumberThing(x: Int, operator: (Int) => Int) =
   operator(x)
 
 
+PARTIAL APPLICATION
+-------------------
+
+// When used as a parameter, underscore allows you to partially apply a function. In plain English, this means
+// deferring passing that unnamed argument to a caller. Here's an example:
+
+def adder(x: Int, y: Int) = y + x
+def addTwo = adder(2, _: Int)
+
+addTwo(1) // => 3
+
+
+CURRYING
+--------
+
+// Abstractly defined:
+
+def curry[A, B](a : A, f: (A, B) => C): B => C =
+  (b: B) => f(a, b)
+
+// More concretely, sometimes it's helpful to let people apply some arguments to a function now, and others
+// later:
+
+def multiply(x: Int)(y: Int) = x * y
+
+// Note that the arguments are in separate parens. This allows us to partially apply the function:
+
+multiply(2)(3) // => 6
+
+def multiplyByTwo = multiply(2) _
+
+multiplyByTwo(4) // => 8
+
+
 CLASSES
 -------
 
@@ -379,3 +413,24 @@ numbers.foldLeft(0)((m: Int, n: Int) => m + n) // => 15
 // 5. foldLeft (same as foldRight but in the opposite direction):
 
 numbers.foldRight(0)((m: Int, n: Int) => m + n) // => 15
+
+
+FUNCTION COMPOSITION
+--------------------
+
+// 'compose' allows you to compose functions. Composed functions are evaluated from the
+// 'inside out' (like Lisp), with the return value of inner functions passed up to the
+// outer functions.
+
+def first(s: String) = "first(" + s + ")"
+def second(s: String) = "second(" + s + ")"
+val composed = first _ compose second _
+
+composed("neat") // => "first(second(neat))"
+
+// 'andThen' is like compose, but it evaluates from the outside in:
+
+val andThened = first _ andThen second _
+
+andThened("neat") // => "second(first(neat))"
+
