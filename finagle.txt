@@ -1,0 +1,24 @@
+FINAGLE
+=======
+
+An RPC system that allows you to implement APIs for multiple protocols, specially
+designed for high performance and concurrency.
+
+
+Service
+-------
+
+A Finagle `Service` handles RPCs, taking requests and return responses.
+
+A service is a function `Req => Future[Rep]`:
+
+`abstract class Service[-Req, +Rep] extends (Req => Future[Rep])`
+
+
+Client
+------
+
+
+
+Server
+------
