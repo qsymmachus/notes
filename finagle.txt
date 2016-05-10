@@ -8,17 +8,116 @@ designed for high performance and concurrency.
 Service
 -------
 
-A Finagle `Service` handles RPCs, taking requests and return responses.
+A Finagle Service handles RPCs, taking requests and return responses.
 
 A service is a function `Req => Future[Rep]`:
 
 `abstract class Service[-Req, +Rep] extends (Req => Future[Rep])`
 
+Clients and servers are both defined in terms of Services – a client
+consumes a service, a server publishes one.
 
 Client
 ------
 
+A Finagle client "imports" or consumes a service from the network. A client provides
+
+  1. A function to _use_ a service: send a `Req` and handle the returned `Future[Rep]`.
+  2. Configuration of how to send request, e.g. via HTTP to port 80 of api.example.com
+
+```
+import org.jboss.netty.handler.codec.http.{DefaultHttpRequest, HttpRequest, HttpResponse, HttpVersion, HttpMethod}
+import com.twitter.finagle.Service
+import com.twitter.finagle.builder.ClientBuilder
+import com.twitter.finagle.http.Http
+
+// Build the client with config:
+val client: Service[HttpRequest, HttpResponse] = ClientBuilder()
+  .codec(Http())
+  .hosts("api.example.com:80")
+  .hostConnectionLimit(1)
+  .build()
+
+val req = new DefaultHttpRequest(HttpVersion.HTTP_1_1, HttpMethod.GET, "/")
+
+// Send the request
+val future = client(req)
+
+// Handle the response:
+f onSuccess { res =>
+  println("neat!", res)
+} onFailure { exc =>
+  println("aw snap!, exc)
+}
+```
 
 
 Server
 ------
+
+A Finagle server "exports" or publishes a service to the network. A server provides
+
+  1. A function to _implement_ a service: receive a `Req` and return a `Future[Rep]`.
+  2. Configuration of how to listen for incoming requests, e.g. as HTTP requests on port 80.
+
+```
+import com.twitter.finagle.Service
+import com.twitter.finagle.http.Http
+import com.twitter.util.Future
+import org.jboss.netty.handler.codec.http.{DefaultHttpResponse, HttpVersion, HttpResponseStatus, HttpRequest, HttpResponse}
+import java.net.{SocketAddress, InetSocketAddress}
+import com.twitter.finagle.builder.{Server, ServerBuilder}
+
+// Define the service. 200 for '/foo', 404 otherwise:
+val fooService = new Service[HttpRequest, HttpResponse] {
+  def apply(req: HttpRequest) = {
+    val rep = req.getUri match {
+      case "/foo" => new DefaultHttpResponse(HttpVersion.HTTP_1_1, HttpResponseStatus.OK)
+      case _ => new new DefaultHttpResponse(HttpVersion.HTTP_1_1, HttpResponseStatus.NOT_FOUND)
+    }
+
+    Future.value(r)
+  }
+}
+
+// Publish our service on a port:
+val address: SocketAddress = new InetSocketAddress(80)
+val server: Server = ServerBuilder()
+  .codec(Http())
+  .bindTo(address)
+  .name("HttpServer")
+  .build(fooService)
+```
+
+
+Builders
+--------
+
+You may have noticed a little magic going on in the examples above.
+
+A `ClientBuilder` takes a set of config parameters and returns a `Service` that can send requests.
+
+```
+val client: Service[HttpRequest, HttpResponse] = ClientBuilder()
+  .codec(Http()) // required
+  .hosts("api1.example.com,api2.example.com") // one or many comma-separated, required
+  .hostConnectionLimit(1) // required
+  .tcpConnectTimeout(1.second)
+  .retries(2)
+  .build() 
+```
+
+A `ServerBuilder` takes a `Service` instance and returns a `Server` that forwards requests to that service.
+
+```
+val service = new SomeService()
+val filter = new SomeFilter()
+val filteredService = filter andThen service
+
+val server = ServerBuilder()
+  .bindTo(new InetSocketAddress(port)) // required
+  .codec(Http()) // required
+  .name("my filtered service") // required
+  .build(filteredService)
+```
+
