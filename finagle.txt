@@ -80,6 +80,7 @@ A service is a function `Req => Future[Rep]`:
 Clients and servers are both defined in terms of Services – a client
 consumes a service, a server publishes one.
 
+
 Client
 ------
 
