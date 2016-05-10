@@ -1851,3 +1851,10 @@ WEEK OF 4/3/16
       – Systems are self-healing
 
 
+WEEK of 5/8/16
+– Covariance vs. contravariance. "Variance" describes how subtyping works between complex types (like collections of a type, or typed functions).
+
+  1. Covariance: A child is a subtype of its parent, and can substitute its parent (in Scala, [+T]).
+
+  2. Contravariance: The parent is the subtype of its child, substitution is reversed (in Scala, [-T]).
+
