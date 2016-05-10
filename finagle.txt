@@ -5,6 +5,69 @@ An RPC system that allows you to implement APIs for multiple protocols, speciall
 designed for high performance and concurrency.
 
 
+Futures
+-------
+
+For more detail, see: https://twitter.github.io/scala_school/finagle.html#Future
+
+Finagle uses its own implementation of `Future`s to encapsulate concurrent operations like network calls.
+
+A `Future[A]` may have three states:
+
+  1. Empty (pending)
+  2. Succeeded (with a result of type `A`)
+  3. Failed (with a result of type `Throwable`)
+
+While you can query this state directly, this is rarely done. You have several options for handling futures:
+
+1. Callbacks – a callback can be used to handle results once they're available.
+
+```
+val future: Future[Int] = // Get a future somehow
+
+future.onSuccess { res: Int =>
+  println("The result is " + res)
+} onFailure { error: Throwable =>
+  println("Failed with " + error)
+}
+```
+
+2. Sequential composition – futures can be composed into a composite operation that pass along results as they
+become available.
+
+Scala combinator functions like `flatMap` are used to compose futures in this way. `flatMap` sequences two futures, that
+is, it takes a future and a asynchronous function and returns another future:
+
+`def Future[A].flatMap[B](f: A => Future[B]): Future[B]`
+
+```
+val fetchFiles(path: String): Future[List[File]] = // do time-consuming stuff
+val compressFiles(files: List[File]): Future[List[CompressedFiles]] = // do more time-consuming stuff
+
+val result: Future[List[File]] = fetchFiles("/stuff").flatMap(compressFiles)
+
+result.onSuccess { files =>
+  println("Finished fetching and compressing files")
+}
+```
+
+3. Concurrent composition – futures can also be composed concurrently. `collect` takes futures of the same type,
+and returns a future of a Sequence of values of that type. The future is complete when _all_ of the underlying futures
+have either completed, or when any of them have failed.
+
+```
+val future1 = Future.value(2)
+
+val future2 = Future.value(3)
+
+val collected = Future.collect(Seq(future1, future2) // future1 and future2 run concurrently
+
+collected.onSuccess{ collection =>
+  println("Here's your collection: " + collection)
+}
+```
+
+
 Service
 -------
 
