@@ -1851,10 +1851,18 @@ WEEK OF 4/3/16
       – Systems are self-healing
 
 
-WEEK of 5/8/16
+WEEK OF 5/8/16
 – Covariance vs. contravariance. "Variance" describes how subtyping works between complex types (like collections of a type, or typed functions).
 
   1. Covariance: A child is a subtype of its parent, and can substitute its parent (in Scala, [+T]).
 
   2. Contravariance: The parent is the subtype of its child, substitution is reversed (in Scala, [-T]).
+
+
+WEEK OF 5/15/16
+– Strangler Application vs. Re-write Application: rather than rewrite a key legacy application, get a foothold with a "strangler" application that starts on the edges of the old, slowly replacing it.
+  – For example, a strangler application might start by just intercepting RCP calls, then delegating it to the legacy domain
+  – Once you have a foothold with your strangler application, you can gradually begin replacing the old piece by piece.
+  – A strangler application reduces risk by slowly delivering value without breaking existing functionality.
+  - See http://www.martinfowler.com/bliki/StranglerApplication.html
 
