@@ -1866,3 +1866,10 @@ WEEK OF 5/15/16
   – A strangler application reduces risk by slowly delivering value without breaking existing functionality.
   - See http://www.martinfowler.com/bliki/StranglerApplication.html
 
+
+WEEK OF 5/22/16
+– Useful Jenkins shortcuts:
+  – /log/all
+  – /restart
+  – /job/<JOB NAME>/ws (job workspace) 
+
