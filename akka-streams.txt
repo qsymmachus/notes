@@ -1,0 +1,50 @@
+AKKA STREAMS
+============
+
+In big data processing, there are two key problems to grapple with:
+
+1. Blocking
+  * Some part of the stream is bottle-necking or "blocking" the thread.
+  * This may happen if a process is time-consuming, or if it is trying pull data that is not ready or does not exist.
+
+2. Back Pressure
+  * Back pressure occurs in "push" based system when a process produces more data that a consumer can handle.
+
+Akka streams attempt to solve these two problems with Sources and Sinks.
+
+
+SOURCES
+-------
+
+A Source is the input to a stream. Sources have only one output, and no input. Sources might be a database or an RPC call, or any other data source.
+
+
+SINKS
+-----
+
+While a Source is the start of a stream, a Sink is the endpoint. Sinks have only one input, and no output. Like Sources, Sinks might be a database or an RPC call, or any other data store.
+
+
+FLOWS
+-----
+
+Flows lie between Sources and Sinks and are typically used to perform data transformations. A Flow as a single input and a single output.
+
+
+RUNNABLE FLOWS
+--------------
+
+When you connect a Source and a Sink, you have created a "Runnable Flow". Flows may be intermediaries between the Source and Sink, but you must have both a Source and a Sink to create a Runnable Flow.
+
+SOURCE ----> FLOW A ----> FLOW B ----> SINK
+
+Runnable flows create back pressure by communicating between the Sink and Source. When the sink is ready to accept more data, it sends a request BACKWARD through the runnable flow to Source. The Source will then push a set amount of data forward.
+
+This generates back pressure and ensures that the Source does not send more data than the Sink can process.
+
+
+SOURCE --(data)--> FLOW A --(data)--> FLOW B --(data)--> SINK
+       <--(ok!)--         <--(ok!)--         <--(ok!)--
+
+For a concrete example, check out: http://boldradius.com/blog-post/VS0NpTAAADAACs_E/introduction-to-akka-streams
+
