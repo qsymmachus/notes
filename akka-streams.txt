@@ -30,11 +30,16 @@ FLOWS
 
 Flows lie between Sources and Sinks and are typically used to perform data transformations. A Flow as a single input and a single output.
 
+SOURCES, SINKS, AND FLOWS ARE FUNCTIONS
+---------------------------------------
+
+As one would expect of a stream-based system, Sources, Sinks, and Flows are all functions. They are defined only by whether they have an output (Source), an input (Sink), or both (Flow).
+
 
 RUNNABLE FLOWS
 --------------
 
-When you connect a Source and a Sink, you have created a "Runnable Flow". Flows may be intermediaries between the Source and Sink, but you must have both a Source and a Sink to create a Runnable Flow.
+When you connect a Source and a Sink, you have created a "Runnable Flow". Flows may be intermediaries between the Source and Sink, but you must have both a Source and a Sink to create a Runnable Flow. Sources can't run until they're connected to a Sink.
 
 SOURCE ----> FLOW A ----> FLOW B ----> SINK
 
@@ -47,4 +52,19 @@ SOURCE --(data)--> FLOW A --(data)--> FLOW B --(data)--> SINK
        <--(ok!)--         <--(ok!)--         <--(ok!)--
 
 For a concrete example, check out: http://boldradius.com/blog-post/VS0NpTAAADAACs_E/introduction-to-akka-streams
+
+
+WHAT ABOUT AKKA?
+----------------
+
+How does the Akka actor model fit in all this?
+
+An Akka actor does the following:
+  * Encapsulates state
+  * Encapsulates behavior
+  * Receives messages in a "mailbox" and processes them in order
+  * Passes its own messages to other actors
+  * Runs on its own thread, asynchronously
+
+Akka streams raise the actor model to a higher level of abstraction.
 
