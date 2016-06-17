@@ -1873,3 +1873,16 @@ WEEK OF 5/22/16
   – /restart
   – /job/<JOB NAME>/ws (job workspace) 
 
+
+WEEK OF 6/12/16
+– Serverless architecture can mean one of two things (see http://martinfowler.com/articles/serverless.html):
+
+  1. Applications that offload server-side logic and state to third party services. These are typically client-heavy applications that treat back-end services "as a service" (BaaS).
+
+  2. Applications where some server-side logic is still written by the app developer, but that logic exist in stateless, ephemeral, event-driven containers that run that code on demand. AWS Lambda is currently the most popular version of this model of "functions as a service" (FaaS).
+    – FaaS is about running back-end code without managing server systems OR server applications.
+    – The lack of _server applications_ is what differentiates FaaS from PaaS (platform as a service, e.g. AWS).
+      – FaaS brings up and tears down an application on a per-request basis.
+    – Horizontal scaling is automatic and handled by the FaaS provider.
+    – FaaS calls are stateless, so your functions must either be pure to begin with or depend on a persistence layer.
+
