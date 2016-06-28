@@ -1886,3 +1886,7 @@ WEEK OF 6/12/16
     – Horizontal scaling is automatic and handled by the FaaS provider.
     – FaaS calls are stateless, so your functions must either be pure to begin with or depend on a persistence layer.
 
+
+WEEK OF 6/26/16
+– Functional Relational Mapping (FRM), like ORM except with a functional rather than object-oriented paradigm. A good example is Slick (http://slick.lightbend.com/).
+
