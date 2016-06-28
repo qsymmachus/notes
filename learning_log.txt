@@ -1889,4 +1889,4 @@ WEEK OF 6/12/16
 
 WEEK OF 6/26/16
 – Functional Relational Mapping (FRM), like ORM except with a functional rather than object-oriented paradigm. A good example is Slick (http://slick.lightbend.com/).
-
+– Database connection pooling: opening a DB connection is an expensive process. A connection 'pool' keeps a set of connections ready for clients to use, even if there are no clients using the connection at a given moment. When a client accesses the DB, it is assigned a connection in the pool, when they're done, the connection is not closed but simply freed up for another client. Connection pools are usually fixed in size.
