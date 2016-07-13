@@ -1894,4 +1894,9 @@ WEEK OF 6/26/16
 
 WEEK OF 7/10/16
 – "Any organization that designs a system (defined broadly) will produce a design whose structure is a copy of the organization's communication structure." – Melvyn Conway
-
+– Other effects of microservice architecture, aside from the technical benefit of modular, independently deployable services:
+  – Encourages cross-functional teams rather than (siloed) functional teams.
+  – Clearly defines the boundaries of a teams responsibilities, and encourages the team to take responsibility for the service _as a product_, not just a "project". This forces them to work more closely with actual users.
+  – "Smart endpoints, dumb pipes". Microservices aim to be as decoupled as possible. We avoid adding extra layers of logic at the messaging layer (the "pipes") and focus on isolating our business logic within the services themselvves (the "endpoints").
+  – See: http://martinfowler.com/articles/microservices.html
+ 
