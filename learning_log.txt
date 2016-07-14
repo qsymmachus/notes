@@ -1898,5 +1898,10 @@ WEEK OF 7/10/16
   – Encourages cross-functional teams rather than (siloed) functional teams.
   – Clearly defines the boundaries of a teams responsibilities, and encourages the team to take responsibility for the service _as a product_, not just a "project". This forces them to work more closely with actual users.
   – "Smart endpoints, dumb pipes". Microservices aim to be as decoupled as possible. We avoid adding extra layers of logic at the messaging layer (the "pipes") and focus on isolating our business logic within the services themselvves (the "endpoints").
+  – Decentralized technology decisions. Since services work independently, they can use different stacks to solve different problems.
+  – Decentralized databases. If needed, services can have their own domain-specific database.
+  – Forces teams to design services for failure, in case a service they are dependent on is down. This adds complexity to the codebase, so it may also be considered a drawback of microservice architecture.
   – See: http://martinfowler.com/articles/microservices.html
+– How do we decide what constitutes a "microservice"? A good rule of thumb is a service that can be independently replaced or upgraded, without affecting dependent services.
+– Important to note that Martin Fowler argues that you should always build "monolith first", then begin breaking it up into microservices once it becomes a problem. The risk with starting with microservices first is that you don't have a clear sense of the boundaries between services, and run the risk of building the wrong service ecosystem: http://martinfowler.com/bliki/MonolithFirst.html
  
