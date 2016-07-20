@@ -1906,3 +1906,7 @@ WEEK OF 7/10/16
 – Important to note that Martin Fowler argues that you should always build "monolith first", then begin breaking it up into microservices once it becomes a problem. The risk with starting with microservices first is that you don't have a clear sense of the boundaries between services, and run the risk of building the wrong service ecosystem: http://martinfowler.com/bliki/MonolithFirst.html
 – Yelp's real-time data pipeline, using Kafka as a message bus: http://engineeringblog.yelp.com/2016/07/billions-of-messages-a-day-yelps-real-time-data-pipeline.html?hn=hn
  
+
+WEEK OF 7/17/16
+– Covariance vs. contravariance in an image: https://i.imgur.com/IO3brhq.png
+
