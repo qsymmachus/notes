@@ -1909,4 +1909,5 @@ WEEK OF 7/10/16
 
 WEEK OF 7/17/16
 – Covariance vs. contravariance in an image: https://i.imgur.com/IO3brhq.png
+– Interesting article on the current state of Ruby web dev tools: http://rwdtow.stdout.in/
 
