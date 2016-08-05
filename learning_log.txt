@@ -1911,3 +1911,7 @@ WEEK OF 7/17/16
 – Covariance vs. contravariance in an image: https://i.imgur.com/IO3brhq.png
 – Interesting article on the current state of Ruby web dev tools: http://rwdtow.stdout.in/
 
+
+WEEK OF 7/31/16
+– The Scala `Try` type as an alternative to throwing exceptions: http://danielwestheide.com/blog/2012/12/26/the-neophytes-guide-to-scala-part-6-error-handling-with-try.html
+
