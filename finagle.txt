@@ -157,6 +157,8 @@ val server: Server = ServerBuilder()
 Builders
 --------
 
+NOTE: Builders are deprecated as of Finagle 6.*, for updated syntax to build Servers and clients, check out: https://twitter.github.io/finagle/guide/Quickstart.html
+
 You may have noticed a little magic going on in the examples above.
 
 A `ClientBuilder` takes a set of config parameters and returns a `Service` that can send requests.
