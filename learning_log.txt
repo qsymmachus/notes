@@ -1919,3 +1919,16 @@ WEEK OF 7/31/16
 WEEK OF 8/7/16
 – `sc_usage <pid>` will give you detailed stats about a running process.
 
+
+WEEK OF 8/22/16
+– The fundamental data structure in Lisp is the linked list, which are formed of "cons cells".
+  – 'car', a pointer which points to the cell's value,
+  – 'cdr', a point which points to the next cons cell in the list.
+
+  (24 67 93)
+
+   ------------        ------------        ------------
+  |  24  |     | ===> |  24  |     | ===> |  24  |     | ===> NIL
+   ------------        ------------        ------------
+     car   cdr           car   cdr           car   cdr
+
