@@ -1932,3 +1932,7 @@ WEEK OF 8/22/16
    ------------        ------------        ------------
      car   cdr           car   cdr           car   cdr
 
+
+WEEK OF 9/4/16
+– Apache vs Nginx: https://www.digitalocean.com/community/tutorials/apache-vs-nginx-practical-considerations
+
