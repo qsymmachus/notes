@@ -1936,3 +1936,7 @@ WEEK OF 8/22/16
 WEEK OF 9/4/16
 – Apache vs Nginx: https://www.digitalocean.com/community/tutorials/apache-vs-nginx-practical-considerations
 
+
+WEEK OF 9/11/16
+– Welcome to javascript hell: https://segment.com/blog/the-deep-roots-of-js-fatigue/
+
