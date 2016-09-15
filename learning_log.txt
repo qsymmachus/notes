@@ -1941,4 +1941,5 @@ WEEK OF 9/11/16
 – Welcome to javascript hell: https://segment.com/blog/the-deep-roots-of-js-fatigue/
 – Learn C and build your own Lisp in the process: http://www.buildyourownlisp.com/contents
   – You should definitely do this!
+– `head -10` takes a bash stream and reduces it to just the first 10 lines. Change that argument as needed.
 
