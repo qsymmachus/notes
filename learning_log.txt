@@ -1943,3 +1943,58 @@ WEEK OF 9/11/16
   – You should definitely do this!
 – `head -10` takes a bash stream and reduces it to just the first 10 lines. Change that argument as needed.
 
+
+WEEK OF 10/10/16
+– OAuth 2 refresher:
+  – OAuth delegates user authentication to a service (OAuth API) that hosts the user account.
+  – The hosting service also authorizes third parties (clients) to access the user account.
+  
+  CLIENT            USER            AUTH SERVER            USER SERVER
+  ------            ----            ----------             -----------
+    |                |                  |                       |
+    |---auth req---->|                  |                       |
+    |                |                  |                       |
+    |<--auth grant---|                  |                       |
+    |                |                  |                       |
+    |-------------------auth grant----->|                       |
+    |                |                  |                       |
+    |<--access token--------------------|                       |
+    |                |                  |                       |
+    |----------------------------------------access token------>|
+    |                |                  |                       |
+    |<--user----------------------------------------------------|
+
+  1. The client application requests access from the end user ("resource").
+  2. If the end user grants the request, client receives an authorization grant.
+  3. The client requests an access token from the authorization server. The request is 
+     verified by the inclusion of both the end user's authorization grant and the client's
+     own credentials (client secret). 
+  4. The authorization server grants the client an access token. Authorization is complete.
+  5. The client requests the user resource from the user server (aka a "resource" server) uses
+     the recently acquired access token.
+  6. If the access token is valid, the user server sends back its resources.
+
+  – In steps 1 & 2 above, the type of "authorization grant" between end users and clients may vary.
+    The two most common approachs are:
+    a. Authorization code
+      – Most common. Used for server-side applications because the confidentiality of the client secret can
+      be guaranteed. Retrieving and storing the access token is all server-side.
+      – The end user is prompted to accept or deny authorization.
+      – If permission is granted, an authorization code is generated.
+      – The auth code can be used as an "authorization grant" to the authorization server (steps 3 & 4).
+      – Passing the authorization code and client secret to the auth server to retrieve the access token
+      all takes place server-side.
+    b. Implicit grant
+      – Used for mobile apps and client-side applications where the confidentiality of the client secret can't 
+      be guaranteed. The access token is passed through user-agent, rather than hidden server-side.
+      – The end user is prompted to accept or deny authorization.
+      – The user-agent interacts with the auth server directly, retrieves the access token, and passes it off
+      to the client.
+      – Since the user-agent is handling the access token directly, it has very limited scope. It usually has
+      a very short time to live (TTL) and never includes a refresh token.
+  – Application/client registration: clients must register their application with the auth server.
+    – Once registered, clients receive a client id and client secret used to authorize requests to the auth server.
+  – Refresh tokens: auth servers may also send a refresh token as well as an access token to clients. When the 
+    original access token expires, refresh tokens may be used to retrieve a fresh access token, without prompting
+    the end user for another authorization grant.
+
