@@ -1997,4 +1997,5 @@ WEEK OF 10/10/16
   – Refresh tokens: auth servers may also send a refresh token as well as an access token to clients. When the 
     original access token expires, refresh tokens may be used to retrieve a fresh access token, without prompting
     the end user for another authorization grant.
+– Update Finagle guide: http://vkostyukov.net/posts/finagle-101/
 
