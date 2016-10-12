@@ -1998,4 +1998,5 @@ WEEK OF 10/10/16
     original access token expires, refresh tokens may be used to retrieve a fresh access token, without prompting
     the end user for another authorization grant.
 – Update Finagle guide: http://vkostyukov.net/posts/finagle-101/
+– You might not need Javascript! http://youmightnotneedjs.com/
 
