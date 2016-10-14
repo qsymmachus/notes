@@ -1997,6 +1997,7 @@ WEEK OF 10/10/16
   – Refresh tokens: auth servers may also send a refresh token as well as an access token to clients. When the 
     original access token expires, refresh tokens may be used to retrieve a fresh access token, without prompting
     the end user for another authorization grant.
+  – Scope: when requesting an auth token, clients may specify a "scope" as part of the request. You can think of 
+    scope as a level of permissions that will accompany the auth token.
 – Update Finagle guide: http://vkostyukov.net/posts/finagle-101/
-– You might not need Javascript! http://youmightnotneedjs.com/
-
+– You might not need Javascript! http://youmightnotneedjs.com
