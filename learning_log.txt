@@ -2006,3 +2006,7 @@ WEEK OF 10/9/16
 WEEK OF 10/16/16
 – Managing modules in Vim v8 (no more pathogen): https://shapeshed.com/vim-packages/
 
+
+WEEK OF 10/30/16
+– How to lazy-load a web font so it doesn't block page rendering: http://meowni.ca/posts/web-fonts/
+
