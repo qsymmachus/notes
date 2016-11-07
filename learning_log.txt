@@ -2009,4 +2009,5 @@ WEEK OF 10/16/16
 
 WEEK OF 10/30/16
 – How to lazy-load a web font so it doesn't block page rendering: http://meowni.ca/posts/web-fonts/
+– Learning vim progressively: http://yannesposito.com/Scratch/en/blog/Learn-Vim-Progressively/
 
