@@ -102,6 +102,12 @@ Update a Key's Expiration Time
 ------------------------------
 
 gpg --edit-key <key id>
+
+# As is, extends the public key's expiration date.
+> expire
+
+# To extend subkey expirations, select them first.
+> key <number of the key>
 > expire
 
 
