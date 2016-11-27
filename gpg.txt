@@ -1,0 +1,54 @@
+GPG CHEATSHEET
+==============
+
+Generating a Key
+----------------
+
+Advice for key generation changes all the time. If you're generating a new key, read up on 
+the latest best practices first.
+
+
+Managing Keys
+-------------
+
+gpg --list-keys
+
+gpg --delete-key <key id>
+
+
+Exchanging Keys
+---------------
+
+# This exports the public key in binary format:
+gpg --output my-key.gpg --export <key id> 
+
+# Adding the 'armor' option exports the public key in a human-readable format:
+gpg --output my-key.gpg --armor --export <key id>
+
+gpg --import friends-key.gpg
+
+
+Signing a Key
+-------------
+
+# When you recieve a new public key, you should take steps to validate it.
+# Take a look the the key's fingerprint and confirm it matches what you expect with
+# The key's owner:
+gpg --edit-key <key id>
+
+# Once editing the key, check the fingerprint with this command:
+> fpr
+
+# To validate it, you sign it:
+> sign
+
+
+Encrypting and Decrypting Files
+-------------------------------
+
+# Files are encrypted with the recipient's keypair's public key:
+gpg --output encrypted-file.gpg --encrypt --recipient <key id for recipient's public key> file
+
+# Files are decrypted with your own keypair's private key (assuming you are the recipient!):
+gpg --output file.gpg --decrypt encrypted-file.gpg
+
