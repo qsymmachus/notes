@@ -2011,3 +2011,15 @@ WEEK OF 10/30/16
 – How to lazy-load a web font so it doesn't block page rendering: http://meowni.ca/posts/web-fonts/
 – Learning vim progressively: http://yannesposito.com/Scratch/en/blog/Learn-Vim-Progressively/
 
+
+WEEK OF 12/3/16
+– The Y-Combinator (cf. Friedman & Felleisen, "The Little Schemer", 4th ed., Ch.9, pp. 160–174):
+  – The Y-Combinator allows an anonymous function to call itself, that is, it allows anonymous function recursion.
+  – Since anonymous functions don't have names, they can't refer to themselves.
+  – The Y-Combinator is just a clever construct that works around this problem.
+  – Keep this simple goal in mind when you read confusing explanations of the Y-Combinator!
+  – Some (relatively) accessible derivations of Y:
+    http://www.catonmat.net/blog/derivation-of-ycombinator/
+    http://www.catonmat.net/blog/wp-content/uploads/2010/02/thewhyofywhyofy.pdf
+  – You have a pdf copy of GABRIEL, "The Why of Y".
+
