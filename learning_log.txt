@@ -2023,3 +2023,12 @@ WEEK OF 12/3/16
     http://www.catonmat.net/blog/wp-content/uploads/2010/02/thewhyofywhyofy.pdf
   – You have a pdf copy of GABRIEL, "The Why of Y".
 
+
+WEEK OF 12/11/16
+– Good summary of "what" functional programming is: http://degoes.net/articles/easy-monads
+  In the functional paradigm, functions are:
+
+  1. Total – A function yields a value for every possible input.
+  2. Deterministic (referentially transparent) – A function yields the same value for the same input.
+  3. Pure – A function must have no effect other than the computation of its return value.
+
