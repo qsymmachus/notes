@@ -2032,3 +2032,7 @@ WEEK OF 12/11/16
   2. Deterministic (referentially transparent) – A function yields the same value for the same input.
   3. Pure – A function must have no effect other than the computation of its return value.
 
+
+WEEK OF 12/25/16
+– Excellent programming languages reference guide: http://hyperpolyglot.org
+
