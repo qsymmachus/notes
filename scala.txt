@@ -93,7 +93,7 @@ def if2[A] (cond: Boolean, onTrue: => A, onFalse => A): A =
 ANONYMOUS FUNCTIONS
 -------------------
 
-val adder = (x: I) => x + 1
+val adder = (x: Int) => x + 1
 
 def doNumberThing(x: Int, operator: (Int) => Int) =
   operator(x)
