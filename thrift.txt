@@ -3,7 +3,7 @@ APACHE THRIFT
 
 Thrift is a cross-language remote procedure call (RPC) framework. To meet this goal, it provides:
 
-  1. A binary communication protocol
+  1. A communication protocol.
   2. An Interactive Data Language (IDL) to model services and resources available for RPC.
 
 The Thrift IDLs can be used to auto-generate code for interacting with these services and resources.
@@ -12,7 +12,7 @@ The Thrift IDLs can be used to auto-generate code for interacting with these ser
 1. Thrift Protocol
 ==================
 
-At a high level We can model Thrift's architecture like this:
+At a high level we can model Thrift's architecture like this:
 
 
       CLIENT                                SERVER
