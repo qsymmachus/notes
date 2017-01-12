@@ -70,9 +70,9 @@ Base Types
 Collections
 -----------
 
-* `list<A>`  – an ordered list of elements of type A
-* `set<A>    – an unordered set of elements of type A
-* `map<A, B> – a map of unique keys of type A mapped to values of type B.
+* `list<A>`   – an ordered list of elements of type A
+* `set<A>     – an unordered set of elements of type A
+* `map<A, B>` – a map of unique keys of type A mapped to values of type B.
 
 Structs
 -------
