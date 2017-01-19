@@ -1,7 +1,7 @@
 FINAGLE
 =======
 
-An RPC system that allows you to implement APIs for multiple protocols, specially
+An RPC system that allows you to implement distributed systems using multiple protocols, specially
 designed for high performance and concurrency.
 
 
@@ -11,6 +11,7 @@ Futures
 For more detail, see: https://twitter.github.io/scala_school/finagle.html#Future
 
 Finagle uses its own implementation of `Future`s to encapsulate concurrent operations like network calls.
+Futures can be thought of as lightweight threads. 
 
 A `Future[A]` may have three states:
 
@@ -35,19 +36,40 @@ future.onSuccess { res: Int =>
 2. Sequential composition – futures can be composed into a composite operation that pass along results as they
 become available.
 
-Scala combinator functions like `flatMap` are used to compose futures in this way. `flatMap` sequences two futures, that
-is, it takes a future and a asynchronous function and returns another future:
-
-`def Future[A].flatMap[B](f: A => Future[B]): Future[B]`
+A Future after all is a kind of list that contains 0 or 1 values. As such you can `map()` a future:
 
 ```
-val fetchFiles(path: String): Future[List[File]] = // do time-consuming stuff
-val compressFiles(files: List[File]): Future[List[CompressedFiles]] = // do more time-consuming stuff
+val result: Future[Int]
+val resultStr: Future[String] = result.map { i => i.toString }
+```
 
-val result: Future[List[File]] = fetchFiles("/stuff").flatMap(compressFiles)
+Note that the return value of `map`ing a future is itself a Future. You can `flatten` a Future as well, to "un-nest" them:
 
-result.onSuccess { files =>
-  println("Finished fetching and compressing files")
+```
+val nestedResult: Future[Future[Int]]
+val result: Future[Int] = nestedResult.flatten
+```
+
+As you might expect, `flatMap` combines the two steps. `flatMap` sequences two futures, that
+is, it takes a future and a asynchronous function and returns another future:
+
+```
+def Future[A].flatMap[B](f: A => Future[B]): Future[B]`
+```
+
+This makes it easy to compose operations that work with Futures. For example:
+
+```
+def getuser(id: Int): Future[User]
+def authenticate(user: User): Future[Boolean]
+
+def isIdAuthed(id: Int): Future[Boolean] = 
+  getUser(id).flatMap { user => authenticate(user) }
+
+val isThisIdAuthed = isIdAuthed(123)
+
+isThisIdAuthed.onSuccess { authed =>
+  println(s"This evaluated to $authed")
 }
 ```
 
@@ -68,51 +90,70 @@ collected.onSuccess{ collection =>
 ```
 
 
-Service
--------
+Services
+--------
 
 A Finagle Service handles RPCs, taking requests and return responses.
 
 A service is a function `Req => Future[Rep]`:
 
-`abstract class Service[-Req, +Rep] extends (Req => Future[Rep])`
+```
+trait Service[Req, Rep] extends (Req => Future[Rep])
+```
 
 Clients and servers are both defined in terms of Services – a client
-consumes a service, a server publishes one.
+_consumes_ a service, a server _publishes_ one.
 
 
-Client
-------
+Filters
+-------
 
-A Finagle client "imports" or consumes a service from the network. A client provides
-
-  1. A function to _use_ a service: send a `Req` and handle the returned `Future[Rep]`.
-  2. Configuration of how to send request, e.g. via HTTP to port 80 of api.example.com
+A Filter is similar to Service because it's a simple function, but with a slightly
+different signature:
 
 ```
-import org.jboss.netty.handler.codec.http.{DefaultHttpRequest, HttpRequest, HttpResponse, HttpVersion, HttpMethod}
-import com.twitter.finagle.Service
-import com.twitter.finagle.builder.ClientBuilder
-import com.twitter.finagle.http.Http
+abstract class Filter[-ReqIn, +RepOut, +ReqOut, -RepIn]
+  extends ((ReqIn, Service[ReqOut, RepIn] => Future[RepOut])
+```
 
-// Build the client with config:
-val client: Service[HttpRequest, HttpResponse] = ClientBuilder()
-  .codec(Http())
-  .hosts("api.example.com:80")
-  .hostConnectionLimit(1)
-  .build()
+In most cases, the `Req` and `Rep` types are the same, so this simplified alias is used most
+often:
 
-val req = new DefaultHttpRequest(HttpVersion.HTTP_1_1, HttpMethod.GET, "/")
+```
+trait SimpleFilter[Req, Rep] extends Filter[Req, Rep, Req, Rep]
+```
 
-// Send the request
-val future = client(req)
+The filter is passed a request and the next Service in the filter chain.  Here's an example 'timeout' filter:
 
-// Handle the response:
-f onSuccess { res =>
-  println("neat!", res)
-} onFailure { exc =>
-  println("aw snap!, exc)
+```
+import com.twitter.finagle.{Service, SimpleFilter}
+import com.twitter.util.{Duration, Future, Timer}
+
+class TimeoutFilter[Req, Rep](timeout: Duration, timer: Timer)
+  extends SimpleFilter[Req, Rep] {
+
+  def apply(request: Req, service: Service[Req, Rep]): Future[Rep] = {
+    val res = service(request)
+    res.within(timer, timeout) 
+  }
 }
+```
+
+
+Composing Filters and Services
+------------------------------
+
+Filters and Services can be composed with `compose` and `andThen`.
+
+```
+import com.twitter.finagle.Service
+import come.twitter.finagle.http
+
+val service: Service[http.Request, http.Response] = ???
+val timeOutFilter = new Timeoutfilter[http.Request, http.Response](???)
+
+val serviceWithTimeout: Service[http.Request, http.Response] = 
+  timeoutFilter.andThen(Service)
 ```
 
 
@@ -125,65 +166,124 @@ A Finagle server "exports" or publishes a service to the network. A server provi
   2. Configuration of how to listen for incoming requests, e.g. as HTTP requests on port 80.
 
 ```
-import com.twitter.finagle.Service
-import com.twitter.finagle.http.Http
-import com.twitter.util.Future
-import org.jboss.netty.handler.codec.http.{DefaultHttpResponse, HttpVersion, HttpResponseStatus, HttpRequest, HttpResponse}
-import java.net.{SocketAddress, InetSocketAddress}
-import com.twitter.finagle.builder.{Server, ServerBuilder}
+import com.twitter.finagle.{Http, Service}
+import com.twitter.finagle.http
+import com.twitter.util.{Await, Future}
 
-// Define the service. 200 for '/foo', 404 otherwise:
-val fooService = new Service[HttpRequest, HttpResponse] {
-  def apply(req: HttpRequest) = {
-    val rep = req.getUri match {
-      case "/foo" => new DefaultHttpResponse(HttpVersion.HTTP_1_1, HttpResponseStatus.OK)
-      case _ => new new DefaultHttpResponse(HttpVersion.HTTP_1_1, HttpResponseStatus.NOT_FOUND)
-    }
-
-    Future.value(r)
-  }
+// Here's our Service. Pretty simple, eh?
+val service = new Service[http.Request, http.Response] {
+  def apply(req: http.Request): Future[http.Response] = 
+    Future.value(http.Response(req.version, http.Status.Ok))
 }
 
-// Publish our service on a port:
-val address: SocketAddress = new InetSocketAddress(80)
-val server: Server = ServerBuilder()
-  .codec(Http())
-  .bindTo(address)
-  .name("HttpServer")
-  .build(fooService)
+// Let's 'publish' our service on a server:
+object Server extends App {
+  val server = Http.serve(":8080", service)
+  Await.ready(server)
+}
+
+// You can spin it up with `sbt run-main Server`
 ```
 
 
-Builders
---------
+Client
+------
 
-NOTE: Builders are deprecated as of Finagle 6.*, for updated syntax to build Servers and clients, check out: https://twitter.github.io/finagle/guide/Quickstart.html
+A Finagle client "imports" or consumes a service from the network. A client provides
 
-You may have noticed a little magic going on in the examples above.
+  1. A function to _use_ a service: send a `Req` and handle the returned `Future[Rep]`.
+  2. Configuration of how to send request, e.g. via HTTP to port 80 of api.example.com
 
-A `ClientBuilder` takes a set of config parameters and returns a `Service` that can send requests.
+As of Finagle 6.*, client implementations are instantiated with a new syntax, as opposed
+to the old 'ClientBuilder' syntax.
 
-```
-val client: Service[HttpRequest, HttpResponse] = ClientBuilder()
-  .codec(Http()) // required
-  .hosts("api1.example.com,api2.example.com") // one or many comma-separated, required
-  .hostConnectionLimit(1) // required
-  .tcpConnectTimeout(1.second)
-  .retries(2)
-  .build() 
-```
-
-A `ServerBuilder` takes a `Service` instance and returns a `Server` that forwards requests to that service.
 
 ```
-val service = new SomeService()
-val filter = new SomeFilter()
-val filteredService = filter andThen service
+import com.twitter.finagle.{Http, Service}
+import com.twitter.finagle.http
+import com.twitter.util.{Await, Future}
 
-val server = ServerBuilder()
-  .bindTo(new InetSocketAddress(port)) // required
-  .codec(Http()) // required
-  .name("my filtered service") // required
-  .build(filteredService)
+object Client extends App {
+  // 1. Here's the client:
+  val client: Service[http.Request, http.Response] = Http.newService("www.example-service.com:80")
+  
+  //  2. Let's make a request with our client:
+  val request = http.Request(http.Method.Get, "/")
+  request.host = "www.example-service.org"
+  
+  val response: Future[http.Response] = client(request)
+
+  Await.result(response.onSuccess { rep: http.Response =>
+    println ("Response: " + rep)
+  })
+}
 ```
+
+
+Using Finagle with Thrift
+-------------------------
+
+See "thrift.txt".
+
+Twitter uses Apache Thrift extensively, and since they developed Finagle, it makes
+sense that the two are used together quite often.
+
+Twitter created TTwitter, and extension of the TBinary Thrift protocol. It tacks on a request
+header that includes data useful for Finagle integration.
+
+Here's an example of how you can use Thrift with Finagle. Let's start with a Thrift IDL:
+
+```
+service LoggerService {
+  string log(1: string message);
+}
+```
+
+[Scrooge](https://twitter.github.io/scrooge/) auto-generates a LoggerService interface that we can implement:
+
+```
+import com.twitter.finagle._
+import com.twitter.finagle.thrift.ThriftServiceIface
+
+// Implementation of the Logger Service
+val logger = new LoggerService[Future] {
+  def log(message: String): Future[String] = {
+    Future.value(s"You sent the message: $message")
+}
+
+// Publishing the service
+val server = Thrift.server.serveIface("localhost:8080", logger)
+```
+
+We can also create a Thrift client for this server:
+
+```
+val loggerServiceIface: LoggerService.ServiceIface = 
+  Thrift.client.newServiceIface[LoggerService.ServiceIface]("localhost:8080, "thrift_client")
+```
+
+A `ServiceIface` is a collection of services, one for each Thrift method. Here's how we call the
+log method:
+
+```
+val result: Future[Log.Result] = clientServiceIface.log(Log.args("hello")
+```
+
+This is a little verbose. Alternatively you can create a Thrift client using the method interface:
+
+```
+val logClient = LoggerService.FutureIface = Thrift.client.newIface[LoggerService.Future]("localhost:8080")
+
+client.log("message") onSuccess { response =>
+  println("Client received response: " + response
+}
+```
+
+
+Resources
+---------
+
+* [Finagle Docs](https://twitter.github.io/finagle/)
+* [Effective Scala on Futures](https://twitter.github.io/effectivescala/#Twitter's%20standard%20libraries-Futures)
+* [finagle-thrift](https://twitter.github.io/finagle/docs/com/twitter/finagle/thrift/index.html)
 
