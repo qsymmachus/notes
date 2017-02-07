@@ -2039,4 +2039,5 @@ WEEK OF 12/25/16
 
 WEEK OF 2/5/17
 – Apache Samza, a stream processing framework that provides an alternative model to the database. Samza thinks of the database as a growing collection of immutable facts. You can query it at some point in time, but better yet, you can take the stream of facts as they come in and process them in real-time: https://www.confluent.io/blog/turning-the-database-inside-out-with-apache-samza/
+– What do you mean you mean by "event driven" architecture?: https://martinfowler.com/articles/201701-event-driven.html
 
