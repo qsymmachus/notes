@@ -2041,3 +2041,34 @@ WEEK OF 2/5/17
 – Apache Samza, a stream processing framework that provides an alternative model to the database. Samza thinks of the database as a growing collection of immutable facts. You can query it at some point in time, but better yet, you can take the stream of facts as they come in and process them in real-time: https://www.confluent.io/blog/turning-the-database-inside-out-with-apache-samza/
 – What do you mean you mean by "event driven" architecture?: https://martinfowler.com/articles/201701-event-driven.html
 
+
+WEEK OF 2/12/17
+– Wanna trace a packet? Use:
+
+    `$ traceroute <some host>`
+
+– Wanna know how a DNS request works? Try:
+
+    `$ dig <some host>`
+
+– You can see the results of a TCP connection with:
+
+    `$ sudo tcpdump host <some host>`
+
+  In another terminal:
+
+    `$ curl <some host>`
+
+– Wanna send an HTTP request by hand? Write a request in plaintext:
+
+    ```
+    GET / HTTP/1.1
+    Host: olmsted.io
+    User-Agent: me
+
+
+    ```
+  Then you can use `nc` (netcat) to set up a TCP connection and send whatever you pipe to it:
+
+    `$ cat request.txt | nc olmsted.io 80`
+
