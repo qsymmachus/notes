@@ -27,7 +27,7 @@ At a high level we can model Thrift's architecture like this:
 ------------------                    ------------------
         |                                     |
         |                                     |
-        |____________[Input/Output)___________|
+        |____________[Input/Output]___________|
 
 
 At the highest level of the stack, your code makes use of IDL-generated service code, which provides 
