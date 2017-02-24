@@ -2072,3 +2072,7 @@ WEEK OF 2/12/17
 
     `$ cat request.txt | nc olmsted.io 80`
 
+
+WEEK OF 2/19/17
+– `shasum` is an easy way to generate SHA hashes in the shell.
+
