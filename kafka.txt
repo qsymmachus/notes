@@ -55,7 +55,7 @@ Topics and the Log
 ------------------
 
 A topic is a category to which records are published. Topics can have any number of subscribers.
-For each topic, the Kafka cluster maintains a paritioned _log_ that looks like this:
+For each topic, the Kafka cluster maintains a partitioned _log_ that looks like this:
 
                 -----------------------------------
   Partition 0  | 0 | 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 | <------|
@@ -73,7 +73,7 @@ For each topic, the Kafka cluster maintains a paritioned _log_ that looks like t
 
 Each partition is an ordered, immutable sequence of records that is continually appended to. Each
 record is assigned a sequential ID that uniquely identifies each record within the partition (but not
-accross partitions).
+across partitions).
 
 Records are retained for a configurable retention period. After the retention period has passed, the
 record is removed, regardless of whether it was read or not.
@@ -128,7 +128,7 @@ As a Message System
 
 Unlike a traditional queue system, Kafka allows multiple subscribers – reading a record from the log
 does not remove it or prevent other consumers from reading it later. Traditional pub-sub systems allow
-multiple subscribers, but scale poorly because one copy of every message must be sent to every suscriber.
+multiple subscribers, but scale poorly because one copy of every message must be sent to every subscriber.
 This is the traditional trade-off in message systems.
 
 Kafka can be thought of as a hybrid of the queue and pub-sub models, sharing the strengths of both. Like a
@@ -157,5 +157,6 @@ some processing on that input, and produces a continual stream of records to out
 on the Streams API above).
 
 Note that Kafka does not have built-in backpressure capability or other features common to dedicated
-streaming platforms. Compare Kafka's functionality with Akka Streams (cf. `akka-streams.txt`).
+streaming platforms. Compare Kafka's functionality with Akka Streams (cf. `akka-streams.txt`) or 
+Apache Spark.
 
