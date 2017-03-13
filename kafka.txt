@@ -1,0 +1,161 @@
+APACHE KAFKA
+============
+
+Apache Kafka is a distributed streaming platform. It has three key capabilities:
+
+1. It lets you publish and subscribe a stream of records (a message queue).
+2. It lets you store streams of records in a fault-tolerate way.
+3. It lets you process streams of records as they occur.
+
+Kafka is good for two broad classes of application:
+
+1. Real-time streaming pipelines that reliable get data between applications (a transport/pipeline)
+2. Real-time streaming applications that transform or react to streams of data (a reactive application)
+
+
+High Level Overview
+-------------------
+
+Kafka is run as a cluster on one or more servers (distributed). The cluster stores streams of _records_ in
+categories called _topics_.
+
+Each record consists of a key, a value, and a timestamp.
+
+The transport layer is a language-agnostic TCP-based protocol.
+
+
+APIs
+----
+
+1. Producer API – allows an application to publish a stream of records to topics.
+
+    ---------------
+   | Kafka Cluster | <------- Producers
+    ---------------
+
+2. Consumer API – allows an application to subscribe to one or more topics and process
+   the stream of records published to them.
+
+    ---------------
+   | Kafka Cluster | -------> Consumers
+    ---------------
+
+3. Streams API – allows an application to act as a _stream processor_, consuming an input
+   stream from one or more topics and producing an output stream (a kind of Kafka 'filter').
+
+    ---------------
+   | Kafka Cluster | <------> Stream Processor
+    ---------------
+
+4. Connector API – allows the creation of resuable producers or consumer that connect topics
+   to existing applications or data systems (Kafka duct tape).
+
+
+Topics and the Log
+------------------
+
+A topic is a category to which records are published. Topics can have any number of subscribers.
+For each topic, the Kafka cluster maintains a paritioned _log_ that looks like this:
+
+                -----------------------------------
+  Partition 0  | 0 | 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 | <------|
+                -----------------------------------         |
+                                                            |
+                -----------------------------------         |
+  Partition 1  | 0 | 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 | <------|------[writes]
+                -----------------------------------         |
+                                                            |
+                -----------------------------------         |
+  Partition 2  | 0 | 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 | <------|
+                -----------------------------------
+
+               old ----------------------------> new 
+
+Each partition is an ordered, immutable sequence of records that is continually appended to. Each
+record is assigned a sequential ID that uniquely identifies each record within the partition (but not
+accross partitions).
+
+Records are retained for a configurable retention period. After the retention period has passed, the
+record is removed, regardless of whether it was read or not.
+
+Using the offset, consumers can choose to start reading records anywhere in the partition, allowing them
+to skip ahead or 'replay' records.
+
+These combinations of features mean that the topic log can:
+
+1. Scale to any size by simply adding new partitions,
+2. The behavior of consumers will not affect other consumers, since reading records does not
+   change the log in any way,
+3. Allows topics to be written to and read from concurrently.
+
+
+Producers
+---------
+
+Producers publish data to topics of their choice. The producer is responsible for choosing which partition
+to assign the record to – typical partioning methods like round-robin may be used.
+
+
+Consumers
+---------
+
+Consumers label themselves with a _consumer group_ name. Each record is delivered to each consumer group,
+and sent to one consumer instance in the group. That is, there is a one-to-one relationship between record
+and consumer group, but there are no guarantees which consumer _within_ a group will ultimately receive the
+record.
+
+    ---------------                 ----------------------------------------
+   | Kafka Cluster | ---record---> | [consumer 1] [consumer 2] [consumer 3] |
+    ---------------                 ----------------------------------------
+                                              Consumer Group A
+
+Kafka attempts to balance the number of records distributed to consumers equally within a consumer group.
+
+
+Guarantees
+----------
+
+Kafka makes the following performance guarantees:
+
+* Records sent by a producer will be appended to a partition in the order they are sent.
+* A consumer instance sees record in the order they are stored in the log.
+* For a topic with replication factor 'n', we will tolerate up to n-1 server failures without
+  losing any records committed to the log.
+
+
+As a Message System
+-------------------
+
+Unlike a traditional queue system, Kafka allows multiple subscribers – reading a record from the log
+does not remove it or prevent other consumers from reading it later. Traditional pub-sub systems allow
+multiple subscribers, but scale poorly because one copy of every message must be sent to every suscriber.
+This is the traditional trade-off in message systems.
+
+Kafka can be thought of as a hybrid of the queue and pub-sub models, sharing the strengths of both. Like a
+queue, processing can be divided over a collection of processors. Like a pub-sub system, messages can be
+broadcast to multiple subscribers.
+
+
+As a Storage System
+-------------------
+
+Any message queue can be thought of as a storage system – after all, the whole point of a message queue is
+that it allows data to be consumed asynchronously from when it was published.
+
+What sets Kafka apart is that it is a particularly good storage system:
+
+* Data written to Kafka is written to disk for fault-tolerance.
+* Kafka has the same performance properties regardless of how much data it's storing.
+* If you have the space, the record retention period can be as long as you want.
+
+
+As a Stream Processor
+---------------------
+
+In Kafka, a stream is anything that takes continual streams of records from input topics, performs
+some processing on that input, and produces a continual stream of records to output topics (see note
+on the Streams API above).
+
+Note that Kafka does not have built-in backpressure capability or other features common to dedicated
+streaming platforms. Compare Kafka's functionality with Akka Streams (cf. `akka-streams.txt`).
+
