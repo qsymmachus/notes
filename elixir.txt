@@ -1,0 +1,139 @@
+ELIXIR
+======
+
+Elixir is a functional, concurrent, dynamically typed programming language that runs on
+on the Erlang virtual machine (BEAM). Elixir builds on top of Erlang and shares the
+same abstractions for building distributed, fault-tolerant applications. Some neat
+features of Elixir include:
+
+* Compiles to BEAM bytecode.
+* Functional: everything is an expression, recursion over looping, higher-order functions.
+* Lightweight concurrency using Erlang's mechanisms.
+* Lazy and async collections.
+* Pattern matching.
+
+`brew install elixir` to get started.
+
+`iex` runs an Elixir REPL.
+
+
+BASIC TYPES
+-----------
+
+`123`     integers
+
+`3.14`    floats
+
+`true`
+`false`
+
+`:foo`     Atoms, similar to Ruby symbols. A constant whose name is its value.
+           Modules in Elixir are also atoms (`MyApp.Module`), which is interesting.
+
+`"Apple"`  Strings are always double quoted.
+
+
+OPERATORS
+---------
+
+`+ - * /`          Arithmetic operators. Note that `/` always returns a float.
+                   For integer division, use `div()`, for modulo, use `rem()`
+
+`|| && !`          Your standard boolean operators.
+
+`and or not`       Also valid boolean operators, but only if first argument is a
+                   boolean. For example: `true and 42`
+
+`== != >= > < <=`  Standard comparison operators.
+
+`=== !===`         For strict comparison of integers and floats. For example,
+                   `2 == 2.0` is true, whereas `2 === 2.0` is false.
+
+STRINGS
+-------
+
+```
+name = "John"      String interpolation.
+
+"Hello, #{name}!"  
+```
+
+`"Hello" <> name`  String concatenation.
+
+
+LISTS
+-----
+
+Lists are simple collections of values. They may contain multiple types. They may
+contain non-unique values (i.e. they are not sets). Elixir implements lists as 
+linked-lists – this means it's faster to prepend than append.
+
+`[123, "Hello", :neat]`
+
+````
+"new value" ++ list`     You can concatenate with `++`, either prepending or appending.
+list ++ "another!"       It's conventional to describe this function as `++/2`, where
+                         `2` is its arity. It's typical to talk about arities in Elixir.
+```
+
+```
+list -- "Hello"          The `--/2` operator subtracts values from a list, but only the
+# returns [123, neat]    first occurence!
+```
+
+```
+hd list                  `hd` and `tl` give you the head and tail of the list.
+# 123
+
+tl list
+# ["Hello", :neat]
+```
+
+TUPLES
+------
+
+Tuples are similar to lists but are stored contiguously in memory. This makes 
+accessing their length fast but modification is expensive, because it requires
+re-writing the entire tuple to memory.
+
+`{321, "Heya", :cool}`
+
+
+KEYWORD LISTS
+-------------
+
+This is the first type of associative collection in Elixir. It's actually just a 
+list of tuples, where the firstelement in each tuple is an atom, and the second 
+element is its value.
+
+```
+keylist = [name: "John", age: 30]
+
+# This is really syntactic sugar for:
+
+keylist = [{:name, "John"}, {:age, 30}]
+```
+
+
+MAPS
+----
+
+This is the second type of associative collection in Elixir, and is more commonly used
+than keyword lists. Unlike keyword lists they allow keys of any type and are un-ordered.
+
+```
+map = %{:name => "John", :age => 30}
+
+map[:name]  # "John"
+```
+
+If the values are all keys, you can use this special syntax:
+
+```
+map = %{name: "John", age: 30}
+
+map.name  # "John"
+
+%{map | name: "Vanya"}  # %{name: "Vanya", age: 30}
+```
+
