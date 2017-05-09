@@ -137,3 +137,48 @@ map.name  # "John"
 %{map | name: "Vanya"}  # %{name: "Vanya", age: 30}
 ```
 
+
+ENUM
+----
+
+The Enum module is the standard library for working with Elixir collections. Here are some
+examples:
+
+`Enum.all?(["dog", "cat", "frog"], fn(s) -> String.length(s) == 3 end)  # false`
+
+`Enum.any?(["dog", "cat", "frog"], fn(s) -> String.length(s) == 3 end)  # true`
+
+`Enum.chunk([1, 2, 3, 4], 2)                                            # [[1, 2], [3, 4]]`
+
+`Enum.chunk_by(["dog", "cat", "frog"], fn(s) -> String.length(s) end)   #[["dog, "cat"], ["frog]]` 
+
+```
+Enum.each(["hey", "hi", "hello"], fn(s) -> IO.puts(s) end)
+
+# hey
+# hi
+# hello
+
+# Note that each is side-effecting, but it technically returns the atom :ok.
+```
+
+`Enum.map([1, 2, 3], fn(n) -> n * 2 end)                    # [2, 4, 6]`
+
+`Enum.min([1, 2, 3])                                        # 1`
+
+`Enum.max([1, 2, 3])                                        # 3`
+
+`Enum.reduce([1, 2, 3], fn(n, accum) -> n + accum end)      # 6`
+
+`Enum.reduce([1, 2, 3], 10, fn(n, accum) -> n + accum end)  # 16`
+
+`Enum.sort([3, 6, 2])                                       # [2, 3, 6]
+
+```
+Enum.sort([%{val: 4}, %{val: 1}], fn(a, b) ->
+  a.val < b.val
+end)
+
+# [%{val: 1}, %{val: 4}]
+```
+
