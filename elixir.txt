@@ -182,3 +182,98 @@ end)
 # [%{val: 1}, %{val: 4}]
 ```
 
+
+PATTERN MATCHING
+----------------
+
+Pattern matching allows you to match simple values, data structures, and even functions.
+
+In Elixir, `=` is actually a match operator. `x = 1` is an expression that matches the left
+side with the right side. The `=` operator performs an assignment when the left side of the 
+match includes a variable. You can perform simple matching like this:
+
+```
+x = 1
+1 = x  # 1
+2 = x  # (MatchError) no match of right hand side value: 1
+```
+
+More commonly, you can use the `=` operator to match on collections. This allows you to destructure
+them, parsing out values from the right side into variables on the left side:
+
+```
+# On a list:
+[1|tail] = [1, 2, 3]
+tail  # [2, 3]
+
+# On a tuple:
+{_, data_i_want} = {"foo", "important"}
+data_i_want  # "important"
+```
+
+
+IF / ELSE / UNLESS
+------------------
+
+`if` and `unless` behave as you'd expect:
+
+```
+if true do
+  "It's true!"
+else
+  "I don't know what to believe anymore."
+end
+
+unless is_integer("Apple") do
+  "It's not an integer."
+end
+```
+
+
+CASE STATEMENTS
+---------------
+
+Case statements work very similarly to Scala pattern matching. Cases match _values_ to expressions.
+
+```
+case {:ok, "Neat data"} do
+  {:ok, result} -> result
+  {:error} -> "Aw snap!"
+  _ -> "Fallback behavior"
+end
+```
+
+If you intend to match on existing variables, you need to use the pin `^` operator:
+
+```
+pie = 3.14
+
+case "cherry pie" do
+  ^pie -> "Not so tasty" # i.e. match on existing value of `pie`
+  pie -> "I love to eat #{pie}"
+end
+```
+
+You can also add guards (predicate checks) to your matchers:
+
+```
+case [1, 2, 3] do
+  [1, x, 3] when x > 0 -> "Yep it's greater than 0"
+  _ -> "Nope doesn't match"
+end
+```
+
+COND STATEMENTS
+---------------
+
+`cond` matches to _conditions_ rather than values. In this sense it's very similar to `cond`
+in Scheme.
+
+```
+cond do
+  2 + 2 == 5 -> "This isn't true"
+  2 + 2 == 4 -> "This is true"
+  true -> "Default case"
+end
+```
+
