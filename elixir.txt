@@ -277,3 +277,93 @@ cond do
 end
 ```
 
+
+FUNCTIONS
+---------
+
+1. Anonymous functions:
+
+```
+sum = fun (a, b) -> a + b end
+
+sum.(2, 3)  # 5
+```
+
+There's a shorthand for anonymous functions using `&`. `&n` refers to arguments, where `n`
+is the position of the argument:
+
+```
+sum = &(&1 + &2)
+
+sum.(2, 3)  # 5
+```
+
+2. Pattern matching functions:
+
+```
+greeter = fn
+  "Hi!" -> "Hello!"
+  "Salut!" -> "Bonjour!"
+  _ -> "No hablo!"
+end
+
+greeter.("Guten Tag!")  # "No hablo!"
+```
+
+greeter = fn
+  "Hi!" -> "Hello!"
+  "Salut!" -> "Bonjour!"
+  _ -> "No hablo!"
+end
+
+greeter.("Guten Tag!")  # "No hablo!"
+```
+
+greeter = fn
+  "Hi!" -> "Hello!"
+  "Salut!" -> "Bonjour!"
+  _ -> "No hablo!"
+end
+
+greeter.("Guten Tag!")  # "No hablo!"
+```
+
+greeter = fn
+  "Hi!" -> "Hello!"
+  "Salut!" -> "Bonjour!"
+  _ -> "No hablo!"
+end
+
+greeter.("Guten Tag!")  # "No hablo!"
+```
+
+3. Named functions. Named functions are defined within a module using `def`:
+
+```
+defmodule Wizard do
+  def transfigure(into) do
+    "*turns you into a #{into}*"
+  end
+end
+
+Wizard.transfigure("toad")  # "*turns you into a toad*"
+```
+
+One-line functions can be shortened like this:
+
+```
+def transfigure(into), do: "*turns you into a #{into}*"
+```
+
+Using pattern matching, you can define the same function multiple times with slightly different arguments.
+This allows you to neatly accomplish some recursive function definitions:
+
+```
+defmodule Length do
+  def of([]), do: 0
+  def of([_|t]), do: 1 + of(t)
+end
+
+Length.of([1, 2, 3])  # 3
+```
+
