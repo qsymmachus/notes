@@ -2076,3 +2076,20 @@ WEEK OF 2/12/17
 WEEK OF 2/19/17
 – `shasum` is an easy way to generate SHA hashes in the shell.
 
+
+WEEK OF 5/14/17
+– WebAssembly update (see your first entry on it in the week of 12/13/15).
+  – Its origins lie in the Javascript "performance wars", ca. 2008.
+  – One of the outcomes of this were Just In Time compilers (JITs) for Javascript.
+    – JITs keep track of blocks of code that executed most frequently, and run them through an
+      optimizing compiler. This makes execution much faster than simple interpreters.
+  – Going forward, we're reaching the limit of JIT optimization.
+  – WebAssembly starts off much closer to machine code (it's bytecode).
+    – Most optimization has already been down ahead of time, before the brower even executes it.
+    – WebAssembly is a _compiler target_. No human writes it (unless you're a masochist).
+    – This means developers can write in the language they want, and compile it to WebAssembly.
+    – Note however that WebAssembly doesn't currently have garbage collection.
+    – Tools for compiling to WebAssembly (.wasm) are still maturing.
+  – Read more: https://www.smashingmagazine.com/2017/05/abridged-cartoon-introduction-webassembly
+
+
