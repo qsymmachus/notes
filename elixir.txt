@@ -421,3 +421,47 @@ You've seen the pipe operator `|>` a few times already. It lets you perform func
 # "NOITCNUF", "NOITISOPMOC", "SI", "LOOC"]
 ```
 
+
+MODULES
+-------
+
+1. Modules allow you to organize functions within a namespace. You can also encapsulate private functions
+within a module, see the note on `defp` above. Modules can also be nested for more precise namespacing:
+
+```
+defmodule Greeter.English do
+  def English do
+    def morning(name), do: "Good morning, #{name}"
+  end
+end
+```
+
+2. Module attributes are most commonly used as constants in Elixir:
+
+```
+defmodule Greeter do
+  @greeting "Hello"
+end
+```
+
+
+STRUCTS
+-------
+
+Structs are special maps with a defined set of keys and default values. They are the "models" of any Elixir
+codebase. Structs must be defined within a module:
+
+```
+defmodule User do
+  defstruct name: "John", age: 30
+end
+```
+
+Once a struct is defined, you instantiate it like a Map. Structs provide compile-time guarantees that only the 
+fields defined in `defstruct` will be allowed to exist:
+
+```
+me = %User{}
+hank = %User{name: "Hank", age: 1}
+```
+
