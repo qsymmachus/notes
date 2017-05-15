@@ -355,7 +355,7 @@ One-line functions can be shortened like this:
 def transfigure(into), do: "*turns you into a #{into}*"
 ```
 
-Using pattern matching, you can define the same function multiple times with slightly different arguments.
+4. Using pattern matching, you can define the same function multiple times with slightly different arguments.
 This allows you to neatly accomplish some recursive function definitions:
 
 ```
@@ -365,5 +365,59 @@ defmodule Length do
 end
 
 Length.of([1, 2, 3])  # 3
+```
+
+5. Function arities – you can also define functions multiple times with different arities.
+
+```
+defmodule Greeter do
+  def hello(), do: "Hello, stranger"!
+  def hello(first), do: "Hello, #{first}!"
+  def hello(first, second), do: "Hello, #{first} #{last}!"
+end
+```
+
+6. Named functions can be made private within a module using `defp`:
+
+```
+defmodule Greeter do
+  def hello(first), do: phrase <> name
+  defp phrase, do: "Hello, "
+end
+```
+
+7. Guards (`when`) allow you to define functions multiple times, this time with different validations:
+
+```
+defmodule Greeter do
+  def hello(names) when is_list(names) do
+    names
+    |> Enum.join(", ")
+    |> hello
+  end
+
+  def hello(name) when is_binary(name) do
+    "Hello, #{name}!"
+  end
+end
+```
+
+8. Default arguments use slightly wonky syntax:
+
+```
+def hello(name \\ "John"), do: "Hello, #{name}!"
+```
+
+
+PIPE OPERATOR
+-------------
+
+You've seen the pipe operator `|>` a few times already. It lets you perform function composition, similar to
+`andThen` in Scala.
+
+```
+"Function composition is cool" |> String.upcase |> String.split |> Enum.map(fn(s) -> String.reverse(s) end)
+
+# "NOITCNUF", "NOITISOPMOC", "SI", "LOOC"]
 ```
 
