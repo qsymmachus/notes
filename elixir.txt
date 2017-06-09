@@ -465,3 +465,134 @@ me = %User{}
 hank = %User{name: "Hank", age: 1}
 ```
 
+
+ALIAS / IMPORT
+--------------
+
+`alias` allows you to mixin a module into another module:
+
+```
+defmodule Sayings.Greetings do
+  def basic(name), do: "Hi, #{name}!"
+end
+
+defmodule AdvancedGreetings do
+  alias Sayings.Greetings
+
+  def greeting(name), do: Greetings.basic(name) <> " How are you today?"
+end
+```
+
+You can alias to a different name with the `:as` option:
+
+```
+alias Sayings.Greetings, as: Hi
+```
+
+`import` allows you to import individual functions rather than aliasing the whole module:
+
+```
+import List
+
+# or 
+
+import List, only: [last: 1]
+
+# or
+
+import List, except: [last: 1]
+```
+
+
+MIX AND ELIXIR PROJECTS
+-----------------------
+
+Mix is the standard Elixir build tool / task manager / depedency manager.
+
+1. Creating a new project:
+
+```
+mix new example_project
+```
+
+2. Mix projects use the following structure:
+
+```
+.
+├── .gitignore
+├── README.md
+├── config
+│   └── config.exs
+├── lib
+│   └── example_project.ex
+├── mix.exs
+└── test
+    ├── example_project_test.exs
+    └── test_helper.exs
+```
+
+3. `mix.exs` is your project configuration file. It looks something like this:
+
+```
+defmodule Example.Mixfile do
+  use Mix.Project
+ 
+  # Project configuration:
+  def project do
+    [app: :example,
+     version: "0.0.1",
+     elixir: "~> 1.0",
+     build_embedded: Mix.env == :prod,
+     start_permanent: Mix.env == :prod,
+     deps: deps]
+  end
+
+  # Applicaton configuration:
+  def application do
+    [applications: [:logger]]
+  end
+
+  # Dependencies:
+  defp deps do
+    []
+  end
+end
+```
+
+4. You can run an `iex` REPL with your project and dependencies already loaded by running:
+
+```
+iex -S mix
+```
+
+5. Mix is smart and will compile your changes automagically, but to explicitly compile:
+
+```
+mix compile
+```
+
+Compilation creates a _build directory with our artifacts.
+
+6. You manage dependencies by updating the list returned by `deps` in `mix.exs`:
+
+```
+ deps do
+  [{:phoenix, "~> 1.1 or ~> 1.2"},
+   {:phoenix_html, "~> 2.3"},
+   {:cowboy, "~> 1.0", only: [:dev, :test]},
+   {:slime, "~> 0.14"}]
+end
+```
+
+To install your dependencies, run:
+
+```
+mix deps.get
+```
+
+7. To run tests:
+
+```
+mix tests
+```
+
