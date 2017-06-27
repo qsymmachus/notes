@@ -2093,3 +2093,21 @@ WEEK OF 5/14/17
   – Read more: https://www.smashingmagazine.com/2017/05/abridged-cartoon-introduction-webassembly
 
 
+WEEK OF 6/25/17
+– Refresher on the CAP theorem:
+  – When working on a distributed system – a system that is (P)artitioned – you must choose
+    between (C)onsistency and (A)vailability, but you can't have both.
+  – (AP) High Availability
+    – Prioritizes availability over consistency.
+    – Every read receives a non-error response (99% of the time), but it does not guarantee
+      that that read is the most up-to-date.
+  – (CP) High Consistency
+    – Prioritizes consistency over availablity.
+    – Reads may returns errors, but successful reads are guaranteed to by the most up-to-date.
+  – What about "CA"? The only way to guarantee both availability and consistency is to not have
+    a Partition-tolerant (i.e. distributed) system.
+– Note that the CAP theorem is a _theorem_ that describes a very specific kind of distributed system:
+  a single, read-write register. Most distributed systems are more complicated than this, for example
+  they probably have transactions that touch multiple objects. The CAP theorem often doesn't map
+  to the real-world that well.
+
