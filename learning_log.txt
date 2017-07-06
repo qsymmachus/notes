@@ -2111,3 +2111,18 @@ WEEK OF 6/25/17
   they probably have transactions that touch multiple objects. The CAP theorem often doesn't map
   to the real-world that well.
 
+
+WEEK OF 7/2/17
+– Memory Heap
+  – Not to be confused with the heap data structure.
+  – A memory heap is where _dynamically_ allocated memory resides (i.e. memory allocated by `malloc`).
+  – Memory will remain allocated in the heap either until
+
+    1. The memory is `free`d
+    2. The program terminates.
+  
+  – If all references to allocated memory are lost (e.g. you don't have a pointer to it anymore), you
+    have a memory leak!
+  – Contrast the memory heap with a memory _stack_ which is used by the callstack. Memory allocated in
+    the memory stack is specific to the callstack frame.
+
