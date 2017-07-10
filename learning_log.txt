@@ -2126,3 +2126,11 @@ WEEK OF 7/2/17
   – Contrast the memory heap with a memory _stack_ which is used by the callstack. Memory allocated in
     the memory stack is specific to the callstack frame.
 
+
+WEEK OF 7/9/17
+– Javascript Service Workers
+  – A service worker is a simple script that your browser runs in the background.
+  – It runs on a separate thread from the main JS thread.
+  – It's asynchronous and does not have access to the DOM.
+  – Current supported by Chrome, Firefox, Opera.
+
