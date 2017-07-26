@@ -2134,3 +2134,15 @@ WEEK OF 7/9/17
   – It's asynchronous and does not have access to the DOM.
   – Current supported by Chrome, Firefox, Opera.
 
+
+WEEK OF 7/23/17
+– Kubernetes, a tool for container orchestration.
+  – Docker containers provide an immutable artifact that works consistently across environments.
+  – What about the environments themselves? How can make them more consistent?
+  – Kubernetes provides a layer of abstraction over the underlying infrastructure in a given environment,
+    be it dev, test, or prod. 
+  – It provides an API for orchestrating the deployment, scaling, and management of containerized applications,
+    independent of the infrastructure it's actually running on!
+  – Useful tutorial: https://kubernetes.io/docs/tutorials/kubernetes-basics/
+
+ 
