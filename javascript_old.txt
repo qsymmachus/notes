@@ -1,3 +1,10 @@
+NB – This was last updated in 2014 and is pretty out of date.
+
+Refer to `javascript.txt` for more up-to-date information.
+
+-------------------------------------------------------------
+
+
 INTERACTIVE
 
 confirm("Are you sure?")		throws a confirmation box at the user
