@@ -113,3 +113,10 @@ To install it:
 yarn add --dev eslint
 ```
 
+WEBPACK
+-------
+
+Webpack is a 'module bundler' – it takes a group of JS files, concatenates and compresses them, and assembles them
+into one JS file usually called a 'bundle'.
+
+
