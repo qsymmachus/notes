@@ -1,0 +1,115 @@
+MODERN JAVASCRIPT
+=================
+
+Up to date as of the summer of 2017 – who knows when the language will get a totally new spec!
+
+This is largely based of this tutorial: https://github.com/verekia/js-stack-from-scratch
+
+See `dev/js-scratchpad` for code based off this tutorial.
+
+NPM AND YARN
+------------
+
+NPM is the default package manager for Node.
+
+Yarn is a superset of NPM and is currently preferred as a package manager.
+
+```
+yarn add <some package>
+
+yarn remove <some package>
+
+yarn add --dev <some dev package>
+```
+
+PACKAGE.JSON
+------------
+
+Both NPM and Yarn use a `package.json` configuration file. Yarn also generates a lock file, `yarn.lock`.
+
+You can define common project tasks in `package.json` like this:
+
+```
+"scripts": {
+  "start": "babel-node src",
+  "test": "estlint src && other-stuff"
+}
+```
+
+BABEL
+-----
+
+Babel is a compiler that transforms ES6 code into ES5 code. It is a necessary evil because
+not all browsers and JS environments have full support for ES6 yet.
+
+To install it: 
+
+```
+yarn add --dev babel
+```
+
+```
+babel <some file> # compiles file from ES6 to ES5.
+
+babel-node <some file> # runtime environment for ES6 files.
+```
+
+`.babelrc` is a config file for Babel.
+
+ES6 CLASSES
+-----------
+
+ES6 introduced real classes to javascript:
+
+```
+class Dog {
+  constructor(name) {
+    this.name = name
+  }
+
+  bark() {
+    return `woof woof, I am ${this.name}`
+  }
+}
+
+module.exports = Dog  // This exposes the class to the outside world.
+```
+
+To use this class in another JS file (assuming it's in the same directory):
+
+```
+const Dog = require('./dog')  // This is why you needed 'module.exports' in dog.js
+
+const toby = new Dog('Toby')
+
+console.log(toby.bark())
+```
+
+ES6 MODULES SYNTAX
+------------------
+
+ES6 introduces a newer sytax for exporting and importing modules.
+
+In `dog.js`, update the 'module.exports' to this:
+
+```
+export default Dog
+```
+
+Then in the JS file that needs Dogs:
+
+```
+import Dog from './dog'
+```
+
+ESLINT
+------
+
+ESLint is a code linter for ES6. `.eslintrc.json` is the configuration file for your linting rules.
+
+To install it:
+
+```
+yarn add --dev eslint
+```
+
