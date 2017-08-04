@@ -2146,3 +2146,15 @@ WEEK OF 7/23/17
   – Useful tutorial: https://kubernetes.io/docs/tutorials/kubernetes-basics/
 
  
+WEEK OF 7/30/17
+– What the hell is a monad you ask? You already know this, you just don't know the terminology.
+  – Scala `List`s, `Option`s, and `Either`s are all examples of monads. What they share in common is:
+    – They encapsulate some value of type A in some 'context' (like a List or an Option),
+    – They provide a means of 'mapping' over these contexts and transforming the encapsulated
+      value, for example by transforming them in some B. In the Scala context you are familiar with,
+      this is accomplished using `map` and `flatMap`.
+  – More formally and abstractly, a monad is a structure that defines
+    
+    1. A data type, and how values of that datatype are combined
+    2. Functions that use the data type, and compose them together into actions.
+
