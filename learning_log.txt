@@ -2157,4 +2157,19 @@ WEEK OF 7/30/17
     
     1. A data type, and how values of that datatype are combined
     2. Functions that use the data type, and compose them together into actions.
+ 
+  – Monads all you to string together computations will abstracting away some part of the "context"
+    you're in. For example, Scala `Option`s all you to string together computations where a value
+    may or may not exist. `Future`s allow you to string together computations without worrying 
+    about the fact that it's asynchronous.
+
+
+WEEK OF 8/6/17
+– Vim macros allow you to record repetitive tasks and replay them:
+
+  `qx`  start recording to register "x"
+        (at this point you do whatever it is you want to record)
+  `q`   stop recording
+  `@x`  play back the macro
+  `5@x` play back the macro five times!
 
