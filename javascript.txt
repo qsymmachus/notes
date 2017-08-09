@@ -119,4 +119,26 @@ WEBPACK
 Webpack is a 'module bundler' – it takes a group of JS files, concatenates and compresses them, and assembles them
 into one JS file usually called a 'bundle'.
 
+REACT
+-----
+
+React is a library for building user interfaces. It uses the JSX syntax to represent HTML elements and components.
+It makes it easy to combine the behavior (i.e. javascript associated with) HTML elements with the actual HTML itself.
+
+REDUX
+-----
+
+Redux is a library to handle the lifecycle of your application. It creates a _store_, which is the single source of
+truth for the state of your application at a given time.
+
+REACT-REDUX
+-----------
+
+React-Redux connects a redux store with React components. with `react-redux`, when the Redux store changes, React
+components get automatically updated. They can also fire Redux actions.
+
+_Components_ are dumb React components, in the sense that they don't know anything about the Redux state.
+
+_Containers_ are smart components that know about the Redux state and communicate that to nested dumb components.
+
 
