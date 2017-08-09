@@ -3,9 +3,198 @@ MODERN JAVASCRIPT
 
 Up to date as of the summer of 2017 – who knows when the language will get a totally new spec!
 
+
+1. JAVASCRIPT THE LANGUAGE
+--------------------------
+
+Based on of this tutorial: https://developer.mozilla.org/en-US/docs/Web/JavaScript/A_re-introduction_to_JavaScript
+
+Javascript has had three major revisions:
+* ECMAScript 3 (ES3) in 1999
+* ES4 shat the bed and was never released
+* ES5 in 2009
+* ES6 in 2015
+
+The language has changed quite a bit as of ES6!
+
+STRINGS
+-------
+
+All strings are sequences of unicode characters.
+
+Strings are like objects and have their own properties and methods:
+
+```
+'hello'.length // 5
+
+'hello'.replace('h', 'j') // 'jello'
+
+'hello'.toUpperCase() // 'HELLO'
+```
+
+VARIABLES
+---------
+
+In ES6 variables are declared using `let`, `const`, or `var`.
+
+1. `let` allows you to declare block-level variables. It is in scope within the block it is declared.
+Note that once a variable is declared using `let`, it _cannot_ be redeclared within that scope!
+However, it _can_ be updated.
+
+```
+let me = "John"
+
+// This is fine:
+me = "John Olmsted"
+
+// This is bad:
+let me = "Toby"
+SyntaxError: Identifier 'me' has already been declared 
+```
+
+2. `const` also allows you to declare a block-level variable. However, it is completely immutable.
+Like a variable declared by `let`, it cannot be redeclared, but it also _cannot_ be updated.
+
+```
+const zero = 0
+
+// This is bad:
+zero = 1
+TypeError: Assignment to constant variable.
+
+// This is also bad:
+const zero = 0
+SyntaxError: Identifier 'zero' has already been declared 
+``` 
+
+3. `var` is the the traditional way to declare a variable. `var`s have _function_ level scope, not block
+scope. They can also be freely redeclared and updated.
+
+OPERATORS
+---------
+
+The usual arithmetic operators:
+
+```
+2 + 2 // 4
+2 - 2 // 0
+2 * 2 // 4
+2 / 2 // 1
+2 % 2 // 0
+```
+
+Incrementers and decrementers:
+
+```
+1++ // 1
+1-- // 0
+```
+
+String concatenation:
+
+```
+'hello' + 'world' // 'hello world'
+```
+
+Comparators:
+
+```
+1 > 2 // false
+1 < 2 // true
+1 <= 2 // true
+1 >= 2 // false
+
+2 == 2 // true
+2 == '2' // true! == coerces types.
+2 === '2' // false, === does not coerce types.
+```
+
+CONTROL FLOW
+------------
+
+```
+let name = 'John'
+
+if (name == 'John') {
+  return name + ' Olmsted'
+} else if (name == 'Barack') {
+  return name + ' Obama'
+else {
+  return name
+}
+
+for (var i = 0; i < 5; i++) {
+  // really you should just use 'map' though.
+}
+
+for (let value of array) {
+  // do something with value, but really you should just use 'map'.
+}
+
+for (let property in object) {
+  // do something with object property.
+}
+```
+
+OBJECTS
+-------
+
+Javascript objects can be thought of as simple collections of key-value pairs.
+Everything except the core data types are objects (yes, even functions are objects).
+
+```
+var obj = new Object();
+
+// or alternatively the object literal syntax:
+
+var obj = {};
+
+// Object literal syntax allows you to initialize the object in its entirety:
+var me = {
+  name: 'John',
+  age: 30,
+  address: {
+    state: "CA",
+    zip: 94703
+  }
+}
+
+me.name // 'John'
+me.address.zip // 94703
+```
+
+CLASSES
+-------
+
+Classes provide syntactic suger over Javascript's existing prototype-based inheritance. 
+
+A Javascript class is just a function that returns an object based on a defined prototype.
+
+```
+class Rectangle {
+  constructor(height, width) {
+    this.height = height
+    this.width = width
+  }
+
+  area() {
+    return this.height * this.width
+  }
+}
+
+const mySquare = new Rectangle(10, 10)
+
+mySquare.area // 100
+```
+
+
+2. JAVASCRIPT TOOLING
+----------------------
+
 This is largely based of this tutorial: https://github.com/verekia/js-stack-from-scratch
 
 See `dev/js-scratchpad` for code based off this tutorial.
+
 
 NPM AND YARN
 ------------
