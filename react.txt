@@ -56,7 +56,7 @@ let thisIsValid = (
 JSX IS REALLY JUST A FUNCTION
 -----------------------------
 
-JSX is syntactic sugar for the React function `createElement`:
+JSX is syntactic sugar for the function `React.createElement`:
 
 ```
 <p color="blue" shadowSize={2}>
@@ -67,7 +67,7 @@ JSX is syntactic sugar for the React function `createElement`:
 // compiles into
 
 React.createElement(
-  p,
+  "p",
   {color: 'blue', shadowSize: 2},
   'Click Me'
 )
@@ -126,8 +126,35 @@ let name = 'John Olmsted'
 let p = <p>{name}</p>
 ```
 
-NB: you cannot inject `if` statements into JSX. We will cover how to handle conditionals in JSX in a future
-section.
+NB: you cannot inject `if` statements into JSX, because it is not an expression. Alternatively, you can
+use a ternary conditional, which is an expression. See "Conditionals in JSX" below.
+
+COLLECTIONS IN JSX
+------------------
+
+`map` is a great way to translate collections into JSX:
+
+```
+const foods = ['apple', 'orange', 'banana']
+
+const foodList = (
+  <ul>
+    {foods.map(food => <li>{food}</li>}
+  </ul>
+)
+```
+
+When you make a list in JSX, sometimes you will need to include `key`s. A `key` is a special attribute that
+React relies on to enforce ordering in lists. Not all lists need keys. Generally, you need keys when:
+
+  1. The list items have some state that must persist from one render to another, like whether a todo item was "done".
+  2. The list's order might be shuffled. For example, a list of search results.
+
+It's easy to add `key`s using `map`:
+
+```
+const foodList = foods.map((food, i) => <li key={'food_' + i}>{food}</li>)
+```
 
 EVENT LISTENERS IN JSX
 ----------------------
@@ -148,3 +175,125 @@ let gooseImg = (
     onClick={honk} />
 )
 ```
+
+CONDITIONALS IN JSX
+-------------------
+
+We've noted before that you can't inject conditionals into JSX. There are a few ways to work around this.
+
+1. One way is to place the condional _outside_ the JSX, and choose between two different JSX templates based
+on some conditonal.
+
+2. Use the ternary operator instead! The ternary operator is an expression, so it evaluates just fine in JSX.
+
+```
+let coin = <img src={coinToss() === 'heads' ? 'heads.jpg' : 'tails.jpg'} />
+```
+
+3. Use &&, which is also an expression, to determine whether JSX elements render at all:
+
+```
+const food = (
+  <ul>
+    { !baby && <li>Pizza</li> }
+    { age > 15 && <li>Brussels Sprouts</li> }
+    { age > 20 && <li>Oysters</li> }
+    { age > 25 && <li>Grappa</li> }
+  </ul>
+)
+```
+
+REACT COMPONENTS
+----------------
+
+Components are the bread and butter of React applications. Components typically encapsulate:
+
+  1. Some HTML to be rendered (in the form of JSX),
+  2. Some behavior tied to that HTML (in the form of Javascript functions).
+
+Here's very simple component:
+
+```
+import React from 'react'
+import ReactDOM from 'react-dom'
+
+class MyComponent extends React.Component {
+  get name() {
+    return "John"
+  }
+
+  render() {
+    return <h1>Hello {this.name}!</h1>
+  }
+}
+
+```
+
+`render` is the only function that _must_ be declared in a component.
+
+Once a component is defined, you can create a Component instance...in JSX!
+
+```
+// <MyComponentClass /> is JSX, but instead of rendering HTML, it renders your
+// React Component!
+
+ReactDOM.render(
+  <MyComponentClass />,
+  document.getElementById('app')
+);
+```
+
+Components make it easy to combine behaviors, like event listeners, with the HTML elements they're
+tied to:
+
+```
+import React from 'react'
+import ReactDOM from 'react-dom'
+
+class Button extends React.Component {
+  scream() {
+    alert('AAAAAAAAHHH!!!!!')
+  }
+
+  render() {
+    return <button onClick={this.scream}>AAAAAH!</button>
+  }
+}
+```
+
+NESTING COMPONENTS
+------------------
+
+By itself, a component is not very useful. To build a full-fledged UI, you need to start
+nesting components.
+
+Say you have this component in one file:
+
+```
+import React from 'react'
+
+export class Title extends React.Component {
+  render() {
+    return <h1>Welcome!</h1>
+  }
+}
+
+You can import it and use it in this file:
+
+```
+import React from 'react'
+
+import { Title } from `./NavBar.js'
+
+class Homepage extends React.Component {
+  render() {
+    return (
+      <div>
+        <Title /> // Check it out, we're nesting a component instance here.
+        <p>Hello and welcome to my website.</p>
+      </div>
+    )
+  }
+}
+```
+
