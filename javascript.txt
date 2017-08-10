@@ -187,6 +187,31 @@ const mySquare = new Rectangle(10, 10)
 mySquare.area // 100
 ```
 
+FUNCTIONS
+---------
+
+```
+// Defining a basic function:
+function add(x, y) {
+  return x + y
+}
+
+// Splat arguments ("rest paramater operator"):
+function average(...nums) {
+  return nums.reduce((a, b) => a + b) / nums.length
+}
+
+average(1, 2, 3, 4) // 2.5
+
+// Anonymous functions:
+var add = function(x, y) {
+  return x, y
+}
+
+// "Fat arrow" notation is more succinct, and allows implicit `return`s:
+var add = (x, y) => x + y
+```
+
 
 2. JAVASCRIPT TOOLING
 ----------------------
