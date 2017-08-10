@@ -1,0 +1,150 @@
+REACT
+=====
+
+Also see `javascript.txt` for some notes on React.
+
+React is a library for building user interfaces in Javascript. It is _not_ a complete framework
+for building web applications, it only handles the UI component. In conjunction with other libraries
+like React Router and Redux, you can build complete web applications with React.
+
+JSX
+---
+
+Here's some JSX:
+
+```
+const h1 = <h1>Hello world</h1>
+```
+
+JSX is a "syntax extension" (you can think of it as a DSL) for Javascript. It allows you to write
+Javascript that looks nearly identical to HTML. JSX must be compiled into valid Javascript.
+
+JSX is _nearly_ identical to HTML, and can have element attributes:
+
+```
+let link = <a hrf="https://olmsted.io>My Site</a>
+```
+
+JSX can be nested, and multi-lined. When writing multi-line JSX, it must be inclosed in parens:
+
+```
+let myDiv = (
+  <div>
+    <h1>
+      Hello world
+    </h1>
+  </div>  
+)
+```
+
+NB: a JSX expression must have only _one_ outer element.
+
+```
+let thisIsInvalid = (
+  <p>Hi</p>
+  <p>Hello</p>
+)
+
+let thisIsValid = (
+  <div>
+    <p>Hi</p>
+    <p>Hello</p>
+  </div>
+)
+```
+
+JSX IS REALLY JUST A FUNCTION
+-----------------------------
+
+JSX is syntactic sugar for the React function `createElement`:
+
+```
+<p color="blue" shadowSize={2}>
+  Click Me
+</p>
+
+
+// compiles into
+
+React.createElement(
+  p,
+  {color: 'blue', shadowSize: 2},
+  'Click Me'
+)
+```
+
+JSX GOTCHAS
+-----------
+
+JSX is nearly identical to HTML, but with a few important differences. 
+
+1. The `class` attribute can't be used in JSX because it's a reserved word in Javascript.
+Instead, JSX uses `className`.
+
+2. Self-closing tags like `<br /> and `<img />` _must_ have a final angle bracket (so no `<img>`).
+
+
+REACT DOM
+---------
+
+ReactDOM allows you to actually render JSX within the DOM:
+
+```
+import React from 'react';
+import ReactDOM from 'react-dom';
+
+const hello = <h1>Hello world</h1>
+const targetElement = document.getElementById('app')
+
+ReactDOM.render(hello, targetElement)
+```
+
+One important thing to note is that `ReactDOM.render()` only updates DOM elements that have changed.
+If you call it twice with the same JSX element, it does nothing. This provides an obvious performance
+benefit and relies on React's use of the  _virtual DOM_.
+
+In React, for every DOM object, there's a corresponding object in the virtual DOM. The virtual DOM is a
+lightweight copy of the real DOM. Manipulating the virtual DOM is very cheap, while manipulating the real
+DOM is very expensive.
+
+When you render a JSX element, the entire virtual DOM is updated. As we said before, this is a cheap 
+operation. The virtual DOM is diff'd wit hthe real DOM, and if there is no difference, the real DOM
+is left unchanged.
+
+If there is a difference, the real DOM is updated, _but only the elements that have changed._
+
+JAVASCRIPT IN JSX
+-----------------
+
+JSX is just Javascript at the end of the day, so you can interpolate Javascript expressions inside your JSX.
+This is what JSX a useful templating language. To interpolate code in your JSX, wrap it in curly braces:
+
+```
+let h1 = <h1>{'John' + 'Olmsted'}</h1>
+
+let name = 'John Olmsted'
+let p = <p>{name}</p>
+```
+
+NB: you cannot inject `if` statements into JSX. We will cover how to handle conditionals in JSX in a future
+section.
+
+EVENT LISTENERS IN JSX
+----------------------
+
+Like HTML elements, JSX elements can have event listeners, like the `onClick` attribute.
+
+```
+let goose = 'https://upload.wikimedia.org/wikipedia/commons/e/e4/Canada_goose_flight_cropped_and_NR.jpg'
+
+function honk(e) {
+  e.target.setAttribute('src', 'https://example.com/honking_goose.jpg')
+  console.log('HONK!')
+}
+
+let gooseImg = (
+  <img
+    src={gooseImg}
+    onClick={honk} />
+)
+```
