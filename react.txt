@@ -297,3 +297,183 @@ class Homepage extends React.Component {
 }
 ```
 
+PROPS
+-----
+
+Every component has 'props'. A components props is just an object that holds data relevant to that
+component. props is a property inherited from `React.Component`, so within a component you can access
+it with `this.props`.
+
+When rendering a component, you can pass information into in the form of attributes:
+
+```
+<MyComponent name="John" age={30} pets={["fish", "snail"]} />
+```
+
+Attributes passed into components in this way are included in the `props` object! This props data can 
+then be used in the component:
+
+```
+import React from 'react'
+
+class MyComponent extends React.Component {
+  get pets() {
+    return this.props.pets.map(pet => <li>{pet}</li>)
+  }
+
+  render() {
+    return (
+      <div>
+        <p>Name: {this.props.name}</p>
+        <p>Age: {this.props.age}</p>
+        <p>Pets:</p>
+        <ul>
+          {this.pets}
+        </ul>
+      </div>
+    )
+  }
+}
+```
+
+The most common use of props is to pass information to a nested component from another, parent component.
+
+Note that you can pass any Javascript expression as props, including booleans (for logic in your render
+function), arrays, and even functions. When passing in props other than strings to a component, note that
+they must be wrapped in curly brackets:
+
+```
+<Button onClick={() => alert('HEY!!')} />
+```
+
+NB: By convention, event handlers that are passed in as props are named `on<event>`, like `onClick` or
+`onHover`. The event handler function is named `handle<event`>, like `handleClick`.
+
+
+PROPS.CHILDREN
+--------------
+
+`prop`s has an element called `children.` `props.children` contains all child elements within a component's
+opening and closing tags:
+
+```
+<MyComponent>
+  // child elements may go here!
+</MyComponent>
+```
+This allows you to do things like this:
+
+```
+import React from 'react';
+
+export class List extends React.Component {
+  render() {
+    return (
+      <div>
+        <h1>{this.props.title}</h1>
+        <ul>{this.props.children}</ul>
+      </div>
+    );
+  }
+}
+
+
+// These '<li>' elements will be picked up in props.children!
+<List>
+  <li>Hello</li>
+  <li>Hi</li>
+</List>
+```
+
+DEFAULT PROPS
+-------------
+
+If a component uses props, there's no guarantee attributes will be passed in for those props at
+render time. You can provide default props by creating a `defaultProps` property in your
+component:
+
+```
+import React from 'react';
+
+class Button extends React.Component {
+  render() {
+    return (
+      <button>
+        {this.props.text}
+      </button>
+    );
+  }
+}
+
+Button.defaultProps = {text: 'I am a button'}
+```
+
+STATE
+-----
+
+A React component can access data in two ways: props and state.
+
+Unlike props, a component's state is _not_ passed in from the outside. A component decides its own state.
+
+To give a component state, we must assign a `state` property in the constructor:
+
+```
+import React from 'react'
+
+class Example extends React.Component {
+  // Note that since we're overriding the React.Component constructor, we must also manually
+  // assign the 'props' dependency:
+  constructor(props) {
+    super(props);
+    this.state = { name: 'John' }
+  }
+
+  render() {
+    return <div></div>
+  }
+}
+```
+
+`this.setState(state)` is used to update a component's state, where the argument `state` is an object with the
+updated state. Note that is updates based on a diff between the current state and the new state (it "merges").
+Omitted properties are unchanged, and updated properties are updated.
+
+Here's an example how you can make use of `setState`:
+
+```
+import React from 'react'
+
+const green = '#39D1B4'
+const yellow = '#FFD712'
+
+class Toggle extends React.Component {
+  constructor(props) {
+    super(props)
+    this.state = { color: green }
+    // NB: you must bind changeColor to this. For an event listener
+    // to use `this` in its function body, it must be bound to `this`.
+    this.changeColor = this.changeColor.bind(this)
+  }
+  
+  changeColor() {
+    const newColor = this.state.color === green ? yellow : green
+    this.setState({ color: newColor })
+  }
+  
+  render() {
+    return (
+      <div style={{background: this.state.color}}>
+        <h1>
+          Change my color
+        </h1>
+        <button onClick={this.changeColor}>
+          Change color
+        </button>
+      </div>
+    );
+  }
+}
+```
+
+Any time you call `setState`, React automatically calls `render` again, rendering the component with the updated state!
+
