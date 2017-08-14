@@ -477,3 +477,155 @@ class Toggle extends React.Component {
 
 Any time you call `setState`, React automatically calls `render` again, rendering the component with the updated state!
 
+PROPS VS. STATE
+---------------
+
+When should you use `state`, and when should you use `props`?
+
+Generally speaking, you should favor props over state. Props lend themselves well to a declarative style, and limit the amount
+of side-effecting logic that components have. Props are also only set at render time – you should never update props _within_ a
+component. If you find yourself needing to update some attribute of a Component, that's a sign you should be using `state`.
+
+A common design pattern in React is to have a "stateless" child component nested within a "stateful" parent component. The parent
+passes its updated `state` down to the child component in the form of prop attributes. A good rule of thumb to follow is:
+
+  1. A React component should use `props` to store data that can only be changed by _another_ component.
+
+  2. A React component should use `state` to store data that the component itself can change.
+
+STATE BETWEEN COMPONENTS
+------------------------
+
+Another common design pattern is have a stateless child component update a parent's state via an event handler function passed
+down from the parent:
+
+```
+import React from 'react'
+
+class Parent extends React.Component {
+  constructor(props) {
+    super(props)
+    this.state = { title: 'NEAT' }
+    this.changeTitle = this.changeTitle.bind(this)
+  }
+  
+  changeTitle(title) {
+    this.setState({ title: newTitle })
+  }
+  
+  render() {
+    return <Child title={this.state.title} handleChange={this.changeTitle}/>
+  }
+}
+```
+
+```
+import React from 'react'
+
+class Child extends React.Component {
+  constructor(props {
+    super(props)
+    this.handleKeyPress = this.handleKeyPress.bind(this)
+  }
+
+  onChange(e) {
+    this.props.handleChange(e.target.value)
+  }
+
+  render() {
+    return (
+      <div>
+        <h1>{this.props.title}</h1>
+        <form>
+         Title: <input type="text" name="title" onChange={this.onChange}>
+        </form>
+      </div>
+    )
+  }
+}
+```
+
+STATELESS FUNCTIONAL COMPONENTS
+-------------------------------
+
+React Components should be small, and it's a good design pattern to separate presentation from the logic behind that presentation.
+A common pattern is to create "presentation" components, which only define a `render` function, within "container" components, which
+define some logic for updating the presentation component's state.
+
+If you have a simple presentation component that only defines a `render` function, you can further simplify it by converting it to a
+function. This is known as a 'stateless functional component`:
+
+```
+// A component class written in the usual way:
+export class class MyComponentClass extends React.Component {
+  render() {
+    return <h1>Hello {this.props.name}</h1>;
+  }
+}
+
+// The same component class, written as a stateless functional component:
+export const MyComponentClass = (props) => {
+  return <h1>Hello {props.name}</h1>;
+}
+```
+
+Stateless functional components can be rendered the same way as normal components.
+
+PROP TYPES
+----------
+
+Prop types allow you to enforce basic type validation for your component's props.
+
+```
+import React from 'react';
+
+export class MessageDisplayer extends React.Component {
+  render() {
+    return <h1>{this.props.message}</h1>;
+  }
+}
+
+// This propTypes object should have
+// one property for each expected prop:
+MessageDisplayer.propTypes = {
+  message: React.PropTypes.string.isRequired // 'isRequired' may be omitted if a prop is optional.
+};
+```
+
+The possible types you can check for include:
+
+```
+React.PropTypes.string
+React.PropTypes.object
+React.PropTypes.bool
+React.PropTypes.number
+React.PropTypes.func
+React.PropTypes.array
+```
+
+LIFECYCLE METHODS
+-----------------
+
+Lifecycle methods are methods that get called at a certain point in time in a component's lifecycle. For example, you might
+want to call a method right before a component renders, or right after it renders.
+
+1. Mounting lifecycle methods – these are called when the component is rendered for the first time. They are called in the 
+   following order:
+
+   `componentWillMount` – called before component is rendered for the first time.
+   `render`
+   `componentDidMount` – called after component is rendered for the first time. Often used as a connecting point for some API.
+
+2. Updating lifecyle methods – these are called everytime the component renders _after_ the first render. They are called
+   in the following order:
+
+   `componentWillReceiveProps(nextProps)` – only called if component receives props.
+   `shouldComponentUpdate(nextProps, nextState)` – determines whether the component should update or not. Should be a predicate.
+   `componentWillUpdate(nextProps, nextState)` – called before component is rendered.
+   `render`
+   `componentDidUpdate(prevProps, prevState)` – called after component is rendered.
+
+3. Unmounting lifecycle methods – these are called when a component is removed from DOM, or if the DOM is closed. There is only one: 
+
+   `componentWillUnmount`
+
