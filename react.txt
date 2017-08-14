@@ -25,7 +25,7 @@ JSX is _nearly_ identical to HTML, and can have element attributes:
 let link = <a hrf="https://olmsted.io>My Site</a>
 ```
 
-JSX can be nested, and multi-lined. When writing multi-line JSX, it must be inclosed in parens:
+JSX can be nested, and multi-lined. When writing multi-line JSX, it must be enclosed in parens:
 
 ```
 let myDiv = (
