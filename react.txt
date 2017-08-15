@@ -1,7 +1,11 @@
 REACT
 =====
 
-Also see `javascript.txt` for some notes on React.
+Also see:
+
+  * `javascript.txt`
+  * `react-router.txt`
+  * `redux.txt`
 
 React is a library for building user interfaces in Javascript. It is _not_ a complete framework
 for building web applications, it only handles the UI component. In conjunction with other libraries
