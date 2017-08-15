@@ -334,3 +334,80 @@ ReactDOM.render(
 )
 ```
 
+ASYNC ACTIONS
+-------------
+
+So far all our actions have all been synchronous – what about asynchronous actions, like a network call?
+
+For async actions, you need to define actions for each step in the lifecycle of the action. In the example
+of a network call, we probably want actions for when the request is first sent, when it fails, and when
+it succeeds.
+
+ASYNC ACTION CREATORS
+---------------------
+
+Next, we define action creators that make network requests. To accomplish this asynchronously, instead of 
+writing action creators that return actions, we write action creators that _return functions that return
+actions_!
+
+This relies on using the React Thunk middleware (covered in detail below).
+
+```
+import fetch from 'isomorphic-fetch'
+
+// Synchronous "request posts"
+export const REQUEST_POSTS = 'REQUEST_POSTS'
+function requestPosts(subreddit) {
+  return {
+    type: REQUEST_POSTS,
+    subreddit
+  }
+}
+
+// Synchronous "receive posts"
+export const RECEIVE_POSTS = 'RECEIVE_POSTS'
+function receivePosts(subreddit, json) {
+  return {
+    type: RECEIVE_POSTS,
+    subreddit,
+    posts: json.data.children.map(child => child.data),
+    receivedAt: Date.now()
+  }
+}
+
+// Asynchrnous "fetch posts"!
+export function fetchPosts(subreddit) {
+  return function (dispatch) {
+    // Signal that we're sending a request:
+    dispatch(requestPosts(subreddit)
+
+    // We're using the 'fetch' library to send requests:
+    return fetch(`https://www.reddit.com/r/${subreddit}.json`)
+      .then(
+        response => response.json()
+        error => console.log('Aw snap!'
+      )
+      .then(json =>
+        // Signal that we received the results!
+        dispatch(receivePosts(subreddit, json)
+      )
+  }
+}
+```
+
+This relies on using the React Thunk middleware (install `redux-thunk`):
+
+```
+import thunkMiddleware from 'redux-thunk'
+import { createStore, applyMiddleware } from 'redux'
+import { selectSubreddit, fetchPosts } from './actions'
+import rootReducer from './reducers'
+
+const store = createStore(
+  rootReducer,
+  applyMiddleware(
+    thunkMiddleware, // lets us dispatch() functions
+  )
+)
+```
+
