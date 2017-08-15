@@ -1,0 +1,180 @@
+REACT ROUTER
+============
+
+React Router allows you to build single-page React applications that are navigable
+using URLs and the forward/backwards button in your browser.
+
+Resources:
+
+  * https://github.com/ReactTraining/react-router
+  * https://medium.com/@pshrmn/a-simple-react-router-v4-tutorial-7f23ff27adf
+  * Also see `react.txt`
+
+NB: These notes are for v4 of React Router, which differs significantly from older
+versions.
+
+INSTALLATION
+------------
+
+Assuming you're developing for the web, you only need one package, `react-router-dom`.
+This also installs the `react-router` dependency (which you generally shouldn't install
+ directly).
+
+THE ROUTER
+----------
+
+You have two choices for what type of Router to use, `<BrowserRouter>` or `<HashRouter`>:
+
+  1. `<BrowserRouter>` should be used when you have a server that can handle dynamic requests
+     (any possible URI).
+
+  2. `<HashRouter`> should be used when with static websites that can only respect to requests
+     for files it knows about.
+
+90% of the time, you're going to use `<BrowserRouter>`.
+
+HISTORY
+-------
+
+Each router creates a `history` object which is used to keep track of navigation history in your
+application. A React component _must_ be nested within a router for the history to work. In other
+words, your entire application should be nested within a router:
+
+```
+import { BrowserRouter } from 'react-router-dom'
+
+ReactDOM.render((
+  <BrowserRouter>
+    <App />        // Root component of your application
+  </BrowserRouter>
+), document.getElementById('root'))
+```
+
+EXAMPLE APPLICATION
+-------------------
+
+Say we define `App` as the following component:
+
+```
+const App = () => (
+  <div>
+    <Header />
+    <Main />
+  </div>
+)
+```
+
+`Header` will contain links to navigate our application, while `Main` is where the rest of the content will
+be rendered.
+
+Let's walk through how our application works.
+
+ROUTES
+------
+
+The `<Route>` component is the main building block of React router. Anywhere you want to render something if it
+matches a certain URI, you create a `Route` element.
+
+A `Route` expects a `path` prop string equal to the URI that the route should match, for example:
+
+```
+// This will match '/puppies' or '/puppies/foo'.
+<Route path='/puppies' />
+
+// Since we've also provided the `exact` prop, this will _only_ match '/puppies'.
+<Route exact path='/puppies' />
+```
+
+SWITCHING BETWEEN ROUTES
+------------------------
+
+By nesting `Routes` within a `Switch` and providing `component` props to each `Route`, you can switch between
+different components depending on the current URI. Here's an example:
+
+```
+<Switch>
+  <Route exact path='/' component={Home} />
+  <Route path='/puppies' component={Puppies} />
+</Switch>
+```
+
+When we navigate to 'Puppies', the `Puppies` component is rendered.
+
+An element rendered by a `Route` is passed a number of props needed for the Router to work properly: the `match` object,
+current `location` object, and of course the `history` object.
+
+Per our application design, we just drop this switch into where we intend the components to render, inside our `Main`
+component:
+
+```
+import { Switch, Route } from 'react-router-dom'
+
+const Main = () => (
+  <main>
+    <Switch>
+      <Route exact path='/' component={Home} />
+      <Route exact path='/puppies' component={Puppies} />
+    </Switch>
+  </main>
+)
+```
+
+NESTED ROUTES & PATH PARAMS
+---------------------------
+
+It makes sense to groupe routes that share a common prefix in the same component:
+
+```
+const Puppies = () => (
+  <Switch>
+   <Route exact path='/puppies' component={AllPuppies} />
+   <Route path='/puppies/:id' component={Puppy} />
+  </Switch>
+)
+```
+
+`:id` is a path parameter. It is available to the `Puppy` component in `match.params.id`:
+
+```
+class Puppy extends React.Component {
+  getPuppy(id) {
+    return PuppyAPI.get(id)
+  }
+
+  render() {
+    const pupper = this.getPuppy(match.params.id)
+    
+    return (
+      <div>
+        <h1>{pupper.name}</h1>
+        <img src={pupper.src}/>
+      </div>
+    )
+  }
+} 
+```
+
+LINKS
+-----
+
+The final piece of the puzzle are `<Link>` components, which allow you to navigate between pages.
+When clicking a `Link`, the URL is updated and rendered content updated _without reloading the whole
+page_.
+
+
+```
+import { Link } from 'react-router-dom'
+const Header = () => (
+  <header>
+    <nav>
+      <ul>
+        <li><Link to='/'>Home</Link></li>
+        <li><Link to='/puppies'>Puppies</Link></li>
+      </ul>
+    </nav>
+  </header>
+)
+```
+
+`Link`s use the `to` prop to point to a path that they navigate to.
+
