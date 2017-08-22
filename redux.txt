@@ -31,7 +31,8 @@ simple todo app might look like this:
   todos: [{
     text: 'Eat food',
     completed: true
-  }, {
+  }, 
+  {
     text: 'Exercise',
     completed: false
   }],
@@ -39,7 +40,7 @@ simple todo app might look like this:
 }
 ```
 
-2. The change something in our store, we need to dispatch an `action`. An `action` is also a plain Javascript
+2. To change something in our store, we need to dispatch an `action`. An `action` is also a plain Javascript
 object:
 
 ```
@@ -97,7 +98,7 @@ const ADD_TODO = 'ADD_TODO'
 }
 ```
 
-Actions must have a `type` property to identify it, and each type is typicall defined in string
+Actions must have a `type` property to identify it, and each type is typically defined in string
 constants.
 
 Other than `type`, the structure of the action object is entirely up to you and the needs of your
@@ -200,7 +201,7 @@ As noted before, the store is the single unified state of your application. It h
   1. Allows access to state via `getState()`
   2. Allows state to be updated via `dispatch(action)`
   3. Registers listeners via `subscribe(listener)`
-  4. Handles unregistering of listeners via the function returned by `subscribe(listener)`
+  4. Handles unregistering of listeners via the function returned by `unsubscribe(listener)`
 
 You create your store by passing your root reducer to `createStore`:
 
@@ -375,7 +376,7 @@ function receivePosts(subreddit, json) {
   }
 }
 
-// Asynchrnous "fetch posts"!
+// Asynchronous "fetch posts"!
 export function fetchPosts(subreddit) {
   return function (dispatch) {
     // Signal that we're sending a request:
@@ -385,7 +386,7 @@ export function fetchPosts(subreddit) {
     return fetch(`https://www.reddit.com/r/${subreddit}.json`)
       .then(
         response => response.json()
-        error => console.log('Aw snap!'
+        error => console.log('Aw snap!)'
       )
       .then(json =>
         // Signal that we received the results!
