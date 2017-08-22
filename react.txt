@@ -26,7 +26,7 @@ Javascript that looks nearly identical to HTML. JSX must be compiled into valid 
 JSX is _nearly_ identical to HTML, and can have element attributes:
 
 ```
-let link = <a hrf="https://olmsted.io>My Site</a>
+let link = <a href="https://olmsted.io>My Site</a>
 ```
 
 JSX can be nested, and multi-lined. When writing multi-line JSX, it must be enclosed in parens:
@@ -112,7 +112,7 @@ lightweight copy of the real DOM. Manipulating the virtual DOM is very cheap, wh
 DOM is very expensive.
 
 When you render a JSX element, the entire virtual DOM is updated. As we said before, this is a cheap 
-operation. The virtual DOM is diff'd wit hthe real DOM, and if there is no difference, the real DOM
+operation. The virtual DOM is diff'd with the real DOM, and if there is no difference, the real DOM
 is left unchanged.
 
 If there is a difference, the real DOM is updated, _but only the elements that have changed._
@@ -121,7 +121,7 @@ JAVASCRIPT IN JSX
 -----------------
 
 JSX is just Javascript at the end of the day, so you can interpolate Javascript expressions inside your JSX.
-This is what JSX a useful templating language. To interpolate code in your JSX, wrap it in curly braces:
+This is what makes JSX a useful templating language. To interpolate code in your JSX, wrap it in curly braces:
 
 ```
 let h1 = <h1>{'John' + 'Olmsted'}</h1>
@@ -304,7 +304,7 @@ class Homepage extends React.Component {
 PROPS
 -----
 
-Every component has 'props'. A components props is just an object that holds data relevant to that
+Every component has 'props'. A component's props is just an object that holds data relevant to that
 component. props is a property inherited from `React.Component`, so within a component you can access
 it with `this.props`.
 
@@ -357,7 +357,7 @@ NB: By convention, event handlers that are passed in as props are named `on<even
 PROPS.CHILDREN
 --------------
 
-`prop`s has an element called `children.` `props.children` contains all child elements within a component's
+`prop`s has an element called `children`. `props.children` contains all child elements within a component's
 opening and closing tags:
 
 ```
@@ -428,7 +428,7 @@ class Example extends React.Component {
   // Note that since we're overriding the React.Component constructor, we must also manually
   // assign the 'props' dependency:
   constructor(props) {
-    super(props);
+    super(props)
     this.state = { name: 'John' }
   }
 
@@ -578,7 +578,7 @@ Stateless functional components can be rendered the same way as normal component
 PROP TYPES
 ----------
 
-Prop types allow you to enforce basic type validation for your component's props.
+Prop types allow you to enforce basic type checks for your component's props.
 
 ```
 import React from 'react';
@@ -605,6 +605,10 @@ React.PropTypes.bool
 React.PropTypes.number
 React.PropTypes.func
 React.PropTypes.array
+React.PropTypes.shape({
+  name: React.PropTypes.string,
+  age: React.PropTypes.number
+})
 ```
 
 LIFECYCLE METHODS
