@@ -122,13 +122,13 @@ const Main = () => (
 NESTED ROUTES & PATH PARAMS
 ---------------------------
 
-It makes sense to groupe routes that share a common prefix in the same component:
+It makes sense to group routes that share a common prefix in the same component:
 
 ```
 const Puppies = () => (
   <Switch>
-   <Route exact path='/puppies' component={AllPuppies} />
-   <Route path='/puppies/:id' component={Puppy} />
+    <Route exact path='/puppies' component={AllPuppies} />
+    <Route path='/puppies/:id' component={Puppy} />
   </Switch>
 )
 ```
