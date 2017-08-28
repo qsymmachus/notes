@@ -1,0 +1,72 @@
+KUBERNETES
+==========
+
+Kubernetes is a system for orchestrating the deployment, scaling, and management of containerized
+applications. See `docker.txt` for more info on containerized applications generally.
+
+You can think of Kubernetes as an additional layer of abstraction over your production infrastructure.
+It provides a consistent interface for managing your deployed applications, and automates many common
+tasks, most importantly automated service scaling.
+
+CLUSTERS
+--------
+
+Kubernetes orchestrates a cluster of computers that are connected to work as a single unit, called a 
+_cluster_.
+
+The cluster allows you to deploy containerized applications without typing them to specific individual 
+machines.
+
+A cluster has two parts:
+
+  1. The Master coordinates the cluster. 
+    * It is in charge of scheduling, scaling, and updating applications.
+    * Clients can manage the cluster by communicating with the master using the Kubernetes API.
+
+  2. Nodes are the workers that run applications. 
+    * It is a VM or physical computer that serves as a worker machine in the cluster.
+    * Each node communicates with the master using the Kubernetes API.
+      * `kubelet` is the agent that communicates with the master.
+
+KUBECTL
+-------
+
+`kubectl` is a CLI-based client for interacting with the Kubernetes API.
+
+Get information about the cluster:
+
+```
+kubectl cluster-info
+```
+
+Get a list of all nodes that can host applications:
+
+```
+kubectl get nodes
+```
+
+DEPLOYMENTS
+-----------
+
+Once you have a running Kubernetes cluster, you can deploy containerized applications within it.
+To do this, you need to create a Deployment configuration. 
+
+The deployment config not only tells Kubernetes how to deploy the applications, but also how to 
+continously manage them. Kubernetes clusters are "self-healing" – if an instance goes down or is 
+deleted, the deployment controller replaces it.
+
+To create a new deployment of a particular application:
+
+```
+kubectl run <name for your deployment> --image=<docker image> --port=<port>
+```
+
+Once you start a deployment, a few things happen:
+
+  1. A suitable node is found where an instance of the application can be run,
+  2. The application instance is scheduled to run on that node,
+  3. The cluster is configured to reschedule the instance when needed.
+
+To check the state of your deployments:
+
+
