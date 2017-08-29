@@ -69,4 +69,135 @@ Once you start a deployment, a few things happen:
 
 To check the state of your deployments:
 
+```
+kubectl get deployments
+```
+
+By default deployment applications are only visible _within_ the cluster. To view your application
+without exposing it publicly, you can create a route between your terminal and the cluster with a proxy:
+
+```
+kubectl proxy
+```
+
+This exposing a temporary proxy to the cluster. To you hit applications within the cluster with the following
+URI:
+
+```
+http://localhost:8001/api/v1/proxy/namespaces/default/pods/<POD NAME>
+```
+
+"Pod Name" is the name of the running application, you can you find out the name of your applications with:
+
+```
+kubectl get pods
+```
+
+PODS AND NODES
+--------------
+
+As we touched on briefly in the last section, Kubernetes creates a _Pod_ to host your application instance.
+A pod is an abstraction that represents
+
+  1. A group of one or more containers running an application, or a group of closely related applications,
+  2. Shared networking configuration, 
+  3. Configuration on how to run each container, like image version.
+
+A pod in turn runs on a _node_, which we've already covered. A node is an abstraction representing an actual
+machine the pod is running on (either a real machine or a virtual one).
+
+To see a list of pods: 
+
+```
+kubectl get pods
+```
+
+To get even more detail about pods: 
+
+```
+kubectl describe pods
+```
+
+To see container logs:
+
+```
+kubectl logs <pod name>
+```
+
+To execute a command on a running container:
+
+```
+kubectl exec <pod name> <command>
+
+# e.g. Run a bash shell within container:
+
+kubectl ctl exec -ti <pod name> bash
+```
+
+SERVICES
+--------
+
+A Kubernetes _Service_ is an abstraction which defines a logical set of pods and a policy by which to access them. 
+Services enable a loose coupling between dependent pods. Note that while pods are isolated to a particular node,
+services _span across multiple nodes_. They serve as an abstraction over the particular hardware applications are
+running on. Services are the abstraction that allow powds to die and replicated across different nodes without 
+affecting the behavior of your overall application.
+
+A service is defined using a config file (usually YAML).
+
+In the "Deployments" section above, we noted that running applications are not exposed outside the cluster by default.
+_Services_ are what expose running applications (running within pods) to the outside world. You may choose different
+ways that a services are exposed by specifiying a `type`:
+
+  * `ClusterIP` (default) – exposes the service on an IP internal to the cluster. It can't be reached outside the cluster.
+  * `NodePort` – exposes the service on a specified port on each node. Makes service accessible outside the cluster.
+  * `LoadBalancer` – creates an external load balancer and assigns a fixed IP to it. Makes service accessible outside the cluster.
+  * `ExternalName` – exposes the service using an name by returning a CNAME record. makes service accessible outside the cluster.
+
+To see a list of running services:
+
+```
+kubectl get services
+```
+
+To create a new service that is exposed to external traffic:
+
+```
+kubectl expose <service name> --type="NodePort" --port 8080
+```
+
+Note that `8080` is the application port you want to expose, the actual _external_ port that is exposed is chose randomly. To get
+that information, you can run:
+
+```
+kubectl describe <service name>
+```
+
+To delete an existing service:
+
+```
+kubectl delete service -l <label to identify service>
+```
+
+LABELS
+------
+
+Labels can be added to pods or services to make them easier to track and identify. A label is just a key-value pair you may assign
+to a pod or service:
+
+```
+kubectl label pod <pod name> <key>=<value>
+```
+
+The key-value pair is the label. For example:
+
+```
+kubectl label pod <pod name> version=v1
+```
+
+Filter pods with a particular label:
+
+```
+kublectl get pods -l <key>=<value>
+```
 
