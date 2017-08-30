@@ -163,11 +163,11 @@ kubectl get services
 To create a new service that is exposed to external traffic:
 
 ```
-kubectl expose <service name> --type="NodePort" --port 8080
+kubectl expose deployments/<service name> --type="NodePort" --port 8080
 ```
 
 Note that `8080` is the application port you want to expose, the actual _external_ port that is exposed is chose randomly. To get
-that information, you can run:
+that information ("NodePort"), you can run:
 
 ```
 kubectl describe <service name>
@@ -199,5 +199,49 @@ Filter pods with a particular label:
 
 ```
 kublectl get pods -l <key>=<value>
+```
+
+SCALING YOUR APPLICATIONS
+-------------------------
+
+You can use Kubernetes to either manually or automatically scale your applications. Kubernetes accomplishes this by creating
+and scheduling new pods to nodes with available resources.
+
+Kubernetes services have an integrated load-balancer that distributes traffic between all the pods.
+
+To see a list of your deployments and their current size:
+
+```
+kubernetes get deployments
+```
+
+To scale up a deployment to say, 4 instances:
+
+```
+kubectl scale deployments/<name> --replicas=4
+```
+
+UPDATING YOUR APPLICATIONS
+--------------------------
+
+Kubernetes allows you to make rolling updates so pods are each deployed in turn without any overall downtime.
+Updates are version and any deployment update can be reverted to the previous version (neat!).
+
+To update the docker image used by a particular application deployment:
+
+```
+kubectl set image deployments/<name> <name>=<image name>
+```
+
+To get the status of a rollout: 
+
+```
+kubectl rollout status deployments/<name>
+```
+
+To revert a rollout to its previous state:
+
+```
+kubectl rollout undo deployments/<name>
 ```
 
