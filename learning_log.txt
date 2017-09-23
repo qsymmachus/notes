@@ -2173,3 +2173,13 @@ WEEK OF 8/6/17
   `@x`  play back the macro
   `5@x` play back the macro five times!
 
+
+WEEK OF 9/17/17
+– `seq` is a pretty cool CLI tool for generating sequences of numbers:
+
+  seq 100 # generates 1-100
+
+  seq 3 1 # generates 3 2 1
+
+  seq 25 50 # generates 25-25
+
