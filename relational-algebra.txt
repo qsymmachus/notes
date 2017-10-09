@@ -1,0 +1,73 @@
+RELATIONAL ALGEBRA
+==================
+
+Relational algebra is an algebra whose
+
+  * Operands are relations or variables that represent relations.
+  * Operators are designed to do common queries performed on a database.
+
+In other words, it's the math behind SQL.
+
+There are five main operators in relational algebra:
+
+   1. Selection (picking certain rows)
+   2. Project (picking certain columns)
+   3. Products, also known as joins (for combining relations)
+   4. Set Union, intersection, and difference (for comparing relations with the same schema)
+
+SELECTION (PICKING ROWS)
+------------------------
+
+R1 := σc(R2)
+
+ * `c` is a condition that refers to attributes of `R2`.
+ * `R1` is all tuples (rows) of `R2` that satisfy `c`.
+
+For example: 
+
+Sales:
+
+bar   | beer   | price
+----------------------
+Joe’s | Bud    | 2.50
+Joe’s | Miller | 2.75
+Sue’s | Bud    | 2.50
+Sue’s | Miller | 3.00
+
+JoeMenu := σ(bar="Joe's")(Sales):
+
+bar   | beer   | price
+----------------------
+Joe’s | Bud    | 2.50
+Joe’s | Miller | 2.75
+
+PROJECTION (PICKING COLUMNS)
+----------------------------
+
+R1 := πL(R2)
+
+  * `L` is a list of attributes from the schema of `R2`.
+  * `R1` is contructed by extracting `L` attributes from each tuple of `R2`, and creating from
+    those extracted attributes a tuple for `R1`.
+
+For example:
+
+Sales:
+
+bar   | beer   | price
+----------------------
+Joe’s | Bud    | 2.50
+Joe’s | Miller | 2.75
+Sue’s | Bud    | 2.50
+Sue’s | Miller | 3.00
+
+Prices := π(bar, bar)(Sales)
+
+bar   | beer   
+---------------
+Joe’s | Bud    
+Joe’s | Miller 
+Sue’s | Bud    
+Sue’s | Miller 
+
+
