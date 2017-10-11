@@ -1,5 +1,5 @@
-WHAT DID I LEARN AT DEV BOOTCAMP?
-
+LEARNING LOG
+============
 
 -----WEEK 1-----
 
@@ -2182,4 +2182,67 @@ WEEK OF 9/17/17
   seq 3 1 # generates 3 2 1
 
   seq 25 50 # generates 25-25
+
+
+WEEK OF 10/8/17
+– Event-driven architecture – you can think of EDA as an extension of one of the important ideas of Object
+  Oriented Programming: components should be highly cohesive within themselves, but loosely coupled between
+  eachother, communicating via well-defined messages. In systems architecture, we extend this idea to the
+  service level. Services are highly cohesive, but loosely coupled, communicated via well-defined events.
+
+    EDA Use Cases:
+
+      1. Decouple components
+        * When component A needs to trigger some behavior in component B, instead of calling it directly,
+          it dispatches an event to an event dispatcher. 
+        * This decouples the two components – A does not need to have any knowledge of B to do its job.
+        * New behaviors can be easily added or removed by adding or removing downstream components.
+
+      2. To perform async tasks
+        * Tasks that can be performed asynchronously lend themselves well to EDA.
+        * Rather than use a blocking request-response cycle, async tasks can be dispatched by events.
+
+      3. Keeping track of state change
+        * Traditionally when we change data in some persistence layer, we just update it in place.
+        * Sometimes however we want to be able to keep a record of these changes (an audit log).
+        * Event-driven state changes allow you to build a timeline of state changes.
+        * State change can be rolled back or replayed using this event log.
+
+     EDA Patterns:
+
+       This is discussed in greater detail in Martin Fowler's article:
+       https://martinfowler.com/articles/201701-event-driven.html
+       
+       1. Event Notification
+         * This is the most typical case and was discussed in the 'decouple components' section above.
+         * Events are dispatched by some component A to trigger behavior in components B, C, and D.
+         * Pros:
+           * Greater resilience. Dispatched messages can be queued and retrieved in the event of an error.
+           * Reduced latency since theres no need for blocking requests.
+           * Teams can develop their components independently.
+         * Disadvantages
+           * Can be difficult to trace an event through the entire system. Behavior is 'emergent'.
+       
+       2. Event-Carried State Transfer
+         * State changes can be dispatched to the entire ecosystem, and components that care about that state
+           can store it locally.
+         * State changes are captured proactively, rather than retrieved in a request-response cycle.
+         * Pros:
+           * Same as the general EDA advantages: greater resilience, reduced latency.
+           * State is distributed rather than stored in a single source, reducing load on that source.
+         * Cons:
+           * Several copies of the same data are maintained by multiple components.
+           * There is a risk of data-drift – components may have slightly different stored states.
+
+        3. Event Sourcing
+          * Sometimes we don't want to just tracking the _current_ state of some resource, but also maintain
+            a history (a 'transaction' or 'audit' log) of its state changes. This can be accomplished if we
+            use event-driven state changes and maintain a log of these events.
+          * In this pattern, the event store becomes the sole source of truth about the state of that resource.
+          * State changes can be replayed or rolled back as needed.
+          * Pros:
+            * It allows you to reconstruct and rollback states, and even experiment with alternate timelines.
+            * State is a pure function of the event store.
+          * Cons:
+            * When replaying the event store, what if slightly different logic needs to be applied at different times?
 
