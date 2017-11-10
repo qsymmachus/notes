@@ -2246,3 +2246,26 @@ WEEK OF 10/8/17
           * Cons:
             * When replaying the event store, what if slightly different logic needs to be applied at different times?
 
+WEEK OF 11/5/17
+– Good article on common patterns in React applications: http://lucasmreis.github.io/blog/simple-react-patterns/
+
+  1. Mixed Pattern – view logic and logic for managing state are mixed in the same component.
+    * State is managed internally using `this.state`
+    * Generally seen as an anti-pattern in all but the simplest applications.
+    * Pros: everything you need is contained in one component.
+    * Cons: View and state logic are tightly coupled.
+
+  2. Container/View Pattern – 'view' logic is in one component, and state logic is in a container component.
+    * State is managed by the container passing it down to the view component using props.
+    * This is probably the most common pattern.
+    * Pros: View and state logic are now loosely coupled.
+    * Cons: To fully understand what's going on, you need to look at two components.
+
+  3. Higher Order Components – functions that take a view component as a parameter, and pass state to it.
+    * A more abstract version of the Container/View pattern.
+    * Instead of a 'container' component managing state, you have a _function_ that takes a component as an argument,
+      and passes state to that component in the form of props.
+    * Pros: View and state logic are loosely coupled, and HOCs are generally more reusable.
+    * Cons: HOC is highly reusable, so you might be duplicating effort (for example, by making the same API call multiple times).
+
+  
