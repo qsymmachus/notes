@@ -140,7 +140,7 @@ SERVICES
 A Kubernetes _Service_ is an abstraction which defines a logical set of pods and a policy by which to access them. 
 Services enable a loose coupling between dependent pods. Note that while pods are isolated to a particular node,
 services _span across multiple nodes_. They serve as an abstraction over the particular hardware applications are
-running on. Services are the abstraction that allow powds to die and replicated across different nodes without 
+running on. Services are the abstraction that allow pods to die and be replicated across different nodes without 
 affecting the behavior of your overall application.
 
 A service is defined using a config file (usually YAML).
@@ -212,7 +212,7 @@ Kubernetes services have an integrated load-balancer that distributes traffic be
 To see a list of your deployments and their current size:
 
 ```
-kubernetes get deployments
+kubectl get deployments
 ```
 
 To scale up a deployment to say, 4 instances:
