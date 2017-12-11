@@ -2272,3 +2272,7 @@ WEEK OF 11/5/17
 WEEK OF 11/12/17
 – Great overview of Javascript and its runtime: http://dmitrysoshnikov.com/ecmascript/javascript-the-core-2nd-edition/
 
+
+WEEK OF 12/10/17
+- This is a _super_ useful general CS resource: https://github.com/jwasham/coding-interview-university
+
