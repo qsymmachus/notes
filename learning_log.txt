@@ -2274,5 +2274,6 @@ WEEK OF 11/12/17
 
 
 WEEK OF 12/10/17
-- This is a _super_ useful general CS resource: https://github.com/jwasham/coding-interview-university
+– This is a _super_ useful general CS resource: https://github.com/jwasham/coding-interview-university
+– This is also a great CS resource: https://teachyourselfcs.com/
 
