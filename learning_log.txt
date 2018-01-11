@@ -2277,3 +2277,22 @@ WEEK OF 12/10/17
 – This is a _super_ useful general CS resource: https://github.com/jwasham/coding-interview-university
 – This is also a great CS resource: https://teachyourselfcs.com/
 
+
+WEEK OF 1/7/18
+– By default, `|` pipes the stdout of the previous command to the stdin of the next command. But what if you need to use that stdout for something else, like as the argument of the next command? `xargs` is what you need!
+
+Say you want to run `docker exec` on a particular container. You can get the container's ID with this command:
+
+```
+docker ps -aqf "name=my-container"
+```
+
+But how do we pass that container ID to the `docker exec` command? Like this:
+
+```
+docker ps -aqf "name=my-container" | xargs -o -I ID docker exec -it ID /bin/bash
+```
+
+`xargs -I FOO` takes the stdout of the previous command, and maps it to `FOO`. 
+Then you can put `FOO` wherever it needs to go in the next command.
+
