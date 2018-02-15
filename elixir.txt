@@ -103,7 +103,7 @@ KEYWORD LISTS
 -------------
 
 This is the first type of associative collection in Elixir. It's actually just a 
-list of tuples, where the firstelement in each tuple is an atom, and the second 
+list of tuples, where the first element in each tuple is an atom, and the second 
 element is its value.
 
 ```
@@ -301,33 +301,6 @@ sum.(2, 3)  # 5
 2. Pattern matching functions:
 
 ```
-greeter = fn
-  "Hi!" -> "Hello!"
-  "Salut!" -> "Bonjour!"
-  _ -> "No hablo!"
-end
-
-greeter.("Guten Tag!")  # "No hablo!"
-```
-
-greeter = fn
-  "Hi!" -> "Hello!"
-  "Salut!" -> "Bonjour!"
-  _ -> "No hablo!"
-end
-
-greeter.("Guten Tag!")  # "No hablo!"
-```
-
-greeter = fn
-  "Hi!" -> "Hello!"
-  "Salut!" -> "Bonjour!"
-  _ -> "No hablo!"
-end
-
-greeter.("Guten Tag!")  # "No hablo!"
-```
-
 greeter = fn
   "Hi!" -> "Hello!"
   "Salut!" -> "Bonjour!"
