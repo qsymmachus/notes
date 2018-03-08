@@ -9,7 +9,7 @@ Apache Kafka is a distributed streaming platform. It has three key capabilities:
 
 Kafka is good for two broad classes of application:
 
-1. Real-time streaming pipelines that reliable get data between applications (a transport/pipeline)
+1. Real-time streaming pipelines that reliably get data between applications (a transport/pipeline)
 2. Real-time streaming applications that transform or react to streams of data (a reactive application)
 
 
