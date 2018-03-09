@@ -1,0 +1,38 @@
+CATEGORY THEORY
+===============
+
+Largely learned from Welsh & Gurnell, "Scala with Cats". You have a copy in your `articles` repo.
+
+Monoid
+------
+
+A monoid `A` has the following properties:
+
+* an operation `combine` with type `(A, A) => A`
+* an `empty` element of type `A`
+  * also called an 'identity' element, because `a + empty = a`
+
+For example, integer integer is a monoid beecause:
+
+* Integers can be combined in an associative way: 1 + 2 = 2 + 1 = 3
+* They have an "empty" element, 0.
+
+By contrast, integer _subtraction_ is _not_ a monoid because it is not associative (you cannot change the order of the operands and get the same result).
+
+Semigroup
+---------
+
+A semi group is a monoid that can be `combine`ed, but has no `empty` element.
+
+Taken together, we can define both a monoid and a semigroup in the following way:
+
+```
+trait Semigroup[A] {
+  def combine(x: A, y: A): A
+}
+
+trait Monoid[A] extends Semigroup[A] {
+  def empty: A
+}
+```
+
