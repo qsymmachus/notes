@@ -22,7 +22,7 @@ By contrast, integer _subtraction_ is _not_ a monoid because it is not associati
 Semigroup
 ---------
 
-A semi group is a monoid that can be `combine`ed, but has no `empty` element.
+A semigroup is a monoid that can be `combine`ed, but has no `empty` element.
 
 Taken together, we can define both a monoid and a semigroup in the following way:
 
@@ -34,5 +34,36 @@ trait Semigroup[A] {
 trait Monoid[A] extends Semigroup[A] {
   def empty: A
 }
+```
+
+Functor
+-------
+
+Informally, a functor is anything with a `map` method. As an abstraction, a functor allows us to chain sequences of operations over a value within some context (like a `List` or `Option`).
+
+Formally, a functor is a type `F[A]` with the following property:
+
+* an operation `map` with the type (A => B) => F[B]
+
+`map` allows us to sequence computations on values while ignoring some complication dictated by the data type:
+
+```
+Future(123).map(_ * 2)
+Option(123).map(_ * 2)
+List(4, 5, 6).map(_ * 2)
+```
+
+It turns out that single-argument functions are also functors! Why is that? `map`ing over a function is simply functional composition. Normally we'd do this manually or with `andThen`, but you can use the `Functor` type from `cat`s to `map` two functions together:
+
+```
+import cats._
+import cats.implicits._
+
+val doubler = (n: Int) => n * 2
+
+val incrementer = (n: Int) => n + 1
+
+(doubler map incrementer)(5)
+// 11
 ```
 
