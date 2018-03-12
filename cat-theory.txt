@@ -67,3 +67,35 @@ val incrementer = (n: Int) => n + 1
 // 11
 ```
 
+Monads
+------
+
+Informally, a monad is anything with a `flatMap` method. Monads are also functors, but on top of `map`, they also have `flatMap`.
+
+This allows to sequence more complex computations than functors, since the intervening transformations may _themselves_ return another monad.
+
+More formally, a monad has the following behavior:
+
+* `pure`, of type `A => F[A]` (i.e. the constructor)
+* `flatMap`, of type `(A => F[B]) => F[B]`
+
+Monads adhere to a set of "monad laws" that allow us to sequence computations freely:
+
+1. Left identity: calling `pure` and transforming the result with `func` is the same as calling ``func`:
+
+```
+pure(a).flatMap(func) == func(a)
+```
+
+2. Right identity: passing `pure` to `flatMap` is the same as doing nothing:
+
+```
+m.flatMap(pure) == m
+```
+
+3. Associativity: sequencing `flatMap`s is the same as nesting `flatMap`s:
+
+```
+m.flatMap(f).flatMap(g) == m.flatMap(x => f(x).flatMap(g))
+```
+
