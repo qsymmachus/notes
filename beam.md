@@ -13,7 +13,7 @@ You can think of Beam as an additional layer of abstraction on top of an underly
 Creating the pipeline
 ---------------------
 
-###`PipelineOptions`
+###PipelineOptions
 
 `PipelineOptions` defines the options for your Beam pipeline. Common options include:
 
@@ -27,7 +27,7 @@ Creating the pipeline
 PipelineOptions options = PipelineOptionsFactory.create();
 ```
 
-###`Pipeline`
+###Pipeline
 
 The next step is to create a `Pipeline` object with the options we've just constructed.
 
@@ -44,7 +44,7 @@ A pipeline takes some input, applies one or more transformations, and writes the
 
 In this doc, we'll walk through an example pipeline that generates word counts from the works of Shakespeare.
 
-###`PCollection`
+###PCollection
 
 This is the "stuff" of your transformation. The input and output data are usually represented as  `PCollection`s.
 
