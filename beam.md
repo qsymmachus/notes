@@ -13,7 +13,7 @@ You can think of Beam as an additional layer of abstraction on top of an underly
 Creating the pipeline
 ---------------------
 
-###PipelineOptions
+### `PipelineOptions`
 
 `PipelineOptions` defines the options for your Beam pipeline. Common options include:
 
@@ -27,7 +27,7 @@ Creating the pipeline
 PipelineOptions options = PipelineOptionsFactory.create();
 ```
 
-###Pipeline
+### `Pipeline`
 
 The next step is to create a `Pipeline` object with the options we've just constructed.
 
@@ -44,13 +44,13 @@ A pipeline takes some input, applies one or more transformations, and writes the
 
 In this doc, we'll walk through an example pipeline that generates word counts from the works of Shakespeare.
 
-###PCollection
+### 1. `PCollection`
 
 This is the "stuff" of your transformation. The input and output data are usually represented as  `PCollection`s.
 
 `PCollection` are abstract enough to represent almost any dataset, including unbounded datasets.
 
-###Reading from a file
+### 2. Reading from a file
 
 Our first step in our example pipeline is to read the works of Shakespeare from a file.
 
@@ -60,7 +60,7 @@ Yep, this returns a `PCollection`:
 p.apply(TextIO.read().from("gs://apache-beam-samples/shakespeare/*")) 
 ```
 
-###Split into lines
+### 3. Split into lines
 
 In this step, we split the text into lines, where each element is a individual word.
 
@@ -72,7 +72,7 @@ In other words, we're taking a `PCollection` of lines, and turning it into a `PC
   .via((String word) -> Arrays.asList(word.split("[^\\p{L}]+"))))
 ```
 
-###Counting the words
+### 4. Counting the words
 
 The Beam SKD provides a `Count` transform, which takes a `PCollection` of any type, and returns a `PCollection` of key-value pairs.
 
@@ -82,7 +82,7 @@ Each key is a unique element in the original `PCollection` (in this example, a w
 .apply(Count.<String>perElement())
 ```
 
-###Filtering out empty words
+### 5. Filtering out empty words
 
 We can filter out empty words using the `Filter` transform:
 
@@ -90,7 +90,7 @@ We can filter out empty words using the `Filter` transform:
 .apply(Filter.by((String word) -> !word.isEmpty())
 ```
 
-###Transforming the counts
+### 6. Transforming the counts
 
 The next transform simple formats our key-value pairs into something human-readable, `Word: count`.
 
@@ -102,7 +102,7 @@ This is a simple `MapElements` transform:
   .via((KV<String, Long> wordCount) -> wordCount.getKey() + ": " + wordCount.getValue()))
 ```
 
-###Output to a file
+### 7. Output to a file
 
 Our final transformation is to write our output to a file:
 
