@@ -56,7 +56,7 @@ Our first step in our example pipeline is to read the works of Shakespeare from 
 
 Yep, this returns a `PCollection`:
 
-```
+```java
 p.apply(TextIO.read().from("gs://apache-beam-samples/shakespeare/*")) 
 ```
 
@@ -66,7 +66,7 @@ In this step, we split the text into lines, where each element is a individual w
 
 In other words, we're taking a `PCollection` of lines, and turning it into a `PCollection` of words via a `FlatMapElements` transform:
 
-```
+```java
 .apply("ExtractWords", FlatMapElements
   .into(TypeDescriptors.strings())
   .via((String word) -> Arrays.asList(word.split("[^\\p{L}]+"))))
@@ -78,7 +78,7 @@ The Beam SKD provides a `Count` transform, which takes a `PCollection` of any ty
 
 Each key is a unique element in the original `PCollection` (in this example, a word), and each value is the number of times that element occurs in the collection.
 
-```
+```java
 .apply(Count.<String>perElement())
 ```
 
@@ -86,7 +86,7 @@ Each key is a unique element in the original `PCollection` (in this example, a w
 
 We can filter out empty words using the `Filter` transform:
 
-```
+```java
 .apply(Filter.by((String word) -> !word.isEmpty())
 ```
 
@@ -96,7 +96,7 @@ The next transform simple formats our key-value pairs into something human-reada
 
 This is a simple `MapElements` transform:
 
-```
+```java
 .apply("FormatResults", MapElements
   .into(TypeDescriptors.strings())
   .via((KV<String, Long> wordCount) -> wordCount.getKey() + ": " + wordCount.getValue()))
@@ -106,7 +106,7 @@ This is a simple `MapElements` transform:
 
 Our final transformation is to write our output to a file:
 
-```
+```java
 .apply(TextIO.write().to("wordcounts"));
 ```
 
@@ -115,7 +115,7 @@ Running the pipeline
 
 In the previous section, we defined a word count pipeline that looks like this:
 
-```
+```java
 p.apply(TextIO.read().from("gs://apache-beam-samples/shakespeare/*"))
   .apply(FlatMapElements
     .into(TypeDescriptors.strings())
@@ -130,7 +130,7 @@ p.apply(TextIO.read().from("gs://apache-beam-samples/shakespeare/*"))
 
 We can run it with this simple command:
 
-```
+```java
 p.run().waitUntilFinish();
 ```
 
@@ -143,7 +143,7 @@ The function invoked by a `ParDo` is called a `DoFn` (these names are awful). Th
 
 Here's a custom `DoFn` that encapsulates our word extraction logic. Given a `PCollection` of lines, it transforms it into a `PCollection` of individual words:
 
-```
+```java
 static class ExtractWordsFn extends DoFn<String, String> {
   @ProcessElement
   public void processElement(ProcessContext c) {
@@ -172,7 +172,7 @@ You can create your own extensions of `PTransform` to encapsulate custom transfo
 
 Here's an extension of `PTransform` that encapsulates part of our word count pipeline:
 
-```
+```java
 public static class CountWords extends PTransform<PCollection<String>,
     PCollection<KV<String, Long>>> {
   @Override
@@ -193,7 +193,7 @@ public static class CountWords extends PTransform<PCollection<String>,
 
 You can then use your custom `PTransform` like this:
 
-```
+```java
 Pipeline p = ...
 
 p.apply(...)
@@ -208,7 +208,7 @@ our pipeline options were hardcoded. However, it is more common to parse out opt
 
 You can create custom command line options by extending `PipelineOptions`:
 
-```
+```java
 public interface WordCountOptions extends PipelineOptions {
 
   /**
@@ -232,15 +232,90 @@ public interface WordCountOptions extends PipelineOptions {
 
 Once you have these custom options, you can instantiate them like this:
 
-```
+```java
 WordCountOptions options = PipelineOptionsFactory.fromArgs(args).withValidation().as(WordCountOptions.class);
+```
+
+You can retrieve and use options with `options.getSomeOption`:
+
+```java
+p.apply("ReadLines", TextIO.read().from(options.getInputFile()))
 ```
 
 Then from the command lines, custom options are passed in as flags:
 
-```
+```sh
 mvn compile exec:java -Dexec.mainClass=org.apache.beam.examples.WordCount \
      -Dexec.args="--inputFile=pom.xml --output=counts" -Pdirect-runner
 ```
 
+PAssert and testing
+-------------------
+
+`PAssert` allows you to perform simple assertions on the state of a `PCollection. Here's an example unit test on our word count pipeline that uses `PAssert`:
+
+```java
+public class WordCountTest {
+
+  static final String[] WORDS_ARRAY = new String[] {
+    "hi there", "hi", "hi sue bob",
+    "hi sue", "", "bob hi"};
+
+  static final List<String> WORDS = Arrays.asList(WORDS_ARRAY);
+
+  static final String[] COUNTS_ARRAY = new String[] {
+      "hi: 5", "there: 1", "sue: 2", "bob: 2"};
+
+  @Rule
+  public TestPipeline p = TestPipeline.create();
+
+  /** Example test that tests a PTransform by using an in-memory input and inspecting the output. */
+  @Test
+  @Category(ValidatesRunner.class)
+  public void testCountWords() throws Exception {
+    PCollection<String> input = p.apply(Create.of(WORDS).withCoder(StringUtf8Coder.of()));
+
+    PCollection<String> output = input.apply(new CountWords())
+      .apply(MapElements.via(new FormatAsTextFn()));
+
+    PAssert.that(output).containsInAnyOrder(COUNTS_ARRAY);
+    p.run().waitUntilFinish();
+  }
+}
+```
+
+Bounded vs Unbounded 
+--------------------
+
+Inputs to a pipeline can either be "bounded" (that is, finite) or "unbounded" (in which case we're dealing with a stream).
+
+If your input is unbounded, all `PCollections` in the pipeline will be unbounded as well.
+
+Windowing
+---------
+
+You can treat an unbounded `PCollection` as a bounded `PCollection` by breaking it up into finite `Window`s.
+
+`PTransforms` that aggregate multiple elements process each `Pcollection` as a succession of multiple, finite windows, even though the entire collection may be of infinite size (a stream).
+
+```java
+PCollection<String> windowedWords = input
+  .apply(Window.<String>into(
+    FixedWindows.of(Duration.standardMinutes(options.getWindowSize()))));
+
+PCollection<KV<String, Long>> wordCounts = windowedWords.apply(new WordCount.CountWords());
+```
+
+Unbounded Sinks
+---------------
+
+When dealing with unbounded inputs, you need to have an unbounded output (or "sink").
+
+When using text files as an output, a common strategy is to partition the files by Window:
+
+```java
+wordCounts
+  .apply(MapElements.via(new WordCount.FormatAsTextFn()))
+  .apply(new WriteOneFilePerWindow(output, options.getNumShards()));
+```
 
