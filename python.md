@@ -416,3 +416,45 @@ for i, v in enumerate(['tic', 'tac', 'toe']):
     print(i, v)
 ```
 
+Modules and Packages
+--------------------
+
+A module is just a file with function definitions that can be reused.
+
+You could save the following code as a module, `fibonacci.py`:
+
+```
+def fib(n):
+    if n <= 1:
+        return 1
+    else:
+        return fib(n - 2) + fib(n - 1)
+```
+
+You can then import and use this module:
+
+```
+import fibonacci
+
+fibonacci.fib(5)
+```
+
+You can also do partial imports:
+
+```
+from fibonacci import fib
+```
+
+Or import with an alias:
+
+```
+import fibonacci as fib
+```
+
+If you want to namespace your modules, you can nest them in subdirectories. These are called packages:
+
+```
+# imports animals/mammals/dog.py
+import animals.mammals.dog
+```
+
