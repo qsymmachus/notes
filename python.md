@@ -458,3 +458,24 @@ If you want to namespace your modules, you can nest them in subdirectories. Thes
 import animals.mammals.dog
 ```
 
+Classes
+-------
+
+Python classes are fairly minimal and about what you'd expect:
+
+```
+# The class Dog extends Animal
+class Dog(Animal):
+
+    kind = 'mammal' # class variable
+  
+    # Constructor. NB: All class methods take `self` as a first arg.
+    def __init__(self, name):
+        self.name = name # 
+
+    def speak(self):
+      print('woof')
+```
+
+Note that there is no support for private attributes or methods, though by convention, attrivbutes and methods prefixed with '_' are considered private.
+
