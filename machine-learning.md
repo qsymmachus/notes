@@ -3,6 +3,8 @@ Machine Learning
 
 More specifically, deep learning using Tensorflow.
 
+Cribbed from [machine learning crash course](https://developers.google.com/machine-learning/crash-course/).
+
 Supervised machine learning
 ---------------------------
 
