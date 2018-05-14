@@ -164,10 +164,10 @@ This kind of problem is called a __class imbalance__. Class imbalanced problems 
 
 We have better metrics than mere "accuracy" to detect false positives and false negatives:
 
-1. Precision: (true positives) / (true positives + false positives)
+1. Precision: `(true positives) / (true positives + false positives)`
   * How many times did we "cry wolf"?
 
-2. Recall: (true positives) / (true positives + false negatives)
+2. Recall: `(true positives) / (true positives + false negatives)`
   * Did we miss any wolves?
 
 Depending on the problem we're trying to solve, we may optimize for precision, or optimize for recall. The improve precision, we may _increase_ or classification threshold. To improve recall, we may _decrease_ our classification threshold.
