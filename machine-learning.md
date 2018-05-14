@@ -8,7 +8,7 @@ Supervised machine learning
 
 ML systems learn how to combine input to produce useful predictions on never-before-seen data.
 
-* Label: the thing you want to predict (the ouput, or `y`)
+* Label: the thing you want to predict (the output, or `y`)
 * Features: the input variables describing our data (the input, or `x`)
 
 * Example: an instance of input data `x`
@@ -85,4 +85,21 @@ When gathering training and test data from a distribution:
   3. Pull all examples from the same distribution!
 
 __NB:__ Debugging in ML is often _data debugging_ rather than code debugging.
+
+Creating features ("representation")
+------------------------------------
+
+Recall that  __features__ are the input variables describing our data (the input, or `x`).
+
+How do we turn our data into features? We need to turn them into tensors.
+  * Numbers: no real conversion is necessary. Just put them in a tensor.
+  * Strings: this is obviously trickier!
+    * Enumerate: enumerate all possible values of the string.
+    * One-hot encoding: if we only care about one string value, convert that to `1`, and all other values to `0`.
+
+Enumeration as a means to represent string data is only really useful if you have a reasonably sized set of enums (for example, 50 state postal codes).
+
+If each enum is nearly unique, then you're not modeling much at all! It's not generalizable.
+
+Bucketing or "binning" is another useful tool. Create buckets for your data (for example, for a set of geolocation data, bucket it by state).jA
 
