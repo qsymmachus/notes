@@ -17,7 +17,7 @@ ML systems learn how to combine input to produce useful predictions on never-bef
 * Labeled example: input paired with a _known_ output `(x, y`)
 * Unlabeled example: input with _unknown_ output `(x, ?)`
 
-A simple example of this is _linear regression_. Given a set of points (labeled examples), find a line that fits the data. 
+A simple example of this is __linear regression__. Given a set of points (labeled examples), find a line that fits the data. 
 
 This line allows you to predict output for a given input.
 
@@ -104,7 +104,7 @@ Enumeration as a means to represent string data is only really useful if you hav
 
 If each enum is nearly unique, then you're not modeling much at all! It's not generalizable.
 
-Bucketing or "binning" is another useful tool. Create buckets for your data (for example, for a set of geolocation data, bucket it by state).jA
+Bucketing or "binning" is another useful tool. Create buckets for your data (for example, for a set of geolocation data, bucket it by state).
 
 Feature crossing
 ----------------
@@ -138,4 +138,37 @@ Regularizing for simplicity in this way has the following effects:
   * Encourages the mean of weights toward 0, with a normal (bell-shaped) distribution.
 
 In plain English, you're forcing the model to be less complex, and hopefully more generalizable.
+
+Logistic regression
+-------------------
+
+So far our examples have relied on linear regression for our models. It's suitable for predicting numbers with a wide range.
+
+What if the range we care about is very small? Say, we only care about two values, like 0 or 1?
+
+__Logistic regression__ is a better model for predicting __probability__ or __binary classification__, because it produces some value between 0 and 1!
+  * Click or not click?
+  * Spam or not spam?
+  * Friend or foe...?
+
+Classification
+--------------
+
+A __classification__ is a threshold applied to a probability. It's a way to use logistic regression to well, _classify_ things!
+
+For example, say we want to classify spam. We use logistic regression, and decide that any `y' > 0.6` is spam. That's a classification!
+
+You'd think that accuracy would be a good metric for classification models. But what if a class is very rare, only 0.1% of results? It would be very easy to create a model that's "99.9% accurate", but actually fails miserably at classification.
+
+This kind of problem is called a __class imbalance__. Class imbalanced problems can cause false positives or false negatives.
+
+We have better metrics than mere "accuracy" to detect false positives and false negatives:
+
+1. Precision: (true positives) / (true positives + false positives)
+  * How many times did we "cry wolf"?
+
+2. Recall: (true positives) / (true positives + false negatives)
+  * Did we miss any wolves?
+
+Depending on the problem we're trying to solve, we may optimize for precision, or optimize for recall. The improve precision, we may _increase_ or classification threshold. To improve recall, we may _decrease_ our classification threshold.
 
