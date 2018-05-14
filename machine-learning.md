@@ -121,3 +121,21 @@ Alone, latitude and longitude features may not tell you much. However, if we __c
 
 This is a more precise location in the real world.
 
+Regularization for simplicity
+-----------------------------
+
+Recall in our discussion of generalization that as a rule, less complex models are more generalizable. Complex models are prone to __overfitting__ their training data.
+
+__Regularization__ can help prevent this by penalizing overly complex models.
+
+If model complexity is a function of weights, a feature weight with a high absolute value is more complex than a feature weight with a low absolute value. 
+We can quantify complexity using the __L2 regularization formula__, which defines the __regularization term__ as the sum of the squares of all the feature weights.
+
+Once you have the __regularization term__ (which is a rough measure of model complexity), you can tune its impact by multiplying it by a scalar known as a __lambda__ or __regularization rate__. The larger the lambda, the more regularized the model.
+
+Regularizing for simplicity in this way has the following effects:
+  * Encourages weight values toward 0 (but not exactly 0)
+  * Encourages the mean of weights toward 0, with a normal (bell-shaped) distribution.
+
+In plain English, you're forcing the model to be less complex, and hopefully more generalizable.
+
