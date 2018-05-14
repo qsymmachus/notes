@@ -64,3 +64,25 @@ Layered on top of this tensor API are some higher-level APIs for supervised mach
 Exercises to try:
   * [First steps with Tensorflow](https://colab.research.google.com/notebooks/mlcc/first_steps_with_tensor_flow.ipynb)
 
+Generalization
+--------------
+
+__Generalization__ is the ability of your model to make accurate predictions with never before seen data – that is, data you have not trained on.
+
+If your training dataset is not representative of other  datasets, your model may not generalizae well.
+  * This is called "overfitting".
+
+Generally speaking, the _less complicated_ the model, the _more generalizable_ the model.
+
+When developing a model, it's a good idea to have both
+  * A __training__ dataset to build the model
+  * A __test__ dataset to determine how generalizable it is.
+
+When gathering training and test data from a distribution:
+
+  1. Draw examples independently and identically (iid) at random
+  2. The distribution is stationary (doesn't change over time)
+  3. Pull all examples from the same distribution!
+
+__NB:__ Debugging in ML is often _data debugging_ rather than code debugging.
+
