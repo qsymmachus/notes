@@ -32,7 +32,8 @@ Loss
 When training our ML system, our goal is to reduce loss.
   * Feed features into model, it spits out predicted outputs.
   * Compare our output with labeled examples and calculate loss.
-  * Based on that loss, adjust parameters and iterate again.
+  * Based on that loss, adjust feature weights and iterate again.
+    * Features are assigned a "weight" that determine its predictive power.
     * The derivative points us which we we need to move on our loss curve (gradient).
     * With each step, we move closer to the minimum (bottom of curve).
     * This process is called __gradient descent__.
