@@ -151,6 +151,8 @@ __Logistic regression__ is a better model for predicting __probability__ or __bi
   * Spam or not spam?
   * Friend or foe...?
 
+Check out this [logistic regression exercise](https://colab.research.google.com/notebooks/mlcc/logistic_regression.ipynb).
+
 Classification
 --------------
 
