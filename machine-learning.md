@@ -106,3 +106,18 @@ If each enum is nearly unique, then you're not modeling much at all! It's not ge
 
 Bucketing or "binning" is another useful tool. Create buckets for your data (for example, for a set of geolocation data, bucket it by state).jA
 
+Feature crossing
+----------------
+
+Sometimes we may have features (inputs) which produce better models when they're weighted together than alone.
+
+For example, imagine we're building a model with latitude and longitude as features.
+
+Alone, latitude and longitude features may not tell you much. However, if we __cross__ these features, we have a more useful feature:
+
+```
+[longitude x latitude]
+```
+
+This is a more precise location in the real world.
+
