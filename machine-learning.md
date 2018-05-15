@@ -205,4 +205,8 @@ Some common activation functions:
 
 By layering models in this way and passing the outputs through activation functions, we have built a __neural network__! Sometimes they're also called "deep models".
 
-Check out this [Tensorflow exercise with neural nets](https://colab.research.google.com/notebooks/mlcc/intro_to_neural_nets.ipynb).
+The neural network trains itself by __backpropagating__ the calculated loss and adjusting the weights accordingly.
+
+Resources:
+ * [Tensorflow exercise with neural nets](https://colab.research.google.com/notebooks/mlcc/intro_to_neural_nets.ipynb).
+ * [Backpropagation algorithm demo](https://google-developers.appspot.com/machine-learning/crash-course/backprop-scroll/)
