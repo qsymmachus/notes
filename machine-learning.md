@@ -241,3 +241,21 @@ Multi-class neural nets have a uniuque output for each possible class (`output =
 
 Resources:
   * [Multi-class classification](https://colab.research.google.com/notebooks/mlcc/multi-class_classification_of_handwritten_digits.ipynb)
+
+Embeddings
+----------
+
+`d`-Dimensional __embeddings__ allow you to categorize things by some dimensions (or __aspects__). 
+
+For examples a 2-dimensional classification of movies might be `arthouse <=> blockbuster` and `kids <=> adults`. We can plot movies along these two dimensions. Each movie becomes a `d`-dimensional point where the value in dimension `d` represents how much the movie fits that aspect.
+
+Most importantly, these embeddings can be learned from data. We can take a list of all movies watched by a user:
+
+```
+user1 => [0, 1, 0, 1]
+user2 => [0, 0, 1, 1]
+```
+
+These vectors than serve as our features. If we feed these into a deep network with an __embedding layer__, the model can discover some aspects. For example, it might discover a "children's movie" aspect because a particular group of kids movies tend to be watched together.
+
+It's important to note that the _machine_ discovers these embeddings. Some embeddings are intuitive (like movie categorization), others are not intuitive and only make sense to the machine. You just choose the number of dimensions (aspects) in the embedding layer, and your embedding spontaneously emerge. _Similar items_ will be embedded _close to eachother_ in `d`-dimensional space.
