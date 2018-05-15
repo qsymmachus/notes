@@ -210,3 +210,12 @@ The neural network trains itself by __backpropagating__ the calculated loss and 
 Resources:
  * [Tensorflow exercise with neural nets](https://colab.research.google.com/notebooks/mlcc/intro_to_neural_nets.ipynb).
  * [Backpropagation algorithm demo](https://google-developers.appspot.com/machine-learning/crash-course/backprop-scroll/)
+
+Normalization
+-------------
+
+Neural networks benefit greatly from data normalization. Some common techniques include:
+
+* Linear scaling: brings feature values within the range of -1 to 1.
+* Clipping: cut off min and max values beyond a chosen scale.
+* Remove outliers: more often than note these are not at all helpful for our model.
