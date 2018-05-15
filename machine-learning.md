@@ -152,7 +152,8 @@ __Logistic regression__ is a better model for predicting __probability__ or __bi
   * Spam or not spam?
   * Friend or foe...?
 
-Check out this [logistic regression exercise](https://colab.research.google.com/notebooks/mlcc/logistic_regression.ipynb).
+Resources:
+  * [logistic regression exercise](https://colab.research.google.com/notebooks/mlcc/logistic_regression.ipynb).
 
 Classification
 --------------
@@ -220,3 +221,23 @@ Neural networks benefit greatly from data normalization. Some common techniques 
 * Linear scaling: brings feature values within the range of -1 to 1.
 * Clipping: cut off min and max values beyond a chosen scale.
 * Remove outliers: more often than note these are not at all helpful for our model.
+
+Multi-class neural nets
+-----------------------
+
+Logistic regression are useful for binary classification. But what about multi-class problems? Say, for example, if we wanted to identify pictures of animals (is this a cat, dog, or monkey?)
+
+Multi-class neural nets have a uniuque output for each possible class (`output => class`). 
+
+* One-vs-all multi-class 
+  * We train a particular output on a signal of "my class" vs "all other classes".
+  * You can do this with a single deep network, or with several models.
+  * You could conceivably get a match on multiple classes.
+  * What if we want to force the model to just pick one class? See the following:
+* SoftMax multi-class
+  * Adds constraint to one-vs-all: require output of all one-vs-all nodes to sum to 1.0
+  * We can interpret that output as _probabilities_ of whether a given input belongs to a given class.
+  * Useful if we want to pick "one correct" output.
+
+Resources:
+  * [Multi-class classification](https://colab.research.google.com/notebooks/mlcc/multi-class_classification_of_handwritten_digits.ipynb)
