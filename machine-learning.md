@@ -129,6 +129,7 @@ Recall in our discussion of generalization that as a rule, less complex models a
 __Regularization__ can help prevent this by penalizing overly complex models.
 
 If model complexity is a function of weights, a feature weight with a high absolute value is more complex than a feature weight with a low absolute value. 
+
 We can quantify complexity using the __L2 regularization formula__, which defines the __regularization term__ as the sum of the squares of all the feature weights.
 
 Once you have the __regularization term__ (which is a rough measure of model complexity), you can tune its impact by multiplying it by a scalar known as a __lambda__ or __regularization rate__. The larger the lambda, the more regularized the model.
@@ -174,3 +175,17 @@ We have better metrics than mere "accuracy" to detect false positives and false 
 
 Depending on the problem we're trying to solve, we may optimize for precision, or optimize for recall. The improve precision, we may _increase_ or classification threshold. To improve recall, we may _decrease_ our classification threshold.
 
+Regularization  for sparsity
+----------------------------
+
+If we have a lot of features (and therefore weights), we can start to use a lot of RAM. Can we reduce the number of weights?
+
+One thing we can do is try to remove weights that are equal to 0, since they're not doing anything anyway.
+
+__L1 regularization__ is a form of regularization that pushes weights closer to 0 so they can be filtered out.
+
+Compare this with L2 regularization (see "regularization for simplicity"), which uses the square of weights as the regularization term. Since we're using the square, the degree of regularization increases exponentially with the size of the weight.
+
+By contrast, L1 regularization has a linear regularization term, so all weights are regularized at an equal rate.
+
+You can think of L1 regularization as a high-pass filter for our weights.
