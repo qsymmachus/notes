@@ -259,3 +259,25 @@ user2 => [0, 0, 1, 1]
 These vectors than serve as our features. If we feed these into a deep network with an __embedding layer__, the model can discover some aspects. For example, it might discover a "children's movie" aspect because a particular group of kids movies tend to be watched together.
 
 It's important to note that the _machine_ discovers these embeddings. Some embeddings are intuitive (like movie categorization), others are not intuitive and only make sense to the machine. You just choose the number of dimensions (aspects) in the embedding layer, and your embedding spontaneously emerge. _Similar items_ will be embedded _close to eachother_ in `d`-dimensional space.
+
+Static vs Dynamic training
+--------------------------
+
+__Statically trained__ models are trained offline, before runtime.
+  * Pros: more control over the input data, easy to build and test
+  * Cons: retraining must be manually triggered, can get stale
+
+__Dynamically trained__ models are trained online, at runtime.
+  * Pros: models are much more up to date
+  * Cons: less control over the input data, harder to build and test
+
+Static vs Dynamic inference
+---------------------------
+
+__Static inference__ means make all possible predictions in advance, save them, and look it up later.
+  * Pros: much faster runtime, fewer failure modes
+  * Cons: falls on its face if it gets a input it hasn't already predicted, slow update latency
+
+__Dynamic inference__ means make predictions on the fly at request time.
+  * Pros: much more flexible, doesn't require anticipating every possible input, fast update latency
+  * Cons: slower runtime, may limit model complexity, more failure modes
