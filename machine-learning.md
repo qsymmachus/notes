@@ -189,3 +189,20 @@ Compare this with L2 regularization (see "regularization for simplicity"), which
 By contrast, L1 regularization has a linear regularization term, so all weights are regularized at an equal rate.
 
 You can think of L1 regularization as a high-pass filter for our weights.
+
+Neural Networks
+---------------
+
+Some problems are _non-linear_ and do not easily confirm to either linear or logistic regression. One option is to use feature crosses to make non-linear problems "look" linear (see "feature crosses" above). But do we have other options?
+
+We can __layer__ linear models, by feeding the outputs of one model to the inputs of another. But we're still dealing with a linear model overall.
+
+However, we can apply some transformations to our outputs before we pass them on to the next layer. Moreover, these transformations can be _non-linear_. These transformations are called __activation functions__.
+
+Some common activation functions:
+
+* Rectified Linear Unit (ReLu): if less than zero, turn it into zero, otherwise leave it alone.
+
+By layering models in this way and passing the outputs through activation functions, we have built a __neural network__! Sometimes they're also called "deep models".
+
+Check out this [Tensorflow exercise with neural nets](https://colab.research.google.com/notebooks/mlcc/intro_to_neural_nets.ipynb).
