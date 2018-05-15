@@ -281,3 +281,15 @@ __Static inference__ means make all possible predictions in advance, save them, 
 __Dynamic inference__ means make predictions on the fly at request time.
   * Pros: much more flexible, doesn't require anticipating every possible input, fast update latency
   * Cons: slower runtime, may limit model complexity, more failure modes
+
+ML Best Practices
+-----------------
+
+* Keep the first model simple
+* Focus on ensuring data pipeline correctness
+* Use a simple, observable metric for training and evaluation
+* Own and monitor your input features
+* Treat your model configuration as code: review it, check it in
+* Write down the results of all experiments, especially "failures"
+
+Take a look at [this doc](https://developers.google.com/machine-learning/rules-of-ml/) for more useful guidelines.
