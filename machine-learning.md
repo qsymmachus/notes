@@ -202,6 +202,7 @@ However, we can apply some transformations to our outputs before we pass them on
 Some common activation functions:
 
 * Rectified Linear Unit (ReLu): if less than zero, turn it into zero, otherwise leave it alone.
+* Sigmoid: since it ranges from 0 to 1, useful for probabilities/classification.
 
 By layering models in this way and passing the outputs through activation functions, we have built a __neural network__! Sometimes they're also called "deep models".
 
