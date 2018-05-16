@@ -10,6 +10,8 @@ Supervised machine learning
 
 ML systems learn how to combine input to produce useful predictions on never-before-seen data.
 
+_Supervised_ ML requires existing, correctly __labeled examples__ to train with. This is in contrast with unsupervised ML, which doesn't have any initial training data. This doc focuses on supervised ML.
+
 * Label: the thing you want to predict (the output, or `y`)
 * Features: the input variables describing our data (the input, or `x`)
 
@@ -20,6 +22,17 @@ ML systems learn how to combine input to produce useful predictions on never-bef
 A simple example of this is __linear regression__. Given a set of points (labeled examples), find a line that fits the data. 
 
 This line allows you to predict output for a given input.
+
+The kinds of problems ML can solve
+----------------------------------
+
+Supervised ML can perform:
+  * Classification: which of `n` labels? (e.g. is this a cat, dog, or mouse?)
+  * Regression: predict numerical values
+  * Generation: complex output (e.g. image captions, translations)
+
+Unsupervised ML can perform:
+  * Clustering: most similar to other examples
 
 Loss
 ----
