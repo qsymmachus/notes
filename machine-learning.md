@@ -54,7 +54,7 @@ When training our ML system, our goal is to reduce loss.
     * This process is called __gradient descent__.
 
 __Step size__ is the size of the steps you take along your loss curve to zero in on the minimum.
-  * If your rate is too small, it takes to long to find the minimum.
+  * If your rate is too small, it takes too long to find the minimum.
   * If your rate is too big, you overshoot on either side of the minimum.
   * An ideal rate gets you to the minimum in the smallest number of steps.
 
@@ -85,7 +85,7 @@ Generalization
 
 __Generalization__ is the ability of your model to make accurate predictions with never before seen data – that is, data you have not trained on.
 
-If your training dataset is not representative of other  datasets, your model may not generalizae well.
+If your training dataset is not representative of other datasets, your model may not generalizae well.
   * This is called "overfitting".
 
 Generally speaking, the _less complicated_ the model, the _more generalizable_ the model.
@@ -166,7 +166,7 @@ __Logistic regression__ is a better model for predicting __probability__ or __bi
   * Friend or foe...?
 
 Resources:
-  * [logistic regression exercise](https://colab.research.google.com/notebooks/mlcc/logistic_regression.ipynb).
+  * [Logistic regression exercise](https://colab.research.google.com/notebooks/mlcc/logistic_regression.ipynb).
 
 Classification
 --------------
@@ -189,8 +189,8 @@ We have better metrics than mere "accuracy" to detect false positives and false 
 
 Depending on the problem we're trying to solve, we may optimize for precision, or optimize for recall. The improve precision, we may _increase_ or classification threshold. To improve recall, we may _decrease_ our classification threshold.
 
-Regularization  for sparsity
-----------------------------
+Regularization for sparsity
+---------------------------
 
 If we have a lot of features (and therefore weights), we can start to use a lot of RAM. Can we reduce the number of weights?
 
@@ -240,7 +240,7 @@ Multi-class neural nets
 
 Logistic regression are useful for binary classification. But what about multi-class problems? Say, for example, if we wanted to identify pictures of animals (is this a cat, dog, or monkey?)
 
-Multi-class neural nets have a uniuque output for each possible class (`output => class`). 
+Multi-class neural nets have a unique output for each possible class (`output => class`). 
 
 * One-vs-all multi-class 
   * We train a particular output on a signal of "my class" vs "all other classes".
@@ -271,7 +271,7 @@ user2 => [0, 0, 1, 1]
 
 These vectors than serve as our features. If we feed these into a deep network with an __embedding layer__, the model can discover some aspects. For example, it might discover a "children's movie" aspect because a particular group of kids movies tend to be watched together.
 
-It's important to note that the _machine_ discovers these embeddings. Some embeddings are intuitive (like movie categorization), others are not intuitive and only make sense to the machine. You just choose the number of dimensions (aspects) in the embedding layer, and your embedding spontaneously emerge. _Similar items_ will be embedded _close to eachother_ in `d`-dimensional space.
+It's important to note that the _machine_ discovers these embeddings. Some embeddings are intuitive (like movie categorization), others are not intuitive and only make sense to the machine. You just choose the number of dimensions (aspects) in the embedding layer, and your embedding spontaneously emerge. _Similar items_ will be embedded _close to each other_ in `d`-dimensional space.
 
 Static vs Dynamic training
 --------------------------
