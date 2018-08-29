@@ -10,6 +10,8 @@ You can think of Beam as an additional layer of abstraction on top of an underly
 * Apache Spark
 * Google Cloud Dataflow
 
+For more details, see the [Apache Beam Examples](https://beam.apache.org/get-started/wordcount-example) documentation.
+
 Creating the pipeline
 ---------------------
 
