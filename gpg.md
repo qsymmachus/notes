@@ -140,7 +140,7 @@ Create a Revocation Certificate
 
 `gpg --output my-rev-cert.gpg --gen-revoke <key id>`
 
-# To use the certificate:
+To use the certificate:
 
 `gpg --import my-rev-cert.gpg`
 
