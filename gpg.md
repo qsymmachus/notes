@@ -134,6 +134,11 @@ To extend subkey expirations, select them first.
 > expire
 ```
 
+When you're done, don't forget to save:
+
+```
+> save
+```
 
 Create a Revocation Certificate
 -------------------------------
