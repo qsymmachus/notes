@@ -14,7 +14,7 @@ CLUSTERS
 Kubernetes orchestrates a cluster of computers that are connected to work as a single unit, called a 
 _cluster_.
 
-The cluster allows you to deploy containerized applications without typing them to specific individual 
+The cluster allows you to deploy containerized applications without tying them to specific individual 
 machines.
 
 A cluster has two parts:
