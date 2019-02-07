@@ -19,14 +19,14 @@ machines.
 
 A cluster has two parts:
 
-  1. The Master coordinates the cluster. 
-    * It is in charge of scheduling, scaling, and updating applications.
-    * Clients can manage the cluster by communicating with the master using the Kubernetes API.
+1. The Master coordinates the cluster. 
+  * It is in charge of scheduling, scaling, and updating applications.
+  * Clients can manage the cluster by communicating with the master using the Kubernetes API.
 
-  2. Nodes are the workers that run applications. 
-    * It is a VM or physical computer that serves as a worker machine in the cluster.
-    * Each node communicates with the master using the Kubernetes API.
-      * `kubelet` is the agent that communicates with the master.
+2. Nodes are the workers that run applications. 
+  * It is a VM or physical computer that serves as a worker machine in the cluster.
+  * Each node communicates with the master using the Kubernetes API.
+    * `kubelet` is the agent that communicates with the master.
 
 KUBECTL
 -------
@@ -99,9 +99,9 @@ PODS AND NODES
 As we touched on briefly in the last section, Kubernetes creates a _Pod_ to host your application instance.
 A pod is an abstraction that represents
 
-  1. A group of one or more containers running an application, or a group of closely related applications,
-  2. Shared networking configuration, 
-  3. Configuration on how to run each container, like image version.
+1. A group of one or more containers running an application, or a group of closely related applications,
+2. Shared networking configuration, 
+3. Configuration on how to run each container, like image version.
 
 A pod in turn runs on a _node_, which we've already covered. A node is an abstraction representing an actual
 machine the pod is running on (either a real machine or a virtual one).
@@ -149,10 +149,10 @@ In the "Deployments" section above, we noted that running applications are not e
 _Services_ are what expose running applications (running within pods) to the outside world. You may choose different
 ways that a services are exposed by specifiying a `type`:
 
-  * `ClusterIP` (default) – exposes the service on an IP internal to the cluster. It can't be reached outside the cluster.
-  * `NodePort` – exposes the service on a specified port on each node. Makes service accessible outside the cluster.
-  * `LoadBalancer` – creates an external load balancer and assigns a fixed IP to it. Makes service accessible outside the cluster.
-  * `ExternalName` – exposes the service using an name by returning a CNAME record. makes service accessible outside the cluster.
+* `ClusterIP` (default) – exposes the service on an IP internal to the cluster. It can't be reached outside the cluster.
+* `NodePort` – exposes the service on a specified port on each node. Makes service accessible outside the cluster.
+* `LoadBalancer` – creates an external load balancer and assigns a fixed IP to it. Makes service accessible outside the cluster.
+* `ExternalName` – exposes the service using an name by returning a CNAME record. makes service accessible outside the cluster.
 
 To see a list of running services:
 
