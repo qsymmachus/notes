@@ -19,11 +19,11 @@ machines.
 
 A cluster has two parts:
 
-1. The Master coordinates the cluster. 
+* The Master coordinates the cluster. 
   * It is in charge of scheduling, scaling, and updating applications.
   * Clients can manage the cluster by communicating with the master using the Kubernetes API.
 
-2. Nodes are the workers that run applications. 
+* Nodes are the workers that run applications. 
   * It is a VM or physical computer that serves as a worker machine in the cluster.
   * Each node communicates with the master using the Kubernetes API.
     * `kubelet` is the agent that communicates with the master.
