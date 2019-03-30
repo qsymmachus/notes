@@ -51,7 +51,7 @@ val result: Future[Int] = nestedResult.flatten
 ```
 
 As you might expect, `flatMap` combines the two steps. `flatMap` sequences two futures, that
-is, it takes a future and a asynchronous function and returns another future:
+is, it takes a future and an asynchronous function and returns another future:
 
 ```
 def Future[A].flatMap[B](f: A => Future[B]): Future[B]`
@@ -60,7 +60,7 @@ def Future[A].flatMap[B](f: A => Future[B]): Future[B]`
 This makes it easy to compose operations that work with Futures. For example:
 
 ```
-def getuser(id: Int): Future[User]
+def getUser(id: Int): Future[User]
 def authenticate(user: User): Future[Boolean]
 
 def isIdAuthed(id: Int): Future[Boolean] = 
@@ -147,13 +147,13 @@ Filters and Services can be composed with `compose` and `andThen`.
 
 ```
 import com.twitter.finagle.Service
-import come.twitter.finagle.http
+import com.twitter.finagle.http
 
 val service: Service[http.Request, http.Response] = ???
-val timeOutFilter = new Timeoutfilter[http.Request, http.Response](???)
+val timeOutFilter = new TimeoutFilter[http.Request, http.Response](???)
 
 val serviceWithTimeout: Service[http.Request, http.Response] = 
-  timeoutFilter.andThen(Service)
+  timeoutFilter.andThen(service)
 ```
 
 
