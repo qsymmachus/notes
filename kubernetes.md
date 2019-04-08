@@ -170,7 +170,7 @@ Note that `8080` is the application port you want to expose, the actual _externa
 that information ("NodePort"), you can run:
 
 ```
-kubectl describe <service name>
+kubectl describe service <service name>
 ```
 
 To delete an existing service:
