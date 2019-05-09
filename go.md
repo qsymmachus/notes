@@ -148,3 +148,50 @@ const (
 )
 ```
 
+For Loops
+---------
+
+Go has only one looping construct, the `for` loop.
+
+```go
+func main() {
+    sum := 1
+    for i := 0; i < 10; i++ {
+        sum += i
+    }
+
+    return sum
+}
+```
+
+The `init` and `post` statements are optional, so you can loop with just the `conditional`:
+
+```go
+func main() {
+    sum := 0
+    for sum < 1000 {
+        sum += 1
+    }
+
+    return sum
+}
+```
+
+Note that when you just include the conditional in this way, `for` works the same way as a `while` loop.
+
+Control Flow
+------------
+
+Go's `if` statements are about what you'd expect, but there's no need for parentheses around the conditional.
+
+```go
+func happy(isHappy bool) {
+    if isHappy {
+        fmt.Println("I'm happy too!")
+    } else {
+        fmt.Println("Oh I'm sorry! Cheer up.")
+    }
+}
+```
+
+Note that there is not `else if`. If you have more than one conditional, you would use `switch` instead.
