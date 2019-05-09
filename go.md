@@ -14,11 +14,11 @@ Every Go program is made up of packages. Programs start running in the `main` pa
 package main
 
 import(
-  "fmt"
+    "fmt"
 )
 
 func main() {
-  fmt.Println("Hello, world")
+    fmt.Println("Hello, world")
 }
 ```
 
@@ -31,7 +31,7 @@ Functions can take zero or more arguments and return zero or more results.
 
 ```go
 func add(x int, y int) int {
-  return x + y
+    return x + y
 }
 ```
 
@@ -53,7 +53,7 @@ Functions can return multiple results, too:
 
 ```go
 func swap(x, y string) (string, string) {
-  return y, x
+    return y, x
 }
 ```
 
@@ -84,8 +84,8 @@ You can "factor" `var` declarations like this if you like:
 
 ```go
 var (
-  apple string  = "Apple"
-  banana string = "Banana"
+    apple string  = "Apple"
+    banana string = "Banana"
 )
 ```
 
@@ -143,7 +143,8 @@ Yep, you can factor constants too:
 
 ```go
 const (
-  Pi = 3.14
-  Tau =  1.57
+    Pi = 3.14
+    Tau =  1.57
 )
 ```
+
