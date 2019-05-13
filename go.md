@@ -179,8 +179,8 @@ func main() {
 
 Note that when you just include the conditional in this way, `for` works the same way as a `while` loop.
 
-Control Flow
-------------
+If and else
+-----------
 
 Go's `if` statements are about what you'd expect, but there's no need for parentheses around the conditional.
 
@@ -195,3 +195,42 @@ func happy(isHappy bool) {
 ```
 
 Note that there is not `else if`. If you have more than one conditional, you would use `switch` instead.
+
+Switch
+------
+
+Go's switch statements match on equality, and can match on any value:
+
+```go
+func main() {
+    today:= time.Now().Weekday()
+
+    switch time.Friday {
+        case today + 0:
+            fmt.Println("Today!")
+        case today + 1:
+            fmt.Println("Tomorrow.")
+        case today + 2:
+            fmt.Println("In two days.")
+        default:
+            fmt.Println("Not soon enough...")
+    }
+}
+```
+
+Switch without an initial condition value is the same as `switch true`. This allows you to match on the first `true` condition, so it's an easy way to write long if-else chains.
+
+```go
+func main() {
+    hour := time.Now().Hour()
+
+    switch {
+        case hour < 12:
+            fmt.Println("Good morning!")
+        case hour < 17:
+            fmt.Println("Good afternoon.")
+        default:
+            fmt.Println("Good evening.")
+    }
+}
+```
