@@ -234,3 +234,53 @@ func main() {
     }
 }
 ```
+
+Pointers
+--------
+
+A pointer holds the memory address of a value. The type `*T` is a pointer to a `T` value. Its zero value is `nil`.
+
+```go
+var pointer *int
+```
+
+The `&` operator generates a pointer to is operand.
+
+```go
+i := 7
+pointer = &i
+```
+
+The `*` operator denotes the pointer's underlying value. This is known as "dereferencing".
+
+```go
+// prints 7, since the pointer references the value of i.
+fmt.Println(*pointer)
+
+// Sets i to a new value, through the pointer.
+*pointer = 21
+```
+
+Structs
+-------
+
+A struct represents structured data.
+
+```go
+type Person struct {
+    name string
+    age int
+}
+
+func main() {
+    me := Person{"John", 32}
+    fmt.Println(me.name)
+}
+```
+
+You can create struct values with named fields ("struct literals")
+
+```go
+// Since we didn't specify `age`, it defaults to the type's zero value (for an `int`, it's 0).
+ageless := Person{name: "Ageless"}
+```
