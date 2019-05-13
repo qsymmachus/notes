@@ -284,3 +284,33 @@ You can create struct values with named fields ("struct literals")
 // Since we didn't specify `age`, it defaults to the type's zero value (for an `int`, it's 0).
 ageless := Person{name: "Ageless"}
 ```
+
+Arrays & Slices
+---------------
+
+The type `[n]T` is an array of `n` values of type `T`. Yep, the size of the array is statically typed.
+
+```go
+primes := [5]int{2, 3, 5, 7, 11}
+```
+
+An array has a fixed size, a slice is dynamically sized. As a result slices are far more common in Go than arrays.
+
+The type `[]T` is a slice with elements of type `T`.
+
+A slice is formed by specifying and upper and lower index, which selects a range that includes the first element, but excludes the last one.
+
+```go
+primes := [5]int{2, 3, 5, 7, 11}
+
+// This slices [2, 3, 5]
+sliced := primes[0:4]
+```
+
+You can think of a slice as a _reference_ to an array. It just points to a section of that array. __Note__ that changing the elements of a slice will change those elements in the referenced array, too!
+
+You can skip the manually slicing with a _slice literal_, which simultaneously creates a slice and the underlying array it references:
+
+```go
+primes:= []int{2, 3, 5, 7, 11, 13}
+```
