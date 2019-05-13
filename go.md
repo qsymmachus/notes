@@ -268,13 +268,13 @@ A struct represents structured data.
 
 ```go
 type Person struct {
-    name string
-    age int
+    Name string
+    Age int
 }
 
 func main() {
     me := Person{"John", 32}
-    fmt.Println(me.name)
+    fmt.Println(me.Name)
 }
 ```
 
