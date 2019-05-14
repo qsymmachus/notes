@@ -307,10 +307,51 @@ primes := [5]int{2, 3, 5, 7, 11}
 sliced := primes[0:4]
 ```
 
+You may also omit the high or low index. By default, the low index will be 0, and the high index will be the length of the array:
+
+```go
+// These slice expressions are all equivalent.
+a[0:10]
+a[:10]
+a[0:]
+a[:]
+```
+
 You can think of a slice as a _reference_ to an array. It just points to a section of that array. __Note__ that changing the elements of a slice will change those elements in the referenced array, too!
 
-You can skip the manually slicing with a _slice literal_, which simultaneously creates a slice and the underlying array it references:
+You can skip the manual slicing with a _slice literal_, which simultaneously creates a slice and the underlying array it references:
 
 ```go
 primes:= []int{2, 3, 5, 7, 11, 13}
+```
+
+A slice has a _length_ (`len(primes)`), which is the number of elements in the slice, and a _capacity_ (`cap(primes)`), which is the number of elements in the underlying array, counting from the first element in the slice.
+
+You can append to a slice with the `append` function. Append takes a slice of type `T`, and the remaining arguments are `T` values to add to the slice.
+
+```go
+var primes []int
+
+primes = append(primes, 2, 3, 5)
+```
+
+If the backing array is too small, a bigger array will be allocated automatically for the slice. Note that `append` does not mutate the slice, but returns a new slice with the appended elements.
+
+Range
+-----
+
+`range` is a very useful construct for iterating over a slice or map. When ranging over a slice, two values are returned for each iteration – first, the index, and second, the element at that index.
+
+```go
+for i, n := range primes {
+    fmt.Printf("index: %d element: %d", i, n)
+}
+```
+
+If you don't care about one of those two values (usually the index), you can omit it with `_`:
+
+```go
+for _, n := range primes {
+    fmt.Printf("%d", n)
+}
 ```
