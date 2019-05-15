@@ -167,7 +167,7 @@ include "images.thrift"
 
 
 struct ImageAttachments {
-    1: list<image.Jpeg> files; // included types are prefixed with the file name.
+    1: list<images.Jpeg> files; // included types are prefixed with the file name.
 }
 ```
 
