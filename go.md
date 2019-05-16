@@ -355,3 +355,89 @@ for _, n := range primes {
     fmt.Printf("%d", n)
 }
 ```
+
+Maps
+----
+
+A map maps keys to values. The zero value of a map is `nil`, sadly.
+
+The `make` function returns a map of the given type:
+
+```go
+m := make(map[string]string)
+
+m["John"] = "Olmsted"
+fmt.Println(m["John"]) // this prints "Olmsted"
+```
+
+Alternatively you can skip make and use a _map literal_, but you must provide some initial keys:
+
+```go
+m := map[string]string{
+    "John": "Olmsted",
+    "Anna": "Gallagher"
+}
+```
+
+To insert or update an element:
+
+```go
+m["key"] = "value"
+```
+
+To retrieve an element:
+
+```go
+elem = m["key"]
+```
+
+To delete an element:
+
+```go
+delete(m, "key")
+```
+
+Test that a key is present with a two-value assignment. `ok` will be `true` if the key exists:
+
+```go
+elem, ok := m["Sally"]
+
+if ok {
+    fmt.Println(elem)
+}
+```
+
+First class functions
+---------------------
+
+Functions are first class in Go, hooray! They can be passed as arguments and returned by other functions.
+
+Here's an example function `Map`, that takes a function as an argument and maps it over array elements:
+
+```go
+package main
+
+import (
+	"fmt"
+)
+
+func Map(nums []int, fn func(int) int) []int {
+	mapped := []int{}
+
+	for _, n := range nums {
+		mapped = append(mapped, fn(n))
+	}
+
+	return mapped
+}
+
+func main() {
+	nums := []int{1, 2, 3, 4, 5}
+
+	doubled := Map(nums, func(n int) int {
+		return n * 2
+	})
+
+	fmt.Println(doubled)
+}
+```
