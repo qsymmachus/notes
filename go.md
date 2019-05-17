@@ -441,3 +441,66 @@ func main() {
 	fmt.Println(doubled)
 }
 ```
+
+Methods
+-------
+
+Go does not have classes. However, you can define methods on types.
+
+A method is a function with a _receiver_ argument. This allows you to define methods on the specified type.
+
+```go
+type Person struct {
+	Name string
+}
+
+// Here, 'p' is the receiver argument. It comes after the 'func' keyword and before the function name.
+func (p Person) Hello() {
+	fmt.Printf("Hello, my name is %s!", p.Name)
+}
+
+func main() {
+	me := Person{"John"}
+	me.Hello()
+}
+```
+
+You can declare methods on `type` aliases as well, not just `struct`s. The only important restriction is that you can only declare methods on types that are defined in the same package. You cannot declare methods for imported types, including Go's core types like `int`.
+
+Pointer and Value Receivers
+---------------------------
+
+So far our receiver arguments have been _value receivers_. This means that the methods cannot _mutate_ the state of the instance they are called on.
+
+```go
+type Vertex struct {
+	X, Y float64
+}
+
+// This won't actually change the state of `v` at all, because we're using a value receiver.
+func (v Vertex) Scale(f float64) {
+	v.X = v.X * f
+	v.Y = v.Y * f
+}
+```
+
+If we want a method to change state, we must use a _pointer receiver_, which is prefixed with the `*` operator:
+
+```go
+type Vertex struct {
+	X, Y float64
+}
+
+// *Vertex is a pointer receiver, so called `v.Scale()` will actually change the state of `v`.
+func (v *Vertex) Scale(f float64) {
+	v.X = v.X * f
+	v.Y = v.Y * f
+}
+```
+
+In Go, pointer receivers are generally preferred for the following reasons:
+
+1. It allows a method to actually modify the value's state.
+2. It avoids creating a copy of the value if we _do_ change state.
+
+In general, all methods on a given type should have either value or pointer receivers, but not a mixture of both.
