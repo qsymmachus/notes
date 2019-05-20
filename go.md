@@ -504,3 +504,76 @@ In Go, pointer receivers are generally preferred for the following reasons:
 2. It avoids creating a copy of the value if we _do_ change state.
 
 In general, all methods on a given type should have either value or pointer receivers, but not a mixture of both.
+
+Interfaces
+----------
+
+An _interface type_ is a collection of method signatures.
+
+Interfaces are implemented _implicitly_. A type implements an interface by simple implementing its methods. In other words, interfaces are _duck-typed_.
+
+```go
+package main
+
+import "fmt"
+
+type Barker interface {
+	Bark()
+}
+
+type Dog struct {
+	Name string
+}
+
+// This method means that `Dog` implements `Barker`, but we don't
+// to explicitly indicate this. It's duck-typed.
+func (d Dog) Bark() {
+	fmt.Printf("Woof! My name is %s.", d.Name)
+}
+
+func main() {
+	var rosie Barker = Dog{"Rosie"}
+	rosie.Bark()
+}
+```
+
+Implicit interfaces decouple the definition of an interface from its implementation, which is pretty nice.
+
+You can think of interface values as a tuple of `(Type, Implementation)`. So continuing with the example above, `rosie` is a variable of type `(Barker, Dog)`. When you call methods on `rosie`, it uses the concrete value.
+
+What if the concrete value is `nil`? For example, we could declare an interface variable without actually assigning a value:
+
+```go
+var borker Barker
+```
+
+In this case the underlying type is `(Barker, nil)`. If you call an interface method on it, you'll get a run-time error.
+
+The interface type that specifies _zero_ methods is known as an _empty interface_:
+
+```go
+interface{}
+```
+
+Empty interfaces are often used to represent values of unknown type. For example, `fmt.Printf` takes any number of arguments of type `interface{}`. That's a little odd, if you ask me.
+
+Type Assertions
+---------------
+
+A _type assertion_ allows you to access an interface value's underlying concrete value:
+
+```go
+var rosie Barker = Dog{"Rosie"}
+d := rosie.(Dog)
+```
+
+This forces the `rosie` interface value to give up the `Dog` concrete value it stores, and assigns it to `r`.
+
+What if `rosie` doesn't actually store a `Dog`? In that case, you ge a panic! You can safely test for this by assigning the type assertion to two values: the underlying value and a boolean value that reports whether the assertion succeeded:
+
+```go
+var rosie Barker = Dog{"Rosie"}
+d, ok := rosie.(Dog)
+```
+
+In this case, if `rosie` does not contain a `Dog`, then `ok` will be false and `d` will be a zero value of type `Dog`. No panic is needed this time!
