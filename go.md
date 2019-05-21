@@ -577,3 +577,100 @@ d, ok := rosie.(Dog)
 ```
 
 In this case, if `rosie` does not contain a `Dog`, then `ok` will be false and `d` will be a zero value of type `Dog`. No panic is needed this time!
+
+Type Switching
+--------------
+
+You can use the `switch` statement to pattern-match based on type:
+
+```go
+switch v := rosie.(type) {
+    case Dog:
+        fmt.Printf("%T is a dog!", v)
+    case Cat:
+        fmt.Printf("%T is a cat!", v)
+    default:
+        fmt.Printf("I don't know what %T is!", v)
+}
+```
+
+Common interfaces
+-----------------
+
+There are a number of interfaces that are show up frequently in Go.
+
+### Stringer
+
+The first, `Stringer`, is what the `fmt` package uses to print types. If you want to print one of your types a particular way, you just need to implement `Stringer`:
+
+```go
+type String interface {
+    String() string
+}
+```
+
+### Error
+
+Another common interface is `error`. Functions often return an `error` value, which is either `nil` if no error occured, or a value that implements `error`.
+
+```go
+type error interface {
+    Error() string
+}
+```
+
+Here's an example of a custom error, `ErrNegativeSqrt`, that implements the `error` interface. We throw this error if the function `Sqrt` is given a negative number.
+
+```go
+package main
+
+import (
+	"fmt"
+	"math"
+)
+
+func Sqrt(x float64) (float64, error) {
+	if (x < 0) {
+		return 0, ErrNegativeSqrt(x)
+	}
+
+	return math.Sqrt(x), nil
+}
+
+type ErrNegativeSqrt float64
+
+func (e ErrNegativeSqrt) Error() string {
+	return fmt.Sprintf("cannot Sqrt a negative number: %d", e)
+}
+
+func main() {
+	fmt.Println(Sqrt(2))
+	fmt.Println(Sqrt(-2))
+}
+```
+
+### Reader
+
+The `io` package specifies the `io.Reader` interface, which is very common. It represents the read end of a stream of data.
+
+The `Reader` interface has a `Read` method:
+
+```go
+func (T) Read(b []byte) (n int, err error)
+```
+
+The method populates the given byte slice with data and returns the number of bytes populated and an error value.
+
+Here's a dumb example that just streams an infinite series of the character `'A'` (or to put it another way, fills the provided byte slice with `'A'`s):
+
+```go
+type MyReader struct{}
+
+func (r MyReader) Read(b []byte) (n int, err error) {
+	for i, _ := range b {
+		b[i] = 'A'
+	}
+
+	return len(b), nil
+}
+```
