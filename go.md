@@ -3,7 +3,7 @@ Go
 
 Go! It's a programming language. It's like C, but simpler, and with garbage collection. One of Go's design goals is to make the language compact enough that "it can fit in a programmer's head".
 
-Do you like programming in a functional style? Too bad! Welcome to imperative hell. But at least it's _simple_.
+Do you like programming in a functional style? Too bad! Welcome to the imperative funhouse. But at least it's _simple_.
 
 Hello, world
 ------------
