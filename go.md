@@ -674,6 +674,167 @@ func (r MyReader) Read(b []byte) (n int, err error) {
 }
 ```
 
+Concurrency
+-----------
+
+### Goroutines
+
+Go provides concurrency in the form of _goroutines_. A goroutine is a lightweight thread managed by the Go runtime.
+
+This starts a goroutine running `f(x, y)`:
+
+```go
+go f(x, y)
+```
+
+Goroutines share the same memory space as the rest of your program. How do you safely manage state when using goroutines?
+
+### Channels
+
+Channels are a type conduit you can use to send and receive values to and from goroutines. In this way, concurrent processes can _share messages about state_, rather than share state itself.
+
+```go
+ch := make(chan int)
+ch <- v // send value `v` to channel `ch`
+v := <-ch // receive from `ch`, and assign to `v`.
+```
+
+By default, sends and receives block until the other side is ready. This obviates the need for an explicit lock.
+
+Here's a concrete example that sums the numbers in slice, distributing the work between two goroutines.
+
+```go
+package main
+
+import "fmt"
+
+func sum(s []int, c chan int) {
+	sum := 0
+	for _, v := range s {
+		sum += v
+	}
+	c <- sum // send sum to c
+}
+
+func main() {
+	s := []int{7, 2, 8, -9, 4, 0}
+
+	c := make(chan int)
+	go sum(s[:len(s)/2], c)
+	go sum(s[len(s)/2:], c)
+	x, y := <-c, <-c // receive from c
+
+	fmt.Println(x, y, x+y)
+}
+```
+
+Channels can optionally be _buffered_. Sends to a buffered channel block when the buffer is full, receives block when the buffer is empty.
+
+```go
+// Creates a channel with a buffer size of 100
+ch := make(chan int, 100)
+```
+
+### Closing channels
+
+Senders may optionally close a channel. This indicates when no more values will be sent. Receivers can test whether a channel has closed by assigning a second parameter to what is received by a channel:
+
+```go
+v, ok := <-ch
+```
+
+In this case, `ok` will be `false` if the channel is closed. Note that only _senders_ can close a channel, not recievers. Sending on a closed channel will cause a panic.
+
+Here's a concrete example that calculates a fibonacci sequence and sends the result to a channel. We close the channel when the sequence is complete:
+
+```go
+package main
+
+import (
+	"fmt"
+)
+
+func fibonacci(n int, c chan int) {
+	x, y := 0, 1
+	for i := 0; i < n; i++ {
+		c <- x
+		x, y = y, x+y
+	}
+	close(c)
+}
+
+func main() {
+	c := make(chan int, 10)
+	go fibonacci(cap(c), c) // `cap` returns the buffer size of the channel, so here, we are calculating the first 10 fibonacci values.
+	for i := range c {
+		fmt.Println(i)
+	}
+}
+```
+
+### Select
+
+The `select` statement allows a gouroutine to handle multiple communication operations. The `select` blocks until one of its cases can run (i.e. it receives a value, or is ready to send a value), then it executes that case. It executes in random order if multiple cases are ready.
+
+```go
+package main
+
+import "fmt"
+
+func fibonacci(c, quit chan int) {
+	x, y := 0, 1
+	for {
+		select {
+		case c <- x: // send `x` to the `c` channel. We can do this immediately!
+			x, y = y, x+y
+		case <-quit: // as soon as a value is sent to the `quit` channel, the function executes this `case`, terminating the goroutine.
+			fmt.Println("quit")
+			return
+		}
+	}
+}
+
+func main() {
+	c := make(chan int)
+	quit := make(chan int)
+	go func() {
+		for i := 0; i < 10; i++ {
+			fmt.Println(<-c)
+		}
+		quit <- 0 // Kill the goroutine!
+	}()
+	fibonacci(c, quit)
+}
+```
+
+The `default` case in a `select` block is run if no other case is ready:
+
+```go
+package main
+
+import (
+	"fmt"
+	"time"
+)
+
+func main() {
+	tick := time.Tick(100 * time.Millisecond) // Channel that "ticks" every 100 ms
+	boom := time.After(500 * time.Millisecond) // Channel that ticks once after 500 ms
+	for {
+		select {
+		case <-tick:
+			fmt.Println("tick.")
+		case <-boom:
+			fmt.Println("BOOM!")
+			return
+		default: // If neither of the `tick` nor `boom` receive a message, we fall back to the default case.
+			fmt.Println("    .")
+			time.Sleep(50 * time.Millisecond)
+		}
+	}
+}
+```
+
 Go Project Conventions
 ----------------------
 
