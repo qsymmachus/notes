@@ -194,31 +194,41 @@ func happy(isHappy bool) {
 }
 ```
 
-Note that there is not `else if`. If you have more than one conditional, you would use `switch` instead.
+You can also nest `else if` statements, though if you have more than two conditions, you might consider using `switch` instead.
+
+```
+if y < 10 {
+    fmt.Println("y < 10")
+} else if y > 10 {
+    fmt.Println("y > 10")
+} else {
+    fmt.Println("y = 10")
+}
+```
 
 Switch
 ------
 
-Go's switch statements match on equality, and can match on any value:
+Go's switch statements match on equality, and can match on any value. A case can test multiple values.
+
+Note that, unlike C, switch cases do not "fall through." What would be a `break` in C is supplied automatically between the cases. You can add explicit `fallthrough` statements if you need the C case-combining behavior, but these situations are better handled by listing multiple values on a single `case` branch.
 
 ```go
 func main() {
     today:= time.Now().Weekday()
 
     switch time.Friday {
-        case today + 0:
-            fmt.Println("Today!")
-        case today + 1:
-            fmt.Println("Tomorrow.")
-        case today + 2:
-            fmt.Println("In two days.")
+        case today:
+            fmt.Println("Today.")
+        case today + 1, today + 2:
+            fmt.Println("Soon.")
         default:
             fmt.Println("Not soon enough...")
     }
 }
 ```
 
-Switch without an initial condition value is the same as `switch true`. This allows you to match on the first `true` condition, so it's an easy way to write long if-else chains.
+Switch without an initial condition value is the same as `switch true`. This allows you to match on the first `true` condition, so it's an easy way to write long conditional chains.
 
 ```go
 func main() {
