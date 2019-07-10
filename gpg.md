@@ -18,7 +18,7 @@ the latest best practices first. In general, though, new keys should:
 4. Have a revocation certificate.
 
 ```
-gpg --full-generate-key`
+gpg --full-generate-key
 ```
 * Use RSA and RSA
 * Use key size 4096
