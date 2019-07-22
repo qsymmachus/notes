@@ -41,7 +41,7 @@ In ES6 variables are declared using `let`, `const`, or `var`.
 Note that once a variable is declared using `let`, it _cannot_ be redeclared within that scope!
 However, it _can_ be updated.
 
-```
+```javascript
 let me = "John"
 
 // This is fine:
@@ -55,7 +55,7 @@ SyntaxError: Identifier 'me' has already been declared
 2. `const` also allows you to declare a block-level variable. However, it is completely immutable.
 Like a variable declared by `let`, it cannot be redeclared, but it also _cannot_ be updated.
 
-```
+```javascript
 const zero = 0
 
 // This is bad:
@@ -75,7 +75,7 @@ OPERATORS
 
 The usual arithmetic operators:
 
-```
+```javascript
 2 + 2 // 4
 2 - 2 // 0
 2 * 2 // 4
@@ -85,20 +85,20 @@ The usual arithmetic operators:
 
 Incrementers and decrementers:
 
-```
+```javascript
 1++ // 1
 1-- // 0
 ```
 
 String concatenation:
 
-```
+```javascript
 'hello' + 'world' // 'hello world'
 ```
 
 Comparators:
 
-```
+```javascript
 1 > 2 // false
 1 < 2 // true
 1 <= 2 // true
@@ -112,7 +112,7 @@ Comparators:
 CONTROL FLOW
 ------------
 
-```
+```javascript
 let name = 'John'
 
 if (name == 'John') {
@@ -142,7 +142,7 @@ OBJECTS
 Javascript objects can be thought of as simple collections of key-value pairs.
 Everything except the core data types are objects (yes, even functions are objects).
 
-```
+```javascript
 var obj = new Object();
 
 // or alternatively the object literal syntax:
@@ -170,7 +170,7 @@ Classes provide syntactic suger over Javascript's existing prototype-based inher
 
 A Javascript class is just a function that returns an object based on a defined prototype.
 
-```
+```javascript
 class Rectangle {
   constructor(height, width) {
     this.height = height
@@ -190,7 +190,7 @@ mySquare.area // 100
 FUNCTIONS
 ---------
 
-```
+```javascript
 // Defining a basic function:
 function add(x, y) {
   return x + y
@@ -228,7 +228,7 @@ NPM is the default package manager for Node.
 
 Yarn is a superset of NPM and is currently preferred as a package manager.
 
-```
+```javascript
 yarn add <some package>
 
 yarn remove <some package>
@@ -243,7 +243,7 @@ Both NPM and Yarn use a `package.json` configuration file. Yarn also generates a
 
 You can define common project tasks in `package.json` like this:
 
-```
+```javascript
 "scripts": {
   "start": "babel-node src",
   "test": "estlint src && other-stuff"
@@ -258,11 +258,11 @@ not all browsers and JS environments have full support for ES6 yet.
 
 To install it: 
 
-```
+```javascript
 yarn add --dev babel
 ```
 
-```
+```javascript
 babel <some file> # compiles file from ES6 to ES5.
 
 babel-node <some file> # runtime environment for ES6 files.
@@ -275,7 +275,7 @@ ES6 CLASSES
 
 ES6 introduced real classes to javascript:
 
-```
+```javascript
 class Dog {
   constructor(name) {
     this.name = name
@@ -291,7 +291,7 @@ module.exports = Dog  // This exposes the class to the outside world.
 
 To use this class in another JS file (assuming it's in the same directory):
 
-```
+```javascript
 const Dog = require('./dog')  // This is why you needed 'module.exports' in dog.js
 
 const toby = new Dog('Toby')
@@ -306,13 +306,13 @@ ES6 introduces a newer sytax for exporting and importing modules.
 
 In `dog.js`, update the 'module.exports' to this:
 
-```
+```javascript
 export default Dog
 ```
 
 Then in the JS file that needs Dogs:
 
-```
+```javascript
 import Dog from './dog'
 ```
 
@@ -323,7 +323,7 @@ ESLint is a code linter for ES6. `.eslintrc.json` is the configuration file for 
 
 To install it:
 
-```
+```javascript
 yarn add --dev eslint
 ```
 
