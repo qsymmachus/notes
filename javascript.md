@@ -4,8 +4,8 @@ MODERN JAVASCRIPT
 Up to date as of the summer of 2017 – who knows when the language will get a totally new spec!
 
 
-1. JAVASCRIPT THE LANGUAGE
---------------------------
+JAVASCRIPT THE LANGUAGE
+-----------------------
 
 Based on of this tutorial: https://developer.mozilla.org/en-US/docs/Web/JavaScript/A_re-introduction_to_JavaScript
 
