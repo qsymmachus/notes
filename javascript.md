@@ -213,8 +213,8 @@ var add = (x, y) => x + y
 ```
 
 
-2. JAVASCRIPT TOOLING
-----------------------
+JAVASCRIPT TOOLING
+------------------
 
 This is largely based of this tutorial: https://github.com/verekia/js-stack-from-scratch
 
