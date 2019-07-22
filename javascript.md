@@ -17,8 +17,7 @@ Javascript has had three major revisions:
 
 The language has changed quite a bit as of ES6!
 
-STRINGS
--------
+### STRINGS
 
 All strings are sequences of unicode characters.
 
@@ -32,8 +31,7 @@ Strings are like objects and have their own properties and methods:
 'hello'.toUpperCase() // 'HELLO'
 ```
 
-VARIABLES
----------
+### VARIABLES
 
 In ES6 variables are declared using `let`, `const`, or `var`.
 
@@ -70,8 +68,7 @@ SyntaxError: Identifier 'zero' has already been declared
 3. `var` is the the traditional way to declare a variable. `var`s have _function_ level scope, not block
 scope. They can also be freely redeclared and updated.
 
-OPERATORS
----------
+### OPERATORS
 
 The usual arithmetic operators:
 
@@ -109,8 +106,7 @@ Comparators:
 2 === '2' // false, === does not coerce types.
 ```
 
-CONTROL FLOW
-------------
+### CONTROL FLOW
 
 ```javascript
 let name = 'John'
@@ -136,8 +132,7 @@ for (let property in object) {
 }
 ```
 
-OBJECTS
--------
+### OBJECTS
 
 Javascript objects can be thought of as simple collections of key-value pairs.
 Everything except the core data types are objects (yes, even functions are objects).
@@ -163,8 +158,7 @@ me.name // 'John'
 me.address.zip // 94703
 ```
 
-CLASSES
--------
+### CLASSES
 
 Classes provide syntactic suger over Javascript's existing prototype-based inheritance. 
 
@@ -187,8 +181,7 @@ const mySquare = new Rectangle(10, 10)
 mySquare.area // 100
 ```
 
-FUNCTIONS
----------
+### FUNCTIONS
 
 ```javascript
 // Defining a basic function:
@@ -221,8 +214,7 @@ This is largely based of this tutorial: https://github.com/verekia/js-stack-from
 See `dev/js-scratchpad` for code based off this tutorial.
 
 
-NPM AND YARN
-------------
+### NPM AND YARN
 
 NPM is the default package manager for Node.
 
@@ -236,8 +228,7 @@ yarn remove <some package>
 yarn add --dev <some dev package>
 ```
 
-PACKAGE.JSON
-------------
+### PACKAGE.JSON
 
 Both NPM and Yarn use a `package.json` configuration file. Yarn also generates a lock file, `yarn.lock`.
 
@@ -250,8 +241,7 @@ You can define common project tasks in `package.json` like this:
 }
 ```
 
-BABEL
------
+### BABEL
 
 Babel is a compiler that transforms ES6 code into ES5 code. It is a necessary evil because
 not all browsers and JS environments have full support for ES6 yet.
@@ -270,8 +260,7 @@ babel-node <some file> # runtime environment for ES6 files.
 
 `.babelrc` is a config file for Babel.
 
-ES6 CLASSES
------------
+### ES6 CLASSES
 
 ES6 introduced real classes to javascript:
 
@@ -299,8 +288,7 @@ const toby = new Dog('Toby')
 console.log(toby.bark())
 ```
 
-ES6 MODULES SYNTAX
-------------------
+### ES6 MODULES SYNTAX
 
 ES6 introduces a newer sytax for exporting and importing modules.
 
@@ -316,8 +304,7 @@ Then in the JS file that needs Dogs:
 import Dog from './dog'
 ```
 
-ESLINT
-------
+### ESLINT
 
 ESLint is a code linter for ES6. `.eslintrc.json` is the configuration file for your linting rules.
 
@@ -327,26 +314,22 @@ To install it:
 yarn add --dev eslint
 ```
 
-WEBPACK
--------
+### WEBPACK
 
 Webpack is a 'module bundler' – it takes a group of JS files, concatenates and compresses them, and assembles them
 into one JS file usually called a 'bundle'.
 
-REACT
------
+### REACT
 
 React is a library for building user interfaces. It uses the JSX syntax to represent HTML elements and components.
 It makes it easy to combine the behavior (i.e. javascript associated with) HTML elements with the actual HTML itself.
 
-REDUX
------
+### REDUX
 
 Redux is a library to handle the lifecycle of your application. It creates a _store_, which is the single source of
 truth for the state of your application at a given time.
 
-REACT-REDUX
------------
+### REACT-REDUX
 
 React-Redux connects a redux store with React components. with `react-redux`, when the Redux store changes, React
 components get automatically updated. They can also fire Redux actions.
