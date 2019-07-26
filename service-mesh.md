@@ -1,7 +1,7 @@
 Service Mesh
 ============
 
-A "service mesh" is a strategy to allow distributed services to communicate over the network without each having to know how to connect to another service.
+A _service mesh_ is a strategy to allow distributed services to communicate over the network without each having to know how to connect to another service.
 
 In a service mesh, each service instance is paired with a reverse proxy (often called a "sidecar proxy") that is deployed alongside the service instance. Depending on the tool, the proxy may be a daemon (like Linkerd) or a sidecar container (like Envoy). The sidecar proxy is responsible for communication with other services – traffic egress and ingress.
 
