@@ -196,7 +196,7 @@ func happy(isHappy bool) {
 
 You can also nest `else if` statements, though if you have more than two conditions, you might consider using `switch` instead.
 
-```
+```go
 if y < 10 {
     fmt.Println("y < 10")
 } else if y > 10 {
@@ -254,7 +254,7 @@ A pointer holds the memory address of a value. The type `*T` is a pointer to a `
 var pointer *int
 ```
 
-The `&` operator generates a pointer to is operand.
+The `&` operator generates a pointer to its operand.
 
 ```go
 i := 7
@@ -613,7 +613,7 @@ There are a number of interfaces that are show up frequently in Go.
 The first, `Stringer`, is what the `fmt` package uses to print types. If you want to print one of your types a particular way, you just need to implement `Stringer`:
 
 ```go
-type String interface {
+type Stringer interface {
     String() string
 }
 ```
