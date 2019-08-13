@@ -353,6 +353,8 @@ Range
 `range` is a very useful construct for iterating over a slice or map. When ranging over a slice, two values are returned for each iteration – first, the index, and second, the element at that index.
 
 ```go
+primes := []int{2, 3, 5, 7, 11, 13}
+
 for i, n := range primes {
     fmt.Printf("index: %d element: %d", i, n)
 }
@@ -576,7 +578,7 @@ var rosie Barker = Dog{"Rosie"}
 d := rosie.(Dog)
 ```
 
-This forces the `rosie` interface value to give up the `Dog` concrete value it stores, and assigns it to `r`.
+This forces the `rosie` interface value to give up the `Dog` concrete value it stores, and assigns it to `d`.
 
 What if `rosie` doesn't actually store a `Dog`? In that case, you get a panic! You can safely test for this by assigning the type assertion to two values: the underlying value and a boolean value that reports whether the assertion succeeded:
 
