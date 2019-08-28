@@ -245,3 +245,57 @@ To revert a rollout to its previous state:
 kubectl rollout undo deployments/<name>
 ```
 
+Using Helm and Charts
+---------------------
+
+[Helm](https://helm.sh/docs) is billed as a "package manager for Kubernetes". It allows you to manage Kubernetes applications packaged as __charts__. You can find and share charts using Helm so you can easily reproduce and extend builds of your Kubernetes applications.
+
+* Helm has two parts: a client (`helm`) and a server (`tiller`).
+* Tiller runs inside of the Kubernetes cluster, and manages the installation of your charts.
+* Helm runs on your machine, CI/CD pipeline, or wherever else you manage deployments.
+
+### Initialize Tiller
+
+After you [install Helm](https://helm.sh/docs/using_helm/#installing-helm), you can spin up Tiller in your cluster with this command:
+
+```
+helm init --history-max 200
+```
+
+We set a maximum history here to avoid storing resource objects in Helm's history indefinitely.
+
+Note that when Tiller is installed, it does not have any authentication enabled. In a production environment, you should read up on how to [secure your installation](https://helm.sh/docs/using_helm/#securing-your-helm-installation).
+
+### Install a chart (creating a "release")
+
+To install a chart, you run the `helm install` command. There are several ways to find an install a chart; the easiest way is to use one of the official `stable` charts.
+
+For example, here's how we'd pull and install the stable chart for a MySQL deployment:
+
+```
+helm repo update
+helm install stable/mysql
+```
+
+You can also install a chart that's just sitting on your disk by specifying a chart directory:
+
+```
+helm install ./my-chart
+```
+
+When you install a chart, a new __release__ is created. A chart can be installed multiple times in the same cluster, and each release can be independently managed and upgraded.
+
+To list the releases running in your cluster:
+
+```
+helm list
+```
+
+### Uninstall a release
+
+To uninstall a release, use the `helm delete` command:
+
+```
+helm delete <release name>
+```
+
