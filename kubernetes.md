@@ -8,7 +8,7 @@ You can think of Kubernetes as an additional layer of abstraction over your prod
 It provides a consistent interface for managing your deployed applications, and automates many common
 tasks, most importantly automated service scaling.
 
-CLUSTERS
+Clusters
 --------
 
 Kubernetes orchestrates a cluster of computers that are connected to work as a single unit, called a 
@@ -28,7 +28,7 @@ A cluster has two parts:
   * Each node communicates with the master using the Kubernetes API.
     * `kubelet` is the agent that communicates with the master.
 
-KUBECTL
+kubectl
 -------
 
 `kubectl` is a CLI-based client for interacting with the Kubernetes API.
@@ -45,7 +45,7 @@ Get a list of all nodes that can host applications:
 kubectl get nodes
 ```
 
-DEPLOYMENTS
+Deployments
 -----------
 
 Once you have a running Kubernetes cluster, you can deploy containerized applications within it.
@@ -93,7 +93,7 @@ http://localhost:8001/api/v1/proxy/namespaces/default/pods/<POD NAME>
 kubectl get pods
 ```
 
-PODS AND NODES
+Pods and Nodes
 --------------
 
 As we touched on briefly in the last section, Kubernetes creates a _Pod_ to host your application instance.
@@ -134,7 +134,7 @@ kubectl exec <pod name> <command>
 kubectl ctl exec -ti <pod name> bash
 ```
 
-SERVICES
+Services
 --------
 
 A Kubernetes _Service_ is an abstraction which defines a logical set of pods and a policy by which to access them. 
@@ -179,7 +179,7 @@ To delete an existing service:
 kubectl delete service -l <label to identify service>
 ```
 
-LABELS
+Labels
 ------
 
 Labels can be added to pods or services to make them easier to track and identify. A label is just a key-value pair you may assign
@@ -201,7 +201,7 @@ Filter pods with a particular label:
 kublectl get pods -l <key>=<value>
 ```
 
-SCALING YOUR APPLICATIONS
+Scaling your Applications
 -------------------------
 
 You can use Kubernetes to either manually or automatically scale your applications. Kubernetes accomplishes this by creating
@@ -221,8 +221,8 @@ To scale up a deployment to say, 4 instances:
 kubectl scale deployments/<name> --replicas=4
 ```
 
-UPDATING YOUR APPLICATIONS
---------------------------
+Scaling your Applications
+-------------------------
 
 Kubernetes allows you to make rolling updates so pods are each deployed in turn without any overall downtime.
 Updates are version and any deployment update can be reverted to the previous version (neat!).
