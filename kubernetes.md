@@ -299,3 +299,7 @@ To uninstall a release, use the `helm delete` command:
 helm delete <release name>
 ```
 
+### Additional Helm docs
+
+* [Charts and how they work](https://github.com/helm/helm/blob/master/docs/charts.md)
+
