@@ -53,7 +53,7 @@ To do this, you need to create a Deployment configuration.
 
 The deployment config not only tells Kubernetes how to deploy the applications, but also how to 
 continously manage them. Kubernetes clusters are "self-healing" – if an instance goes down or is 
-deleted, the deployment controller replaces it.
+deleted, the deployment controller replaces it. A deployment is one of many types of Kubernetes [controllers](https://kubernetes.io/docs/concepts/workloads/controllers/deployment).
 
 To create a new deployment of a particular application:
 
@@ -303,5 +303,9 @@ More resources
 --------------
 
 * [Kubernetes concepts](https://kubernetes.io/docs/concepts/overview)
+  * [Kubernetes objects](https://kubernetes.io/docs/concepts/overview/working-with-objects/kubernetes-objects/): important for understanding the different kind of objects represented by the API, and how to express them in `.yaml` formate.
+  * [Managing objects](https://kubernetes.io/docs/concepts/overview/working-with-objects/object-management): explains and contraststhe different ways of managing Kubernetes objects (e.g. "imperatively" using commands, vs. "declaratively" using config files).
+* [kubectl CLI reference doc](https://kubernetes.io/docs/reference/kubectl/overview/)
 * [Helm charts and how they work](https://github.com/helm/helm/blob/master/docs/charts.md)
+* [Kubernetes networking](https://jvns.ca/blog/2017/10/10/operating-a-kubernetes-network/)
 
