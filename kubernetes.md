@@ -345,8 +345,8 @@ More resources
 --------------
 
 * [Kubernetes concepts](https://kubernetes.io/docs/concepts/overview)
-  * [Kubernetes objects](https://kubernetes.io/docs/concepts/overview/working-with-objects/kubernetes-objects/): important for understanding the different kind of objects represented by the API, and how to express them in `.yaml` formate.
-  * [Managing objects](https://kubernetes.io/docs/concepts/overview/working-with-objects/object-management): explains and contraststhe different ways of managing Kubernetes objects (e.g. "imperatively" using commands, vs. "declaratively" using config files).
+  * [Kubernetes objects](https://kubernetes.io/docs/concepts/overview/working-with-objects/kubernetes-objects/): important for understanding the different kind of objects represented by the API, and how to express them in `.yaml` format.
+  * [Managing objects](https://kubernetes.io/docs/concepts/overview/working-with-objects/object-management): explains and contrasts the different ways of managing Kubernetes objects (e.g. "imperatively" using commands, vs. "declaratively" using config files).
 * [kubectl CLI reference doc](https://kubernetes.io/docs/reference/kubectl/overview/)
 * [Helm charts and how they work](https://github.com/helm/helm/blob/master/docs/charts.md)
 * [Kubernetes networking](https://jvns.ca/blog/2017/10/10/operating-a-kubernetes-network/)
