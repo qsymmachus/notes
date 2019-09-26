@@ -291,6 +291,48 @@ To list the releases running in your cluster:
 helm list
 ```
 
+### Customizing an install
+
+Installation will use the default configuration options (as defined in the chart's `values.yml` file) for the chart. Often you'll want to customize these values yourself.
+
+To see what options are available on a chart, use this command:
+
+```
+helm inspect values stable/mysql
+```
+
+Using that list as a guide, you can then write your own custom configuration file, and use it during installation:
+
+```
+helm install -f my-config.yaml stable/mysql
+```
+
+Alternatively, you can override each value specifically using the `--set` flag. Values overriden in this way will take precedence over values in your custom config.
+
+```
+helm install stable/mysql --set mysqlRootPassword=supersecret123
+```
+
+### Other useful commands
+
+To keep track of the state of a release, you can use the `status` command:
+
+```
+helm status mysql
+```
+
+You can search for particular charts available on your repos using the `search command`:
+
+```
+helm search redis
+```
+
+Not finding something in your repos? You can add a new one, and manage existing ones, with the `repo` command:
+
+```
+helm repo add stable https://kubernetes-charts.storage.googleapis.com/
+```
+
 ### Uninstall a release
 
 To uninstall a release, use the `helm delete` command:
