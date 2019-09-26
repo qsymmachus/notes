@@ -291,6 +291,13 @@ To list the releases running in your cluster:
 helm list
 ```
 
+There's more than one way to install a chart! All these methods work:
+
+* From a repository (shown above)
+* A chart directory (also shown above)
+* A local chart archive (`helm install my-dope-chart-0.0.1.tgz`)
+* A full URL (`helm install https://example.com/charts/my-dope-chart-0.0.1.tgz`)
+
 ### Customizing an install
 
 Installation will use the default configuration options (as defined in the chart's `values.yml` file) for the chart. Often you'll want to customize these values yourself.
@@ -313,6 +320,30 @@ Alternatively, you can override each value specifically using the `--set` flag. 
 helm install stable/mysql --set mysqlRootPassword=supersecret123
 ```
 
+Finally, you can see what values a release is using with this command:
+
+```
+helm get values mysql
+```
+
+### Upgrades and rollbacks
+
+An upgrade takes an existing release and upgrades it according to your specifications. Helm is clever and will only try to upgrade things that have changed since the last release, rather than do a full reinstallation.
+
+Most often you just want to supply a new config file to an existing release. Here's what that looks like:
+
+```
+helm upgrade -f my-new-config.yaml mysql stable/mysql
+```
+
+Helm keeps a history of upgrades it has performed. This means if you blow something up, you can rollback to a previous version of the release:
+
+```
+helm rollback mysql 1
+```
+
+This command reverts the release to its very first version, `1`. You can use `helm history <release>` to see a full list of revision numbers.
+
 ### Other useful commands
 
 To keep track of the state of a release, you can use the `status` command:
@@ -333,12 +364,30 @@ Not finding something in your repos? You can add a new one, and manage existing 
 helm repo add stable https://kubernetes-charts.storage.googleapis.com/
 ```
 
-### Uninstall a release
+### Delete a release
 
 To uninstall a release, use the `helm delete` command:
 
 ```
 helm delete <release name>
+```
+
+### Making your own charts
+
+It's a good idea to read the [chart documentation](https://github.com/helm/helm/blob/master/docs/charts.md) before you roll your own chart. That said, the Helm CLI provides some tooling to make this easier.
+
+The `create` command will create a skeleton chart directory you can start with:
+
+```
+helm create my-dope-chart
+```
+
+You can validate a chart with `helm lint`.
+
+When your chart is ready, you can package it into a tarball:
+
+```
+helm package my-dope-chart
 ```
 
 More resources
