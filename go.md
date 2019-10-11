@@ -861,3 +861,28 @@ Aside from that, you can structure your project directories however you want. If
 * `/pkg`: the bulk of your code goes here. It should be organized in directories that match the `package` name for each file.
 * `/vendor`: application dependencies if you use `godep` to manage them. Not sure how common this actually is, though.
 * Tests are in files named `*_test.go`, where `*` is the name of the file under test. Run `go test` to run these tests.
+
+Debugging with `go-delve`
+-------------------------
+
+[Delve](https://github.com/go-delve/delve) is a very useful debugger for Go. After you install it, you can attach it to a running process with this command:
+
+```
+dlv attach <pid> <path to binary>
+```
+
+You'll need to know both the PID for the program you're debugging and the path to its executable binary.
+
+Once you're in debug mode, you can run `help` to see a list of commands, but here's a quick cheatsheet.
+
+Create a breakpoint in a file at line `123`:
+
+```
+break path/to/file:123
+```
+
+Then run `continue` or `c` to pick up the breakpoint when your program executes.
+
+Once you're at a break point, you can list all local variables with `locals`. Dig into the contents of a variable with `print <variable>`.
+
+`continue` when you're done with a breakpoint, or just `exit`.
