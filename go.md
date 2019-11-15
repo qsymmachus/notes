@@ -345,6 +345,16 @@ var primes []int
 primes = append(primes, 2, 3, 5)
 ```
 
+Appending two slices can be done with the `...` operator, which "unpacks" the second slice:
+
+```go
+a := []int{1, 2, 3}
+b := []int{4, 5, 6}
+
+appended := append(a, b...)
+// [1 2 3 4 5 6]
+```
+
 If the backing array is too small, a bigger array will be allocated automatically for the slice. Note that `append` does not mutate the slice, but returns a new slice with the appended elements.
 
 Range
