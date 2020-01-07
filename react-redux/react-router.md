@@ -8,7 +8,7 @@ Resources:
 
   * https://github.com/ReactTraining/react-router
   * https://medium.com/@pshrmn/a-simple-react-router-v4-tutorial-7f23ff27adf
-  * Also see `react.txt`
+  * Also see `react.md`
 
 NB: These notes are for v4 of React Router, which differs significantly from older
 versions.
