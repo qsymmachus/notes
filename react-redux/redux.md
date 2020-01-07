@@ -13,7 +13,9 @@ To specify how `action`s transform the `store`, your write functions called `red
 Resources:
 
   * See `react.md` and `react-router.md` for a fuller picture of your hypothetical application
-  * http://redux.js.org/
+  * [http://redux.js.org/](http://redux.js.org/)
+  
+__Note__ that for simpler projects, you may consider using [Redux Zero](https://github.com/redux-zero/redux-zero) instead. It's very similar to Redux, but merges the concepts of `actions` and `reducers` for a little less complexity.
 
 INSTALLATION
 ------------
