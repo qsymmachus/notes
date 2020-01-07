@@ -12,7 +12,7 @@ To specify how `action`s transform the `store`, your write functions called `red
 
 Resources:
 
-  * See `react.txt` and `react-router.txt` for a fuller picture of your hypothetical application
+  * See `react.md` and `react-router.md` for a fuller picture of your hypothetical application
   * http://redux.js.org/
 
 INSTALLATION
@@ -228,14 +228,14 @@ lifecycle pattern. The data lifecycle in any Redux app frollows these four steps
 USAGE WITH REACT
 ----------------
 
-See `react.txt` for more information on React. This guide assumes you are already familiar with React.
+See `react.md` for more information on React. This guide assumes you are already familiar with React.
 
 Redux and React are unrelated libraries, but they pair well together because React allows to describe UI as functions
 of state, and Redux provides a sensible way to manage application state.
 
 You should install React bindings for Redux by installing `react-redux`.
 
-React bindings for Redux embrace the idea of separating _presentational_ and _container_ components (see `react.txt`
+React bindings for Redux embrace the idea of separating _presentational_ and _container_ components (see `react.md`
 for more detail on this distinction. In a nutshell,
 
   1. Presentational deal with how things _look_
@@ -262,9 +262,9 @@ because it makes performance optimizations.
 
 To use `connect`, you need to define two functions:
 
-  1. `mapStateToProps`, which takes the Redux `state` as an argument and return a `props` object to pass to the presentation layer
+  1. `mapStateToProps`, which takes the Redux `state` as an argument and returns a `props` object to pass to the presentation layer
 
-  2. `mapDispatchToProps`, which takes the `dispatch` function as an argument a `props` object with callbacks to pass to the presentation layer.
+  2. `mapDispatchToProps`, which takes the `dispatch` function as an argument and returns a `props` object with callbacks to pass to the presentation layer.
 
 Here's an example Container component, which manages our visibility filter for our todo list:
 
@@ -411,4 +411,3 @@ const store = createStore(
   )
 )
 ```
-
