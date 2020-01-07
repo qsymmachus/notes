@@ -85,7 +85,7 @@ JSX is nearly identical to HTML, but with a few important differences.
 1. The `class` attribute can't be used in JSX because it's a reserved word in Javascript.
 Instead, JSX uses `className`.
 
-2. Self-closing tags like `<br /> and `<img />` _must_ have a final angle bracket (so no `<img>`).
+2. Self-closing tags like `<br />` and `<img />` _must_ have a final angle bracket (so no `<img>`).
 
 
 REACT DOM
