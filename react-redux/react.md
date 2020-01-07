@@ -185,7 +185,7 @@ CONDITIONALS IN JSX
 
 We've noted before that you can't inject conditionals into JSX. There are a few ways to work around this.
 
-1. One way is to place the condional _outside_ the JSX, and choose between two different JSX templates based
+1. One way is to place the conditional _outside_ the JSX, and choose between two different JSX templates based
 on some conditonal.
 
 2. Use the ternary operator instead! The ternary operator is an expression, so it evaluates just fine in JSX.
@@ -281,6 +281,7 @@ export class Title extends React.Component {
     return <h1>Welcome!</h1>
   }
 }
+```
 
 You can import it and use it in this file:
 
@@ -365,6 +366,7 @@ opening and closing tags:
   // child elements may go here!
 </MyComponent>
 ```
+
 This allows you to do things like this:
 
 ```
