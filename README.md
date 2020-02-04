@@ -9,4 +9,6 @@ Networking
 - [ ] Relevant chapters in  "The Unix and Linux Administration Handbook":
   - [ ] Chapter 14 on TCP/IP Networking
   - [ ] Chapter 21 on Network Debugging
-- [ ] CIDR notation ([cidr.md](https://github.com/qsymmachus/notes/blob/master/cidr.md))
+- [X] CIDR notation ([cidr.md](https://github.com/qsymmachus/notes/blob/master/cidr.md))
+
+![TCP/IP Layering Model](https://raw.githubusercontent.com/qsymmachus/notes/master/images/TCP-IP-layering-model.jpeg)
