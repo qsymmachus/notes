@@ -1,7 +1,7 @@
 Sword Sharpening
 ================
 
-Here's a list of things I like to review periodically to keep my understanding of key concepts fresh. Gotta keep those swords sharp!
+Here's a list of things I like to review periodically to keep my understanding of key concepts fresh. I try to review everything on this list once a year or so. Gotta keep those swords sharp!
 
 Networking
 ----------
@@ -18,3 +18,7 @@ Agile Philosophy & Practice
 
 - [ ] Stellman & Greene, "Learning Agile"
 
+Infrastructure
+--------------
+
+- [ ] Kubernetes and Helm ([kubernetes.md](https://github.com/qsymmachus/notes/blob/master/kubernetes.md))
