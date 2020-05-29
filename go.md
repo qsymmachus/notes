@@ -896,3 +896,9 @@ Then run `continue` or `c` to pick up the breakpoint when your program executes.
 Once you're at a break point, you can list all local variables with `locals`. Dig into the contents of a variable with `print <variable>`.
 
 `continue` when you're done with a breakpoint, or just `exit`.
+
+Useful resources:
+-----------------
+
+* You were burned by this exact gotcha once. Make sure you understand it: [https://golang.org/doc/faq#closures_and_goroutines](https://golang.org/doc/faq#closures_and_goroutines)
+* When (and when not) to use pointers: [https://medium.com/@kent.rancourt/go-pointers-when-to-use-pointers-4f29256ddff3](https://medium.com/@kent.rancourt/go-pointers-when-to-use-pointers-4f29256ddff3)
