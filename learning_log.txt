@@ -2300,3 +2300,17 @@ Then you can put `FOO` wherever it needs to go in the next command.
 WEEK OF 1/28/18
 – Great article on the transition from IC role to leadership role: https://lcamtuf.blogspot.com/2018/02/on-leadership.html
 
+
+WEEK OF 5/31/20
+– `grep` as you probably remember can perform regex matches:
+
+```
+cat some-file.txt | grep 'field_i_care_about:"[^"]"'
+```
+
+But what if you want to "capture" these matches so you can ouput it to a file? The `-o` flag will limit grep's output to the exact matches it finds:
+
+```
+cat some-file.txt | grep -o 'field_i_care_about:"[^"]"' > fields-file.txt
+```
+
