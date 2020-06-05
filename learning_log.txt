@@ -2314,3 +2314,12 @@ But what if you want to "capture" these matches so you can ouput it to a file? T
 cat some-file.txt | grep -o 'field_i_care_about:"[^"]"' > fields-file.txt
 ```
 
+– To map over the output of something you're piping:
+
+```
+cat some-file.txt | while read line
+do
+  // do something with $line
+done
+```
+
