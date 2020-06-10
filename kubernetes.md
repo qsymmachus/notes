@@ -254,6 +254,8 @@ Using Helm and Charts
 * Tiller runs inside of the Kubernetes cluster, and manages the installation of your charts.
 * Helm runs on your machine, CI/CD pipeline, or wherever else you manage deployments.
 
+__Note__: The client/server model using Tiller is specific to Helm v2, Helm v3 has a very different model that deprecates Tiller. Instead of sending requests to a client (Tiller), Helm v3 acts as a domain proxy and forwards requests directly to the Kubernetes API. This means you don't need Tiller running in your target cluster, and also means that Helm inherits whatever Kubernetes permissions (RBAC) you have on your local machine. You can read more about the differences between Helm v2 and v3 [here](https://helm.sh/docs/topics/v2_v3_migration/).
+
 ### Initialize Tiller
 
 After you [install Helm](https://helm.sh/docs/using_helm/#installing-helm), you can spin up Tiller in your cluster with this command:
