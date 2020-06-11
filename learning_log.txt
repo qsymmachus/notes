@@ -2323,3 +2323,6 @@ do
 done
 ```
 
+WEEK OF 6/7/20
+– By default `kubectl` and `helm` use the kubeconfig file found at `~/.kube/config`. If you'd like to override that temporarily, and point to another file, set the KUBECONFIG environment variable to a different path.
+
