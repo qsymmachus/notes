@@ -883,6 +883,12 @@ dlv attach <pid> <path to binary>
 
 You'll need to know both the PID for the program you're debugging and the path to its executable binary.
 
+Alternatively, if you want to start a process and debug it at the same time, use the `debug` command:
+
+```
+dlv debug github.com/myproject/cmd/some-command -- --flags are-passed-this-way
+```
+
 Once you're in debug mode, you can run `help` to see a list of commands, but here's a quick cheatsheet.
 
 Create a breakpoint in a file at line `123`:
