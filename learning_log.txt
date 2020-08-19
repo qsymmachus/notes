@@ -2326,3 +2326,10 @@ done
 WEEK OF 6/7/20
 – By default `kubectl` and `helm` use the kubeconfig file found at `~/.kube/config`. If you'd like to override that temporarily, and point to another file, set the KUBECONFIG environment variable to a different path.
 
+WEEK OF 8/16/20
+– Check if a IP/port combination is open at all, using `curl`:
+
+```
+curl -v telnet://<IP address>:<port>
+```
+
