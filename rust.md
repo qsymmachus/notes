@@ -105,12 +105,58 @@ fn main() {
 
   let mut mutable = 6;
   mutable = 21;
-
-  let mutable = true // Variables can be overwritten this way.
 }
 ```
 
 Tuples
 ------
 
-TODO
+A tuple is a collection of values of different types. Tuples are typed with a signature `(A, B, ...)` where `A` and `B` are the types of its members.
+
+You can extract values from a tuple using indexing:
+
+```rust
+let my_tuple = (1, 2 ,3);
+println!("first value: {}", my_tuple.0);
+println!("second value: {}", my_tuple.1);
+```
+
+Tuples are often used as return values for functions, so they can return multiple values:
+
+```rust
+fn swap(pair: (i32, bool)) -> (bool, i32) {
+  // You can destructure a tuple using `let`:
+  let (integer, boolean) = pair;
+
+  (boolean, integer)
+}
+```
+
+Arrays and Slices
+-----------------
+
+An array is a collection of objects of the same type `T`, and their size is also defined at compile time as part of their type signature `[T; size]`.
+
+Slices are similar to arrays, but their size is not known at compile time. A slice is a two-word object: the first word is a pointer to the data, and the second word is the length of the slice. Slices can be used to "borrow" a section of an array, and have the type signature `&[T]`.
+
+```rust
+fn main() {
+  // Fixed size array
+  let nums: [i32; 5] = [1, 2, 3, 4, 5];
+
+  // With this neat trick you can initialize all elements with the same value:
+  let lots_of_fives: [i32; 100] = [0; 500];
+
+  // `len` returns the size of the array:
+  println!("array size: {}", nums.len());
+
+  // Arrays can be borrowed as slices:
+  let nums_slice: [&i32] = &nums;
+
+  // You can borrow a section of an array instead.
+  // If you're borrowing [x .. y], `x` is the first index inclusive,
+  // `y` is the last index exclusive. So this is gonna be [2, 3, 4]:
+  let sliced_section = &nums[1 .. 4]
+}
+```
+
