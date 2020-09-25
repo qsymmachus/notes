@@ -160,3 +160,96 @@ fn main() {
 }
 ```
 
+Structs
+-------
+
+### Unit structs
+
+These structs have no fields at all, and are useful for generics, or as `enum` types.
+
+```rust
+struct MyType;
+```
+
+### Tuple structs
+
+A tuple struct is just a named tuple.
+
+```rust
+struct MinMax(i32, i32);
+```
+
+### Ordinary structs
+
+Similar to C structs or Go structs, these structure data with named fields.
+
+```rust
+struct Point {
+  x: f32,
+  y: f32,
+}
+
+// Nested struct:
+struct Rectangle {
+  top_left: Point,
+  bottom_right: Point,
+}
+
+fn main() {
+  // Instantiate a struct:
+  let point = Point { x: 10.3, y: 0.4 };
+
+  // You can make new point using 'struct update' syntax to copy all but the overidden fields:
+  let new_point = Point { x: 2.7, ..point };
+
+  // You can destructure a struct with `let`:
+  let Point { x: gimme_this, y: gimme_that } = new_point;
+  println!("x: {} y: {}", gimme_this, gimme_that);
+}
+```
+
+Enums
+-----
+
+These are great for defining sum types, and you can pattern match on them!
+
+```rust
+enum Animal {
+  // 'Unit' struct types
+  Cat,
+  Dog,
+  // Enum types can be structured too:
+  CustomAnimal(String),
+  Human(name: String),
+}
+
+// Enums are great for pattern matching!
+fn speak(animal: Animal) {
+  match animal {
+    Animal::Cat => println!("meow"),
+    Animal::Dog => println!("woof!"),
+    Animal::Custom(sound) => println!(sound),
+    Animal::Human { name } => println!("Hello, my name is {}", name)
+  }
+}
+```
+
+If an enum's name is too long or needs to be disambiguated, you can rename it with a __type alias__:
+
+```rust
+enum VeryVerboseEnumOfThingsToDoWithNumbers {
+    Add,
+    Subtract,
+}
+
+// Creates a type alias
+type Operations = VeryVerboseEnumOfThingsToDoWithNumbers;
+
+fn main() {
+    let x = Operations::Add;
+}
+```
+
+### Using an enum to create a linked list
+
+TODO
