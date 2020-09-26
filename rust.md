@@ -359,6 +359,11 @@ impl fmt::Display for Circle {
     write!(f, "Circle of radius {}", self.radius)
   }
 }
+
+fn main() {
+    let circle = Circle { radius: 6 };
+    println!("{}", circle.to_string());
+}
 ```
 
 Control Flow
