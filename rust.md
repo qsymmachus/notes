@@ -250,6 +250,118 @@ fn main() {
 }
 ```
 
-### Using an enum to create a linked list
+### Defining sum types and methods
+
+Rust enums are great for defining sum types. Here's an example definition of a linked list:
+
+```rust
+use crate::List::*;
+
+enum List {
+  // 'Box' wraps a pointer to the next item in the list.
+  Cons(u32, Box<List>),
+  Nil,
+}
+
+// You can attach methods to an enum with 'impl'
+impl List {
+  fn new() -> List {
+    Nil
+  }
+
+  fn prepend(self, elem: u32) -> List {
+    Cons(elem, Box::new(self))
+  }
+
+  // A recursive `len` function.
+  fn len(&self) -> u32 {
+    match *self {
+      // You can't take ownership of the tail because 'self' is borrowed. Instead you take a reference to the tail:
+      Cons(_, ref tail) => 1 + tail.len(),
+      Nil => 0
+    }
+  }
+}
+
+fn main() {
+  let mut list = List::new();
+  println!("list length: {}", list.len());
+}
+```
+
+Type casting & conversion
+-------------------------
+
+### Casting primitive types
+
+Explicit type conversion (casting) can be performed using the `as` keyword.
+
+```rust
+let decimal = 3.1459
+let integer = decimal as u8
+```
+
+### Conversion with `From` and `Into`
+
+For non-primitive custom types (like structs and enums), Rust allows type conversion using the `From` and `Into` traits.
+
+The `From` trait allows a type to define how to create itself from another type.
+
+Many of these are defined in the standard library already:
+
+```rust
+let my_str = "hello";
+let my_string = String::from(my_str);
+```
+
+For custom types, you can define your own implementation of `From`:
+
+```rust
+use std::convert::From;
+
+#[derive(Debug)]
+struct Number{
+  value: i32,
+}
+
+// Note that `From` takes a type parameter:
+impl From<i32> for Number {
+  fn from(item: i32) -> self {
+    Number { value: item }
+  }
+}
+```
+
+The reciprocal form of `From` is `Into`. You get this for free when you define an implementation of `From`:
+
+```rust
+fn main() {
+  let int = 5;
+  let num: Number = int.into();
+  
+  println!("My number is {:?}", num);
+}
+```
+
+### String conversion
+
+Converting a type into a string can be down by implementing the `ToString` trait for the type. But it's easier to just implement `fmt::Display`, since that generates `ToString` for you automagically.
+
+```rust
+use std::fmt;
+
+struct Circle {
+  radius: i32
+}
+
+impl fmt::Display for Circle {
+  fn fmt(&self, f: &mut fmt::Formatter) -> fmt::Result {
+    write!(f, "Circle of radius {}", self.radius)
+  }
+}
+```
+
+Control Flow
+------------
 
 TODO
