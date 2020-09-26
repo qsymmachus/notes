@@ -3,7 +3,7 @@ Rust
 
 Rust is a statically typed, multi-paradigm programming language focusing on safety, speed, and concurrency. It guarantees memory safety without using garbage collection.
 
-The initial version of these notes has been cribed from [Rust by Example](https://doc.rust-lang.org/stable/rust-by-example/index.html)
+The initial version of these notes has been cribed from [Rust by Example](https://doc.rust-lang.org/stable/rust-by-example/index.html).
 
 Hello, world
 ------------
