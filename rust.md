@@ -369,4 +369,126 @@ fn main() {
 Control Flow
 ------------
 
+### Conditionals
+
+In Rust `if / else` are expressions, not statements, which is pretty cool. This means each branch must return the same type.
+
+```rust
+fn describe(n: i32) {
+  if n < 0 {
+    println!("{} is less than zero", n);
+  } else if n > 0 {
+    println!("{} is greater than zero", n);
+  } else {
+    println!("{} is zero", n);
+  }
+}
+```
+
+### Simple loops
+
+The `loop` keyword starts an infinite loop, which you can break with `break`. You can skip an iteration with `continue`.
+
+If you put an expression after `break` it will return that value.
+
+```rust
+fn main() {
+  let mut count = 100;
+
+  loop {
+    if count == 0 {
+      break;
+    }
+
+    println!("{} bottles of beer on the wall", count)
+
+    count -= 1;
+  }
+}
+```
+
+The `while` keyword word works exactly as you'd expect.
+
+### `for` and `range`
+
+You can iterate over an `Iterator` using the `for in` loop. 
+
+An easy way to create an iterator is with the range notation `a..b`:
+
+```rust
+fn main() {
+  // Range notation is _exclusive_ of the final value, so this stops at 101.
+  for n in 1..102 {
+    if n == 1 {
+      println!("{} dalmatian", n)
+    } else {
+     println!("{} dalmatians", n)
+    }
+  }
+}
+```
+
+Collections can be converted into iterators using one of three methods:
+
+* `iter()` borrows each element of the collection, leaving the original collection untouched.
+* `into_iter()` consumes the collection so it is no longer available for use outside the loop.
+* `iter_mut()` borrows each element but allows you to mutate it so you can modify the collection in place.
+
+Pattern matching
+----------------
+
+Rust provides robust pattern matching. `match` is an expression.
+
+Matching on __value__:
+
+```rust
+fn describe(n: i32) {
+  match n {
+    1 => println!("This is one"),
+    // Matching against several values:
+    2 | 3 | 5 | 7 | 11 => println!("This number is prime"),
+    // Matching against in inclusive range:
+    11..=19 => println!("It's a teen"),
+    // Handles all other cases:
+    _ => println!("It's nothing special"),
+  }
+}
+```
+
+Matching on __type__, and __destructuring__:
+
+```rust
+fn speak(animal: Animal) {
+  match animal {
+    Animal::Cat => println!("meow"),
+    Animal::Dog => println!("woof!"),
+    Animal::Custom(sound) => println!(sound),
+    Animal::Human { name } => println!("Hello, my name is {}", name)
+  }
+}
+```
+
+Pattern matching is __exhaustive__, so you need handling for all possible types or values.
+
+### Guards
+
+Match __guards__ can be added to filter based on conditionals:
+
+```rust
+fn describe(num: i32) {
+  match num {
+    n if n == 0 => println!("It's odd"),
+    n if isEven(n) => println!("It's even"),
+    _ => println!("It's odd"),
+  }
+}
+
+fn isEven(num: i32) -> bool {
+  n % 2 == 0
+}
+```
+
+Functions
+---------
+
 TODO
