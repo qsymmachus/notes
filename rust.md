@@ -477,7 +477,7 @@ Match __guards__ can be added to filter based on conditionals:
 ```rust
 fn describe(num: i32) {
   match num {
-    n if n == 0 => println!("It's odd"),
+    n if n == 0 => println!("It's zero"),
     n if isEven(n) => println!("It's even"),
     _ => println!("It's odd"),
   }
