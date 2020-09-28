@@ -491,4 +491,108 @@ fn isEven(num: i32) -> bool {
 Functions
 ---------
 
+Functions are declared using the `fn` keyword. Its arguments and return values are type annotated as part of the function signature.
+
+The final expression of the function will be used as the return value. Alternatively, you can explicitly `return`.
+
+```rust
+fn double(n: i32) -> i32 {
+  // Implicit returns are cool
+  2 * n
+}
+```
+
+### Methods
+
+Methods are functions attached to objects. Methods have access to the data of the object and its other methods using the `self` keyword.
+
+Methods are defined under an `impl` block:
+
+```rust
+struct Rectangle {
+  width: i32,
+  height: i32,
+}
+
+impl Rectangle {
+  fn area(&self) -> i32 {
+    self.width * self.height
+  }
+}
+```
+
+### Closures
+
+Closures, also called lambdas, are anonymous functions that capture the enclosing environment.
+
+
+```rust
+fn main() {
+  let closure = |i: 32| -> i32 { i + 1 };
+
+  println!("closure returns: {}", closure(6)) // 7
+}
+```
+
+Closures can capture variables:
+
+* By __reference__: `&T`, annotated with the trait `Fn`
+* By __mutable reference__: `&mut T`, annotated with the trait `FnMut`
+* By __value__: `T`, annotated with the trait `FnOnce`
+
+Higher order functions
+----------------------
+
+Rust functions are first-class and can be both the arguments and the return values of other functions.
+
+A function that takes another function as an argument:
+
+```rust
+// Rolling our own, type-parameterized implementation of `map`
+fn map<A, B>(list: Vec<A>, f: fn(&A) -> B) -> Vec<B> {
+  let mut new_list: Vec<B> = Vec::new();
+
+  for elem in list.iter() {
+    new_list.push(f(elem));
+  }
+
+  return new_list;
+}
+
+fn main() {
+  let list = vec![1, 2, 3, 5];
+
+  let new_list = map(list, |n: &i32| -> i32 {
+    n * 2
+  });
+
+  println!("{:?}", new_list);
+}
+```
+
+A function that returns another function:
+
+```rust
+// Note the use of the `Fn` trait to indicate the returned closure captures by reference:
+fn add_n(n: i32) -> impl Fn(i32) -> i32 {
+  // Technically, we're returning a closure here.
+  // Variable `n` needs to be `move`d into the closure's scope:
+  return move |m| -> i32 { n + m };
+}
+
+fn main() {
+  let add_10 = add_n(10); // 10 is captured by the closure
+  println!("{}", add_10(5)) // 15
+}
+```
+
+### Built-in higher order functions
+
+Rust lends itself well to a functional style and has a lot of built-in higher order functions you're familisar with, like `map`, `reduce`, and so on.
+
+[Iterator](https://doc.rust-lang.org/core/iter/trait.Iterator.html) and [Option](https://doc.rust-lang.org/core/option/enum.Option.html) both implement many HOFs.
+
+Modules
+-------
+
 TODO
