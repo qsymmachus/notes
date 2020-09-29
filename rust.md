@@ -595,4 +595,204 @@ Rust lends itself well to a functional style and has a lot of built-in higher or
 Modules
 -------
 
+A module is a collection of logically related code, with managed visibility (public/private) of functionality. Package, module, library, whatever you want to call it!
+
+By default items in a module are private, but they can be made public with the `pub` keyword.
+
+```rust
+mod my_mod {
+  fn private_function() {
+    println!("called `my_mod::private_function()`");
+  }
+
+   pub fn public_function() {
+    println!("called `my_mod::public_function()`");
+  }
+
+  // Modules can be nested:
+  pub mod nested {
+    pub fn nested_public_function() {
+      println!("called `my_mod::nested::nested_public_function()`")
+    }
+  }
+}
+```
+
+Structs declared within modules have private fields unless they are explicity made public:
+
+```rust
+mod my_structs {
+  pub struct Stuff<T> {
+    pub contents: T,
+    private_contents: T, // This field is private
+  }
+}
+```
+
+The `use` declaration can import a full path to a new name for easier access. You can also alias imports:
+
+```rust
+use crate::deeply::nested::{
+    my_first_function,
+    my_second_function,
+    AndATraitType
+};
+
+// Import aliasing
+use some::crate::really_long_ass_name as shorter_name;
+
+fn main() {
+    my_first_function();
+}
+```
+
+### Splitting modules into separate files
+
+Modules can be mapped to a file/directory hierarchy. Assume you have the following file structure:
+
+```
+.
+|-- my
+|   |-- mod.rs
+|   `-- indirect.rs
+`-- split.rs
+```
+
+In `split.rs`:
+
+```rust
+//This declaration looks for a file named `my.rs`, or `my/mod.rs` and inserts its contents inside a module named
+// `my` in this scope:
+mod my;
+
+fn main() {
+    // The `function()` definite in `my.rs` is treated like part of a `my` module:
+    my::function();
+
+    // Since this file imports `my`, and `my/mod.rs` imports `indirect.rs`, it's treated as a nested module:
+    my::indirect::function();
+}
+```
+
+In `my/mod.rs`:
+
+```rust
+// This is imported from `indirect.rs` in the same directory:
+pub mod indirect;
+
+pub fn function() {
+  println!("Howdy!");
+}
+```
+
+Crates
+-------
+
+A __crate__ is a compilation unit in Rust.
+
+Whenever you compile a Rust file with `rustc some_file.rs`, `some_file.rs` is treated as a __crate file__.
+
+A create can be compiled into a binary or into a library. By default, `rustc` will compile binaries, but you can create libraries using the `--crate-type=lib` flag.
+
+Say you write the following crate file, `my_crate.rs`:
+
+```rust
+pub fn public_function() {
+    println!("Hello!");
+}
+
+fn private_function() {
+    println!("You're not supposed to be here.");
+}
+```
+
+Compile it into a library:
+
+```
+$ rustc --crate-type=lib my_crate.rs
+```
+
+To link another crate to this new library, use the `extern crate` declaration. By default it looks for libraries in the same directory.
+
+```rust
+extern crate my_crate;
+
+fn main() {
+  my_rate::public_function();
+}
+```
+
+Cargo
+-----
+
+[Cargo](https://doc.rust-lang.org/cargo/) is Rust's official package manager. Cargo can be used for:
+
+* Dependency management
+* Generating new project boilerplate
+* Running unit tests and benchmarks
+
+To create a new Rust project:
+
+```
+$ cargo new foo
+```
+
+This generates a package directory with the following structure:
+
+```
+foo
+├── Cargo.toml
+└── src
+    └── main.rs
+```
+
+* `main.rs` is the root source file of your project.
+* `Cargo.toml` is the config file for Cargo. It looks like this:
+
+
+```toml
+[package]
+name = "foo"
+version = "0.1.0"
+authors = ["john"]
+
+[dependencies]
+```
+
+### Dependency management
+
+You can add project dependencies in one of three ways:
+
+```toml
+[dependencies]
+clap = "2.27.1" # from crates.io
+rand = { git = "https://github.com/rust-lang-nursery/rand" } # from online repo
+bar = { path = "../bar" } # from a path in the local filesystem
+```
+
+### Builds
+
+`cargo build` will build the project.
+
+`cargo run` builds and runs the project in one command.
+
+### Testing
+
+By convention tests go in their own `tests` directory:
+
+```
+foo
+├── Cargo.toml
+├── src
+│   └── main.rs
+└── tests
+    ├── my_test.rs
+    └── my_other_test.rs
+```
+
+`cargo test` will run all your tests.
+
+Attributes
+----------
+
 TODO
