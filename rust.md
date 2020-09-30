@@ -792,7 +792,66 @@ foo
 
 `cargo test` will run all your tests.
 
-Attributes
-----------
+Generics
+--------
+
+### Type parameters
+
+Type parameters allow you to parameterize functions and type definitions by type. They're surrounded by angle brackets and written in upper camel case, `<LikeThis>`.
+
+```rust
+// A tuple struct with type parameter `T`:
+struct MyBox<T>(T);
+
+// A function with a type parameter:
+fn return_it<T>(it: T) -> T {
+  it
+}
+
+fn main() {
+  let my_box: MyBox<char> = MyBox('a'); // Explicit type parameter
+  let another_box = MyBox(1); // Implicit type parameter
+
+  println!("{}", return_it::<char>('a')); // Note the ::<T> syntax when explicit
+  println!("{}", return_it(1)); // Ordinary syntax when implicit
+}
+```
+
+### Bounds
+
+Type parameters can use traits as __bounds__ that stipulate what functionlity a type must implement.
+
+For example, we can bound this type `T` so it must implement `Display`:
+
+```rust
+// The compiler will complain if we use a type parameter that can't `Display`:
+fn printer<T: Display>(t: T) {
+    println!("{}", t);
+}
+```
+
+You can specify multiple bounds by separating them with a `+`:
+
+```rust
+fn compare_prints<T: Debug + Display>(t: &T) {
+    println!("Debug: `{:?}`", t);
+    println!("Display: `{}`", t);
+}
+```
+
+### Where clauses
+
+A bound can also be expressed using a `where` clause, which may be clearer to read. It's often used when bounding `impl` blocks:
+
+```rust
+impl <A, D> MyTrait<A, D> for YourType where
+    A: TraitB + TraitC,
+    D: TraitE + TraitF {
+      // Methods for `YourType`, bounded by the `where` clause above.
+    }
+```
+
+Traits
+------
 
 TODO
