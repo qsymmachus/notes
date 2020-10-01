@@ -238,15 +238,15 @@ If an enum's name is too long or needs to be disambiguated, you can rename it wi
 
 ```rust
 enum VeryVerboseEnumOfThingsToDoWithNumbers {
-    Add,
-    Subtract,
+  Add,
+  Subtract,
 }
 
 // Creates a type alias
 type Operations = VeryVerboseEnumOfThingsToDoWithNumbers;
 
 fn main() {
-    let x = Operations::Add;
+  let x = Operations::Add;
 }
 ```
 
@@ -361,8 +361,8 @@ impl fmt::Display for Circle {
 }
 
 fn main() {
-    let circle = Circle { radius: 6 };
-    println!("{}", circle.to_string());
+  let circle = Circle { radius: 6 };
+  println!("{}", circle.to_string());
 }
 ```
 
@@ -633,16 +633,16 @@ The `use` declaration can import a full path to a new name for easier access. Yo
 
 ```rust
 use crate::deeply::nested::{
-    my_first_function,
-    my_second_function,
-    AndATraitType
+  my_first_function,
+  my_second_function,
+  AndATraitType
 };
 
 // Import aliasing
 use some::crate::really_long_ass_name as shorter_name;
 
 fn main() {
-    my_first_function();
+  my_first_function();
 }
 ```
 
@@ -666,11 +666,11 @@ In `split.rs`:
 mod my;
 
 fn main() {
-    // The `function()` definite in `my.rs` is treated like part of a `my` module:
-    my::function();
+  // The `function()` definite in `my.rs` is treated like part of a `my` module:
+  my::function();
 
-    // Since this file imports `my`, and `my/mod.rs` imports `indirect.rs`, it's treated as a nested module:
-    my::indirect::function();
+  // Since this file imports `my`, and `my/mod.rs` imports `indirect.rs`, it's treated as a nested module:
+  my::indirect::function();
 }
 ```
 
@@ -826,7 +826,7 @@ For example, we can bound this type `T` so it must implement `Display`:
 ```rust
 // The compiler will complain if we use a type parameter that can't `Display`:
 fn printer<T: Display>(t: T) {
-    println!("{}", t);
+  println!("{}", t);
 }
 ```
 
@@ -834,8 +834,8 @@ You can specify multiple bounds by separating them with a `+`:
 
 ```rust
 fn compare_prints<T: Debug + Display>(t: &T) {
-    println!("Debug: `{:?}`", t);
-    println!("Display: `{}`", t);
+  println!("Debug: `{:?}`", t);
+  println!("Display: `{}`", t);
 }
 ```
 
@@ -845,10 +845,10 @@ A bound can also be expressed using a `where` clause, which may be clearer to re
 
 ```rust
 impl <A, D> MyTrait<A, D> for YourType where
-    A: TraitB + TraitC,
-    D: TraitE + TraitF {
-      // Methods for `YourType`, bounded by the `where` clause above.
-    }
+  A: TraitB + TraitC,
+  D: TraitE + TraitF {
+    // Methods for `YourType`, bounded by the `where` clause above.
+  }
 ```
 
 Traits
