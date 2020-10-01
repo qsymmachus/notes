@@ -897,3 +897,33 @@ impl Animal for Sheep {
   }
 }
 ```
+
+### Derive
+
+The compiler can generate basic implementations of some traits for you using the `#[derive]` attribute. The following traits are derivable:
+
+* Comparison traits: `Eq`, `PartialEq`, `Ord`, `PartialOrd`.
+* `Clone`, to create `T` from `&T` via a copy.
+* `Copy`, to give a type 'copy semantics' instead of 'move semantics'.
+* `Hash`, to compute a hash from `&T`.
+* `Default`, to create an empty instance of a data type.
+* `Debug`, to format a value using the `{:?}` formatter.
+
+```rust
+// `Centimeters`, a tuple struct that can be compared using derived traits:
+#[derive(PartialEq, PartialOrd)]
+struct Centimeters(i32);
+
+fn main() {
+  let long = Centimeters(100);
+  let short = Centimeters(5);
+
+  if long > short {
+    println!("Yep, it is longer!");
+  }
+}
+```
+
+### Returning traits with `dyn`
+
+TODO
