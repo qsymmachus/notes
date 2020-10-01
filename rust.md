@@ -854,4 +854,46 @@ impl <A, D> MyTrait<A, D> for YourType where
 Traits
 ------
 
-TODO
+A trait is a collection of methods that defines an interface for an unknown type, `Self`. 
+
+Traits can be implemented by any other data type.
+
+```rust
+struct Sheep { name: &'static str }
+
+// Defining an `Animal` trait (interface):
+trait Animal {
+  // Static method signature; `Self` refers to the implementor type.
+  fn new(name: &'static str) -> Self;
+
+  // Instance method signatures; these will return a string.
+  fn name(&self) -> &'static str;
+  fn noise(&self) -> &'static str;
+
+  // Traits can provide default method definitions.
+  fn talk(&self) {
+      println!("{} says {}", self.name(), self.noise());
+  }
+}
+
+// Sheep's implementation of the `Animal` interface:
+impl Animal for Sheep {
+  // `Self` is the implementor type: `Sheep`.
+  fn new(name: &'static str) -> Sheep {
+      Sheep { name: name }
+  }
+
+  fn name(&self) -> &'static str {
+      self.name
+  }
+
+  fn noise(&self) -> &'static str {
+    "baaaaaa!"
+  }
+  
+  // Default trait methods can be overridden.
+  fn talk(&self) {
+    println!("{} pauses briefly... {}", self.name, self.noise());
+  }
+}
+```
