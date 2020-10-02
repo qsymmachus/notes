@@ -924,6 +924,174 @@ fn main() {
 }
 ```
 
-### Returning traits with `dyn`
+### Returning traits with a `Box`
 
-TODO
+The Rust compiler needs to know how much space every function's return type requires. This means your functions can't return a trait, because the compiler can't guess the size of concrete types that implement that trait.
+
+To work around this limitation, you can return `Box` that contains a trait. A `Box` is a reference to memory in the heap, and has a fixed size, so the compiler accepts it as a return type.
+
+```rust
+// Returns some struct that implements Animal, but we don't know which one at compile time.
+fn random_animal(random_number: f64) -> Box<dyn Animal> {
+  if random_number < 0.5 {
+      Box::new(Sheep {})
+  } else {
+      Box::new(Cow {})
+  }
+}
+```
+
+### Supertraits
+
+Rust doesn't have a concept of inheritance, but you can define a trait as a superset of another trait:
+
+```rust
+trait Person {
+  fn name(&self) -> String;
+}
+
+// Person is a supertrait of Student.
+// Implementing Student requires you to also impl Person.
+trait Student: Person {
+  fn university(&self) -> String;
+}
+```
+
+### Some common traits to know
+
+* `Display` and `Debug` were covered in our section on formatting. They can be derived.
+* [`Iterator`](https://doc.rust-lang.org/core/iter/trait.Iterator.html), which only requires you to implement the method `next`.
+* [`Clone`](https://doc.rust-lang.org/std/clone/trait.Clone.html) allows you to copy a resource to a new variable, without destroying the copied variable. It can be derived.
+
+Macros
+------
+
+Rust allows you to metaprogram using macros. Macros look like functions, but always end with a `!`, and instead of generating a function call, they expand into source code that is plopped into your program inline.
+
+Macros are created using the `macro_rules!` macro:
+
+```rust
+macro_rules! say_hello {
+  // `()` means the macro takes no argument:
+  () => {
+    println!("Hello!");
+  };
+}
+
+fn main() {
+  say_hello!()
+}
+```
+
+Error Handling
+--------------
+
+Rust has a few different ways to handle errors:
+
+* `panic!`, useful for unrecoverable errors.
+* `Option` type for handling optional values.
+* `Result` type for handling tasks that may fail.
+
+### Panic!
+
+`panic!` prints an error message and exits the entire program. It goes without saying you shouldn't do this unless there is really no way to recover.
+
+```rust
+fn main() {
+  panic!("AAAAAAAHHHHHH!!!!!");
+}
+```
+
+### `Option` type
+
+The `Option` type is an enum, very similier to Scala's `Option` type.
+
+`Option<T>` has two possible values, `Some(T)` or `None`. You can pattern match over this:
+
+```rust
+fn give_gift(gift: Option<&str>) {
+  match gift {
+    Some("snake") => println!("AAAAAHHHH!!!!"),
+    Some(other) => println!("What a nice {}!", other),
+    None => println!("No gift for me?"),
+  }
+}
+```
+
+In Rust it's common to "unwrap" an option using the `?` operator. If the Option is `Some(T)`, `?` will return that value `T`, otherwise it terminates whatever function is running and returns `None`.
+
+```rust
+fn next_birthday(current_age: Option<u8>) -> Option<String> {
+  // If `current_age` is `None`, this short circuits and returns `None`.
+  // If `current_age` is `Some`, the inner `u8` gets assigned to `next_age`
+  let next_age: u8 = current_age?;
+  Some(format!("Next year I will be {}", next_age))
+}
+```
+
+But why the hell would you do that when you can __map__ over options?
+
+```rust
+let some_number = Some(123);
+
+let some_length = some_number
+  .map(|num| num.to_string())
+  .map(|s| s.len());
+```
+
+You can __flat map__ too if you're mapping over a function that returns `Option<Option<T>>`. For whatever reason though it's not called flat map in Rust, it's `and_then`.
+
+### `Result` type
+
+Results are just like options except they describe a possible _error_ instead of possible _absence_.
+
+A `Result<T, E>` is either an `Ok(T)` or an `Err(E)`
+
+You can pattern match on the type:
+
+```rust
+fn print(result: Result<i32, ParseIntError>) {
+  match result {
+      Ok(n)  => println!("n is {}", n),
+      Err(e) => println!("Error: {}", e),
+  }
+}
+```
+
+You can also use the `?` operator, which unwraps `T` if the result is `Ok(T)`, or short circuits and immediately returns the error.
+
+Like options, you can `map` and `and_then` over a result:
+
+```rust
+fn multiply(first_number_str: &str, second_number_str: &str) -> Result<i32, ParseIntError> {
+  first_number_str.parse::<i32>().and_then(|first_number| {
+      second_number_str.parse::<i32>().map(|second_number| first_number * second_number)
+  })
+}
+```
+
+It's common to __alias__ results with specific type signatures if you're using a particular result type repeatedly:
+
+```rust
+// Define a generic alias for a `Result` with the error type `ParseIntError`.
+type ParseResult<T> = Result<T, ParseIntError>;
+```
+
+#### Returning a `Result` from `main()`
+
+The `main` function may optionally return a `Result`, if specified:
+
+```rust
+use std::num::ParseIntError;
+
+fn main() -> Result<(), ParseIntError> {
+  let number_str = "10";
+  let number = match number_str.parse::<i32>() {
+      Ok(number)  => number,
+      Err(e) => return Err(e),
+  };
+
+  println!("{}", number);
+  Ok(())
+}
+```
