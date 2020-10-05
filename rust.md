@@ -722,76 +722,6 @@ fn main() {
 }
 ```
 
-Cargo
------
-
-[Cargo](https://doc.rust-lang.org/cargo/) is Rust's official package manager. Cargo can be used for:
-
-* Dependency management
-* Generating new project boilerplate
-* Running unit tests and benchmarks
-
-To create a new Rust project:
-
-```
-$ cargo new foo
-```
-
-This generates a package directory with the following structure:
-
-```
-foo
-├── Cargo.toml
-└── src
-    └── main.rs
-```
-
-* `main.rs` is the root source file of your project.
-* `Cargo.toml` is the config file for Cargo. It looks like this:
-
-
-```toml
-[package]
-name = "foo"
-version = "0.1.0"
-authors = ["john"]
-
-[dependencies]
-```
-
-### Dependency management
-
-You can add project dependencies in one of three ways:
-
-```toml
-[dependencies]
-clap = "2.27.1" # from crates.io
-rand = { git = "https://github.com/rust-lang-nursery/rand" } # from online repo
-bar = { path = "../bar" } # from a path in the local filesystem
-```
-
-### Builds
-
-`cargo build` will build the project.
-
-`cargo run` builds and runs the project in one command.
-
-### Testing
-
-By convention tests go in their own `tests` directory:
-
-```
-foo
-├── Cargo.toml
-├── src
-│   └── main.rs
-└── tests
-    ├── my_test.rs
-    └── my_other_test.rs
-```
-
-`cargo test` will run all your tests.
-
 Generics
 --------
 
@@ -1095,3 +1025,73 @@ fn main() -> Result<(), ParseIntError> {
   Ok(())
 }
 ```
+
+Cargo
+-----
+
+[Cargo](https://doc.rust-lang.org/cargo/) is Rust's official package manager. Cargo can be used for:
+
+* Dependency management
+* Generating new project boilerplate
+* Running unit tests and benchmarks
+
+To create a new Rust project:
+
+```
+$ cargo new foo
+```
+
+This generates a package directory with the following structure:
+
+```
+foo
+├── Cargo.toml
+└── src
+    └── main.rs
+```
+
+* `main.rs` is the root source file of your project.
+* `Cargo.toml` is the config file for Cargo. It looks like this:
+
+
+```toml
+[package]
+name = "foo"
+version = "0.1.0"
+authors = ["john"]
+
+[dependencies]
+```
+
+### Dependency management
+
+You can add project dependencies in one of three ways:
+
+```toml
+[dependencies]
+clap = "2.27.1" # from crates.io
+rand = { git = "https://github.com/rust-lang-nursery/rand" } # from online repo
+bar = { path = "../bar" } # from a path in the local filesystem
+```
+
+### Builds
+
+`cargo build` will build the project.
+
+`cargo run` builds and runs the project in one command.
+
+### Testing
+
+By convention tests go in their own `tests` directory:
+
+```
+foo
+├── Cargo.toml
+├── src
+│   └── main.rs
+└── tests
+    ├── my_test.rs
+    └── my_other_test.rs
+```
+
+`cargo test` will run all your tests.
