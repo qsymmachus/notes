@@ -366,6 +366,133 @@ fn main() {
 }
 ```
 
+Standard library types
+----------------------
+
+### `Box`, stack and heap
+
+In Rust, all values are stack-allocated by default. You can explicity allocate values on the heap ("boxed") by creating a `Box<T>`. 
+
+A box is a pointer to a heap allocated value of type `T`. When a box goes out of scope, the inner object is destroyed and the memory on the heap is reclaimed.
+
+Boxed values can be dereferenced using the `*` operator.
+
+### Vectors
+
+A `Vec<T>` are re-sizable arrays of values of type `T`. Like slices, their size is not known at compile time, but they can grow or shrink at any time.
+
+A vector has three parameters:
+
+* Pointer to the data
+* Length
+* Capacity
+
+A vector can keep growing so long as its length is less than its capacity. When this threshold needs to be passed, the vector is reallocated with a larger capacity.
+
+```rust
+fn main() {
+  // The `vec!` macro can initialize a vector:
+  let mut nums = vec![1, 2, 3];
+
+  // The vector needs to be mutable if you want to add/remove elements.
+  nums.push(4);
+
+  // You can easily iterate over vectors:
+  for n in nums.iter() {
+    println!("{}", n);
+  }
+
+  for (i, n) in nums.iter().enumerate() {
+    println!("Value at index {} is: {}", i, n);
+  }
+}
+```
+
+### Strings
+
+There are two types of strings in Rust, `String` and `&str`.
+
+A `String` is stored as a vector of bytes (`Vec<u8>`) and guaranteed to be a valid UTF-8 sequence. Strings are heap allocated, growable, and not null terminated.
+
+A `&str` is a slice (`&[u8]`) that always points to a valid UTF-8 sequence, and can be used to view a slice of a string, just as `&[T]` is a view into `Vec<T>`.
+
+```rust
+fn main() {
+  // A reference to a string allocated in read only memory:
+  let pangram: &'static str = "the quick brown fox jumps over the lazy dog";
+
+  // Iterate over words in reverse, no new string is allocated
+  for word in pangram.split_whitespace().rev() {
+      println!("{}", word);
+  }
+
+  // Heap allocate a string
+  let i_like_dogs = String::from("I like dogs");
+  
+  // YELL IT!
+  for word in i_like_dogs.split_whitespace() {
+      println!("{}", word.to_uppercase());
+  }
+}
+```
+
+### `HashMap`
+
+A `HashMap` is a key-value store.
+
+Keys can be booleans, integers, strings, or any type that implements `Eq` and `Hash` traits. Recall that you can _derive_ these traits easily with the attribute `#[derive(PartialEq, Eq, Hash)]`.
+
+Like vectors, hash maps can grow, but they also shrink themselves if they have excess space.
+
+```rust
+use std::collections::HashMap;
+
+fn main() { 
+  let mut contacts = HashMap::new();
+
+  contacts.insert("Daniel", "798-1364");
+  contacts.insert("Ashley", "645-7689");
+  contacts.insert("Katie", "435-8291");
+  contacts.insert("Robert", "956-1745");
+
+  // Takes a reference and returns Option<&V>
+  match contacts.get(&"Daniel") {
+      Some(&number) => println!("Calling Daniel: {}", number),
+      _ => println!("Don't have Daniel's number."),
+  }
+
+  // `HashMap::insert()` returns `None`
+  // if the inserted value is new, `Some(value)` otherwise
+  contacts.insert("Daniel", "164-6743");
+
+  // `HashMap::iter()` returns an iterator that yields 
+  // (key, value) pairs in random order:
+  for (contact, &number) in contacts.iter() {
+      println!("{}: {}", contact, number); 
+  }
+}
+```
+
+### HashSet
+
+A `HashSet` is just a `HashMap` of type `HashMap<T, ()>`. It's used to store deduplicated elements in the form of hash keys. In other words, it's commonly used as a "set" type.
+
+Hash sets implement `union`, `difference`, and `intersection` methods.
+
+```rust
+use std::collections::HashSet;
+
+fn main() {
+  let mut set: HashSet<i32> = vec![1i32, 2, 3].into_iter().collect();
+  let mut b: HashSet<i32> = vec![2i32, 3, 4].into_iter().collect();
+
+  assert!(a.insert(4));
+  assert!(a.contains(&4));
+
+  println!("Union: {:?}", a.union(&b).collect::<Vec<&i32>>());
+}
+```
+
 Control Flow
 ------------
 
