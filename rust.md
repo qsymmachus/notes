@@ -1222,3 +1222,150 @@ foo
 ```
 
 `cargo test` will run all your tests.
+
+Testing
+-------
+
+Rust has established conventions for writing unit tests.
+
+Unit tests go into a `tests` module with the `#[cfg(test)]` attribute. Test functions are marked with the `#[test]` attribute.
+
+Tests fail when something in the test function panic, usually by means of one of these helper macros:
+
+* `assert!(expression)` panics if the expression is false.
+* `assert_eq!(a, b)` panics if `a` and `b` are not equal.
+* `assert_ne!(a, b)` panics if `a` and `b` _are_ equal.
+
+```rust
+pub fn add(a: i32, b: i32) -> i32 {
+  a + b
+}
+
+#[cfg(test)]
+mod tests {
+  // Note this useful idiom: importing names from outer (for mod tests) scope.
+  use super::*;
+
+  #[test]
+  fn test_add() {
+    assert_eq!(add(1, 2), 3);
+  }
+}
+```
+
+You can test whether a function panics as expected using the `#[should_panic]` attribute:
+
+```rust
+pub fn divide_non_zero_result(a: u32, b: u32) -> u32 {
+  if b == 0 {
+    panic!("Divide-by-zero error");
+  } else if a < b {
+    panic!("Divide result is zero");
+  }
+  a / b
+}
+
+#[cfg(test)]
+mod tests {
+  use super::*;
+
+  #[test]
+  #[should_panic]
+  fn test_any_panic() {
+    divide_non_zero_result(1, 0);
+  }
+
+  #[test]
+  #[should_panic(expected = "Divide result is zero")]
+  fn test_specific_panic() {
+    divide_non_zero_result(1, 10);
+  }
+}
+```
+
+### Integration testing
+
+Unit tests usually only test one module at a time. Integration tests are external to your crate and use only its public interface in the same way any other code would.
+
+Cargo looks for integration tests in the `tests` directory.
+
+Assume you have this content in `src/lib.rs`:
+
+```rust
+// Assume that crate is called adder, will have to extern it in integration test.
+pub fn add(a: i32, b: i32) -> i32 {
+  a + b
+}
+```
+
+Then, you can write this test file in `tests/integration-test.rs`:
+
+```rust
+// extern crate we're testing, same as any other code would do.
+extern crate adder;
+
+#[test]
+fn test_add() {
+  assert_eq!(adder::add(3, 2), 5);
+}
+```
+
+Each rust source file in the `tests` directory is compiled as a separate crate. If you want to share code between integration tests, you can make a module with public functions and import it within your tests.
+
+File `tests/common.rs`:
+
+```rust
+pub fn setup() {
+  // Some setup code for your tests
+}
+```
+
+Import your setup module in `tests/integration_test.rs`:
+
+```rust
+extern crate adder;
+
+// importing the common module:
+mod common;
+
+#[test]
+fn test_add() {
+  // using common code.
+  common::setup();
+  assert_eq!(adder::add(3, 2), 5);
+}
+```
+
+### Development dependencies
+
+Dependencies you only need during testing and development are specified in `Cargo.toml` within the `[dev-dependencies]` section.
+
+For example, say you want to use the `pretty_assertions` crate in your tests. In `Cargo.toml`:
+
+```toml
+[dev-dependencies]
+pretty_assertions = "0.4.0"
+```
+
+Then within your source code:
+
+```rust
+// externing crate for test-only use
+#[cfg(test)]
+#[macro_use]
+extern crate pretty_assertions;
+
+pub fn add(a: i32, b: i32) -> i32 {
+  a + b
+}
+
+#[cfg(test)]
+mod tests {
+  use super::*;
+
+  #[test]
+  fn test_add() {
+      assert_eq!(add(2, 3), 5);
+  }
+}
+```
