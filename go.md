@@ -908,5 +908,5 @@ Useful resources:
 
 * You were burned by this exact gotcha once. Make sure you understand it: [https://golang.org/doc/faq#closures_and_goroutines](https://golang.org/doc/faq#closures_and_goroutines)
 * When (and when not) to use pointers: [https://medium.com/@kent.rancourt/go-pointers-when-to-use-pointers-4f29256ddff3](https://medium.com/@kent.rancourt/go-pointers-when-to-use-pointers-4f29256ddff3)
-* Go has robust instrumentation/diagnostic tooling out of the box: https://golang.org/doc/diagnostics.html
-  * How to set up gPRC tracing instrumentation: https://charithe.github.io/tracing-grpc-services-in-go.html
+* Go has robust instrumentation/diagnostic tooling out of the box: [https://golang.org/doc/diagnostics.html](https://golang.org/doc/diagnostics.html)
+  * How to set up gPRC tracing instrumentation: [https://charithe.github.io/tracing-grpc-services-in-go.html](https://charithe.github.io/tracing-grpc-services-in-go.html)
