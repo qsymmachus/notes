@@ -221,8 +221,8 @@ To scale up a deployment to say, 4 instances:
 kubectl scale deployments/<name> --replicas=4
 ```
 
-Scaling your Applications
--------------------------
+Rolling updates
+---------------
 
 Kubernetes allows you to make rolling updates so pods are each deployed in turn without any overall downtime.
 Updates are version and any deployment update can be reverted to the previous version (neat!).
