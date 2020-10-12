@@ -245,6 +245,17 @@ To revert a rollout to its previous state:
 kubectl rollout undo deployments/<name>
 ```
 
+Port Forwarding
+---------------
+
+Say you want to hit an endpoint on a particular pod. That's very easy to do with the `port-forward` command:
+
+```
+kubectl port-forward <pod name> <pod port you want>:<local port>
+```
+
+You can then hit the pod at `localhost:<local port>` Cool!
+
 Using Helm and Charts
 ---------------------
 
