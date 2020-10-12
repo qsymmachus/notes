@@ -251,7 +251,7 @@ Port Forwarding
 Say you want to hit an endpoint on a particular pod. That's very easy to do with the `port-forward` command:
 
 ```
-kubectl port-forward <pod name> <pod port you want>:<local port>
+kubectl port-forward <pod name> <local port>:<pod port you want>
 ```
 
 You can then hit the pod at `localhost:<local port>` Cool!
