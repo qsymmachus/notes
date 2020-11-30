@@ -412,4 +412,5 @@ More resources
 * [kubectl CLI reference doc](https://kubernetes.io/docs/reference/kubectl/overview/)
 * [Helm charts and how they work](https://github.com/helm/helm/blob/master/docs/charts.md)
 * [Kubernetes networking](https://jvns.ca/blog/2017/10/10/operating-a-kubernetes-network/)
+* [Debugging Kubernetes DNS issues](https://kubernetes.io/docs/tasks/administer-cluster/dns-debugging-resolution)
 
