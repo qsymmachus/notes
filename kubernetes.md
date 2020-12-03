@@ -413,4 +413,5 @@ More resources
 * [Helm charts and how they work](https://github.com/helm/helm/blob/master/docs/charts.md)
 * [Kubernetes networking](https://jvns.ca/blog/2017/10/10/operating-a-kubernetes-network/)
 * [Debugging Kubernetes DNS issues](https://kubernetes.io/docs/tasks/administer-cluster/dns-debugging-resolution)
+* [Kind, a nice way to run a test cluster locally](https://kind.sigs.k8s.io/)
 
