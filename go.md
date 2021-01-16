@@ -313,7 +313,7 @@ A slice is formed by specifying and upper and lower index, which selects a range
 ```go
 primes := [5]int{2, 3, 5, 7, 11}
 
-// This slices [2, 3, 5]
+// This slices [2, 3, 5, 7]
 sliced := primes[0:4]
 ```
 
