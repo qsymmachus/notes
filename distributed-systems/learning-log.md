@@ -16,7 +16,7 @@ Excellent [lecture series](https://www.youtube.com/playlist?list=PLeKd45zvjcDFUE
 - [X] Physical Time
 - [X] Clock Synchronization
 - [X] Causality and happens-before
-- [ ] Logical time
+- [X] Logical time
 - [ ] Broadcast ordering
 - [ ] Broadcast algorithms
 - [ ] Replication
