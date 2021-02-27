@@ -13,10 +13,13 @@ Networking
 
 ![TCP/IP Layering Model](https://raw.githubusercontent.com/qsymmachus/notes/master/images/TCP-IP-layering-model.jpeg)
 
-Agile Philosophy & Practice
----------------------------
+Getting Things Done
+-------------------
 
 * Stellman & Greene, "Learning Agile"
+* [Work is Work](https://codahale.com/work-is-work/) by Coda Hale
+  * Contention cost can grow faster than work capacity: "If contention on those [shared] resources is unmanaged, organizational growth can result in catastrophic increases in wait time. At some point, adding new members can cause the organization’s overall productivity to decrease instead of increase, as the increase in wait time due to contention is greater than the increase in work capacity."
+  * Invest in reducing resource contention: "If the organization’s intent is to increase value delivery by hiring more people, work efforts must be as independent as possible. Leaders should develop practices and processes to ensure that the work efforts which their strategies consider parallel are _actually parallel_."
 
 Infrastructure
 --------------
