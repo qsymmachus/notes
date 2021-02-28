@@ -18,7 +18,7 @@ Excellent [lecture series](https://www.youtube.com/playlist?list=PLeKd45zvjcDFUE
 - [X] Causality and happens-before
 - [X] Logical time
 - [X] Broadcast ordering
-- [ ] Broadcast algorithms
+- [X] Broadcast algorithms
 - [ ] Replication
 - [ ] Quorums
 - [ ] State machine replication
