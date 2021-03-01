@@ -19,7 +19,7 @@ Excellent [lecture series](https://www.youtube.com/playlist?list=PLeKd45zvjcDFUE
 - [X] Logical time
 - [X] Broadcast ordering
 - [X] Broadcast algorithms
-- [ ] Replication
+- [X] Replication
 - [ ] Quorums
 - [ ] State machine replication
 - [ ] Consensus
