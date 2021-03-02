@@ -910,3 +910,5 @@ Useful resources:
 * When (and when not) to use pointers: [https://medium.com/@kent.rancourt/go-pointers-when-to-use-pointers-4f29256ddff3](https://medium.com/@kent.rancourt/go-pointers-when-to-use-pointers-4f29256ddff3)
 * Go has robust instrumentation/diagnostic tooling out of the box: [https://golang.org/doc/diagnostics.html](https://golang.org/doc/diagnostics.html)
   * How to set up gPRC tracing instrumentation: [https://charithe.github.io/tracing-grpc-services-in-go.html](https://charithe.github.io/tracing-grpc-services-in-go.html)
+* Pretty good tutorial on goroutines & channels: [https://golangbot.com/goroutines/](https://golangbot.com/goroutines/)
+
