@@ -20,9 +20,9 @@ Excellent [lecture series](https://www.youtube.com/playlist?list=PLeKd45zvjcDFUE
 - [X] Broadcast ordering
 - [X] Broadcast algorithms
 - [X] Replication
-- [ ] Quorums
-- [ ] State machine replication
-- [ ] Consensus
+- [X] Quorums
+- [X] State machine replication
+- [X] Consensus
 - [ ] Raft
 - [ ] Two-phase commmit
 - [ ] Linearizability
