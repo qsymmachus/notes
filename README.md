@@ -43,3 +43,8 @@ Distributed Systems
   * __causal__: messages are delivered on all nodes in causal order, but concurrent messages are delivered in any order and may vary from node to node.
   * __reliable__: non-faulty nodes deliver every message, retrying dropped messages.
   * __best-effort__: messages may be dropped.
+
+* The overview of Consul's architecture is a great real-world illustration of how distributed systems are built in practice: [Consul Architecture](https://www.consul.io/docs/architecture)
+  * How Consul uses the [gossip protocol](https://www.consul.io/docs/architecture/gossip) so peers can find each other and detect node failure.
+  * How Consul uses [consensus](https://www.consul.io/docs/architecture/consensus) to replicate data across peer nodes and elect a leader.
+
