@@ -23,7 +23,7 @@ Excellent [lecture series](https://www.youtube.com/playlist?list=PLeKd45zvjcDFUE
 - [X] Quorums
 - [X] State machine replication
 - [X] Consensus
-- [ ] Raft
+- [X] Raft
 - [ ] Two-phase commmit
 - [ ] Linearizability
 - [ ] Eventual consistency
