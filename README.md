@@ -35,16 +35,37 @@ Distributed Systems
   * Of the CAP theorem's consistency, availability, and partition tolerance, partition tolerance is mandatory in distributed systems. You can only choose between consistency and availability.
   * A more helpful heuristic may be the tradeoff between _yield_ (percent of requests answered successfully) and _harvest_ (percent of data included in the responses).
   * The yield/harvest tradeoff is outlined in Fox & Brewer, "Harvest, yield, and scalable tolerant systems" (1999).
-
-![Replication and Broadcast](https://raw.githubusercontent.com/qsymmachus/notes/master/images/replication-and-broadcast.png)
-
-* Broadcast ordering (a good [summary](https://www.youtube.com/watch?v=A8oamrHf_cQ&list=PLeKd45zvjcDFUEv_ohr_HdUFe97RItdiB&index=12)):
-  * __total order__: messages are delivered on all nodes in the same order. Often accomplished with a leader/follower pattern, where a single leader determines total order.
-  * __causal__: messages are delivered on all nodes in causal order, but concurrent messages are delivered in any order and may vary from node to node.
-  * __reliable__: non-faulty nodes deliver every message, retrying dropped messages.
-  * __best-effort__: messages may be dropped.
-
 * The overview of Consul's architecture is a great real-world illustration of how distributed systems are built in practice: [Consul Architecture](https://www.consul.io/docs/architecture)
   * How Consul uses the [gossip protocol](https://www.consul.io/docs/architecture/gossip) so peers can find each other and detect node failure.
   * How Consul uses [consensus](https://www.consul.io/docs/architecture/consensus) to replicate data across peer nodes and elect a leader.
 
+### Replication and Broadcast
+
+![Replication and Broadcast](https://raw.githubusercontent.com/qsymmachus/notes/master/images/replication-and-broadcast.png)
+
+* Broadcast ordering (a good [summary](https://www.youtube.com/watch?v=A8oamrHf_cQ&list=PLeKd45zvjcDFUEv_ohr_HdUFe97RItdiB&index=12)):
+  * __total order__: messages are delivered on all nodes in the same order. Often accomplished with a leader/follower pattern, where a single leader determines total order (see _consensus_ below).
+  * __causal__: messages are delivered on all nodes in causal order, but concurrent messages are delivered in any order and may vary from node to node.
+  * __reliable__: non-faulty nodes deliver every message, retrying dropped messages.
+  * __best-effort__: messages may be dropped.
+
+### Consensus Protocols
+
+* Consensus protocols allow follower nodes to elect a leader, and allows the leader to help followers reach a consensus on shared state. Consensus is _formally equivalent_ to total order broadcast.
+* Excellent explanation of the [Raft consensus protocol](https://www.youtube.com/watch?v=IPnesACYRck&list=PLeKd45zvjcDFUEv_ohr_HdUFe97RItdiB&index=19)
+
+![Consensus and Total Order](https://raw.githubusercontent.com/qsymmachus/notes/master/images/consensus-and-total-order.png)
+
+### Distributed Transactions
+
+* Transactions can either be committed or aborted (rolled back). _Distributed_ transactions do this across multiple nodes.
+
+![Distributed Transactions](https://raw.githubusercontent.com/qsymmachus/notes/master/images/distributed-transactions.png)
+
+* Atomic commits sounds similar to _consensus_, but it makes stricter guarantees.
+
+![Atomic Commit vs. Consensus](https://raw.githubusercontent.com/qsymmachus/notes/master/images/atomic-commit-vs-consensus.png)
+
+* _Two-phase commits_ are a common protocol for atomic commits in a distributed system.
+
+![2PC](https://raw.githubusercontent.com/qsymmachus/notes/master/images/two-phase-commit.png)
