@@ -24,8 +24,8 @@ Excellent [lecture series](https://www.youtube.com/playlist?list=PLeKd45zvjcDFUE
 - [X] State machine replication
 - [X] Consensus
 - [X] Raft
-- [ ] Two-phase commmit
-- [ ] Linearizability
+- [X] Two-phase commmit
+- [X] Linearizability
 - [ ] Eventual consistency
 - [ ] Collaboration software
 - [ ] Google's spanner 

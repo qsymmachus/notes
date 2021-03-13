@@ -33,7 +33,7 @@ Distributed Systems
 * Design patterns outlined in [distributed-systems](https://github.com/qsymmachus/notes/blob/master/distributed-systems)
 * Best explanation of the [CAP theorem](https://codahale.com/you-cant-sacrifice-partition-tolerance/)
   * Of the CAP theorem's consistency, availability, and partition tolerance, partition tolerance is mandatory in distributed systems. You can only choose between consistency and availability.
-  * A more helpful heuristic may be the tradeoff between _yield_ (percent of requests answered successfully) and _harvest_ (percent of data included in the responses).
+  * A more helpful heuristic may be the tradeoff between _yield_ (percent of requests answered successfully) and _harvest_ (percent of most upt-to-date data included in the responses).
   * The yield/harvest tradeoff is outlined in Fox & Brewer, "Harvest, yield, and scalable tolerant systems" (1999).
 * The overview of Consul's architecture is a great real-world illustration of how distributed systems are built in practice: [Consul Architecture](https://www.consul.io/docs/architecture)
   * How Consul uses the [gossip protocol](https://www.consul.io/docs/architecture/gossip) so peers can find each other and detect node failure.
@@ -69,3 +69,8 @@ Distributed Systems
 * _Two-phase commits_ are a common protocol for atomic commits in a distributed system.
 
 ![2PC](https://raw.githubusercontent.com/qsymmachus/notes/master/images/two-phase-commit.png)
+
+### Consistency
+
+* How do you define "consistency" when you have multiple nodes reading/writing replicated data?
+  * __Linearizability__: This is the strongest definition of consistency. All operations behave as if they were a against a single copy of the data. If a write starts and finish before a read, the read should always return the latest value. Concurrent read/writes make no guarantees about which value is returned by the read, but that's still consistent with linearizability.
