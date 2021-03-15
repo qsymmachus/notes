@@ -48,7 +48,7 @@ Great outline of distributed systems [design patterns](https://martinfowler.com/
 - [ ] Request Pipeline
 - [ ] Segmented Log
 - [ ] Single Socket Channel
-- [ ] Singular Update Queue
+- [X] Singular Update Queue
 - [ ] State Watch
 - [ ] Write-Ahead Log
 
