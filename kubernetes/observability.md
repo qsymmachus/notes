@@ -36,9 +36,9 @@ Tracing
 
 [OpenTracing](https://opentracing.io/) is a project to enable open source, vendor neutral distributed tracing. It's an API spec, and frameworks and libraries that implement taht spec.
 
-Generally tracing requires services to actively _push_ tracing instrumentation.
+Generally tracing requires services to actively _push_ tracing instrumentation. You can avoid implementing instrumentation on every service by using a service mesh like [Traefik](https://traefik.io/) that generates tracing instrumentation for you.
 
 * [Jaeger](https://www.jaegertracing.io/docs/1.22/getting-started/) is a popular project that implements the OpenTracing spec.
-    * Requires [client-side instrumentation](https://www.jaegertracing.io/docs/1.22/getting-started/) to be set up on each service you want to trace.
+    * Requires [client-side instrumentation](https://www.jaegertracing.io/docs/1.22/getting-started/) to be set up on each service you want to trace (or use a service mesh that does this for you).
     * The Jaeger [operator](https://github.com/jaegertracing/jaeger-operator) then collects tracing metrics sent by the clients.
 * [Zipkin](https://zipkin.io/) is another popular option, a bit older than Jaeger but also implements the OpenTracing spec as well.
