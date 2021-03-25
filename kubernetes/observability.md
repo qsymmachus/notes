@@ -34,9 +34,9 @@ By default in Kubernetes, a container's stdout and stderr are written to a file 
 Tracing
 -------
 
-[OpenTracing](https://opentracing.io/) is a project to enable open source, vendor neutral distributed tracing. It's an API spec, and frameworks and libraries that implement taht spec.
+[OpenTracing](https://opentracing.io/) is a project to enable open source, vendor neutral distributed tracing. It's an API spec, and frameworks and libraries that implement that spec.
 
-Generally tracing requires services to actively _push_ tracing instrumentation.
+Generally tracing requires services to actively _push_ tracing instrumentation. However, many service meshes, like [Traefik](https://doc.traefik.io/traefik/observability/tracing/jaeger/), provide tracing instrumentation out of the box (Traefik uses Jaeger, see below).
 
 * [Jaeger](https://www.jaegertracing.io/docs/1.22/getting-started/) is a popular project that implements the OpenTracing spec.
     * Requires [client-side instrumentation](https://www.jaegertracing.io/docs/1.22/getting-started/) to be set up on each service you want to trace.
