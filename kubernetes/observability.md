@@ -14,10 +14,10 @@ Metrics
 
 The current (as of March 2021) standard for scraping and publishing metrics in a Kubernetes cluster is [Prometheus](https://prometheus.io/). Why is it popular?
 
-* Prometheus gathers metrics as a time series if key-value pairs.
+* Prometheus gathers metrics as a time series off key-value pairs.
 * The Prometheus server _pulls_ metrics from its sources, sources don't have to actively _push_ metrics.
 * Easily scrapes from [kube state metrics](https://github.com/kubernetes/kube-state-metrics), a system service that listens to the kube API and generates metrics that Prometheus can scrape.
-* Prometheus metrics can be queried using its own query language, and this queries can drive alerting using `alert-manager`.
+* Prometheus metrics can be queried using its own query language, and these queries can drive alerting using `alert-manager`.
 * Prometheus can scrape data from any service that exposes an HTTP endpoint that produces metrics in the correct [exposition format](https://prometheus.io/docs/instrumenting/exposition_formats/).
   * Alternatively, there are a wide range of [exporters](https://prometheus.io/docs/instrumenting/exporters/) that integrate with common services (usually running as a sidecar container) to expose metrics to Prometheus.
 
