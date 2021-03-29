@@ -37,7 +37,9 @@ Authorization flow
 Access Tokens in detail
 -----------------------
 
-Access tokens contain:
+The Oauth spec _does not_ define what an access token should actually look like. In practice, [JSON Web Tokens](https://jwt.io/) (JWTs) are most common.
+
+JWT access tokens contain:
 
 * Identity of the client
 * Scopes
