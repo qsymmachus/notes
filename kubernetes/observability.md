@@ -14,10 +14,10 @@ Metrics
 
 The current (as of March 2021) standard for scraping and publishing metrics in a Kubernetes cluster is [Prometheus](https://prometheus.io/). Why is it popular?
 
-* Prometheus gathers metrics as a time series if key-value pairs.
+* Prometheus gathers metrics as a time series of key-value pairs.
 * The Prometheus server _pulls_ metrics from its sources, sources don't have to actively _push_ metrics.
 * Easily scrapes from [kube state metrics](https://github.com/kubernetes/kube-state-metrics), a system service that listens to the kube API and generates metrics that Prometheus can scrape.
-* Prometheus metrics can be queried using its own query language, and this queries can drive alerting using `alert-manager`.
+* Prometheus metrics can be queried using its own query language, and these queries can drive alerting using `alert-manager`.
 * Prometheus can scrape data from any service that exposes an HTTP endpoint that produces metrics in the correct [exposition format](https://prometheus.io/docs/instrumenting/exposition_formats/).
   * Alternatively, there are a wide range of [exporters](https://prometheus.io/docs/instrumenting/exporters/) that integrate with common services (usually running as a sidecar container) to expose metrics to Prometheus.
 
@@ -34,11 +34,12 @@ By default in Kubernetes, a container's stdout and stderr are written to a file 
 Tracing
 -------
 
-[OpenTracing](https://opentracing.io/) is a project to enable open source, vendor neutral distributed tracing. It's an API spec, and frameworks and libraries that implement taht spec.
+[OpenTracing](https://opentracing.io/) is a project to enable open source, vendor neutral distributed tracing. It's an API spec, and frameworks and libraries that implement that spec.
 
-Generally tracing requires services to actively _push_ tracing instrumentation. You can avoid implementing instrumentation on every service by using a service mesh like [Traefik](https://traefik.io/) that generates tracing instrumentation for you.
+Generally tracing requires services to actively _push_ tracing instrumentation. However, many service meshes, like [Traefik](https://doc.traefik.io/traefik/observability/tracing/jaeger/), provide tracing instrumentation out of the box (Traefik uses Jaeger, see below).
 
 * [Jaeger](https://www.jaegertracing.io/docs/1.22/getting-started/) is a popular project that implements the OpenTracing spec.
     * Requires [client-side instrumentation](https://www.jaegertracing.io/docs/1.22/getting-started/) to be set up on each service you want to trace (or use a service mesh that does this for you).
     * The Jaeger [operator](https://github.com/jaegertracing/jaeger-operator) then collects tracing metrics sent by the clients.
 * [Zipkin](https://zipkin.io/) is another popular option, a bit older than Jaeger but also implements the OpenTracing spec as well.
+
