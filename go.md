@@ -757,6 +757,38 @@ Channels can optionally be _buffered_. Sends to a buffered channel block when th
 ch := make(chan int, 100)
 ```
 
+Here's an example of how to parallelize a workload using a `sync.WaitGroup`:
+
+```go
+nums := []int{1, 2, 3, 4, 5}
+
+// Since this channel has a buffer length of 5, you can "queue" (send) 5 messages on it before
+// it will block until a message is received.
+results := make(chan (int), len(nums))
+
+// Wait groups allow us to coordinate groups of goroutines.
+// wg.Add(n) – Increments the group's counter by `n`
+// wg.Done() - Decrements the counter by 1
+// wg.Wait() – Blocks until the counter is == 0
+var wg sync.WaitGroup
+for _, n := range numbers {
+  wg.Add(1)
+  go func(n int) int {
+    defer wg.Done()
+    results <- n * 2 // sends the result of doubling `n` to our channel
+  }(n)
+}
+
+// Wait for the workgroup to finish, then close the channel so the `for` loop below knows that no
+// more messages will be received.
+wg.Wait()
+close(results)
+
+for result := range results {
+  fmt.Println(result) // 2, 4, 6, 8, 10
+}
+```
+
 ### Closing channels
 
 Senders may optionally close a channel. This indicates when no more values will be sent. Receivers can test whether a channel has closed by assigning a second parameter to what is received by a channel:
