@@ -757,7 +757,10 @@ Channels can optionally be _buffered_. Sends to a buffered channel block when th
 ch := make(chan int, 100)
 ```
 
-Here's an example of how to parallelize a workload using a `sync.WaitGroup`:
+### Parallelization
+
+
+Groups of goroutines can be coordinated using a "wait group". Here's an example of how to parallelize a workload using a `sync.WaitGroup`:
 
 ```go
 nums := []int{1, 2, 3, 4, 5}
