@@ -945,5 +945,7 @@ Useful resources:
 * When (and when not) to use pointers: [https://medium.com/@kent.rancourt/go-pointers-when-to-use-pointers-4f29256ddff3](https://medium.com/@kent.rancourt/go-pointers-when-to-use-pointers-4f29256ddff3)
 * Go has robust instrumentation/diagnostic tooling out of the box: [https://golang.org/doc/diagnostics.html](https://golang.org/doc/diagnostics.html)
   * How to set up gPRC tracing instrumentation: [https://charithe.github.io/tracing-grpc-services-in-go.html](https://charithe.github.io/tracing-grpc-services-in-go.html)
+	* Also see [your own notes](https://github.com/qsymmachus/notes/blob/master/go/diagnostics.md) on this.
 * Pretty good tutorial on goroutines & channels: [https://golangbot.com/goroutines/](https://golangbot.com/goroutines/)
+* Quick explanation of `context`s and how they're cancelled: [https://medium.com/a-journey-with-go/go-context-and-cancellation-by-propagation-7a808bbc889c](https://medium.com/a-journey-with-go/go-context-and-cancellation-by-propagation-7a808bbc889c)
 
