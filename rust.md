@@ -11,7 +11,7 @@ Hello, world
 Here's "hello world" in Rust, the binary executes whatever is in the `main` function:
 
 ```rust
-fun main() {
+fn main() {
   println!("Hello World!");
 }
 ```
@@ -53,7 +53,7 @@ fn main() {
 * `fmt::Debug`: Uses the `{:?}` marker. Format text for debugging purposes.
 * `fmt::Display`: Uses the `{}` marker. Format text in a more elegant, user friendly fashion.
 
-In all the examples above, use used `fmt::Display` because the standard library implements this trait for all the basic types. To print _custom_ types, you must write your own implementation.
+In all the examples above, we used `fmt::Display` because the standard library implements this trait for all the basic types. To print _custom_ types, you must write your own implementation.
 
 ### Custom `fmt::Display` implementations
 
@@ -557,9 +557,11 @@ fn main() {
 
 Collections can be converted into iterators using one of three methods:
 
-* `iter()` borrows each element of the collection, leaving the original collection untouched.
-* `into_iter()` consumes the collection so it is no longer available for use outside the loop.
+* `iter()` borrows each element of the collection, leaving the original collection untouched. The iterator returned by iter will yield `&T`.
+* `into_iter()` consumes the collection so it is no longer available for use outside the loop. The iterator returned by into_iter may yield any of `T`, `&T` or `&mut T`, depending on the context.
 * `iter_mut()` borrows each element but allows you to mutate it so you can modify the collection in place.
+
+Another way to phrase it – if you just need to "look at" the data, use `iter`, if you need to `edit/mutate it`, use iter_mut, and if you need to give it a new owner, use `into_iter`.
 
 Pattern matching
 ----------------
@@ -793,7 +795,7 @@ In `split.rs`:
 mod my;
 
 fn main() {
-  // The `function()` definite in `my.rs` is treated like part of a `my` module:
+  // The `function()` definition in `my/mod.rs` is treated like part of a `my` module:
   my::function();
 
   // Since this file imports `my`, and `my/mod.rs` imports `indirect.rs`, it's treated as a nested module:
@@ -1243,7 +1245,7 @@ pub fn add(a: i32, b: i32) -> i32 {
 
 #[cfg(test)]
 mod tests {
-  // Note this useful idiom: importing names from outer (for mod tests) scope.
+  // Note this useful idiom: importing names from outer scope (everything just outside the 'tests' module).
   use super::*;
 
   #[test]
