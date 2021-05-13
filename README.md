@@ -74,3 +74,10 @@ Distributed Systems
 
 * How do you define "consistency" when you have multiple nodes reading/writing replicated data?
   * __Linearizability__: This is the strongest definition of consistency. All operations behave as if they were a against a single copy of the data. If a write starts and finish before a read, the read should always return the latest value. Concurrent read/writes make no guarantees about which value is returned by the read, but that's still consistent with linearizability.
+
+Algorithms & Data Structures
+----------------------------
+
+* Steven Skiena has a good [introduction to algorithms](https://www.youtube.com/watch?v=A2bFN3MyNDA&list=PLOtl7M3yp-DX32N0fVIyvn7ipWKNGmwpp) lecture series, along with lecture notes.
+  * Your notes are saved in [algorithms.pdf](https://github.com/qsymmachus/notes/blob/master/algorithms.pdf).
+
