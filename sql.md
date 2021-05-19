@@ -79,3 +79,15 @@ In this example it will sort by `column1`, but use `column2` as a secondary sort
 
 By default, order by sorts in ascending (`ASC`) order.
 
+INSERT INTO
+-----------
+
+To insert new records into a table:
+
+```sql
+INSERT INTO table_name (column1, column2, column3, ...)
+VALUES (value1, value2, value3, ...)
+```
+
+You can omit the column list if you're inserting values for every column. Be sure that your value order matches the column order, however.
+
