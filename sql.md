@@ -25,6 +25,14 @@ SELECT DISTINCT column1, column2, ...
 FROM table_name;
 ```
 
+Syntax varies by database, but in MySQL and PostgreSQL, you can also limit the number of columns returned by a select statement with a `LIMIT` clause:
+
+```sql
+SELECT *
+FROM table_name
+LIMIT number;
+```
+
 WHERE
 -----
 
@@ -86,8 +94,69 @@ To insert new records into a table:
 
 ```sql
 INSERT INTO table_name (column1, column2, column3, ...)
-VALUES (value1, value2, value3, ...)
+VALUES (value1, value2, value3, ...);
 ```
 
 You can omit the column list if you're inserting values for every column. Be sure that your value order matches the column order, however.
+
+UPDATE
+------
+
+To modify existing records in a table:
+
+```sql
+UPDATE table_name
+SET column1 = value1, column2 = value2, ...
+WHERE condition;
+```
+
+Be careful, if you omit the `WHERE` clause, _all_ records in the database will be updated!
+
+DELETE
+------
+
+To delete existing records in a table:
+
+```
+DELETE FROM table_name
+WHERE condition;
+```
+
+Again, be careful – if you forget the `WHERE` clause, _all_ records will be deleted. There are times you may want to do this, will still preserving the table (for example to delete test data).
+
+MIN, MAX, COUNT, AVG, SUM
+-------------------------
+
+These are _functions_ that operate on column values.
+
+The min function returns the smallest value of the selected column, and max returns the biggest:
+
+```sql
+SELECT MIN(column_name), MAX(column_name
+FROM table_name;
+```
+
+Count returns the number of rows returned by a query:
+
+```sql
+SELECT COUNT(column_name)
+FROM table_name
+WHERE condition;
+```
+
+Average returns the average value of a _numeric_ column:
+
+```sql
+SELECT AVG(column_name)
+FROM table_name
+WHERE condition;
+```
+
+Sum returns the total sum of a _numeric_ column:
+
+```sql
+SELECT SUM(column_name)
+FROM table_name
+WHERE condition;
+```
 
