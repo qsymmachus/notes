@@ -1,6 +1,8 @@
 GraphQL
 =======
 
+* [Introduction to GraphQL](https://graphql.org/learn/)
+
 Conceptually GraphQL is both
 
 1. A __query language__ for an API,
