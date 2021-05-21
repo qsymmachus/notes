@@ -176,3 +176,38 @@ FROM table_name
 WHERE column1 LIKE pattern;
 ```
 
+ALIASES
+-------
+
+Aliases allow you to give tables or columns a temporary name.
+
+```sql
+SELECT column_name AS alias_name
+FROM table_name;
+```
+
+```sql
+SELECT column_name
+FROM table_name AS alias_name;
+```
+
+JOIN
+----
+
+A join clauses combines rows from two or more tables, using a shared column between them.
+
+```sql
+SELECT Orders.OrderID, Customers.CustomerName, Orders.OrderDate
+FROM Orders
+INNER JOIN Customers ON Orders.CustomerID=Customers.CustomerID;
+```
+
+There are four different kinds of joins:
+
+* `(INNER) JOIN` Returns records that have matching values in both tables.
+* `LEFT JOIN` Returns _all_ rows from the left (first) table, _and_ the matched rows from the right (second) table.
+* `RIGHT JOIN` Returns _all_ rows from the right (second) table, _and_ the matched rows from the left (first) table.
+* `FULL JOIN` Returns _all_ rows from _both_ the right and left tables.
+
+![sql join venn diagrams](./sql-joins.png)
+
