@@ -160,3 +160,19 @@ FROM table_name
 WHERE condition;
 ```
 
+LIKE
+----
+
+The like operator is used in where clauses to match column values against patterns.
+
+Two common wildcards are used in these patterns:
+
+* `%` Zero, one, or more characters.
+* `_` One single wildcard character.
+
+```sql
+SELECT column1, column2, ...
+FROM table_name
+WHERE column1 LIKE pattern;
+```
+
