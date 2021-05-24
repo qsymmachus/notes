@@ -199,7 +199,7 @@ A join clauses combines rows from two or more tables, using a shared column betw
 ```sql
 SELECT Orders.OrderID, Customers.CustomerName, Orders.OrderDate
 FROM Orders
-INNER JOIN Customers ON Orders.CustomerID=Customers.CustomerID;
+JOIN Customers ON Orders.CustomerID=Customers.CustomerID;
 ```
 
 There are four different kinds of joins:
@@ -210,4 +210,120 @@ There are four different kinds of joins:
 * `FULL JOIN` Returns _all_ rows from _both_ the right and left tables.
 
 ![sql join venn diagrams](./sql-joins.png)
+
+UNION
+-----
+
+The union operator is used to combine the result set of two or more select statements.
+
+To work, the result sets must have the same column number, type, and order.
+
+
+```sql
+SELECT column1, column2, ...
+FROM table1
+UNION
+SELECT column1, column2, ...
+FROM table2;
+```
+
+GROUP BY
+--------
+
+The group by statement allows you to group rows that have the same values into summary rows, usually in conjunction with aggregate functions like count, max, min, and so on.
+
+```sql
+SELECT column1, column2, ...
+FROM table_name
+WHERE condition
+GROUP BY column_name
+```
+
+For example, to list the number of customers in each country:
+
+```sql
+SELECT COUNT(CustomerId), Country
+FROM Customers
+GROUP BY Country;
+```
+
+List the number of orders by shipper:
+
+```sql
+SELECT Shippers.ShipperName, COUNT(Orders.OrderID) AS NumberOfOrders FROM Orders
+LEFT JOIN Shippers ON Orders.ShipperID = Shippers.ShipperID
+GROUP BY ShipperName;
+```
+
+HAVING
+------
+
+The having clause was introduced because where clauses could not be used with aggregate functions.
+
+```sql
+SELECT column1, column2, ...
+FROM table_name
+HAVING condition;
+```
+
+Find all countries that have at least 5 customers:
+
+```sql
+SELECT COUNT(CustomerID) CustomerCount, Country
+FROM Customers
+GROUP BY Country
+HAVING COUNT(CustomerCount) > 5;
+```
+
+EXISTS, ANY, ALL
+----------------
+
+The exists operator tests any record exists within a subquery.
+
+```sql
+SELECT column1, column2 ...
+FROM table_name
+WHERE EXISTS
+  (subquery)
+```
+
+For example, are there any suppliers who sell anything for less than twenty dollars?:
+
+```sql
+SELECT SupplierName
+FROM Suppliers
+WHERE EXISTS
+  (SELECT ProductName FROM Products WHERE Products.SupplierID = Suppliers.supplierID AND Price < 20);
+```
+
+The any operator works in much the same way, but allows you to more specifically check for particular column values.
+
+```sql
+SELECT column1, column2 ...
+FROM table_name
+WHERE column1 operator ANY
+  (subquery)
+```
+
+For example, find the name of any product we have at least ten of:
+
+```sql
+SELECT ProductName
+FROM Products
+WHERE ProductID = ANY
+  (SELECT ProductID
+  FROM OrderDetails
+  WHERE Quantity = 10);
+```
+
+All works the same way as any, but only returns true if _all_ records match. This example won't return anything unless `Quantity = 10` for all records:
+
+```sql
+SELECT ProductName
+FROM Products
+WHERE ProductID = ALL
+  (SELECT ProductID
+  FROM OrderDetails
+  WHERE Quantity = 10);
+```
 
