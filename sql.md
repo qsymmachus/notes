@@ -327,3 +327,88 @@ WHERE ProductID = ALL
   WHERE Quantity = 10);
 ```
 
+SELECT INTO
+-----------
+
+The "select into" statement copies data from one table into a new table.
+
+```sql
+SELECT column1, column2, ...
+INTO new_table [IN another_db]
+FROM old_table
+WHERE condition;
+```
+
+You can rename columns in the new table using `AS`.
+
+INSERT INTO SELECT
+------------------
+
+The "insert into select" statement copies data from one table and inserts it in an existing table.
+
+```sql
+INSERT INTO table2 (column1, column2, ...)
+SELECT column1, column2, ...
+FROM table1
+WHERE condition;
+```
+
+The existing table has to have the same schema for this to work, though you can rename columns using `AS` if needed.
+
+CASE
+----
+
+Case statements allow you to add control flow to your queries. They return the value of the first matching condition, using `ELSE` as a default.
+
+```sql
+CASE
+  WHEN condition1 THEN result1
+  WHEN condition2 THEN result2
+  WHEN conditionN THEN resultN
+  ELSE result
+END;
+```
+
+Here's a practical example to show how you can use it:
+
+```sql
+SELECT CustomerName, City, Country
+FROM Customers
+ORDER BY
+(CASE
+    WHEN City IS NULL THEN Country
+    ELSE City
+END);
+```
+
+PROCEDURE
+---------
+
+You can store queries as "stored procedures" so they can be executed later, and even pass parameters to them. You probably won't use these too much in the real world but here are some examples. Note that exact syntax may vary by database implementation.
+
+Simple query stored as a procedure:
+
+```sql
+CREATE PROCEDURE SelectAllCustomers
+AS
+SELECT * FROM Customers
+GO;
+```
+
+```sql
+EXEC SelectAllCustomers;
+```
+
+Parameterized procedure:
+
+```sql
+CREATE PROCEDURE SelectAllCustomers @City nvarchar(30), @PostalCode nvarchar(10)
+AS
+SELECT * FROM Customers WHERE City = @City AND PostalCode = @PostalCode
+GO;
+```
+
+```sql
+EXEC SelectAllCustomers @City = 'London', @PostalCode = 'WA1 1DP';
+```
+
