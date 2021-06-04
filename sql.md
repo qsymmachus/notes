@@ -412,3 +412,226 @@ GO;
 EXEC SelectAllCustomers @City = 'London', @PostalCode = 'WA1 1DP';
 ```
 
+Managing Databases
+------------------
+
+Creating, dropping (deleting), and backing up a database:
+
+```sql
+CREATE DATABASE database;
+```
+
+```sql
+DROP DATABASE database;
+```
+
+```sql
+BACKUP DATABASE database
+TO DISK = 'filepath';
+```
+
+
+Managing Databases
+------------------
+
+Creating, dropping (deleting), and backing up a database:
+
+```sql
+CREATE DATABASE database;
+```
+
+```sql
+DROP DATABASE database;
+```
+
+```sql
+BACKUP DATABASE database
+TO DISK = 'filepath';
+```
+
+
+Managing Databases
+------------------
+
+Creating, dropping (deleting), and backing up a database:
+
+```sql
+CREATE DATABASE database;
+```
+
+```sql
+DROP DATABASE database;
+```
+
+```sql
+BACKUP DATABASE database
+TO DISK = 'filepath';
+```
+
+
+Managing Databases
+------------------
+
+Creating, dropping (deleting), and backing up a database:
+
+```sql
+CREATE DATABASE database;
+```
+
+```sql
+DROP DATABASE database;
+```
+
+```sql
+BACKUP DATABASE database
+TO DISK = 'filepath';
+```
+
+
+Managing Databases
+------------------
+
+Creating, dropping (deleting), and backing up a database:
+
+```sql
+CREATE DATABASE database;
+```
+
+```sql
+DROP DATABASE database;
+```
+
+```sql
+BACKUP DATABASE database
+TO DISK = 'filepath';
+```
+
+
+Managing Databases
+------------------
+
+Creating, dropping (deleting), and backing up a database:
+
+```sql
+CREATE DATABASE database;
+```
+
+```sql
+DROP DATABASE database;
+```
+
+```sql
+BACKUP DATABASE database
+TO DISK = 'filepath';
+```
+
+
+Managing Databases
+------------------
+
+Creating, dropping (deleting), and backing up a database:
+
+```sql
+CREATE DATABASE database;
+```
+
+```sql
+DROP DATABASE database;
+```
+
+```sql
+BACKUP DATABASE database
+TO DISK = 'filepath';
+```
+
+
+Managing Databases
+------------------
+
+Creating, dropping (deleting), and backing up a database:
+
+```sql
+CREATE DATABASE database;
+```
+
+```sql
+DROP DATABASE database;
+```
+
+```sql
+BACKUP DATABASE database
+TO DISK = 'filepath';
+```
+
+CREATE TABLE
+------------
+
+To create new table:
+
+```sql
+CREATE TABLE table_name (
+    column1 datatype constraint,
+    column2 datatype constraint,
+    column3 datatype constraint,
+   ....
+);
+```
+
+Table columns may optionally have __constraints__ that enforce rules about their data. Here are some common constraints:
+
+* `NOT NULL` The column can't be null.
+* `UNIQUE` Column values must be unique within the table.
+* `PRIMARY KEY` A combination of a NOT NULL and UNIQUE. Uniquely identifies each row in a table.
+* `FOREIGN KEY` Prevents actions that would destroy links between tables.
+* `DEFAULT value` Sets a default value for the column.
+
+
+DROP and TRUNCATE
+-----------------
+
+Drop deletes a table completely:
+
+```sql
+DROP TABLE table_name;
+```
+
+Truncate deletes all a table's rows, but preserves the tables:
+
+```sql
+TRUNCATE TABLE table_name;
+```
+
+ALTER TABLE
+-----------
+
+Alter table allows you to modify an existing table.
+
+To add columns:
+
+```sql
+ALTER TABLE table_name
+ADD column_name datatype;
+```
+
+To remove columns:
+
+```sql
+ALTER TABLE table_name
+DROP COLUMN column_name;
+```
+
+To modify an existing column (whether you use `ALTER` or `MODIFY` depends on implementation):
+
+```sql
+ALTER TABLE table_name
+[ALTER | MODIFY] column_name datatype; -- to change the data type
+```
+
+To simply rename a column:
+
+```sql
+ALTER TABLE table_name
+RENAME COLUMN old_name TO new_name;
+```
+
+
