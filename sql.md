@@ -582,7 +582,7 @@ Table columns may optionally have __constraints__ that enforce rules about their
 * `NOT NULL` The column can't be null.
 * `UNIQUE` Column values must be unique within the table.
 * `PRIMARY KEY` A combination of a NOT NULL and UNIQUE. Uniquely identifies each row in a table.
-* `FOREIGN KEY` Prevents actions that would destroy links between tables.
+* `FOREIGN KEY` Prevents actions that would destroy links between tables. A foreign key in a _child_ table is the primary key of a _parent_ table. The constraint prevents the creation of foreign keys not found in the parent table: `FOREIGN KEY foo_id REFERENCES Foo(id);`
 * `DEFAULT value` Sets a default value for the column.
 
 
@@ -627,6 +627,11 @@ ALTER TABLE table_name
 [ALTER | MODIFY] column_name datatype; -- to change the data type
 ```
 
+```sql
+ALTER TABLE table_name
+[ALTER | MODIFY] column name constraint; -- to add a constraint
+```
+
 To simply rename a column:
 
 ```sql
@@ -634,4 +639,53 @@ ALTER TABLE table_name
 RENAME COLUMN old_name TO new_name;
 ```
 
+CREATE INDEX
+------------
+
+Indices are created to enable fast queries against specific table column. Under the hood, these are usually implemented as some kind of balanced tree to enable logarithmic search time. See `algorithms.pdf` for more information on these kinds of trees.
+
+__Note__ that indices come with a cost; they make _updates_ of that table more time-intensive, because the index also needs to be updated. 
+
+You should only create indices for columns you know you will be querying very frequently.
+
+```sql
+CREATE INDEX index_name
+ON table_name (column1, column2, ...);
+```
+
+Date Types
+----------
+
+It's worth noting some common date types you may encounter:
+
+* `DATE` Format YYYY-MM-DD
+* `DATETIME` Format YYYY-MM-DD HH:MI:SS
+* `TIMESTAMP` Depending on the database, either the same as `DATETIME` or a Unix Epoch number.
+
+Views
+-----
+
+A view is a virtual table based on the result set of a SQL statement. You can query against a view as if it were a real table, however, the view is executing its underlying statement every time you do.
+
+To create a view:
+
+```sql
+CREATE VIEW view_name AS
+SELECT column1, column2, ...
+FROM table_name
+WHERE condition;
+```
+
+Some databases like [PostgreSQL](https://www.postgresql.org/docs/11/rules-materializedviews.html) support __materialized__ views. A materialized view persists the result set in the datastore, so the view isn't recomputed every time you use it. The tradeoff is that the materialized view may become stale if it's not periodically updated.
+
+```sql
+CREATE MATERIALIZED VIEW mat_view 
+AS SELECT * 
+FROM my_table
+WHERE condition;
+```
+
+```sql
+REFRESH MATERIALIZED VIEW mat_view;
+```
 
