@@ -948,4 +948,5 @@ Useful resources:
 	* Also see [your own notes](https://github.com/qsymmachus/notes/blob/master/go/diagnostics.md) on this.
 * Pretty good tutorial on goroutines & channels: [https://golangbot.com/goroutines/](https://golangbot.com/goroutines/)
 * Quick explanation of `context`s and how they're cancelled: [https://medium.com/a-journey-with-go/go-context-and-cancellation-by-propagation-7a808bbc889c](https://medium.com/a-journey-with-go/go-context-and-cancellation-by-propagation-7a808bbc889c)
+* Goroutines in depth, and how they map onto OS threads: [https://osmh.dev/posts/goroutines-under-the-hood](https://osmh.dev/posts/goroutines-under-the-hood)
 
