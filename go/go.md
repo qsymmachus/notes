@@ -774,12 +774,12 @@ results := make(chan (int), len(nums))
 // wg.Done() - Decrements the counter by 1
 // wg.Wait() – Blocks until the counter is == 0
 var wg sync.WaitGroup
-for _, n := range numbers {
+for _, num := range numbers {
   wg.Add(1)
   go func(n int) int {
     defer wg.Done()
     results <- n * 2 // sends the result of doubling `n` to our channel
-  }(n)
+  }(num)
 }
 
 // Wait for the workgroup to finish, then close the channel so the `for` loop below knows that no
