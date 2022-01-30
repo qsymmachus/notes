@@ -948,6 +948,10 @@ Useful resources:
 	* Also see [your own notes](https://github.com/qsymmachus/notes/blob/master/go/diagnostics.md) on this.
 * Pretty good tutorial on goroutines & channels: [https://golangbot.com/goroutines/](https://golangbot.com/goroutines/)
 * Quick explanation of `context`s and how they're cancelled: [https://medium.com/a-journey-with-go/go-context-and-cancellation-by-propagation-7a808bbc889c](https://medium.com/a-journey-with-go/go-context-and-cancellation-by-propagation-7a808bbc889c)
+<<<<<<< Updated upstream
 * Goroutines in depth, and how they map onto OS threads: [https://osmh.dev/posts/goroutines-under-the-hood](https://osmh.dev/posts/goroutines-under-the-hood)
 * Visualizing concurrency in Go: [https://divan.dev/posts/go_concurrency_visualize/](https://divan.dev/posts/go_concurrency_visualize/)
 
+=======
+* Nice article outlining how to build a Go web app with `gin`: [https://www.allhandsontech.com/programming/golang/web-app-sqlite-go/](https://www.allhandsontech.com/programming/golang/web-app-sqlite-go/)
+>>>>>>> Stashed changes
