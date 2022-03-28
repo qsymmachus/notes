@@ -696,6 +696,55 @@ func (r MyReader) Read(b []byte) (n int, err error) {
 }
 ```
 
+Generics
+--------
+
+Generics were introduced to Go in v1.18 of the language, which as of December 2021 is still in beta.
+
+Generics allow you to parameterize functions by type. __Type arguments__ can have a __type constraint__, which specifies the permissible type arguments that calling code can use.
+
+Here's a generic function that can calculate the sum of a slice of `int`s _or_ `float32`s:
+
+```go
+func Sum[N int | float32](numbers []N) (sum N) {
+	for _, n := range numbers {
+		sum += n
+	}
+
+	return sum
+}
+```
+
+In this function, `N` is our type argument, and it is constrained to either be an `int` or a `float32`. Callers just need to specific a type argument that satisfies the constraint:
+
+```go
+sum := Sum[int]([]int{1, 2, 3, 4})
+```
+
+However, the compiler can often infer type arguments, so this works too:
+
+```go
+sum := Sum([]int{1, 2, 3, 4})
+```
+
+To simplify type constraints or easily reuse them, you can declare them as an __interface__ like this:
+
+```go
+type Number interface {
+	int | float32
+}
+
+func Sum[N Number](numbers []N) (sum N) {
+	for _, n := range numbers {
+		sum += n
+	}
+
+	return sum
+}
+```
+
+The [`constraints`](https://github.com/golang/go/issues/45458) package contains definitions for many commonly used type constraints.
+
 Concurrency
 -----------
 
@@ -950,8 +999,11 @@ Useful resources:
 * Quick explanation of `context`s and how they're cancelled: [https://medium.com/a-journey-with-go/go-context-and-cancellation-by-propagation-7a808bbc889c](https://medium.com/a-journey-with-go/go-context-and-cancellation-by-propagation-7a808bbc889c)
 <<<<<<< Updated upstream
 * Goroutines in depth, and how they map onto OS threads: [https://osmh.dev/posts/goroutines-under-the-hood](https://osmh.dev/posts/goroutines-under-the-hood)
+<<<<<<< Updated upstream
 * Visualizing concurrency in Go: [https://divan.dev/posts/go_concurrency_visualize/](https://divan.dev/posts/go_concurrency_visualize/)
 
 =======
 * Nice article outlining how to build a Go web app with `gin`: [https://www.allhandsontech.com/programming/golang/web-app-sqlite-go/](https://www.allhandsontech.com/programming/golang/web-app-sqlite-go/)
+>>>>>>> Stashed changes
+=======
 >>>>>>> Stashed changes
