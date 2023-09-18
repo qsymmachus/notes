@@ -521,3 +521,134 @@ The following practices are usually followed when implementing a GraphQL API:
 * GraphQL avoids API versioning. Because it only returns data that's explicitly requested, new capabilities can be added on top of an existing API without introducing breaking changes. But, if you _remove_ a field, that would be a breaking change.
 * All GraphQL fields are nullable by default. If an error causes you to fail to return a particular field, that field is often just left `null`. This is a weird way to handle this if you ask me.
 
+GraphQL Federation
+------------------
+
+Typically the schema for a single GraphQL API is implemented by a single backing server. 
+However, it is possible to take a single API and have it implemented by multiple, discrete APIs that are merged. This is called __federation__.
+
+The _de facto_ standard approach to graph federation is [Apollo Federation](https://www.apollographql.com/docs/federation/), which we'll learn about here.
+
+In a federated architecture, separate GraphQL APIs called __subgraphs__ are composed into a single __supergraph__. From a client's perspective, nothing has changed – they can query the supergraph as if it were a single API. What's changed is how those queries are resolved – the supergraph's __router__ just needs to understand how the schema is composed, and where the data it needs is distributed across the subgraphs.
+
+### Combining subgraph schemas
+
+#### Subgraph schemas
+
+Each subgraph will have its own schema. Subgraph schemas indicate _which_ types and fields they can resolve. These schemas are written much the same way other GraphQL schemas are defined, by people.
+
+```graphql
+# 1. Users subgraph:
+
+type Query {
+  me: User
+}
+
+type User @key(fields: "id") {
+  id: ID!
+  username: String! @shareable
+}
+
+# (Subgraph schemas include
+# this to opt in to
+# Federation 2 features.)
+extend schema
+  @link(url: "https://specs.apollo.dev/federation/v2.3",
+        import: ["@key", "@shareable"])
+```
+
+```graphql
+# 2. Products subgraph:
+
+type Query {
+  topProducts(first: Int = 5): [Product]
+}
+
+type Product @key(fields: "upc") {
+  upc: String!
+  name: String!
+  price: Int
+}
+
+extend schema
+  @link(url: "https://specs.apollo.dev/federation/v2.3",
+        import: ["@key", "@shareable"])
+```
+
+```graphql
+# 3. Reviews subgraph: 
+
+type Review {
+  body: String
+  author: User @provides(fields: "username")
+  product: Product
+}
+
+type User @key(fields: "id") {
+  id: ID!
+  username: String! @external
+  reviews: [Review]
+}
+
+type Product @key(fields: "upc") {
+  upc: String!
+  reviews: [Review]
+}
+
+# (This subgraph uses additional
+# federated directives)
+extend schema
+  @link(url: "https://specs.apollo.dev/federation/v2.3",
+        import: ["@key", "@shareable", "@provides", "@external"])
+```
+
+As these examples illustrate, multiple subgraphs can contribute fields to a single type. For example, both the user and products subgraphs contribute fields to the `Review` type.
+
+#### The supergraph schema
+
+The __supergraph schema__ is created by composing each subgraph schema into one, giant schema, plus federation-specific information that tells the router which subgraphs can resolve which fields. 
+
+The supergraph schema is machine-generated using [composition](https://www.apollographql.com/docs/federation/federated-types/composition/) and is not particularly human-readable, so there's no point sharing an example here.
+
+The supergraph schema is what is __used by the server__ (that is, the router) to understand and correctly plan distributed queries.
+
+#### The API schema
+
+Schema composition process also produces an __API schema__, which is what is __used by clients__ to query your federated API as if it were a single GraphQL API.
+
+This is much cleaner and easier to understand than the supergraph schema:
+
+```graphql
+type Product {
+  name: String!
+  price: Int
+  reviews: [Review]
+  upc: String!
+}
+
+type Query {
+  me: User
+  topProducts(first: Int = 5): [Product]
+}
+
+type Review {
+  author: User
+  body: String
+  product: Product
+}
+
+type User {
+  id: ID!
+  reviews: [Review]
+  username: String!
+}
+```
+
+### The router
+
+In a federated architecture each subgraph is queried only by the __router__, never by clients directly. The router implements the supergraph's schema by planning queries that distribute the requests across all the subgraphs, and then returns that data to the client.
+
+The router is one of the following:
+
+* The [Apollo Router](https://www.apollographql.com/docs/router/) executable (written in Rust).
+* An instance of Apollo Server (written in Javascript) using special extensions from the `@apollo/gateway` library.
