@@ -660,3 +660,88 @@ The router is one of the following:
 
 * The [Apollo Router](https://www.apollographql.com/docs/router/) executable (written in Rust).
 * An instance of Apollo Server (written in Javascript) using special extensions from the `@apollo/gateway` library.
+
+### How federated types are resolved
+
+An __entity__ is an object type that can resolve its fields across multiple subgraphs.
+
+In this simple example, the `Product` entity is defined and resulved across two subgraphs:
+
+```graphql
+type Product @key(fields: "id") {
+  id: ID!
+  name: String!
+  price: Int
+}
+```
+
+```graphql
+type Product @key(fields: "id") {
+  id: ID!
+  inStock: Boolean!
+}
+```
+
+Note that __the entity must be defined in each subgraph where its data is lives__. Each definition contains one particular slice of the data that makes up the overall entity.
+
+To define an entity type within a subgraph, you follow a few basic steps.
+
+#### 1. Define a `@key`
+
+Any object type is designated as an entity using the `@key` directive:
+
+```graphql
+type Product @key(fields: "id") {
+  id: ID!
+  name: String!
+  price: Int
+}
+```
+
+The `@key` directive defines the entity's __primary key__, which is one or more of (a set) of the object's fields. This key must uniquely identify the entity – it's how the router knows how to associate data from _different_ subgraphs to model the _same_ entity instance.
+
+#### 2. Define a reference resolver
+
+The `@key` directive signals to the router that an entity can be resolved across multiple subgraphs __if you provide its primary key__. For this to work, each subgraph that includes the entity must define a __reference resolver__ for it.
+
+Exactly how a reference resolver depends on what library you're using to define your GraphQL resolvers. Here's an example using Apollo Server:
+
+```javascript
+// Products subgraph
+const resolvers = {
+  Product: {
+    __resolveReference(productRepresentation) {
+      return fetchProductByID(productRepresentation.id);
+    }
+  },
+  // ...other resolvers...
+}
+```
+
+The important things to note here are:
+
+* You declare the reference resolver as a member of the entity's corresponding object (in this case, `Product`).
+* A reference resolver's name is always `__resolverReference`.
+* The resolver's first paratmer is a representation of the entity being resolved. This representation is provided by the router automatically.
+* A reference resolver is responsible for returning all the fields that this subgraph defines.
+
+Every subgraph that contributes one or more fields to an entity must define a reference resolver for that entity.
+
+#### Referencing an entity without contributing fields
+
+Sometimes a subgraph would like to make an entity resolvable within its own types, but not actually contribute any new fields to the entity.
+
+To do this, you just need to add a __stub__ of the entity in your subgraph:
+
+```graphql
+type Review {
+  product: Product! # Reference to the product entity
+  score: Int!
+}
+
+type Product @key(fields: "id", resolvable: false) {
+  id: ID!
+}
+```
+
+Not that the stub only needs to contain the `@key` fields of `Product`. In addition, the `resolvable: false` parameter indicates that this subgraph can't resolve the type itself, so there's no need to define a reference resolver in this subgraph.
