@@ -537,6 +537,10 @@ In a federated architecture, separate GraphQL APIs called __subgraphs__ are comp
 
 Each subgraph will have its own schema. Subgraph schemas indicate _which_ types and fields they can resolve. These schemas are written much the same way other GraphQL schemas are defined, by people.
 
+Subgraph schemas use __federated directives__ imported from `https://specs.apollo.dev/federation/v2.3` to define how the subgraph fits into the larger supergraph.
+
+These example subgraph schemas all include some important directives like `@key`, read the comments below to see how they work:
+
 ```graphql
 # 1. Users subgraph:
 
@@ -544,8 +548,10 @@ type Query {
   me: User
 }
 
+# `@key` designates that this object is an entity (meaning it can resolve its fields across multiple subgraphs). It specifies its `fields`, which are the set of fields that the subgraph can use to uniquely identify an instance of this entity.
 type User @key(fields: "id") {
   id: ID!
+  # `@shareable` indicates that this field can be resolved by multiple subgraphs.
   username: String! @shareable
 }
 
@@ -572,7 +578,7 @@ type Product @key(fields: "upc") {
 
 extend schema
   @link(url: "https://specs.apollo.dev/federation/v2.3",
-        import: ["@key", "@shareable"])
+        import: ["@key"])
 ```
 
 ```graphql
@@ -603,6 +609,8 @@ extend schema
 ```
 
 As these examples illustrate, multiple subgraphs can contribute fields to a single type. For example, both the user and products subgraphs contribute fields to the `Review` type.
+
+You can learned about all the federated directives in the [directive docs](https://www.apollographql.com/docs/federation/federated-types/federated-directives/).
 
 #### The supergraph schema
 
