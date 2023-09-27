@@ -944,17 +944,7 @@ func main() {
 Go Project Conventions
 ----------------------
 
-Unlike formatting or language conventions, Go doesn't have strong opinions about project structure. There are a few rules that _must_ be followed:
-
-* Package names must match the name of the directory in which they are found. So if you named a package `example`, the file would have to be found in a folder named `/example`.
-* The only exception to this run is the `main` package, which doesn't have to be in a `/main` directory. The `main` package is typically the entry-point to the application.
-
-Aside from that, you can structure your project directories however you want. If it's a really simple project, you could also just have everything in the same flat directory. Having said that, here's a set of conventions that are commonly used:
-
-* `/cmd`: main applications for the project. Your `main` package would go here. The directory name for each application should match the name of the executable you want to have (e.g., `/cmd/myapp`). It’s common to have a small main function that imports and invokes the code from the `/pkg` directory and nothing else.
-* `/pkg`: the bulk of your code goes here. It should be organized in directories that match the `package` name for each file.
-* `/vendor`: application dependencies if you use `godep` to manage them. Not sure how common this actually is, though.
-* Tests are in files named `*_test.go`, where `*` is the name of the file under test. Run `go test` to run these tests.
+[This doc](https://go.dev/doc/modules/layout#multiple-packages) outlines both rules and conventions for organizing go projects.
 
 Debugging with `go-delve`
 -------------------------
