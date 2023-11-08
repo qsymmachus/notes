@@ -990,6 +990,5 @@ Useful resources:
 * Goroutines in depth, and how they map onto OS threads: [https://osmh.dev/posts/goroutines-under-the-hood](https://osmh.dev/posts/goroutines-under-the-hood)
 * Visualizing concurrency in Go: [https://divan.dev/posts/go_concurrency_visualize/](https://divan.dev/posts/go_concurrency_visualize/)
 * Nice article outlining how to build a Go web app with `gin`: [https://www.allhandsontech.com/programming/golang/web-app-sqlite-go/](https://www.allhandsontech.com/programming/golang/web-app-sqlite-go/)
->>>>>>> Stashed changes
-=======
->>>>>>> Stashed changes
+* `sqlc`, generate Go types from SQL schemas: [https://sqlc.dev/posts/2023/11/06/publishing-sqlc-gen-go/](https://sqlc.dev/posts/2023/11/06/publishing-sqlc-gen-go/)
+
