@@ -65,20 +65,33 @@ In other words, scope provide an _authorization_ layer in addition to the authen
 
 Specific scopes are tied to each access token granted by an authorization server.
 
+Open ID connect (OIDC)
+----------------------
 
-Access Tokens in detail
------------------------
+Oauth v2 is only used for _authorization_, it does not provide _authentication_ (it does not identify the _user_ or resource owner who originally initiated the authorization flow). It provides a client with a key, but that key doesn't identify who you are or anything else about you.
 
-The Oauth spec _does not_ define what an access token should actually look like. In practice, [JSON Web Tokens](https://jwt.io/) (JWTs) are most common.
+Open ID connect (OIDC) attempts to solve this problem. It is an _extension_ of Oauth v2 that adds a layer of authentication on top of Oauth. It allows a client to establish a login session on behalf of the original user, and so it is commonly used to enable Single Sign On (SSO). Note it is entirely distinct from SAML, an older protocol for SSO, which also has nothing to do with Oauth.
 
-JWT access tokens usually contain:
+When an authorization server supports OIDC, it is often called an __identity provider__ (IdP).
+
+For this to work, OIDC requires an extension of the access token such that it contains identifiers and other data that allow authentication (like an expiration date).
+
+OIDC flows work the same as Oauth authorization flows with the following differences:
+
+* The client's intial redirect to the authorization scope includes the `openid` scope. This lets the authz server know this is an OIDC exchange.
+* When the client exchanges the authorization code for an access token, the client recieves both an access token and an __ID token__.
+  * The access token remains opaque to the client.
+  * The ID token is legible to the client, and is a specifically formatted JSON Web Token (JWT).
+
+### ID Tokens in detail
+
+JWT ID tokens provided by an authorization server usually contain:
 
 * Identity of the client
 * Scopes
 * Expiry date
-* User claims
 
-Example access token:
+Example token:
 
 ```
 Header (algorithm & token type)
@@ -92,10 +105,6 @@ Data and Payload
   "exp": 1519952764,
   "iat": 1519951864,
   "jti": "6dcda840-6fc3-493c-bb9d-9afd0e56af53"
-
-Signature
-  HMACSHA256(base64UrlEncode(header) + "." +
-  base64UrlEncode(payload),secret)
 ```
 
 * `aud`: the client ID the token was generated for.
