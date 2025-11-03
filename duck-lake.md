@@ -23,7 +23,7 @@ It has a few limitations:
 
 ### Lake houses
 
-"Lake houses" (a portmanteau of "data lake" + "data warehouse") attempts to solve the limitations of parquet files by adding a layer of **metadata** on top of our data lake. The **metadata catalog** describes the raw data in the data lake (just parquet files), adding a transaction log that describes data changes, versions, and schema changes. Query engines then use this metadata catalog to narrow down the specific parquet files needed to satisfy a particular query.
+"Lake houses" (a portmanteau of "data lake" + "data warehouse") attempts to solve the limitations of parquet files by adding a layer of **metadata** on top of our data lake (e.g. [Iceberg](https://en.wikipedia.org/wiki/Apache_Iceberg)) The **metadata catalog** describes the raw data in the data lake (just parquet files), adding a transaction log that describes data changes, versions, and schema changes. Query engines then use this metadata catalog to narrow down the specific parquet files needed to satisfy a particular query.
 
 Lake houses allow you to add behaviors to your data lake like:
 
@@ -36,11 +36,15 @@ Many lake houses are commited to a _file based_ approach to metadata management.
 - They struggle with _atomic commits_ to metadata.
 - They're typically designed to describe and manage a _single table_ of data.
 
+To solve for this they introduced **catalogs** – REST services backed by databases like Postgres – for making atomic commits to metadata files and managing multiple tables. The critique of this approach is that it introduces significant complexity to work around the commitment to storing metadata in files
+
 ## The DuckLake idea
 
 With that background covered, what is DuckLake and what distinguishes it?
 
-**DuckLake just stores the metadata ctalog in a traditional database.** This approach solves the limitations of "file-based" lake houses (lack of atomic commits, single table management) because relational databases solve them for us. In practice this just means two things:
+**DuckLake centralizes _all_ metadata in a traditional database.** This simplifies metadata management by removing metadata files and the catalogs used to manage them.
+
+It immediately solves the limitations of "file-based" lake houses (lack of atomic commits, single table management) because relational databases solve them for us. In practice this just means two things:
 
 - Database tables –> store the actual metadata.
 - Database queries -> implement updates to the metadata.
