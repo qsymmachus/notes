@@ -25,6 +25,12 @@ It has a few limitations:
 
 "Lake houses" (a portmanteau of "data lake" + "data warehouse") attempts to solve the limitations of parquet files by adding a layer of **metadata** on top of our data lake. The **metadata catalog** describes the raw data in the data lake (just parquet files), adding a transaction log that describes data changes, versions, and schema changes. Query engines then use this metadata catalog to narrow down the specific parquet files needed to satisfy a particular query.
 
+Lake houses allow you to add behaviors to your data lake like:
+
+- Time travel
+- Schema changes
+- Partitioning
+
 Many lake houses are commited to a _file based_ approach to metadata management. This has a few draw backs:
 
 - They struggle with _atomic commits_ to metadata.
