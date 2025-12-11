@@ -269,7 +269,8 @@ Generally this means that it is unsafe to make changes to workflow definitions t
 
 Typically there are two reasons why a command might be generated out of sequence, or the wrong command might be generated altogether:
 
-1. Code changes are made to a workflow definition that is in use by a running workflow execution.2. There is intrinsic non-deterministic logic (such as inline random branching).
+1. Code changes are made to a workflow definition that is in use by a running workflow execution
+2. There is intrinsic non-deterministic logic (such as inline random branching).
 
 This is why it's critical that workflow definitions be "thin", and all business logic is isolated within its activities.
 
