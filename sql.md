@@ -132,7 +132,7 @@ These are _functions_ that operate on column values.
 The min function returns the smallest value of the selected column, and max returns the biggest:
 
 ```sql
-SELECT MIN(column_name), MAX(column_name
+SELECT MIN(column_name), MAX(column_name)
 FROM table_name;
 ```
 
@@ -430,139 +430,6 @@ BACKUP DATABASE database
 TO DISK = 'filepath';
 ```
 
-
-Managing Databases
-------------------
-
-Creating, dropping (deleting), and backing up a database:
-
-```sql
-CREATE DATABASE database;
-```
-
-```sql
-DROP DATABASE database;
-```
-
-```sql
-BACKUP DATABASE database
-TO DISK = 'filepath';
-```
-
-
-Managing Databases
-------------------
-
-Creating, dropping (deleting), and backing up a database:
-
-```sql
-CREATE DATABASE database;
-```
-
-```sql
-DROP DATABASE database;
-```
-
-```sql
-BACKUP DATABASE database
-TO DISK = 'filepath';
-```
-
-
-Managing Databases
-------------------
-
-Creating, dropping (deleting), and backing up a database:
-
-```sql
-CREATE DATABASE database;
-```
-
-```sql
-DROP DATABASE database;
-```
-
-```sql
-BACKUP DATABASE database
-TO DISK = 'filepath';
-```
-
-
-Managing Databases
-------------------
-
-Creating, dropping (deleting), and backing up a database:
-
-```sql
-CREATE DATABASE database;
-```
-
-```sql
-DROP DATABASE database;
-```
-
-```sql
-BACKUP DATABASE database
-TO DISK = 'filepath';
-```
-
-
-Managing Databases
-------------------
-
-Creating, dropping (deleting), and backing up a database:
-
-```sql
-CREATE DATABASE database;
-```
-
-```sql
-DROP DATABASE database;
-```
-
-```sql
-BACKUP DATABASE database
-TO DISK = 'filepath';
-```
-
-
-Managing Databases
-------------------
-
-Creating, dropping (deleting), and backing up a database:
-
-```sql
-CREATE DATABASE database;
-```
-
-```sql
-DROP DATABASE database;
-```
-
-```sql
-BACKUP DATABASE database
-TO DISK = 'filepath';
-```
-
-
-Managing Databases
-------------------
-
-Creating, dropping (deleting), and backing up a database:
-
-```sql
-CREATE DATABASE database;
-```
-
-```sql
-DROP DATABASE database;
-```
-
-```sql
-BACKUP DATABASE database
-TO DISK = 'filepath';
-```
-
 CREATE TABLE
 ------------
 
@@ -688,4 +555,3 @@ WHERE condition;
 ```sql
 REFRESH MATERIALIZED VIEW mat_view;
 ```
-
